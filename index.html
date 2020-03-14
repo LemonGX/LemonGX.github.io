@@ -173,11 +173,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>md5加密相等绕过</strong></p>
-<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
-<p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
+<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2020/03/14/2020-03-14%20Day5%20for%20CCF/#more">more >></a>
         
@@ -658,11 +655,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vps</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color4">vps</a>
               </li>
              
               <li class="article-tag-list-item">
