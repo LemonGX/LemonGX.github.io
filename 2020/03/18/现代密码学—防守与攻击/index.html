@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>现代密码学—防守与攻击 | 鳕鱼堡er</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}K。 用符号{M}K表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），">
+  <meta name="description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}~K~。 用符号{M}~K~表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体">
 <meta property="og:type" content="article">
 <meta property="og:title" content="现代密码学—防守与攻击">
 <meta property="og:url" content="http://yoursite.com/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}K。 用符号{M}K表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），">
+<meta property="og:description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}~K~。 用符号{M}~K~表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-18T03:41:54.000Z">
-<meta property="article:modified_time" content="2020-03-18T08:52:22.413Z">
+<meta property="article:modified_time" content="2020-03-18T09:10:21.248Z">
 <meta property="article:author" content="Angel">
 <meta property="article:tag" content="现代密码学">
 <meta name="twitter:card" content="summary">
@@ -176,16 +176,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用<code>M&#39;=A(K,M)</code>表示一个<strong>密码变换</strong>。</p>
-<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为<strong>{M}<del>K</del></strong>。</p>
-<p><strong>用符号{M}<del>K</del>表示的完善加密</strong></p>
+<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为<strong>{M}~K~</strong>。</p>
+<p><strong>用符号{M}~K~表示的完善加密</strong></p>
 <ol>
-<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文{M}<del>K</del>不提供任何求解明文消息M的密码分析方法。</li>
-<li>密文{M}<del>K</del>也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
-<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改{M}<del>K</del>而不被接收者在解密阶段发现是不可能的。</li>
+<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文{M}~K~不提供任何求解明文消息M的密码分析方法。</li>
+<li>密文{M}~K~也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
+<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改{M}~K~而不被接收者在解密阶段发现是不可能的。</li>
 </ol>
 <p>具有这两个性质的完善加密是对现实世界中存在的加密算法的理想化。完善加密并不能防止协议含有安全缺陷。</p>
 <a id="more"></a>
-
 <p><strong>Dolve-Yao威胁模型</strong>——密码协议的标准威胁模型[102]</p>
 <p>在这个模型中，攻击者有如下特征：</p>
 <ol>
@@ -202,7 +201,7 @@
 <li>攻击者虽然能控制我们的计算和通信环境的大量公共部分，但一般他不能控制计算环境中的许多私有区域，如：访问离线主体的存储器。</li>
 </ol>
 <p><strong>认证服务器</strong>：它根据它所服务的主体的名字维护一个检索数据库，并能够递送通过请求主体密钥所计算出来的身份信息，而该密钥为服务器和主体所共享。认证服务器是一种特殊的主体，成为<strong>可信第三方</strong>或<strong>TTP</strong>。</p>
-<p>在同一个认证服务器提供服务下，假定Alice和TTP共享一个密钥，密钥由<strong>K<del>AT</del></strong>表示，成为<strong>密钥-加密密钥</strong>或<strong>长期密钥</strong>。</p>
+<p>在同一个认证服务器提供服务下，假定Alice和TTP共享一个密钥，密钥由<strong>K~AT~</strong>表示，成为<strong>密钥-加密密钥</strong>或<strong>长期密钥</strong>。</p>
 <p>一个<strong>共享密钥</strong>只能用于一次通信会话，因此这种密钥也称<strong>会话密钥</strong>和<strong>短期密钥</strong>。</p>
 <p><strong>“消息认证”协议</strong>：将消息和通信主体相绑定。可利用<strong>消息重放攻击</strong>。</p>
 <p>如果主体的身份对于消息的意义来说是必要的，那么为了保险起见，应当在消息中明确置入主体的名字。</p>
@@ -447,11 +446,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
             
             <div class="clearfix"></div>

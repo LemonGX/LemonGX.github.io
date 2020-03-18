@@ -173,12 +173,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用<code>M&#39;=A(K,M)</code>表示一个<strong>密码变换</strong>。</p>
-<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为<strong>{M}<del>K</del></strong>。</p>
-<p><strong>用符号{M}<del>K</del>表示的完善加密</strong></p>
+<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为<strong>{M}~K~</strong>。</p>
+<p><strong>用符号{M}~K~表示的完善加密</strong></p>
 <ol>
-<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文{M}<del>K</del>不提供任何求解明文消息M的密码分析方法。</li>
-<li>密文{M}<del>K</del>也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
-<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改{M}<del>K</del>而不被接收者在解密阶段发现是不可能的。</li>
+<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文{M}~K~不提供任何求解明文消息M的密码分析方法。</li>
+<li>密文{M}~K~也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
+<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改{M}~K~而不被接收者在解密阶段发现是不可能的。</li>
 </ol>
 <p>具有这两个性质的完善加密是对现实世界中存在的加密算法的理想化。完善加密并不能防止协议含有安全缺陷。</p>
         
@@ -425,22 +425,7 @@
 <li>PHP支持的8种原始数据类型</li>
 </ul>
 <ul>
-<li><table>
-<thead>
-<tr>
-<th>4种标量类型</th>
-<th>boolean布尔型；integer整形；float浮点型；string字符串型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2种复合类型</td>
-<td>array数组；object对象</td>
-</tr>
-<tr>
-<td>2种特殊类型</td>
-<td>resource资源；NULL</td>
-</tr>
-</tbody></table>
+<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p>
         
           <a class="article-more-a" href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/#more">more >></a>
         
@@ -686,7 +671,6 @@
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
         
           <a class="article-more-a" href="/2020/03/10/hello-world/#more">more >></a>
@@ -833,11 +817,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
             
             <div class="clearfix"></div>
