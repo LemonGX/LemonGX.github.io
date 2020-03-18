@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: CCF | 鳕鱼堡er</title>
+  <title>现代密码学—防守与攻击 | 鳕鱼堡er</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="鳕鱼堡er">
-<meta property="og:url" content="http://yoursite.com/tags/CCF/index.html">
+  <meta name="description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}K。 用符号{M}K表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代密码学—防守与攻击">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
+<meta property="og:description" content="对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用M&#39;&#x3D;A(K,M)表示一个密码变换。 在对称密码体制种，我们可以认为K’&#x3D;K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为{M}K。 用符号{M}K表示的完善加密  不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-18T03:41:54.000Z">
+<meta property="article:modified_time" content="2020-03-18T08:52:22.413Z">
 <meta property="article:author" content="Angel">
+<meta property="article:tag" content="现代密码学">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="鳕鱼堡er" type="application/atom+xml">
@@ -150,98 +155,198 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-现代密码学—防守与攻击" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/14/2020-03-14%20Day5%20for%20CCF/" class="archive-article-date">
-  	<time datetime="2020-03-14T07:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/14/2020-03-14%20Day5%20for%20CCF/">代码审计—01</a>
+    <h1 class="article-title" itemprop="name">
+      现代密码学—防守与攻击
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/" class="archive-article-date">
+  	<time datetime="2020-03-18T03:41:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用<code>M&#39;=A(K,M)</code>表示一个<strong>密码变换</strong>。</p>
+<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为<strong>{M}<del>K</del></strong>。</p>
+<p><strong>用符号{M}<del>K</del>表示的完善加密</strong></p>
+<ol>
+<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文{M}<del>K</del>不提供任何求解明文消息M的密码分析方法。</li>
+<li>密文{M}<del>K</del>也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
+<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改{M}<del>K</del>而不被接收者在解密阶段发现是不可能的。</li>
+</ol>
+<p>具有这两个性质的完善加密是对现实世界中存在的加密算法的理想化。完善加密并不能防止协议含有安全缺陷。</p>
+<a id="more"></a>
+
+<p><strong>Dolve-Yao威胁模型</strong>——密码协议的标准威胁模型[102]</p>
+<p>在这个模型中，攻击者有如下特征：</p>
+<ol>
+<li>他能获得经过网络的任何消息。</li>
+<li>他是网络的一个合法使用者，因而能够发起与任何其他用户的对话。</li>
+<li>他有机会成为任何主体发出信息的接收者。</li>
+<li>他能够冒充任何别的主体给任意主体发消息。</li>
+</ol>
+<p>在不对“不能做”的意思量化的情况下，攻击者不能做的事情：</p>
+<ol>
+<li>攻击者不能猜到从足够大的空间中选出的随机数。</li>
+<li>没有正确的密钥（或私钥），攻击者不能由给定的密文恢复出明文；对于完善加密算法，攻击者也不能从给定的明文构造出正确的密文。</li>
+<li>攻击者不能求出私有部分，比如：与给定的公钥相匹配的私钥。</li>
+<li>攻击者虽然能控制我们的计算和通信环境的大量公共部分，但一般他不能控制计算环境中的许多私有区域，如：访问离线主体的存储器。</li>
+</ol>
+<p><strong>认证服务器</strong>：它根据它所服务的主体的名字维护一个检索数据库，并能够递送通过请求主体密钥所计算出来的身份信息，而该密钥为服务器和主体所共享。认证服务器是一种特殊的主体，成为<strong>可信第三方</strong>或<strong>TTP</strong>。</p>
+<p>在同一个认证服务器提供服务下，假定Alice和TTP共享一个密钥，密钥由<strong>K<del>AT</del></strong>表示，成为<strong>密钥-加密密钥</strong>或<strong>长期密钥</strong>。</p>
+<p>一个<strong>共享密钥</strong>只能用于一次通信会话，因此这种密钥也称<strong>会话密钥</strong>和<strong>短期密钥</strong>。</p>
+<p><strong>“消息认证”协议</strong>：将消息和通信主体相绑定。可利用<strong>消息重放攻击</strong>。</p>
+<p>如果主体的身份对于消息的意义来说是必要的，那么为了保险起见，应当在消息中明确置入主体的名字。</p>
+<p><strong>“询问-应答”协议</strong>：以运行的随机数为nonce，表示仅使用一次的数字。又称<strong>Needham-Schroeder对称密钥认证协议</strong>。阻截通信信道，利用消息重放攻击。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CCF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">现代密码学</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/10/2020-03-10%20Day1%20for%20CCF/" class="archive-article-date">
-  	<time datetime="2020-03-10T08:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">现代密码学—一个简单的通信游戏“电话掷币”</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/10/2020-03-10%20Day1%20for%20CCF/">simple HTTP method</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CCF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -264,9 +369,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -334,15 +439,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vps</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CCF</a>
+                <a href="javascript:void(0)" class="js-tag color4">vps</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
             
             <div class="clearfix"></div>
