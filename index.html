@@ -173,20 +173,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="标准符号"><a href="#标准符号" class="headerlink" title="标准符号"></a>标准符号</h4><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B701.png" class title="标准符号01">
-<p><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/MyWork\hexo\source\_posts\现代密码学—概率论和信息论\标准符号01.png" alt="标准符号01"></p>
-<p><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/标准符号02.png" alt="标准符号02"></p>
+<img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B702.png" class title="标准符号02">
 <h4 id="概率论的基本概念"><a href="#概率论的基本概念" class="headerlink" title="概率论的基本概念"></a>概率论的基本概念</h4><p>令S为一个任意确定的点的集合，称之为<strong>概率空间</strong>（或<strong>样本空间</strong>）。任意元素 x∈S 成为<strong>样点</strong>（也称为<strong>结果</strong>、<strong>简单事件</strong>或<strong>不可分事件</strong>。一个<strong>事件</strong>（也成为<strong>合成事件</strong>或<strong>可分事件</strong>）是 S 的一个子集，通常用以一个大写字母表示（比如 E ）。<strong>一次实验或观察</strong>是一种从 S 中产生（取出）一个点的动作。一个事件 E 的发生就是一个实验产生某个点 x∈S ，并满足 x∈E 。</p>
 <h5 id="概率的经典定义"><a href="#概率的经典定义" class="headerlink" title="概率的经典定义"></a>概率的经典定义</h5><p>假设一个实验可以从 n=#S 个等可能的点中产生一个点，并且每次实验必须产生一个点。令 m 表示事件 E 包含的点的数目，那么称 m/n 为事件 E 发生的概率，并记为</p>
 <script type="math/tex; mode=display">
 Prob[E]=\frac{m}{n}</script><h5 id="概率的统计定义"><a href="#概率的统计定义" class="headerlink" title="概率的统计定义"></a>概率的统计定义</h5><p>假设在相同条件下进行了 n 次实验，其中事件 E 发生了 μ 次。如果对所有足够大的 n ， μ/n 保持不变，那么就说事件E的概率为 μ/n ，记为</p>
 <script type="math/tex; mode=display">
-Prob[E]≈\frac{μ}{n}</script><h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><h5 id="加法规则"><a href="#加法规则" class="headerlink" title="加法规则"></a>加法规则</h5><p><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/加法规则.png" alt="加法规则"></p>
+Prob[E]≈\frac{μ}{n}</script><h4 id="基本运算"><a href="#基本运算" class="headerlink" title="基本运算"></a>基本运算</h4><h5 id="加法规则"><a href="#加法规则" class="headerlink" title="加法规则"></a>加法规则</h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%8A%A0%E6%B3%95%E8%A7%84%E5%88%99.png" class title="加法规则">
 <h6 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h6><p>设 E、F 为两个事件，且 E 的概率不为 0 。在 E 发生的条件下 F 发生的概率称为已知 E 时 F 的条件概率，记为</p>
 <script type="math/tex; mode=display">
 Prob[E|F]=\frac{Prob[E∩F]}{Prob[E]}</script><h6 id="独立事件"><a href="#独立事件" class="headerlink" title="独立事件"></a>独立事件</h6><p>事件 E、F 是相互独立的，当且仅当</p>
 <script type="math/tex; mode=display">
-Prob[E|F]=Prob[F]</script><h5 id="乘法规则"><a href="#乘法规则" class="headerlink" title="乘法规则"></a>乘法规则</h5><p><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/乘法规则.png" alt="乘法规则"></p>
-<h5 id="全概率定律★"><a href="#全概率定律★" class="headerlink" title="全概率定律★"></a>全概率定律★</h5><p><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/全概率定律.png" alt="全概率定律"></p>
+Prob[E|F]=Prob[F]</script><h5 id="乘法规则"><a href="#乘法规则" class="headerlink" title="乘法规则"></a>乘法规则</h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%B9%98%E6%B3%95%E8%A7%84%E5%88%99.png" class title="乘法规则">
+<h5 id="全概率定律★"><a href="#全概率定律★" class="headerlink" title="全概率定律★"></a>全概率定律★</h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%85%A8%E6%A6%82%E7%8E%87%E5%AE%9A%E5%BE%8B.png" class title="全概率定律">
 <h4 id="随机变量及其概率分布"><a href="#随机变量及其概率分布" class="headerlink" title="随机变量及其概率分布"></a>随机变量及其概率分布</h4><h5 id="离散随机变量及其分布函数"><a href="#离散随机变量及其分布函数" class="headerlink" title="离散随机变量及其分布函数"></a>离散随机变量及其分布函数</h5><ol>
 <li><p>一个（离散）随机变量是一个实验的数字化结果。它是定义在一个（离散）样本空间上的函数。</p>
 </li>
@@ -913,19 +912,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vps</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
+                <a href="javascript:void(0)" class="js-tag color4">vps</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
             
             <div class="clearfix"></div>
