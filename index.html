@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 8
+			总文章数 10
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -153,6 +153,167 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DanBoneh-StreamCiphers" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/24/DanBoneh-StreamCiphers/">DanBoneh-Stream Ciphers</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/24/DanBoneh-StreamCiphers/" class="archive-article-date">
+  	<time datetime="2020-03-24T02:32:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
+</a>
+        
+		
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在流密码中，密钥不是完全随机的，而是一种<u>伪随机密钥</u>。</p>
+<p><strong>伪随机数发生器</strong>（PRG）：是一个<u>本身没有随机性</u>的<u>完全确定</u>的<u>函数 G</u> ，取一个种子为输入（<u>种子具有随机性</u>），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做<u>种子空间</u>，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，<code>G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s</code>。种子可能只有128位，但能扩展成一个长得多的字符串。</p>
+<p>以<u>种子</u>为私钥 k ，使用<u>发生器</u>将种子扩张成长得多看起来随机的<u>伪随机序列</u> G(k) ，将伪随机序列和明文异或，得到密文。<code>c = E(K,m) = m⊕G(k)</code>；<code>m = D(K,c) = c⊕G(k)</code>。</p>
+<p>流密码是安全的，安全性依赖于使用的发生器，但其密钥比明文短得多，不是完美安全的。</p>
+        
+          <a class="article-more-a" href="/2020/03/24/DanBoneh-StreamCiphers/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">DanBoneh密码学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/24/DanBoneh-StreamCiphers/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-DanBoneh-OneTimePad" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/24/DanBoneh-OneTimePad/">DanBoneh-One Time Pad</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/24/DanBoneh-OneTimePad/" class="archive-article-date">
+  	<time datetime="2020-03-24T01:22:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
+</a>
+        
+		
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
+<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
+<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
+<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
+<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
+        
+          <a class="article-more-a" href="/2020/03/24/DanBoneh-OneTimePad/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">DanBoneh密码学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/24/DanBoneh-OneTimePad/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DanBoneh-绪论" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,7 +321,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/">DanBoneh_绪论</a>
+      <a class="article-title" href="/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/">DanBoneh-绪论</a>
     </h1>
   
 
