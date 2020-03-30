@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 12
+			总文章数 14
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -152,6 +152,167 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-2020-03-14 Day5 for CTF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/14/2020-03-14%20Day5%20for%20CTF/">代码审计—01</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/14/2020-03-14%20Day5%20for%20CTF/" class="archive-article-date">
+  	<time datetime="2020-03-14T07:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
+</a>
+        
+		
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>md5加密相等绕过</strong></p>
+<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2020/03/14/2020-03-14%20Day5%20for%20CTF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/14/2020-03-14%20Day5%20for%20CTF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2020-03-13 Day4 for CTF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/">Basic PHP</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/" class="archive-article-date">
+  	<time datetime="2020-03-14T06:32:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
+</a>
+        
+		
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>PHP基础知识</strong></p>
+<ul>
+<li>PHP支持的8种原始数据类型</li>
+</ul>
+<ul>
+<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p></li></ul>
+        
+          <a class="article-more-a" href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-2020-03-12 Day3 for CTF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
