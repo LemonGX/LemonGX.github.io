@@ -60,7 +60,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 15
+			总文章数 16
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -153,6 +153,84 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-DanBoneh-CollisionResistance" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/12/DanBoneh-CollisionResistance/">DanBoneh-Collision Resistance</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/12/DanBoneh-CollisionResistance/" class="archive-article-date">
+  	<time datetime="2020-04-12T05:45:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+</a>
+        
+		
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>HMAC</strong>：基于抗碰撞的哈希函数构建的。</p>
+<p><strong>抗碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) = H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到标签空间中的同一个输出，则称函数 H 是抗碰撞的。</p>
+        
+          <a class="article-more-a" href="/2020/04/12/DanBoneh-CollisionResistance/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">DanBoneh密码学</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/12/DanBoneh-CollisionResistance/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DanBoneh-MessageIntegrity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,7 +238,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/02/DanBoneh-MessageIntegrity/">DanBoneh-MessageIntegrity</a>
+      <a class="article-title" href="/2020/04/02/DanBoneh-MessageIntegrity/">DanBoneh-Message Integrity</a>
     </h1>
   
 
@@ -175,7 +253,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>MAC</strong>（消息验证码）：包含一个<u>签名算法</u>和一个<u>验证算法</u> I=(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。</p>
-<p>标准的一致性要求：每一个密钥空间中的密钥 K 和每一个信息空间中的信息 M 都正好满足，如果使用密钥对信息进行签名，使用同样的密钥验证这个签名应该获得 yes 作为回应，V(k,m,S(k,m)) = yes。</p>
+<p><strong>标准的一致性要求</strong>：每一个密钥空间中的密钥 K 和每一个信息空间中的信息 M 都正好满足，如果使用密钥对信息进行签名，使用同样的密钥验证这个签名应该获得 yes 作为回应，V(k,m,S(k,m)) = yes。</p>
         
           <a class="article-more-a" href="/2020/04/02/DanBoneh-MessageIntegrity/#more">more >></a>
         
@@ -835,91 +913,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-现代密码学—防守与攻击" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/">现代密码学—防守与攻击</a>
-    </h1>
-  
-
-        
-        <a href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/" class="archive-article-date">
-  	<time datetime="2020-03-18T03:41:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-18</time>
-</a>
-        
-		
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用<code>M&#39;=A(K,M)</code>表示一个<strong>密码变换</strong>。</p>
-<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为${M}_K$。</p>
-<p><strong>用符号${M}_K$表示的完善加密</strong></p>
-<ol>
-<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文${M}_K$不提供任何求解明文消息M的密码分析方法。</li>
-<li>密文${M}_K$也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
-<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改${M}_K$而不被接收者在解密阶段发现是不可能的。</li>
-</ol>
-<p>具有这两个性质的完善加密是对现实世界中存在的加密算法的理想化。完善加密并不能防止协议含有安全缺陷。</p>
-        
-          <a class="article-more-a" href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">现代密码学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/">展开全文 >></a>
         </p>
       
 
