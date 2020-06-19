@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>DanBoneh-Collision Resistance | 鳕鱼堡er</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HMAC：基于抗碰撞的哈希函数构建的。 抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空">
+  <meta name="description" content="抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DanBoneh-Collision Resistance">
 <meta property="og:url" content="http://yoursite.com/2020/04/12/DanBoneh-CollisionResistance/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="HMAC：基于抗碰撞的哈希函数构建的。 抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空">
+<meta property="og:description" content="抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-12T05:45:20.000Z">
-<meta property="article:modified_time" content="2020-04-12T06:42:24.564Z">
+<meta property="article:modified_time" content="2020-06-19T05:38:45.707Z">
 <meta property="article:author" content="Angel">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>HMAC</strong>：基于抗碰撞的哈希函数构建的。</p>
+        <!-- toc -->
+<!-- tocstop -->
 <p><strong>抗碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) = H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到标签空间中的同一个输出，则称函数 H 是抗碰撞的。</p>
 <a id="more"></a>
 
