@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/03/24/DanBoneh-StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/03/24/DanBoneh-StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg">
 <meta property="article:published_time" content="2020-03-24T02:32:47.000Z">
-<meta property="article:modified_time" content="2020-03-24T07:02:44.925Z">
+<meta property="article:modified_time" content="2020-06-16T02:55:32.448Z">
 <meta property="article:author" content="Angel">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 16
+			总文章数 17
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -198,7 +198,7 @@
 <p>$C_1$ ← $m_1$⊕PRG(k)</p>
 <p>$C_2$ ← $m_2$⊕PRG(k)</p>
 <p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
-<p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
+<p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
 <h5 id="几种流密码"><a href="#几种流密码" class="headerlink" title="几种流密码"></a>几种流密码</h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
 <p>Google在 HTTPS 中使用RC4。</p>
 <p>RC4已被伪随机数发生器取代。</p>
