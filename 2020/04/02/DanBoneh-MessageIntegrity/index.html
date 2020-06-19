@@ -8,6 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>DanBoneh-Message Integrity | 鳕鱼堡er</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    <style>
+    .pace .pace-progress {
+        background: #6d6d6d; /*进度条颜色*/
+        height: 2px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #6d6d6d; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #6d6d6d;    /*上边框颜色*/
+        border-left-color: #6d6d6d;    /*左边框颜色*/
+    }
+  </style>
   <meta name="description" content="MAC（消息验证码）：包含一个签名算法和一个验证算法 I&#x3D;(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。 标准的一致性要求：每一个密钥空间中的密钥 K 和每一个信息空间中的信息 M 都正好满足，如果使用密钥">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DanBoneh-Message Integrity">
@@ -450,10 +465,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vps</a>
               </li>
              
@@ -462,11 +473,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">DanBoneh密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
             
             <div class="clearfix"></div>

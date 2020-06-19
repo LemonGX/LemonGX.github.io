@@ -8,6 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>DanBoneh-Stream Ciphers | 鳕鱼堡er</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+  <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    <style>
+    .pace .pace-progress {
+        background: #6d6d6d; /*进度条颜色*/
+        height: 2px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #6d6d6d; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #6d6d6d;    /*上边框颜色*/
+        border-left-color: #6d6d6d;    /*左边框颜色*/
+    }
+  </style>
   <meta name="description" content="在流密码中，密钥不是完全随机的，而是一种伪随机密钥。 伪随机数发生器（PRG）：是一个本身没有随机性的完全确定的函数 G ，取一个种子为输入（种子具有随机性），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做种子空间，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s。种子可能只有128位，但能扩展成一个长得多的字符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DanBoneh-Stream Ciphers">
@@ -194,12 +209,12 @@
 <p><strong>不可预测性</strong>：对于各个位置，即对所有 i ，没有有效的破解算法 A ，以不可忽略的概率预测出第 i+1 位。</p>
 <p>安全的发生器必须具有<strong>不可预测性</strong>，即不能由前面的部分预测出后面的部分。如：拿到密文，而明文的前半部分已知，可以异或出伪随机序列的前半部分，如果伪随机序列可预测，就可以预测出完整的伪随机序列，从而密文完全破解，还原整个明文。</p>
 <p><strong>线性同余法</strong>：将当前伪随机数的数值乘以 A 再加上 C ，然后将除以 M 得到的余数作为下一个随机数，A 和 C 是整数，M 是质数，迭代执行 <code>$R_0$ = (A × 种子 + C) mod M</code>，输出后一位。线性同余法<u>不具备不可预测性</u>，不能用于密码技术。</p>
-<h5 id="对一次性密码本的攻击"><a href="#对一次性密码本的攻击" class="headerlink" title="对一次性密码本的攻击"></a>对一次性密码本的攻击</h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
+<h5><span id="对一次性密码本的攻击">对一次性密码本的攻击</span></h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
 <p>$C_1$ ← $m_1$⊕PRG(k)</p>
 <p>$C_2$ ← $m_2$⊕PRG(k)</p>
 <p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
 <p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
-<h5 id="几种流密码"><a href="#几种流密码" class="headerlink" title="几种流密码"></a>几种流密码</h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
+<h5><span id="几种流密码">几种流密码</span></h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
 <p>Google在 HTTPS 中使用RC4。</p>
 <p>RC4已被伪随机数发生器取代。</p>
 <p>RC4弱点：</p>
@@ -469,10 +484,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vps</a>
               </li>
              
@@ -481,11 +492,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">DanBoneh密码学</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">现代密码学</a>
               </li>
             
             <div class="clearfix"></div>
