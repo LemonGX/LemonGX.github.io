@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>对称加密知识点串讲</title>
+    <url>/2020/06/19/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/</url>
+    <content><![CDATA[
+
+	<div class="row">
+    <embed src="对称加密知识点串讲.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【hexo】next踩坑no such file or directory open ... \.swig </title>
+    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/</url>
+    <content><![CDATA[<p>更换 hexo 主题为 next 时，首先根据 hexo 官方文档进行主题设定。</p>
+<p>官方文档链接：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/getting-started.html</a></p>
+<a id="more"></a>
+<p>主题设定完成，发布过程<strong>报错</strong></p>
+<p>ERROR ENOENT: no such file or directory, open ‘D:\MyWork\hexo\themes\next\layout_scripts\schemes.swig’</p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/cmd%E6%8A%A5%E9%94%99.PNG" class title="cmd报错">
+<p><strong>解决方案</strong></p>
+<p>对主题配置文件代码（_config.yml）进行格式检查，推荐使用 YAML Lint 在线检测。</p>
+<p>检测地址链接：<a href="http://www.yamllint.com/" target="_blank" rel="noopener">http://www.yamllint.com/</a></p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/yamllint%E6%A3%80%E6%B5%8B.PNG" class title="yamllint检测">
+<p>检测发现第100行代码冒号后缺少空格，错误得以解决。</p>
+]]></content>
+      <categories>
+        <category>hexo踩坑记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Collision Resistance</title>
+    <url>/2020/06/22/DanBoneh-CollisionResistance/</url>
+    <content><![CDATA[<p><strong>HMAC</strong>：基于抗碰撞的哈希函数构建的。</p>
+<p><strong>抗碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) = H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到标签空间中的同一个输出，则称函数 H 是抗碰撞的。</p>
+<a id="more"></a>
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Message Integrity</title>
+    <url>/2020/04/02/DanBoneh-MessageIntegrity/</url>
+    <content><![CDATA[<h1><span id="message-auth-codes">Message Auth. Codes</span></h1><p><strong>MAC</strong>（消息验证码）：是一对算法，包含一个<u>签名算法</u>和一个<u>验证算法</u> I=(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。</p>
+<p><strong>标准的一致性要求</strong>：每一个密钥空间中的密钥 K 和每一个信息空间中的信息 M 都正好满足，如果使用密钥对信息进行签名，使用同样的密钥验证这个签名应该获得 yes 作为回应，V(k,m,S(k,m)) = yes。</p>
+<a id="more"></a>
+<p><strong>CRC</strong>（循环冗余检验）：一个经典的校验和算法，为监测信息中的随机发生的错误而设计，并非针对恶意错误。如果利用 CRC 进行检验，没有密钥，攻击者可以随意更改信息重新计算输出 tag 并得到 yes 的反馈，Alice与攻击者无区别。</p>
+<p>安全的MAC，如果对它进行<strong>选择信息攻击</strong>，是不可能被存在性伪造的。</p>
+<p><strong>存在性伪造</strong>：攻击者不能产生新的信息标签对。</p>
+<p>有两个算法 S 和 V ，有一个攻击者A ，游戏如下：挑战者通常为 MAC 选择一个随机密钥，攻击者进行他的选择信息攻击，他提交 $m_1$ 给挑战者，获得 $m_1$ 的标签，然后提交 $m_2$ 给挑战者，获得 $m_2$ 的标签，直到他提交了 q 个信息给挑战者，获得了 q 个这些信息的标签，这是选择信息攻击的部分，然后攻击者继续试图进行存在性伪造，他输出一个新的信息标签对我们就说他赢下这场游戏，换句话说，b=1 表示他赢下这场游戏。通常，我们定义攻击者的优势等于挑战者在本游戏中输出 1 的概率。安全的MAC系统，对所有有效的攻击者，优势都是可忽略的，换句话说，没有有效的攻击者能够以不可忽视的概率赢得这个游戏。</p>
+<img src="/2020/04/02/DanBoneh-MessageIntegrity/MAC%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9E%8B.PNG" class title="MAC攻击模型">
+<h1><span id="macs-based-on-prfs">MACs based on PRFs</span></h1><p><u>安全的 PRF 可以构建安全的 MAC</u>。</p>
+<p><strong>CBC-MAC</strong>（ECBC，常与AES一起使用）：取针对短信息的 PRF 为输入，输出一个 PRF ，可以处理长信息作为输出。</p>
+<img src="/2020/04/02/DanBoneh-MessageIntegrity/ECBC.PNG" class title="ECBC">
+<p>不经历最后一步 $k_1$ 加密的函数，叫做<u>原 CBC 函数</u>。不是一个安全的 MAC。</p>
+<p><strong>NMAC</strong>：同上，取处理短输入的 PRF ，产生能处理长输入的 PRF。</p>
+<img src="/2020/04/02/DanBoneh-MessageIntegrity/NMAC.PNG" class title="NMAC">
+<p>不经历最后一步 $k_1$ 加密的函数，为<u>级联函数</u>。不是安全的 MAC。最后一步的加密阻止了<u>扩展攻击</u>。</p>
+<p>如果 N 位 PRF 是安全的，那么 T&lt;N 位的PRF（截断PRF，1/2^N可忽略）也是安全的。</p>
+<p><strong>补齐函数</strong>：本身必须是一一映射的函数，它应当是将两个不同的信息映射到不同的两个补齐的信息，不应该在补齐函数上有碰撞，必须是可逆的。</p>
+<p><strong>CMAC</strong>（常与AES一起使用）：可以使用一个随机的补齐函数，不用加假分组。使用三密钥机制，第一个密钥 k 用于 CBC 计算标准的 CBC-MAC 算法，密钥 $k_1$ 和 $k_2$ 仅用于最后一个分组的补齐。 $k_1$ 和 $k_2$ 是使用伪随机数发生器由 k 推出的。如果信息长度正好是分组长度的整数倍，采用 ISO 补齐，并把最后一个分组和密钥 $k_1$ 异或；如果信息长度不是分组长度的整数倍，不做扩展，把最后一个分组和密钥 $k_2$ 异或。</p>
+<img src="/2020/04/02/DanBoneh-MessageIntegrity/CMAC.PNG" class title="CMAC">
+<p><strong>PMAC</strong>：可并行，使用了一个底层的 PRF 来构建一个 PRF去处理长得多的信息。密钥是一对密钥，一个给 PRF，另一个给掩码函数 P。采用补齐函数，不需要加假的分组。</p>
+<img src="/2020/04/02/DanBoneh-MessageIntegrity/PMAC.PNG" class title="PMAC">
+<p><strong>Carter-Wegman MAC</strong>：一个随机的 MAC ，不基于 PRF ，单个信息可以有许多不同的有效标签。取大量的信息，计算哈希值，得到一个小标签，计算用了快速的一次性 MAC ，然后用 PRF 加密。</p>
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【pptx】对称密码2</title>
+    <url>/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/</url>
+    <content><![CDATA[<p><strong>分组密码</strong>：见《DanBoneh-Block Ciphers》分组密码。</p>
+<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
+<p>设计分组密码的两种基本技术：为了<u>抵抗攻击者对密码系统的统计分析</u>，香农提出<strong>混乱</strong>和<strong>扩散</strong>。</p>
+<a id="more"></a>
+<p><strong>混乱</strong></p>
+<ol>
+<li>目的：使明文和密文之间、密文和密文之间的相关统计特性极小化，从而使攻击者无法找到密钥。</li>
+<li>方法：代换。</li>
+</ol>
+<p><strong>扩散</strong></p>
+<ol>
+<li>目的：将明文及密钥的影响尽可能迅速地散布到较多个密文比特中。</li>
+<li>方法：置换。</li>
+</ol>
+<p>目前，绝大多数的分组密码都是通过<strong>迭代技术</strong>构造的。轮密钥（子密钥）：$k_1$~$k_d$，轮函数：R($k_i$,..)。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG" class title="分组密码迭代">
+<h5><span id="des">DES</span></h5><p>核心思想：<strong>Feistel网络</strong>，是使用<u>任意函数</u>构造<u>可逆函数</u>（分组密码）的一般方法。d 个函数无需可逆，构造出的Feistel网络仍然可逆。</p>
+<p>Feistel网络</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG" class title="Feistel网络">
+<p>Feistel网络求逆</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG" class title="Feistel网络求逆">
+<p>DES结构</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG" class title="DES结构">
+<p>Feistel网络一轮的结构中，乘积函数 F 有三个关键函数 E-box、S-box、P-box。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG" class title="DES一轮结构">
+<p>DES安全性：密钥空间只有 $2_56$ ≈ $10_17$，56 bits不足以抵抗<u>穷举攻击</u>。DES 依靠 S-box 实现非线性变换，但 NSA 被指责在 S-box 设计上隐藏了“陷门”。</p>
+<p><strong>PRF and PRP</strong>：见《DanBoneh-Block Ciphers》PRF、PRP。</p>
+<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
+<p><strong>PRF开关引理</strong></p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG" class title="PRF开关引理">
+<p><strong>分组密码工作模式</strong></p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG" class title="分组密码工作模式">
+<h5><span id="ecb模式">ECB模式</span></h5><p>对于包含两个或两个以上分组的明文，ECB 不是语义安全的。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="ECB语义安全证明">
+<p>优点</p>
+<ol>
+<li>简单、高速。</li>
+<li>无差错传播：单个密文分组在传输或存储时出现错误，只会影响该分组的解密，不会影响到其他分组。</li>
+</ol>
+<p>缺点：安全性差，暴露明文数据的格式和统计特征</p>
+<p><strong>确定的计数器模式</strong></p>
+<p>F 是安全的 PRF，与真随机函数不可区分，可以构造一个安全的 PRG。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG" class title="确定的计数器模式">
+<h5><span id="cpa">CPA</span></h5><p>CPA安全性：<u>选择明文攻击下</u>的<u>语义安全性</u>（密钥可以重复使用）。</p>
+<p>对称加密体制不是CPA安全的。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG" class title="对称加密体制">
+<p><strong>随机化加密</strong></p>
+<p>选取随机数和密钥 k 共同加密明文，使得加密相同的明文，输出不同的密文。</p>
+<p>密文比明文长，密文长度 =  明文长度 + “随机比特长度”，“随机比特长度” ≠ 随机比特长度，只是相关。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG" class title="随机化加密">
+<p><strong>nonce-based加密</strong></p>
+<p>nonce：只使用一次的数值，每加密一个明文，就换一个新的。(k，n)不重复使用。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG" class title="nonce-based加密">
+<p>如何选择nonce？</p>
+<ol>
+<li>计数器方式：设置nonce为计数器，使用每次数值加 1 ，如果发送者和接收者保持相同的状态，则nonce无需发送。</li>
+<li>随机数方式：设置nonce为随机数，随机数需与密文一起发送。</li>
+</ol>
+<p>文件加密：随机数方式（加密文件时无需保持状态）</p>
+<p>SSL（按顺序发送）: 计数器方式 （无需向对方发送nonce）</p>
+<p>IP sec（无序发送）: 计数器方式即可, 但发送每个报文时，需附带所用nonce一起发送</p>
+<h5><span id="cbc模式">CBC模式</span></h5><p>密钥可以重复使用，CPA安全的。加密串行，解密可以并行。使用 PRP。</p>
+<p>见《DanBoneh-Using Block Ciphers》CBC。</p>
+<p><a href="https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/</a></p>
+<p>差错传播：单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。</p>
+<p>可自同步：只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG" class title="CBC差错传播">
+<h5><span id="ctr模式">CTR模式</span></h5><p>密钥可以重复使用，CPA安全的。加密、解密都可以并行。使用安全的 PRF。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG" class title="CTR的IV选择">]]></content>
+      <tags>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【pptx】对称密码1</title>
+    <url>/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/</url>
+    <content><![CDATA[<p><strong>随机序列</strong>：</p>
+<p>性质：<u>不能可靠重复产生</u>（用完全相同的输入操作两次，得到两个不相关的序列）</p>
+<p>数学解释：概率服从<u>均匀分布</u>（①产生每个比特概率为 1/2  ②任意两个比特统计上相互独立）</p>
+<p>计算机不能产生真正的随机序列，其本身只能产生<u>伪随机序列</u>。相同计算环境下，对于相同输入，计算机只能产生相同的输出。</p>
+<a id="more"></a>
+<p>一次一密（one-time pad）密钥流是随机序列，且不重复使用。</p>
+<p>如何定义“安全”：</p>
+<ol>
+<li>不能恢复密钥？$E_k$(m)=m 虽没有泄露密钥，但泄露了明文。</li>
+<li>不能恢复所有明文？$E_k$($m_0$||$m_1$) = $m_0$ || k ⊕$m_1$ 只加密了后半段，前半段明文泄露。</li>
+</ol>
+<p>香农认为，在唯密文攻击下，<u>密文</u>不能泄露明文的<u>任何信息</u>（只包含明文的内容）</p>
+<p><strong>完善保密性</strong>：见《DanBoneh-One Time Pad》密码完美安全。</p>
+<p><a href="https://lemongx.github.io/2020/03/24/DanBoneh-OneTimePad/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/24/DanBoneh-OneTimePad/</a></p>
+<p><strong>香农定理</strong>：满足完善保密性，所需密钥至少和明文一样长。</p>
+<p><strong>一次一密</strong>总结：</p>
+<p>优点：</p>
+<ol>
+<li>只用异或运算，实现简单/效率高</li>
+<li>唯密文攻击无效，再牛的攻击者也无计可施（具备完善保密性）</li>
+</ol>
+<p>不实用的原因：</p>
+<ol>
+<li>密钥是(真)随机的（如何获得真随机序列是一个现实的问题）</li>
+<li>每个密钥只用一次</li>
+<li>密钥至少和明文一样长(完善保密性, 香农定理)（分发/存储如此长的密钥，并确保安全性很困难）</li>
+</ol>
+<p><strong>流密码</strong>：为使一次一密更加实用，降低安全性要求，缩短密钥长度，使用<u>“伪随机”密钥流</u>代替<u>“随机”密钥流</u>，利用一个短的随机密钥（种子k）作为伪随机数发生器（PRG/PRNG）的输入，产生伪随机密钥流 G(k)，再与明文异或。</p>
+<p><strong>PRG</strong>：见《DanBoneh-Stream Ciphers》PRG。</p>
+<p><a href="https://lemongx.github.io/2020/03/24/DanBoneh-StreamCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/24/DanBoneh-StreamCiphers/</a></p>
+<p><strong>PRG的安全性</strong>：对于任何高效可计算的算法，成功区分出 PRG 的输出和随机序列的概率都是可忽略的。（计算上不可区分）</p>
+<p><u>一个PRG是安全的 = 一个PRG是不可预测的</u>。</p>
+<p>流密码不具有完善保密性。</p>
+<p><strong>完善保密性 VS 语义安全性</strong></p>
+<p>完善保密性</p>
+<ol>
+<li>唯密文攻击无效</li>
+<li>无条件安全（即使拥有无限计算资源，唯密文攻击也无法破译）</li>
+</ol>
+<p>语义安全性</p>
+<ol>
+<li>选择明文攻击无效（密钥只用一次）比唯密文攻击更强</li>
+<li>计算上安全（攻击者的计算资源有限，更符合现实）</li>
+</ol>
+<p>在实验中，攻击者发送等长的两条明文进行加密，实验前黑盒中 b 的值已经确定，攻击者根据加密结果判断 b 的值（即发生的实验是实验一还是实验二）</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E6%A8%A1%E5%9E%8B.PNG" class title="语义安全模型">
+<p><strong>语义安全性</strong>：在上述模型中，对于所有高效可计算的攻击者A，优势Adv：=| Pr[A($E_k$($m_0$)) = 1] - Pr[A($E_k$($m_1$)) = 1] |（即 b 为 0 或 1 的概率差）是可忽略的。</p>
+<p>对于任何高校可计算的攻击者选择的明文 $m_0$ 和 $m_1$ ：{$E_k$($m_0$)} $≈_c$ {$E_k$($m_1$)} （计算上不可区分）</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E7%AD%89%E4%BB%B7%E6%A8%A1%E5%9E%8B.PNG" class title="语义安全等价模型">
+<p><strong>语义安全性</strong>等价定义：在上述模型中，对于所有高效可计算的攻击者A，优势Adv：=| Pr[b’ = b] - 1/2 |（攻击者猜对 b 的概率）是可忽略的。</p>
+<p>对于任何高效可计算的攻击者选择的明文 $m_0$ 和 $m_1$ ：猜中 b 的概率可以忽略不计。</p>
+<p><strong>一次一密是语义安全的。</strong></p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E4%B8%80%E6%AC%A1%E4%B8%80%E5%AF%86%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="一次一密语义安全证明">
+<p><strong>PRG具有不可预测性 ⇒ 相应的流密码是语义安全的。</strong></p>
+<p>目的是证明流密码在计算上不可区分</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E6%B5%81%E5%AF%86%E7%A0%81%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A81.PNG" class title="流密码语义安全1">
+<p>首先证明下图，由于 PRG 具有不可预测性，则 PRG 与真随机在计算上不可区分</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E6%B5%81%E5%AF%86%E7%A0%81%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A82.PNG" class title="流密码语义安全2">
+<p>一次一密是语义安全的，在计算上不可区分</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E6%B5%81%E5%AF%86%E7%A0%81%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A83.PNG" class title="流密码语义安全3">
+<p>PRG 与真随机在计算上不可区分</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E6%B5%81%E5%AF%86%E7%A0%81%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A84.PNG" class title="流密码语义安全4">
+<p>因此流密码在计算上不可区分，是语义安全的。</p>
+<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/%E6%B5%81%E5%AF%86%E7%A0%81%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.PNG" class title="流密码语义安全">
+<p><strong>一次一密 VS 流密码</strong></p>
+<p>一次一密：符合<u>完善保密性</u>、<u>语义安全性</u>，密钥长度至少和明文<u>一样长</u>，不实用。</p>
+<p>流密钥：符合<u>语义安全性</u>，密钥长度比明文<u>短很多</u>，实用。</p>
+<p>一次一密和流密码的<strong>密钥都不能重复使用</strong>，想重复使用密钥，不要“直接”使用流密码。</p>
+]]></content>
+      <tags>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Using Block Ciphers</title>
+    <url>/2020/03/28/DanBoneh-UsingBlockCiphers/</url>
+    <content><![CDATA[<p><strong>电子密码本</strong>（ECB）不是语义安全的，永远不应被用来加密长于一个分组的信息。</p>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/ECB.PNG" class title="ECB">
+<a id="more"></a>
+<p>在确定的计数器模式下，由分组密码构建一个流密码。</p>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/PRF%E6%9E%84%E9%80%A0%E7%9A%84%E6%B5%81%E5%AF%86%E7%A0%81.PNG" class title="PRF构造的流密码">
+<p>同一个密钥加密多个信息，允许攻击者实施<strong>选择明文攻击</strong>（<strong>CPA</strong>，即攻击者可任选一条信息交给Alice加密，然后给攻击者相应的密文。）目标是破解语义安全。</p>
+<p>确定的加密机制不可能是 CPA 安全的。</p>
+<p>用同一个密钥加密两段相同的明文，最好产生两段不同的密文，可以通过<u>随机加密</u>（在加密过程中，选择一些随机的字符串进行加密）和<u>基于新鲜值的加密</u>（构造对选择明文攻击安全的加密机制）来解决。</p>
+<p><strong>密码分组链接模式</strong>（CBC）：使用一个分组密码，以实现对选择明文攻击是安全的。首先选择一个随机的<u>初始向量 IV</u> （ IV 必须不可预测，其大小就是分组密码的一个分组大小，IV就是一个分组密码），IV 和第一个明文分组进行异或，得到的结果使用分组密码进行加密，输出第一个分组的密文。以此类推，将第二个明文分组与第一个密文分组进行异或，再加密，得到第二个分组的密文。最后的密文是选择的 IV 以及所有的密文分组。</p>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/CBC.PNG" class title="CBC">
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/CBC%E8%A7%A3%E5%AF%86.PNG" class title="CBC解密">
+<p>无法对单独的一个中间明文分组加密。解密时，若一个密文分组受损，只要长度不变化，只会影响 2 个明文分组，若长度变化，分组错位，则无法解密。</p>
+<p>带 IV （IV不可预测）的 CBC 模式对选择明文攻击是语义安全的。</p>
+<p><strong>基于新鲜值的CBC加密</strong>：IV 被某个<u>不随机</u>但<u>唯一</u>的新鲜值取代。在这个模式中，要使用两个独立的密钥 k 和 $k_1$ ，k 用来加密单独的明文分组， $k_1$ 用来加密新鲜值。在CBC链接使用新鲜值前需要使用  $k_1$ 加密新鲜值，没有的话就不是 CPA 安全的。</p>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/CBC.PNG" class="nonce-based" title="nonce-based CBC">
+<p>当加密的明文长度不是分组密码的分组长度的倍数时，需要在最后一个分组后面进行补齐，解密者会将其移除。如果不需要补齐，为避免出错，最后还是需要加一个没用的分组，解密者根据信息内容会将其移除。</p>
+<p><strong>随机计数器模式</strong>（CTR）：使用安全的 PRF ，不使用分组密码。是一种通过逐次累加的计数器进行加密来生成密钥流的流密码，能以任意顺序处理分组，实现<u>并行</u>计算。IV 被包含在密文里，密文要比明文稍微长一点。</p>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/CTR.PNG" class title="CTR">
+<p><strong>CTR与CBC的比较</strong></p>
+<ol>
+<li>CBC 必须使用分组密码，解密过程时逆向的运行分组密码，CTR 只使用正向的加密功能。</li>
+<li>CBC 串行，CTR 可并行。</li>
+<li>CTR 的安全上界、误差项比 CBC 好。</li>
+<li>CBC 需要加一个假的补齐分组，有一个 CBC 变种叫做 CBC 密文偷窃可以用来避免产生假的分组。</li>
+<li>基于新鲜值的模式下，新鲜值需要被扩展成 16 字节的分组才能加密，CBC 模式的密文比原来扩展了 16 倍；CTR 模式可以加密一字节的信息，通过与 CTR 模式产生的流的第一个字节进行异或，产生的每个密文都是一个字节的，无需扩张，和明文一样。</li>
+</ol>
+<img src="/2020/03/28/DanBoneh-UsingBlockCiphers/CTRvsCBC.PNG" class title="CTRvsCBC">]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DanBoneh-Block Ciphers</title>
+    <url>/2020/03/27/DanBoneh-BlockCiphers/</url>
+    <content><![CDATA[<p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
+<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
+<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
+<a id="more"></a>
+<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
+<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
+<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
+<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
+<p><strong>DES</strong>：核心思想是Feistel网络。</p>
+<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
+<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Stream Ciphers</title>
+    <url>/2020/03/24/DanBoneh-StreamCiphers/</url>
+    <content><![CDATA[<p>在流密码中，密钥不是完全随机的，而是一种<u>伪随机密钥</u>。</p>
+<p><strong>伪随机数发生器</strong>（PRG）：是一个<u>本身没有随机性</u>的<u>完全确定</u>的<u>函数 G</u> ，取一个种子为输入（<u>种子具有随机性</u>），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做<u>种子空间</u>，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，<code>G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s</code>。种子可能只有128位，但能扩展成一个长得多的字符串。</p>
+<p>以<u>种子</u>为私钥 k ，使用<u>发生器</u>将种子扩张成长得多看起来随机的<u>伪随机序列</u> G(k) ，将伪随机序列和明文异或，得到密文。<code>c = E(K,m) = m⊕G(k)</code>；<code>m = D(K,c) = c⊕G(k)</code>。</p>
+<p>流密码是安全的，安全性依赖于使用的发生器，但其密钥比明文短得多，不是完美安全的。</p>
+<a id="more"></a>
+<p><strong>不可预测性</strong>：对于各个位置，即对所有 i ，没有有效的破解算法 A ，以不可忽略的概率预测出第 i+1 位。</p>
+<p>安全的发生器必须具有<strong>不可预测性</strong>，即不能由前面的部分预测出后面的部分。如：拿到密文，而明文的前半部分已知，可以异或出伪随机序列的前半部分，如果伪随机序列可预测，就可以预测出完整的伪随机序列，从而密文完全破解，还原整个明文。</p>
+<p><strong>线性同余法</strong>：将当前伪随机数的数值乘以 A 再加上 C ，然后将除以 M 得到的余数作为下一个随机数，A 和 C 是整数，M 是质数，迭代执行 <code>$R_0$ = (A × 种子 + C) mod M</code>，输出后一位。线性同余法<u>不具备不可预测性</u>，不能用于密码技术。</p>
+<h5><span id="对一次性密码本的攻击">对一次性密码本的攻击</span></h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
+<p>$C_1$ ← $m_1$⊕PRG(k)</p>
+<p>$C_2$ ← $m_2$⊕PRG(k)</p>
+<p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
+<p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
+<h5><span id="几种流密码">几种流密码</span></h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
+<p>Google在 HTTPS 中使用RC4。</p>
+<p>RC4已被伪随机数发生器取代。</p>
+<p>RC4弱点：</p>
+<ol>
+<li>第二个字节等于 0 的概率为 2/256 ，而不是 1/256 ，加密时，第二个字节可能不会被加密。此外，第一个和第三个字节也是不均匀的。</li>
+<li>观察一段很长的输出，出现序列 00 的可能性更大。</li>
+<li>密钥关联攻击。</li>
+</ol>
+<p><strong>CSS</strong>（面向硬件）：已被完全破解，用于加密DVD电影。CSS是基于线性反馈移位寄存器（LFSR）的。</p>
+<p>CSS密钥是 5 个字节，40 位。（seed = 5 bytes = 40 bits）</p>
+<p>CSS使用 2 个LFSR，一个 17 位（1联结上前2个字节），一个 25 位（1联结上后3个字节）。</p>
+<p><strong>eStream</strong>：</p>
+<p>PRG：{0,1}^s × R →{0,1}ⁿ，n&gt;&gt;s，{0,1}^s 为seed，R 为新鲜值（只要密钥定下来，永不重复的值）。</p>
+<p><code>E(k, m; r) = m⊕PRG(k; r)</code>。(k; r) 这个有序对永不重复，不被多次使用，底线是可以重复使用密钥，新鲜值确保了有序对唯一。</p>
+<img src="/2020/03/24/DanBoneh-StreamCiphers/PRG.PNG" class title="PRG">
+<img src="/2020/03/24/DanBoneh-StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG" class title="统计测试">
+<p>一个生成器是安全的，不仅特定的统计测试认为它的输出是随机的，事实上，对于所有<u>有效</u>（测试算法总在有限步内终止并返回结果）的统计测试，都认为输出是随机的。</p>
+<p><strong>完美安全</strong>：</p>
+<p>对于任意等长的消息m，只要这个m属于消息空间（就是说用这个加密算法可以加密m），那么用加密密钥k加密后，加密结果“看起来都一样”，没法看出来这是从m，还是从其他什么消息加密得来的。</p>
+<img src="/2020/03/24/DanBoneh-StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg" class title="完美安全">
+<p><strong>语义安全</strong>：</p>
+<p>计算机在多项式复杂度内看加密结果，觉得“看起来都一样”。</p>
+<img src="/2020/03/24/DanBoneh-StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg" class title="语义安全">
+<p>可参考链接：<a href="https://www.zhihu.com/question/37203836" target="_blank" rel="noopener">https://www.zhihu.com/question/37203836</a></p>
+<p><u>安全的PRG是语义安全的</u>。</p>
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】One Time Pad</title>
+    <url>/2020/03/24/DanBoneh-OneTimePad/</url>
+    <content><![CDATA[<p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
+<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
+<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
+<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
+<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
+<a id="more"></a>
+<p>给定明文 M 和密文 C 很容易求出密钥 K ，C = M⊕K，C⊕M = M⊕K⊕M，<code>K=M⊕C</code>，同时可以得出，<u>只有一个</u>密钥 K ，能够满足 E(K,M) = C。</p>
+<p>关于<strong>应用</strong>：Alice和Bob想要通信，必须传递一个和明文等长的密钥，这和直接安全传递明文没有区别，实际中很难应用。</p>
+<p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
+<p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
+<p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
+<img src="/2020/03/24/DanBoneh-OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
+<p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
+<p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
+]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】绪论</title>
+    <url>/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<p><strong>TLS</strong>（安全传输层协议）：由两部分组成。第一部分为<strong>握手协议</strong>（Handshake），Alice与Bob互相交谈，在握手的最后，双方分享一个密钥，Alice与Bob都知道这个密钥，但攻击者不知道会话密钥K，运用了公钥密码技术。第二部分为<strong>记录协议</strong>（Record），双方共享密钥时，如何使用密钥加以保护通信数据。</p>
+<p><strong>对称加密</strong>：以分组的形式保护流量的技术。在对称加密系统中，只有通信双方知道密钥K，他们使用<strong>加密算法 E</strong> 和<strong>解密算法 D</strong> 进行通信加密。加密算法以<u>原信息</u>和<u>密钥</u>为输入，产生<u>密文</u>；解密算法以<u>密文</u>和<u>密钥</u>为输入，输出<u>原信息</u>。<strong>算法是公开的，密钥是保密的</strong>。很多私有的算法一旦被逆向工程很容易破解。</p>
+<p><strong>一次密钥</strong>（one time key）每个密钥只加密一个信息。</p>
+<a id="more"></a>
+<p><strong>WEP</strong>用来加密WiFi流量。</p>
+<p>密码学的核心是安全通信，含有两个部分：<strong>安全的密钥建立</strong>、<strong>安全的通信</strong>。</p>
+<p>现代密码学描述的每一个概念都依照非常严格的三步：</p>
+<ol>
+<li>当引入新的原型时，如数字签名，要准确描述模型的威胁是什么，如攻击者如何攻击数字签名、伪造签名的目的。</li>
+<li>提出架构，证明攻击者在这个威胁模型下可以攻击这个架构。</li>
+<li>攻击者可以用来解决根本性难题，如果问题很难，则证明攻击者无法在威胁模型下破解这个架构。</li>
+</ol>
+<p>eg：对于数字签名，我们定义数字签名不可伪造的意义，然后给出一个架构，假如有人能够破解这个架构，他也可以用他破解的方法来解决因子分解问题。</p>
+<p><strong>凯撒密码</strong>：并不是密码，因为没有密钥，是一个固定替换的替换式密码，利用字母移位，<em>可轻易破解</em>。</p>
+<p><strong>简单的替换式密码</strong>：密钥是一张字母映射替换表，替换表是随机选择的。假设有26个字母，密钥空间是 26！个，约为 2^88 ，意味着描述一个替换密钥需要88位，每个密钥以88位表示，但依然不安全，可以通过<strong>唯密文攻击</strong>仅凭密文就能还原密钥以及明文，首先可以使用<u>字母的频率</u> e&gt;t&gt;a 分析，其次，通过<u>字母配对的频率</u> he、an、in、th 等。所以，替换式密码<em>可轻易破解</em>。</p>
+<p><strong>Vigener加密</strong>：密钥是一个单词，将密钥字母不断重复以覆盖整个明文信息，将密钥字母和信息字母相加，模 26 得到密文。解密时，将密文信息（不够则 +26 ）减去密钥。通过<strong>唯密文攻击</strong>破解，破解时，首先假设<u>密钥长度已知</u>为 6 ，将密文按照密钥长度分组，然后看每组的第一个字母，它们都被同一个字母加密，eg：假设第一个密钥字母为 C ，则密文分组第一个字母是明文移动 3 位。收集所有字母，最常见的字母很可能是 E 的加密结果，设想每隔 5 个字母最常见的是 M ，我们知道 E 加上第一个密钥字母等于 M ，则 M-E=H，得出 H 为第一个密钥字母。同理，看每个密文分组的第二个字母，重复操作，找出最常见字母，它很可能是 E 的加密结果，减去 E 就是密钥的第二个字母，可以还原整个密钥。<u>密钥长度未知</u>的情况下，先假定密钥长度是 1 ，然后假定长度是 2 、是 3 等等，再运行解密过程，知道了密钥长度和密钥信息，直到得到一个说得通的明文信息。</p>
+<p><strong>单个轴轮机</strong>：密钥在碟片里，每按一次打字机，碟片转一个刻痕，实际上是一个<u>替换表的编码</u>，如图所示，连续按下 C 三次，三次输出均不同，依次为 T、S、K。通过<strong>唯密文攻击</strong>破解，分析<u>字母频率</u>、<u>配对频率</u>、<u>三合字母频率</u>。</p>
+<img src="/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/%E8%BD%B4%E8%BD%AE%E6%9C%BA.PNG" class title="轴轮机">
+<p><strong>Enigma机</strong>：是一种复杂的轴轮机，使用了3、4或5个轴轮。密钥是轴轮的初始设定，打字时，轴轮以不同速率旋转输出密文，4 个轴有 26^4 个不同的密钥，约 2^18，密钥空间较小。可通过<strong>唯密文攻击</strong>破解。</p>
+<p><strong>DES</strong>：一种将 64 比特的明文加密成 64 比特的密文的对称密码算法，密钥长度为 56 比特，每隔 7 比特会设置一个用于错误检查比特，密钥空间为 2^56 ，一次加密 64 位（8个字母），密钥空间很小，可以使用<strong>暴力破解</strong>，新项目中不能继续使用。</p>
+<p><strong>AES</strong>：分组长度固定，使用 128 位密钥，密钥长度 128、192、256 比特。</p>
+<img src="/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8701.JPG" class title="离散概率01">
+<img src="/2020/03/23/DanBoneh-%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8702.JPG" class title="离散概率02">]]></content>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【现代密码学】概率论和信息论</title>
+    <url>/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
+    <content><![CDATA[<h4><span id="标准符号">标准符号</span></h4><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B701.png" class title="标准符号01">
+<a id="more"></a>
+<img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B702.png" class title="标准符号02">
+<h4><span id="概率论的基本概念">概率论的基本概念</span></h4><p>令S为一个任意确定的点的集合，称之为<strong>概率空间</strong>（或<strong>样本空间</strong>）。任意元素 x∈S 成为<strong>样点</strong>（也称为<strong>结果</strong>、<strong>简单事件</strong>或<strong>不可分事件</strong>。一个<strong>事件</strong>（也成为<strong>合成事件</strong>或<strong>可分事件</strong>）是 S 的一个子集，通常用以一个大写字母表示（比如 E ）。<strong>一次实验或观察</strong>是一种从 S 中产生（取出）一个点的动作。一个事件 E 的发生就是一个实验产生某个点 x∈S ，并满足 x∈E 。</p>
+<h5><span id="概率的经典定义">概率的经典定义</span></h5><p>假设一个实验可以从 n=#S 个等可能的点中产生一个点，并且每次实验必须产生一个点。令 m 表示事件 E 包含的点的数目，那么称 m/n 为事件 E 发生的概率，并记为</p>
+<script type="math/tex; mode=display">
+Prob[E]=\frac{m}{n}</script><h5><span id="概率的统计定义">概率的统计定义</span></h5><p>假设在相同条件下进行了 n 次实验，其中事件 E 发生了 μ 次。如果对所有足够大的 n ， μ/n 保持不变，那么就说事件E的概率为 μ/n ，记为</p>
+<script type="math/tex; mode=display">
+Prob[E]≈\frac{μ}{n}</script><h4><span id="基本运算">基本运算</span></h4><h5><span id="加法规则">加法规则</span></h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%8A%A0%E6%B3%95%E8%A7%84%E5%88%99.png" class title="加法规则">
+<h6><span id="条件概率">条件概率</span></h6><p>设 E、F 为两个事件，且 E 的概率不为 0 。在 E 发生的条件下 F 发生的概率称为已知 E 时 F 的条件概率，记为</p>
+<script type="math/tex; mode=display">
+Prob[E|F]=\frac{Prob[E∩F]}{Prob[E]}</script><h6><span id="独立事件">独立事件</span></h6><p>事件 E、F 是相互独立的，当且仅当</p>
+<script type="math/tex; mode=display">
+Prob[E|F]=Prob[F]</script><h5><span id="乘法规则">乘法规则</span></h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%B9%98%E6%B3%95%E8%A7%84%E5%88%99.png" class title="乘法规则">
+<h5><span id="全概率定律">全概率定律★</span></h5><img src="/2020/03/22/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%85%A8%E6%A6%82%E7%8E%87%E5%AE%9A%E5%BE%8B.png" class title="全概率定律">
+<h4><span id="随机变量及其概率分布">随机变量及其概率分布</span></h4><h5><span id="离散随机变量及其分布函数">离散随机变量及其分布函数</span></h5><ol>
+<li><p>一个（离散）随机变量是一个实验的数字化结果。它是定义在一个（离散）样本空间上的函数。</p>
+</li>
+<li><p>设 S 为一个（离散）概率空间，ξ 为一个随机变量。ξ 的（离散）分布函数是 S→R 的一个函数，以一个概率值</p>
+<script type="math/tex; mode=display">
+Prob[ξ=x_i]=p_i（i=1,2,...,S）</script><p>列表为条件，并满足下面的条件</p>
+<script type="math/tex; mode=display">
+1.p_i≥0</script><script type="math/tex; mode=display">
+2.\sum_{1}^{S}{p_i}=1</script></li>
+</ol>
+<h5><span id="二项式分布">二项式分布</span></h5><p>如果随机变量 ξn 取值为0，1，…，n，且对每一个 p ，0&lt;p&lt;1 ，有</p>
+<script type="math/tex; mode=display">
+Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn 服从<strong>贝努利分布</strong>，用 b(k ; n , p) 表示一个贝努利项，其中 k=0,1,2,…,n 且 0&lt;p&lt;1 。</p>
+<h6><span id="中心项">中心项</span></h6><p>相邻的二项式两项的比值是</p>
+<script type="math/tex; mode=display">
+\frac{b(k；n，p)}{b(k-1 ；n ，p)}=\frac{(n-k+1)p}{k(1-p)}=1+\frac{(n+1)p-k}{k(1-p)}</script><p>当 k&lt;(n+1)p 时，其值为正；当 k&gt;(n+1)p 时，其值为负。因此在 k=(n+1)p 时，二项式 b(k ; n , p) 达到最大值。此二项式 b((n+1)p ; n , p) 称为<strong>中心项</strong>。</p>
+]]></content>
+      <tags>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【现代密码学】防守与攻击</title>
+    <url>/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E9%98%B2%E5%AE%88%E4%B8%8E%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<p>对于消息M（不管是明文还是密文）、密码算法A（不管它代表加密还是解密）、密钥K（不管它是加密密钥还是解密密钥），我们可以用<code>M&#39;=A(K,M)</code>表示一个<strong>密码变换</strong>。</p>
+<p>在对称密码体制种，我们可以认为K’=K；在公钥密码体制中，K’表示K的秘密部分或与K相匹配的部分。密文习惯记为${M}_K$。</p>
+<p><strong>用符号${M}_K$表示的完善加密</strong></p>
+<ol>
+<li>不用密钥K（在对称密码体制中），或者不用与K相匹配的私钥（在公钥密码体制中），密文${M}_K$不提供任何求解明文消息M的密码分析方法。</li>
+<li>密文${M}_K$也许还有一些关于明文消息M的已知信息，不提供任何求解密钥K（在对称密码体制中）或与K相匹配的私钥（在公钥密码体制中）的密码分析方法。</li>
+<li>（用于消息认证服务）如果没有密钥K，即使知道明文M，要想更改${M}_K$而不被接收者在解密阶段发现是不可能的。</li>
+</ol>
+<p>具有这两个性质的完善加密是对现实世界中存在的加密算法的理想化。完善加密并不能防止协议含有安全缺陷。</p>
+<a id="more"></a>
+<p><strong>Dolve-Yao威胁模型</strong>——密码协议的标准威胁模型[102]</p>
+<p>在这个模型中，攻击者有如下特征：</p>
+<ol>
+<li>他能获得经过网络的任何消息。</li>
+<li>他是网络的一个合法使用者，因而能够发起与任何其他用户的对话。</li>
+<li>他有机会成为任何主体发出信息的接收者。</li>
+<li>他能够冒充任何别的主体给任意主体发消息。</li>
+</ol>
+<p>在不对“不能做”的意思量化的情况下，攻击者不能做的事情：</p>
+<ol>
+<li>攻击者不能猜到从足够大的空间中选出的随机数。</li>
+<li>没有正确的密钥（或私钥），攻击者不能由给定的密文恢复出明文；对于完善加密算法，攻击者也不能从给定的明文构造出正确的密文。</li>
+<li>攻击者不能求出私有部分，比如：与给定的公钥相匹配的私钥。</li>
+<li>攻击者虽然能控制我们的计算和通信环境的大量公共部分，但一般他不能控制计算环境中的许多私有区域，如：访问离线主体的存储器。</li>
+</ol>
+<p><strong>认证服务器</strong>：它根据它所服务的主体的名字维护一个检索数据库，并能够递送通过请求主体密钥所计算出来的身份信息，而该密钥为服务器和主体所共享。认证服务器是一种特殊的主体，成为<strong>可信第三方</strong>或<strong>TTP</strong>。</p>
+<p>在同一个认证服务器提供服务下，假定Alice和TTP共享一个密钥，密钥由<strong>$K_AT$</strong>表示，成为<strong>密钥-加密密钥</strong>或<strong>长期密钥</strong>。</p>
+<p>一个<strong>共享密钥</strong>只能用于一次通信会话，因此这种密钥也称<strong>会话密钥</strong>和<strong>短期密钥</strong>。</p>
+<p><strong>“消息认证”协议</strong>：将消息和通信主体相绑定。可利用<strong>消息重放攻击</strong>。</p>
+<p>如果主体的身份对于消息的意义来说是必要的，那么为了保险起见，应当在消息中明确置入主体的名字。</p>
+<p><strong>“询问-应答”协议</strong>：以运行的随机数为nonce，表示仅使用一次的数字。又称<strong>Needham-Schroeder对称密钥认证协议</strong>。阻截通信信道，利用消息重放攻击。</p>
+]]></content>
+      <tags>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【现代密码学】一个简单的通信游戏“电话掷币”</title>
+    <url>/2020/03/18/%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E2%80%94%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/</url>
+    <content><![CDATA[<p><strong>协议</strong>：一个适当定义的、在<strong>多个参与实体</strong>之间执行的规程。（如果一个规程仅由一个实体执行，那么它只是一种程序，不能称之为协议。）</p>
+<p><strong>奇妙函数f</strong></p>
+<ol>
+<li>对任意整数x，由x计算f(x)是容易的，而给出f(x)，要找出对应的原像x是不可能的，不管x是奇数还是偶数。</li>
+<li>不可能找出一对整数(x,y)，满足x≠y且f(x)=f(y)。</li>
+</ol>
+<p>奇妙函数是构成现代密码学的一个基本要素—<strong>单向函数</strong>。</p>
+<ol>
+<li>单向函数的存在性意味着安全密码系统的存在性。</li>
+<li>安全密码系统的存在性意味着单向函数的存在性。</li>
+</ol>
+<p><strong>实际效率</strong>：一个密码算法一方面应该设计成容易处理的，以便能被合法用户使用；另一方面还应该是困难的，以便对非用户和攻击者构成一个要解的困难问题。</p>
+<p><strong>通信轮数</strong>：通信交互的次数。一个协议的通信轮数超过线性函数，它就不会被人为是实际有效的。</p>
+]]></content>
+      <tags>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码审计—01</title>
+    <url>/2020/03/14/2020-03-14%20Day5%20for%20CTF/</url>
+    <content><![CDATA[<p><strong>md5加密相等绕过</strong></p>
+<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>如果hash值以“0e”开头，后边都是数字，再与数字比较，就会被解释为0*10^n，还是为0，就会被判断相等，绕过登录环节。</p>
+<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
+<p><strong>sha()函数比较绕过</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if ($_GET[&#39;name&#39;] &#x3D;&#x3D; $_GET[&#39;password&#39;])&#123;</span><br><span class="line">        print &#39;Your password can not be your name.&#39;;</span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br><span class="line">else if (sha1($_GET[&#39;name&#39;]) &#x3D;&#x3D;&#x3D; sha1($_GET[&#39;password&#39;]))&#123;</span><br><span class="line">        print &#39;You passed stage 2.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">        print &#39;Flag: &#39;.$flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看似不可能，但如果把这两个字段构造为数组，如：?name[]=a&amp;password[]=b，这样在第一处判断时两数组确实是不同的，但在第二处判断时由于<strong>sha1()函数无法处理数组类型</strong>，将报错并返回false，if 条件成立，获得flag。经验证md5()函数同样存在此漏洞。</p>
+<p><strong>bool欺骗</strong></p>
+<p>当存在json_decode和unserialize的时候，部分结构会被解释成bool类型，也会造成欺骗。</p>
+<p><strong>通过数组绕过函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_GET[&#39;content&#39;]))&#123;</span><br><span class="line">    $filename &#x3D; &#39;config.php&#39;;</span><br><span class="line">    $content &#x3D; $_GET[&#39;content&#39;];</span><br><span class="line"></span><br><span class="line">    if(is_int(stripos($content, &#39;php&#39;)) || is_int(stripos($content, &#39;&lt;&#39;))) &#123;</span><br><span class="line">        echo &#39;Invalid input&#39;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        file_put_contents($filename, $content);</span><br><span class="line">        echo &#39;Success&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
+<p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
+<p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
+<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Basic PHP</title>
+    <url>/2020/03/14/2020-03-13%20Day4%20for%20CTF/</url>
+    <content><![CDATA[<p><strong>PHP基础知识</strong></p>
+<ul>
+<li>PHP支持的8种原始数据类型</li>
+</ul>
+<ul>
+<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p>
+<a id="more"></a>
+</li>
+<li><p>布尔值：true、false，不区分大小写</p>
+</li>
+<li>整型值0、浮点值0.0、空白字符串、字符串“0”、没有成员变量的数组、NULL都是false，除此之外为true</li>
+<li>整数可以用十进制、十六进制（0x）、八进制（0）符号制定</li>
+<li>字符串：<strong>单引号</strong>定义的字符串如实输出，<strong>双引号</strong>定义的字符串可以输出变量、换行符等</li>
+<li>数组：<ul>
+<li>索引数组：形如：<code>$arr=array(1,2,3,4);</code></li>
+<li>关联数组：形如：<code>$arr=array(&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2, &#39;c&#39;=&gt;3);</code></li>
+<li>用array()定义：<code>$users=array(&quot;name1&quot;=&gt;&quot;test1&quot;, &quot;name2&quot;=&gt;&quot;test2&quot;);</code></li>
+<li>用方括号定义：<code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code> <code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code></li>
+</ul>
+</li>
+<li><p><strong>NULL类型：</strong></p>
+<ul>
+<li>NULL表示一个变量没有值</li>
+<li>NULL不区分大小写</li>
+<li>尚未被赋值的变量为NULL</li>
+<li>被unset()的变量为NULL</li>
+<li>NULL类型唯一可能的值是NULL</li>
+<li>预定义变量</li>
+</ul>
+</li>
+<li><p>$GLOBALS      当前脚本全局变量</p>
+</li>
+<li>$_SERVER        变量由web服务器设定</li>
+<li>$_GET              网页提交的GET变量</li>
+<li>$_POST           网页提交的POST变量</li>
+<li>$_COOKIE       网页cookie变量</li>
+<li>$_FILES           上传文件的变量</li>
+<li><p>$_ENV             执行环境提交至脚本的变量</p>
+<ul>
+<li>常见函数</li>
+</ul>
+</li>
+<li><p>strlen()       检查字符串长度</p>
+</li>
+<li>strpos()      检索字符串内指定的字符或文本<ul>
+<li>strcmp() / strcasecmp() / strncmp()   字符串比较函数</li>
+<li>ctrcmp(str1,str2)，如果str1<str2 返回<0；如果str1>str2 返回&gt;0；如果str1=str2 返回=0。假如str2为一个array，也返回0。</str2></li>
+</ul>
+</li>
+<li>strstr() / stristr()                  查找替换</li>
+<li>trim() / ltrim() / rtrim()       删除空白符<ul>
+<li>逻辑运算符优先级从高到低是：&amp;&amp;、||、AND、OR</li>
+<li><strong>“==” 与 “===”</strong></li>
+</ul>
+</li>
+<li>=== 在比较的时候，会判断两种字符串的类型是否相等，再比较</li>
+<li>== 在比较的时候，会先将字符串类型转化成相同，再比较</li>
+<li>如果 比较一个数字和字符串 或者 比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行<ul>
+<li><strong>empty</strong>：当var存在，并且是一个非空非零的值时返回FALSE，否则返回TRUE。以下东西被认为是空的：</li>
+</ul>
+</li>
+<li>“”（空字符串）</li>
+<li>0（作为整数的0）</li>
+<li>0.0（作为浮点数的0）</li>
+<li>“0”（作为字符串的0）</li>
+<li>NULL</li>
+<li>FALSE</li>
+<li>array()（一个空数组）</li>
+<li>$var;（一个声明了，但是没有值的变量）</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vps搭建</title>
+    <url>/2020/03/12/2020-03-12%20Day3%20for%20CTF/</url>
+    <content><![CDATA[<ul>
+<li><p>github博客搭建，参考链接</p>
+<p><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa</a></p>
+</li>
+</ul>
+<p><strong>vps搭建</strong></p>
+<ul>
+<li><p>Vultr购买账号</p>
+</li>
+<li><p>利用 Xshell 和 ShadowSocks 搭建vps，参考链接</p>
+<p><a href="http://www.pianshen.com/article/133225018/" target="_blank" rel="noopener">http://www.pianshen.com/article/133225018/</a></p>
+<p><a href="http://www.pianshen.com/article/8499260352/" target="_blank" rel="noopener">http://www.pianshen.com/article/8499260352/</a></p>
+<p><a href="https://www.jianshu.com/p/4716cc35750f" target="_blank" rel="noopener">https://www.jianshu.com/p/4716cc35750f</a></p>
+</li>
+</ul>
+<p><strong>错误</strong>：vps代理连接失败，经学长指导，关闭vps防火墙，连接成功</p>
+<p><strong>解决方法</strong>：</p>
+<a id="more"></a>
+<ol>
+<li><p>在Xshell输入以下代码，关闭vps防火墙</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir -p ~&#x2F;.ssh &amp;&amp; \</span><br><span class="line">curl https:&#x2F;&#x2F;1248.ml&#x2F;my&#x2F;keys&#x2F;Phuker.keys &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys &amp;&amp; \</span><br><span class="line">chmod 700 ~&#x2F;.ssh &amp;&amp; \</span><br><span class="line">chmod 600 ~&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在cmd设置代理地址</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set ALL_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在cmd尝试连接网页</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -vv https:&#x2F;&#x2F;ip.cn&#x2F;   或者  curl -vv https:&#x2F;&#x2F;www.google.com&#x2F;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器尝试连接，连接成功（以上操作随时观察vps详细日志记录）</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>vps</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>simple HTTP method</title>
+    <url>/2020/03/10/2020-03-10%20Day1%20for%20CTF/</url>
+    <content><![CDATA[<p>$_GET[] 与 $_POST[] 的区别：</p>
+<p>GET方式会将表单中的数据以URL字符串的形式发送给服务器<br>将test.php以GET方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php?key1=value1&amp;key2=value2" target="_blank" rel="noopener">http://localhost/test.php?key1=value1&amp;key2=value2</a><br>以”?”开头的字符串称为URL字符串，则$_GET[“key1”]=value1、$_GET[“key2”]=value2;</p>
+<p>将test.php以POST方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php" target="_blank" rel="noopener">http://localhost/test.php</a></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+</search>
