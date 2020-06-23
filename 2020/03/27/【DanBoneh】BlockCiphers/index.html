@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CTF," />
+  <meta name="keywords" content="DanBoneh密码学,密码学," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="md5加密相等绕过 md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。 12345678910$test&#x3D;$_GET[&#39;test&#39;]; $test&#x3D;md5($test); if($test&#x3D;&#x3D;&#39;0&#39;)">
+<meta name="description" content="分组密码：由两部分组成，加密算法E 和 解密算法D，它的输入和输出具有严格相同的位数。 3DES：分组大小为 64 位，使用 168 位长的密钥。n &#x3D; 64 bits，k &#x3D; 168 bits。 AES：n &#x3D; 128 bits，k &#x3D; 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码审计—01">
-<meta property="og:url" content="http://yoursite.com/2020/03/14/2020-03-14%20Day5%20for%20CTF/index.html">
+<meta property="og:title" content="DanBoneh-Block Ciphers">
+<meta property="og:url" content="http://yoursite.com/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="md5加密相等绕过 md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。 12345678910$test&#x3D;$_GET[&#39;test&#39;]; $test&#x3D;md5($test); if($test&#x3D;&#x3D;&#39;0&#39;)">
-<meta property="article:published_time" content="2020-03-14T07:14:24.000Z">
-<meta property="article:modified_time" content="2020-06-22T06:06:38.546Z">
+<meta property="og:description" content="分组密码：由两部分组成，加密算法E 和 解密算法D，它的输入和输出具有严格相同的位数。 3DES：分组大小为 64 位，使用 168 位长的密钥。n &#x3D; 64 bits，k &#x3D; 168 bits。 AES：n &#x3D; 128 bits，k &#x3D; 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。">
+<meta property="article:published_time" content="2020-03-27T11:37:22.000Z">
+<meta property="article:modified_time" content="2020-06-23T08:50:55.887Z">
 <meta property="article:author" content="lucky_Leo">
-<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="DanBoneh密码学">
+<meta property="article:tag" content="密码学">
 <meta name="twitter:card" content="summary">
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/14/2020-03-14 Day5 for CTF/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/27/【DanBoneh】BlockCiphers/"/>
 
 
 
 
 
-  <title>代码审计—01 | 鳕鱼堡er</title>
+  <title>DanBoneh-Block Ciphers | 鳕鱼堡er</title>
   
 
 
@@ -306,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/2020-03-14%20Day5%20for%20CTF/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lucky_Leo">
@@ -323,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">代码审计—01</h1>
+          <h1 class="post-title" itemprop="name headline">DanBoneh-Block Ciphers</h1>
         
 
         <div class="post-meta">
@@ -338,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T15:14:24+08:00">
-                2020-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T19:37:22+08:00">
+                2020-03-27
               </time>
             
 
@@ -354,12 +355,34 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T14:06:38+08:00">
-                2020-06-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T16:50:55+08:00">
+                2020-06-23
               </time>
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -369,8 +392,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/03/14/2020-03-14%20Day5%20for%20CTF/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/14/2020-03-14%20Day5%20for%20CTF/" itemprop="commentCount"></span>
+                <a href="/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -378,7 +401,7 @@
 
           
           
-             <span id="/2020/03/14/2020-03-14%20Day5%20for%20CTF/" class="leancloud_visitors" data-flag-title="代码审计—01">
+             <span id="/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" class="leancloud_visitors" data-flag-title="DanBoneh-Block Ciphers">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,7 +426,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  632字
+                  374字
                 </span>
               
 
@@ -419,7 +442,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2分钟
+                  1分钟
                 </span>
               
             </div>
@@ -440,28 +463,17 @@
       
 
       
-        <p><strong>md5加密相等绕过</strong></p>
-<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
+<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
+<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
 <a id="more"></a>
-<p>如果hash值以“0e”开头，后边都是数字，再与数字比较，就会被解释为0*10^n，还是为0，就会被判断相等，绕过登录环节。</p>
-<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
-<p>eg：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
-<p><strong>sha()函数比较绕过</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if ($_GET[&#39;name&#39;] &#x3D;&#x3D; $_GET[&#39;password&#39;])&#123;</span><br><span class="line">        print &#39;Your password can not be your name.&#39;;</span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br><span class="line">else if (sha1($_GET[&#39;name&#39;]) &#x3D;&#x3D;&#x3D; sha1($_GET[&#39;password&#39;]))&#123;</span><br><span class="line">        print &#39;You passed stage 2.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">        print &#39;Flag: &#39;.$flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看似不可能，但如果把这两个字段构造为数组，如：?name[]=a&amp;password[]=b，这样在第一处判断时两数组确实是不同的，但在第二处判断时由于<strong>sha1()函数无法处理数组类型</strong>，将报错并返回false，if 条件成立，获得flag。经验证md5()函数同样存在此漏洞。</p>
-<p><strong>bool欺骗</strong></p>
-<p>当存在json_decode和unserialize的时候，部分结构会被解释成bool类型，也会造成欺骗。</p>
-<p><strong>通过数组绕过函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_GET[&#39;content&#39;]))&#123;</span><br><span class="line">    $filename &#x3D; &#39;config.php&#39;;</span><br><span class="line">    $content &#x3D; $_GET[&#39;content&#39;];</span><br><span class="line"></span><br><span class="line">    if(is_int(stripos($content, &#39;php&#39;)) || is_int(stripos($content, &#39;&lt;&#39;))) &#123;</span><br><span class="line">        echo &#39;Invalid input&#39;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        file_put_contents($filename, $content);</span><br><span class="line">        echo &#39;Success&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
-<p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
-<p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
-<p>参考链接：</p>
-<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
-<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
+<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
+<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
+<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
+<p><strong>DES</strong>：核心思想是Feistel网络。</p>
+<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
+<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
 
       
     </div>
@@ -479,8 +491,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i>
- CTF</a>
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
+            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ 密码学</a>
           
         </div>
       
@@ -493,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/14/2020-03-13%20Day4%20for%20CTF/" rel="next" title="Basic PHP">
-                <i class="fa fa-chevron-left"></i> Basic PHP
+              <a href="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/" rel="next" title="【DanBoneh】Stream Ciphers">
+                <i class="fa fa-chevron-left"></i> 【DanBoneh】Stream Ciphers
               </a>
             
           </div>
@@ -503,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/03/18/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/" rel="prev" title="【现代密码学理论与实践】一个简单的通信游戏“电话掷币”">
-                【现代密码学理论与实践】一个简单的通信游戏“电话掷币” <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/" rel="prev" title="【DanBoneh】Using Block Ciphers">
+                【DanBoneh】Using Block Ciphers <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

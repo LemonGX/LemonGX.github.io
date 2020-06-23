@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="密码学," />
+  <meta name="keywords" content="CTF," />
 
 
 
@@ -79,32 +79,17 @@
 
 
 
-<meta name="description" content="分组密码：见《DanBoneh-Block Ciphers》分组密码。 https:&#x2F;&#x2F;lemongx.github.io&#x2F;2020&#x2F;03&#x2F;27&#x2F;DanBoneh-BlockCiphers&#x2F; 设计分组密码的两种基本技术：为了抵抗攻击者对密码系统的统计分析，香农提出混乱和扩散。">
+<meta name="description" content="md5加密相等绕过 md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。 12345678910$test&#x3D;$_GET[&#39;test&#39;]; $test&#x3D;md5($test); if($test&#x3D;&#x3D;&#39;0&#39;)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【pptx】对称密码2">
-<meta property="og:url" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/index.html">
+<meta property="og:title" content="代码审计—01">
+<meta property="og:url" content="http://yoursite.com/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="分组密码：见《DanBoneh-Block Ciphers》分组密码。 https:&#x2F;&#x2F;lemongx.github.io&#x2F;2020&#x2F;03&#x2F;27&#x2F;DanBoneh-BlockCiphers&#x2F; 设计分组密码的两种基本技术：为了抵抗攻击者对密码系统的统计分析，香农提出混乱和扩散。">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG">
-<meta property="article:published_time" content="2020-03-30T06:53:18.000Z">
-<meta property="article:modified_time" content="2020-06-23T08:54:21.204Z">
+<meta property="og:description" content="md5加密相等绕过 md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。 12345678910$test&#x3D;$_GET[&#39;test&#39;]; $test&#x3D;md5($test); if($test&#x3D;&#x3D;&#39;0&#39;)">
+<meta property="article:published_time" content="2020-03-14T07:14:24.000Z">
+<meta property="article:modified_time" content="2020-06-22T06:06:38.546Z">
 <meta property="article:author" content="lucky_Leo">
-<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG">
 
 
 
@@ -134,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/30/pptx-对称密码2/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/14/【CTF】代码审计-01/"/>
 
 
 
 
 
-  <title>【pptx】对称密码2 | 鳕鱼堡er</title>
+  <title>代码审计—01 | 鳕鱼堡er</title>
   
 
 
@@ -321,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lucky_Leo">
@@ -338,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【pptx】对称密码2</h1>
+          <h1 class="post-title" itemprop="name headline">代码审计—01</h1>
         
 
         <div class="post-meta">
@@ -353,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-30T14:53:18+08:00">
-                2020-03-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T15:14:24+08:00">
+                2020-03-14
               </time>
             
 
@@ -369,34 +354,12 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T16:54:21+08:00">
-                2020-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T14:06:38+08:00">
+                2020-06-22
               </time>
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">密码学之路</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -406,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/" itemprop="commentCount"></span>
+                <a href="/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -415,7 +378,7 @@
 
           
           
-             <span id="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/" class="leancloud_visitors" data-flag-title="【pptx】对称密码2">
+             <span id="/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/" class="leancloud_visitors" data-flag-title="代码审计—01">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -440,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  893字
+                  632字
                 </span>
               
 
@@ -456,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  2分钟
                 </span>
               
             </div>
@@ -477,75 +440,29 @@
       
 
       
-        <p><strong>分组密码</strong>：见《DanBoneh-Block Ciphers》分组密码。</p>
-<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
-<p>设计分组密码的两种基本技术：为了<u>抵抗攻击者对密码系统的统计分析</u>，香农提出<strong>混乱</strong>和<strong>扩散</strong>。</p>
+        <p><strong>md5加密相等绕过</strong></p>
+<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p><strong>混乱</strong></p>
-<ol>
-<li>目的：使明文和密文之间、密文和密文之间的相关统计特性极小化，从而使攻击者无法找到密钥。</li>
-<li>方法：代换。</li>
-</ol>
-<p><strong>扩散</strong></p>
-<ol>
-<li>目的：将明文及密钥的影响尽可能迅速地散布到较多个密文比特中。</li>
-<li>方法：置换。</li>
-</ol>
-<p>目前，绝大多数的分组密码都是通过<strong>迭代技术</strong>构造的。轮密钥（子密钥）：$k_1$~$k_d$，轮函数：R($k_i$,..)。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG" class title="分组密码迭代">
-<h5><span id="des">DES</span></h5><p>核心思想：<strong>Feistel网络</strong>，是使用<u>任意函数</u>构造<u>可逆函数</u>（分组密码）的一般方法。d 个函数无需可逆，构造出的Feistel网络仍然可逆。</p>
-<p>Feistel网络</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG" class title="Feistel网络">
-<p>Feistel网络求逆</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG" class title="Feistel网络求逆">
-<p>DES结构</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG" class title="DES结构">
-<p>Feistel网络一轮的结构中，乘积函数 F 有三个关键函数 E-box、S-box、P-box。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG" class title="DES一轮结构">
-<p>DES安全性：密钥空间只有 $2_56$ ≈ $10_17$，56 bits不足以抵抗<u>穷举攻击</u>。DES 依靠 S-box 实现非线性变换，但 NSA 被指责在 S-box 设计上隐藏了“陷门”。</p>
-<p><strong>PRF and PRP</strong>：见《DanBoneh-Block Ciphers》PRF、PRP。</p>
-<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
-<p><strong>PRF开关引理</strong></p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG" class title="PRF开关引理">
-<p><strong>分组密码工作模式</strong></p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG" class title="分组密码工作模式">
-<h5><span id="ecb模式">ECB模式</span></h5><p>对于包含两个或两个以上分组的明文，ECB 不是语义安全的。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="ECB语义安全证明">
-<p>优点</p>
-<ol>
-<li>简单、高速。</li>
-<li>无差错传播：单个密文分组在传输或存储时出现错误，只会影响该分组的解密，不会影响到其他分组。</li>
-</ol>
-<p>缺点：安全性差，暴露明文数据的格式和统计特征</p>
-<p><strong>确定的计数器模式</strong></p>
-<p>F 是安全的 PRF，与真随机函数不可区分，可以构造一个安全的 PRG。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG" class title="确定的计数器模式">
-<h5><span id="cpa">CPA</span></h5><p>CPA安全性：<u>选择明文攻击下</u>的<u>语义安全性</u>（密钥可以重复使用）。</p>
-<p>对称加密体制不是CPA安全的。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG" class title="对称加密体制">
-<p><strong>随机化加密</strong></p>
-<p>选取随机数和密钥 k 共同加密明文，使得加密相同的明文，输出不同的密文。</p>
-<p>密文比明文长，密文长度 =  明文长度 + “随机比特长度”，“随机比特长度” ≠ 随机比特长度，只是相关。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG" class title="随机化加密">
-<p><strong>nonce-based加密</strong></p>
-<p>nonce：只使用一次的数值，每加密一个明文，就换一个新的。(k，n)不重复使用。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG" class title="nonce-based加密">
-<p>如何选择nonce？</p>
-<ol>
-<li>计数器方式：设置nonce为计数器，使用每次数值加 1 ，如果发送者和接收者保持相同的状态，则nonce无需发送。</li>
-<li>随机数方式：设置nonce为随机数，随机数需与密文一起发送。</li>
-</ol>
-<p>文件加密：随机数方式（加密文件时无需保持状态）</p>
-<p>SSL（按顺序发送）: 计数器方式 （无需向对方发送nonce）</p>
-<p>IP sec（无序发送）: 计数器方式即可, 但发送每个报文时，需附带所用nonce一起发送</p>
-<h5><span id="cbc模式">CBC模式</span></h5><p>密钥可以重复使用，CPA安全的。加密串行，解密可以并行。使用 PRP。</p>
-<p>见《DanBoneh-Using Block Ciphers》CBC。</p>
-<p><a href="https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/</a></p>
-<p>差错传播：单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。</p>
-<p>可自同步：只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG" class title="CBC差错传播">
-<h5><span id="ctr模式">CTR模式</span></h5><p>密钥可以重复使用，CPA安全的。加密、解密都可以并行。使用安全的 PRF。</p>
-<img src="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG" class title="CTR的IV选择">
+<p>如果hash值以“0e”开头，后边都是数字，再与数字比较，就会被解释为0*10^n，还是为0，就会被判断相等，绕过登录环节。</p>
+<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
+<p>eg：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line">0e830400451993494058024219903391</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s878926199a</span><br><span class="line">0e545993274517709034328855841020</span><br></pre></td></tr></table></figure>
+<p><strong>sha()函数比较绕过</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if ($_GET[&#39;name&#39;] &#x3D;&#x3D; $_GET[&#39;password&#39;])&#123;</span><br><span class="line">        print &#39;Your password can not be your name.&#39;;</span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br><span class="line">else if (sha1($_GET[&#39;name&#39;]) &#x3D;&#x3D;&#x3D; sha1($_GET[&#39;password&#39;]))&#123;</span><br><span class="line">        print &#39;You passed stage 2.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">        print &#39;Flag: &#39;.$flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看似不可能，但如果把这两个字段构造为数组，如：?name[]=a&amp;password[]=b，这样在第一处判断时两数组确实是不同的，但在第二处判断时由于<strong>sha1()函数无法处理数组类型</strong>，将报错并返回false，if 条件成立，获得flag。经验证md5()函数同样存在此漏洞。</p>
+<p><strong>bool欺骗</strong></p>
+<p>当存在json_decode和unserialize的时候，部分结构会被解释成bool类型，也会造成欺骗。</p>
+<p><strong>通过数组绕过函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">if(isset($_GET[&#39;content&#39;]))&#123;</span><br><span class="line">    $filename &#x3D; &#39;config.php&#39;;</span><br><span class="line">    $content &#x3D; $_GET[&#39;content&#39;];</span><br><span class="line"></span><br><span class="line">    if(is_int(stripos($content, &#39;php&#39;)) || is_int(stripos($content, &#39;&lt;&#39;))) &#123;</span><br><span class="line">        echo &#39;Invalid input&#39;;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        file_put_contents($filename, $content);</span><br><span class="line">        echo &#39;Success&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
+<p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
+<p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
+<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+
       
     </div>
     
@@ -562,8 +479,8 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
- 密码学</a>
+            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i>
+ CTF</a>
           
         </div>
       
@@ -576,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/" rel="next" title="【pptx】对称密码1">
-                <i class="fa fa-chevron-left"></i> 【pptx】对称密码1
+              <a href="/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/" rel="next" title="Basic PHP">
+                <i class="fa fa-chevron-left"></i> Basic PHP
               </a>
             
           </div>
@@ -586,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/04/02/DanBoneh-MessageIntegrity/" rel="prev" title="【DanBoneh】Message Integrity">
-                【DanBoneh】Message Integrity <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/18/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/" rel="prev" title="【现代密码学理论与实践】一个简单的通信游戏“电话掷币”">
+                【现代密码学理论与实践】一个简单的通信游戏“电话掷币” <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -643,17 +560,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -718,22 +626,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">DES</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">ECB模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">CPA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">CBC模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">CTR模式</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

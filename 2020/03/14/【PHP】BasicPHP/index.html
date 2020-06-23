@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="DanBoneh密码学,密码学," />
+  <meta name="keywords" content="PHP," />
 
 
 
@@ -79,24 +79,17 @@
 
 
 
-<meta name="description" content="Message Auth. CodesMAC（消息验证码）：是一对算法，包含一个签名算法和一个验证算法 I&#x3D;(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。 标准的一致性要求：每一个密钥空间中的密钥 K 和每">
+<meta name="description" content="PHP基础知识  PHP支持的8种原始数据类型   | 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 || —————- | ———————————————————————————- || 2种复合类型 | array数组；object对象                                   || 2种特殊类型 | resour">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【DanBoneh】Message Integrity">
-<meta property="og:url" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/index.html">
+<meta property="og:title" content="Basic PHP">
+<meta property="og:url" content="http://yoursite.com/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="Message Auth. CodesMAC（消息验证码）：是一对算法，包含一个签名算法和一个验证算法 I&#x3D;(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。 标准的一致性要求：每一个密钥空间中的密钥 K 和每">
-<meta property="og:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/MAC%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9E%8B.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/ECBC.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/NMAC.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/CMAC.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/PMAC.PNG">
-<meta property="article:published_time" content="2020-04-02T01:11:50.000Z">
-<meta property="article:modified_time" content="2020-06-23T08:53:22.135Z">
+<meta property="og:description" content="PHP基础知识  PHP支持的8种原始数据类型   | 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 || —————- | ———————————————————————————- || 2种复合类型 | array数组；object对象                                   || 2种特殊类型 | resour">
+<meta property="article:published_time" content="2020-03-14T06:32:02.000Z">
+<meta property="article:modified_time" content="2020-06-22T06:06:29.228Z">
 <meta property="article:author" content="lucky_Leo">
-<meta property="article:tag" content="DanBoneh密码学">
-<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="PHP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/MAC%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9E%8B.PNG">
 
 
 
@@ -126,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/14/【PHP】BasicPHP/"/>
 
 
 
 
 
-  <title>【DanBoneh】Message Integrity | 鳕鱼堡er</title>
+  <title>Basic PHP | 鳕鱼堡er</title>
   
 
 
@@ -313,7 +306,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/02/DanBoneh-MessageIntegrity/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lucky_Leo">
@@ -330,7 +323,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【DanBoneh】Message Integrity</h1>
+          <h1 class="post-title" itemprop="name headline">Basic PHP</h1>
         
 
         <div class="post-meta">
@@ -345,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-02T09:11:50+08:00">
-                2020-04-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-14T14:32:02+08:00">
+                2020-03-14
               </time>
             
 
@@ -361,34 +354,12 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T16:53:22+08:00">
-                2020-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-22T14:06:29+08:00">
+                2020-06-22
               </time>
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">密码学之路</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -398,8 +369,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/04/02/DanBoneh-MessageIntegrity/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/04/02/DanBoneh-MessageIntegrity/" itemprop="commentCount"></span>
+                <a href="/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -407,7 +378,7 @@
 
           
           
-             <span id="/2020/04/02/DanBoneh-MessageIntegrity/" class="leancloud_visitors" data-flag-title="【DanBoneh】Message Integrity">
+             <span id="/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/" class="leancloud_visitors" data-flag-title="Basic PHP">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -432,7 +403,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k字
+                  399字
                 </span>
               
 
@@ -448,7 +419,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  1分钟
                 </span>
               
             </div>
@@ -469,28 +440,76 @@
       
 
       
-        <h1><span id="message-auth-codes">Message Auth. Codes</span></h1><p><strong>MAC</strong>（消息验证码）：是一对算法，包含一个<u>签名算法</u>和一个<u>验证算法</u> I=(S,V)，定义在一个密钥空间、一个信息空间、一个标签空间上 (K,M,T)，签名算法 S(k,m) 会输出标签空间 T 中的一个标签 tag，验证算法 V(k,m,tag) 取密钥 k ，信息 m ，标签 tag，输出 yes 或 no。</p>
-<p><strong>标准的一致性要求</strong>：每一个密钥空间中的密钥 K 和每一个信息空间中的信息 M 都正好满足，如果使用密钥对信息进行签名，使用同样的密钥验证这个签名应该获得 yes 作为回应，V(k,m,S(k,m)) = yes。</p>
+        <p><strong>PHP基础知识</strong></p>
+<ul>
+<li>PHP支持的8种原始数据类型</li>
+</ul>
+<ul>
+<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p>
 <a id="more"></a>
-<p><strong>CRC</strong>（循环冗余检验）：一个经典的校验和算法，为监测信息中的随机发生的错误而设计，并非针对恶意错误。如果利用 CRC 进行检验，没有密钥，攻击者可以随意更改信息重新计算输出 tag 并得到 yes 的反馈，Alice与攻击者无区别。</p>
-<p>安全的MAC，如果对它进行<strong>选择信息攻击</strong>，是不可能被存在性伪造的。</p>
-<p><strong>存在性伪造</strong>：攻击者不能产生新的信息标签对。</p>
-<p>有两个算法 S 和 V ，有一个攻击者A ，游戏如下：挑战者通常为 MAC 选择一个随机密钥，攻击者进行他的选择信息攻击，他提交 $m_1$ 给挑战者，获得 $m_1$ 的标签，然后提交 $m_2$ 给挑战者，获得 $m_2$ 的标签，直到他提交了 q 个信息给挑战者，获得了 q 个这些信息的标签，这是选择信息攻击的部分，然后攻击者继续试图进行存在性伪造，他输出一个新的信息标签对我们就说他赢下这场游戏，换句话说，b=1 表示他赢下这场游戏。通常，我们定义攻击者的优势等于挑战者在本游戏中输出 1 的概率。安全的MAC系统，对所有有效的攻击者，优势都是可忽略的，换句话说，没有有效的攻击者能够以不可忽视的概率赢得这个游戏。</p>
-<img src="/2020/04/02/DanBoneh-MessageIntegrity/MAC%E6%94%BB%E5%87%BB%E6%A8%A1%E5%9E%8B.PNG" class title="MAC攻击模型">
-<h1><span id="macs-based-on-prfs">MACs based on PRFs</span></h1><p><u>安全的 PRF 可以构建安全的 MAC</u>。</p>
-<p><strong>CBC-MAC</strong>（ECBC，常与AES一起使用）：取针对短信息的 PRF 为输入，输出一个 PRF ，可以处理长信息作为输出。</p>
-<img src="/2020/04/02/DanBoneh-MessageIntegrity/ECBC.PNG" class title="ECBC">
-<p>不经历最后一步 $k_1$ 加密的函数，叫做<u>原 CBC 函数</u>。不是一个安全的 MAC。</p>
-<p><strong>NMAC</strong>：同上，取处理短输入的 PRF ，产生能处理长输入的 PRF。</p>
-<img src="/2020/04/02/DanBoneh-MessageIntegrity/NMAC.PNG" class title="NMAC">
-<p>不经历最后一步 $k_1$ 加密的函数，为<u>级联函数</u>。不是安全的 MAC。最后一步的加密阻止了<u>扩展攻击</u>。</p>
-<p>如果 N 位 PRF 是安全的，那么 T&lt;N 位的PRF（截断PRF，1/2^N可忽略）也是安全的。</p>
-<p><strong>补齐函数</strong>：本身必须是一一映射的函数，它应当是将两个不同的信息映射到不同的两个补齐的信息，不应该在补齐函数上有碰撞，必须是可逆的。</p>
-<p><strong>CMAC</strong>（常与AES一起使用）：可以使用一个随机的补齐函数，不用加假分组。使用三密钥机制，第一个密钥 k 用于 CBC 计算标准的 CBC-MAC 算法，密钥 $k_1$ 和 $k_2$ 仅用于最后一个分组的补齐。 $k_1$ 和 $k_2$ 是使用伪随机数发生器由 k 推出的。如果信息长度正好是分组长度的整数倍，采用 ISO 补齐，并把最后一个分组和密钥 $k_1$ 异或；如果信息长度不是分组长度的整数倍，不做扩展，把最后一个分组和密钥 $k_2$ 异或。</p>
-<img src="/2020/04/02/DanBoneh-MessageIntegrity/CMAC.PNG" class title="CMAC">
-<p><strong>PMAC</strong>：可并行，使用了一个底层的 PRF 来构建一个 PRF去处理长得多的信息。密钥是一对密钥，一个给 PRF，另一个给掩码函数 P。采用补齐函数，不需要加假的分组。</p>
-<img src="/2020/04/02/DanBoneh-MessageIntegrity/PMAC.PNG" class title="PMAC">
-<p><strong>Carter-Wegman MAC</strong>：一个随机的 MAC ，不基于 PRF ，单个信息可以有许多不同的有效标签。取大量的信息，计算哈希值，得到一个小标签，计算用了快速的一次性 MAC ，然后用 PRF 加密。</p>
+</li>
+<li><p>布尔值：true、false，不区分大小写</p>
+</li>
+<li>整型值0、浮点值0.0、空白字符串、字符串“0”、没有成员变量的数组、NULL都是false，除此之外为true</li>
+<li>整数可以用十进制、十六进制（0x）、八进制（0）符号制定</li>
+<li>字符串：<strong>单引号</strong>定义的字符串如实输出，<strong>双引号</strong>定义的字符串可以输出变量、换行符等</li>
+<li>数组：<ul>
+<li>索引数组：形如：<code>$arr=array(1,2,3,4);</code></li>
+<li>关联数组：形如：<code>$arr=array(&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2, &#39;c&#39;=&gt;3);</code></li>
+<li>用array()定义：<code>$users=array(&quot;name1&quot;=&gt;&quot;test1&quot;, &quot;name2&quot;=&gt;&quot;test2&quot;);</code></li>
+<li>用方括号定义：<code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code> <code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code></li>
+</ul>
+</li>
+<li><p><strong>NULL类型：</strong></p>
+<ul>
+<li>NULL表示一个变量没有值</li>
+<li>NULL不区分大小写</li>
+<li>尚未被赋值的变量为NULL</li>
+<li>被unset()的变量为NULL</li>
+<li>NULL类型唯一可能的值是NULL</li>
+<li>预定义变量</li>
+</ul>
+</li>
+<li><p>$GLOBALS      当前脚本全局变量</p>
+</li>
+<li>$_SERVER        变量由web服务器设定</li>
+<li>$_GET              网页提交的GET变量</li>
+<li>$_POST           网页提交的POST变量</li>
+<li>$_COOKIE       网页cookie变量</li>
+<li>$_FILES           上传文件的变量</li>
+<li><p>$_ENV             执行环境提交至脚本的变量</p>
+<ul>
+<li>常见函数</li>
+</ul>
+</li>
+<li><p>strlen()       检查字符串长度</p>
+</li>
+<li>strpos()      检索字符串内指定的字符或文本<ul>
+<li>strcmp() / strcasecmp() / strncmp()   字符串比较函数</li>
+<li>ctrcmp(str1,str2)，如果str1<str2 返回<0；如果str1>str2 返回&gt;0；如果str1=str2 返回=0。假如str2为一个array，也返回0。</str2></li>
+</ul>
+</li>
+<li>strstr() / stristr()                  查找替换</li>
+<li>trim() / ltrim() / rtrim()       删除空白符<ul>
+<li>逻辑运算符优先级从高到低是：&amp;&amp;、||、AND、OR</li>
+<li><strong>“==” 与 “===”</strong></li>
+</ul>
+</li>
+<li>=== 在比较的时候，会判断两种字符串的类型是否相等，再比较</li>
+<li>== 在比较的时候，会先将字符串类型转化成相同，再比较</li>
+<li>如果 比较一个数字和字符串 或者 比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行<ul>
+<li><strong>empty</strong>：当var存在，并且是一个非空非零的值时返回FALSE，否则返回TRUE。以下东西被认为是空的：</li>
+</ul>
+</li>
+<li>“”（空字符串）</li>
+<li>0（作为整数的0）</li>
+<li>0.0（作为浮点数的0）</li>
+<li>“0”（作为字符串的0）</li>
+<li>NULL</li>
+<li>FALSE</li>
+<li>array()（一个空数组）</li>
+<li>$var;（一个声明了，但是没有值的变量）</li>
+</ul>
 
       
     </div>
@@ -508,11 +527,8 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
- DanBoneh密码学</a>
-          
-            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
- 密码学</a>
+            <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i>
+ PHP</a>
           
         </div>
       
@@ -525,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/30/pptx-%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/" rel="next" title="【pptx】对称密码2">
-                <i class="fa fa-chevron-left"></i> 【pptx】对称密码2
+              <a href="/2020/03/12/%E3%80%90vps%E3%80%91vps%E6%90%AD%E5%BB%BA/" rel="next" title="vps搭建">
+                <i class="fa fa-chevron-left"></i> vps搭建
               </a>
             
           </div>
@@ -535,8 +551,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/19/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/" rel="prev" title="对称加密知识点串讲">
-                对称加密知识点串讲 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/" rel="prev" title="代码审计—01">
+                代码审计—01 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,17 +608,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -667,22 +674,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Message Auth. Codes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">MACs based on PRFs</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
