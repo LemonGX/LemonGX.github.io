@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="HMAC：基于抗碰撞的哈希函数构建的。 抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空">
+<meta name="description" content="Introduction抗碰撞的哈希函数HMAC：基于抗碰撞的哈希函数构建的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【DanBoneh】Collision Resistance">
-<meta property="og:url" content="http://yoursite.com/2020/06/22/%E3%80%90DanBoneh%E3%80%91CollisionResistance/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="HMAC：基于抗碰撞的哈希函数构建的。 抗碰撞的哈希函数：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) &#x3D; H($m_1$) 且 $m_0$≠$m_1$，即信息空">
-<meta property="article:published_time" content="2020-06-22T01:41:27.000Z">
-<meta property="article:modified_time" content="2020-06-23T08:53:04.649Z">
+<meta property="og:description" content="Introduction抗碰撞的哈希函数HMAC：基于抗碰撞的哈希函数构建的。">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG">
+<meta property="article:published_time" content="2020-06-25T01:51:04.000Z">
+<meta property="article:modified_time" content="2020-06-25T02:08:53.726Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG">
 
 
 
@@ -120,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/22/【DanBoneh】CollisionResistance/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/25/【DanBoneh】CollisionResistance/"/>
 
 
 
@@ -307,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/22/%E3%80%90DanBoneh%E3%80%91CollisionResistance/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lucky_Leo">
@@ -339,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-22T09:41:27+08:00">
-                2020-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-25T09:51:04+08:00">
+                2020-06-25
               </time>
             
 
@@ -355,8 +359,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T16:53:04+08:00">
-                2020-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-25T10:08:53+08:00">
+                2020-06-25
               </time>
             
           </span>
@@ -392,8 +396,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/06/22/%E3%80%90DanBoneh%E3%80%91CollisionResistance/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/22/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" itemprop="commentCount"></span>
+                <a href="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,7 +405,7 @@
 
           
           
-             <span id="/2020/06/22/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" class="leancloud_visitors" data-flag-title="【DanBoneh】Collision Resistance">
+             <span id="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" class="leancloud_visitors" data-flag-title="【DanBoneh】Collision Resistance">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -426,7 +430,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  144字
+                  585字
                 </span>
               
 
@@ -442,7 +446,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  2分钟
                 </span>
               
             </div>
@@ -463,10 +467,15 @@
       
 
       
-        <p><strong>HMAC</strong>：基于抗碰撞的哈希函数构建的。</p>
-<p><strong>抗碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），H：M→T (|M| &gt;&gt; |T|)，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)，$m_0$和$m_1$不同，但应用函数 H 会得到同样的输出。H($m_0$) = H($m_1$) 且 $m_0$≠$m_1$，即信息空间的$m_0$和$m_1$同被映射到标签空间中的同一个输出，则称函数 H 是抗碰撞的。</p>
+        <h1><span id="introduction">Introduction</span></h1><h2><span id="抗碰撞的哈希函数">抗碰撞的哈希函数</span></h2><p><strong>HMAC</strong>：基于抗碰撞的哈希函数构建的。</p>
 <a id="more"></a>
-
+<p><strong>抗碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），<code>H：M→T (|M| &gt;&gt; |T|)</code>，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)， $m_0$ 和 $m_1$ 不同，但应用函数 H 会得到同样的输出。<code>H($m_0$) = H($m_1$)</code> 且 $m_0$ ≠ $m_1$，即信息空间的 $m_0$ 和 $m_1$ 同被映射到标签空间中的同一个输出（输出空间没有足够的空间来不碰撞地容纳所有信息），则称函数 H 是抗碰撞的。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG" class title="抗碰撞的哈希函数">
+<p><strong>简单应用</strong>：特别地，给定一个抗碰撞的哈希函数，我们看如何简单地构建一个 MAC 。假设我们对短信息有一个 MAC ，假设我们有一个哈希函数是抗碰撞的，它从一个很大的信息空间里取值，将几个 G 的信息映射到小的信息空间里，我们用哈希函数输出值 MAC 来定义它。我们如何验证它呢？给定一个标签，我们通过重新计算给定信息的哈希值来验证，检查小 MAC 值是否能验证给定的标签。这是一个非常简单的方法来证明，抗碰撞可以取一个原型，这个原型可以<u>处理短输入</u>，把这个原型扩展成一个<u>为非常长的输入而构建的原型</u>。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG" class title="简单应用">
+<h2><span id="安全性定理">安全性定理</span></h2><p>如果<u>底层 MAC 是安全的</u>，并且 <u>H 是抗碰撞的</u>，那么这个组合可以计算长信息的 MAC ，得到的 MAC 也是安全的。</p>
+<p>把这个安全性定理应用到 AES ，在 SHA-256 里，输出 256 位，即 32 字节，我们必须构建一个能处理 32 字节的 MAC ，我们可以应用 16 字节的 AES 把它带入到一个两个分组的 CBC 里，两个分组的 CBC 把 AES 从一个 16 字节的 PRF 扩展成了以一个 32 字节的 PRF ，然后取 SHA-256 的输出，把它带入到两分组的基于 AES 的 CBC 里，然后我们获得了一个非常简单的 MAC ，假设 AES 是个 PRF ，并且 SHA-256 是抗碰撞的，这个 MAC 是安全的。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG" class title="安全性定理">
       
     </div>
     
@@ -500,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/" rel="next" title="【总结归纳】对称加密知识点串讲">
-                <i class="fa fa-chevron-left"></i> 【总结归纳】对称加密知识点串讲
+              <a href="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" rel="next" title="【hexo】next踩坑侧边栏菜单链接乱码问题">
+                <i class="fa fa-chevron-left"></i> 【hexo】next踩坑侧边栏菜单链接乱码问题
               </a>
             
           </div>
@@ -509,10 +518,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/" rel="prev" title="【hexo】next踩坑no such file or directory open ... \.swig ">
-                【hexo】next踩坑no such file or directory open ... \.swig  <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -567,8 +572,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -633,6 +647,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -945,7 +975,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">18.2k</span>
+	  <span class="post-count">18.7k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
