@@ -95,8 +95,11 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E5%9B%BE%E8%A1%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/Merkle-Damgard%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.PNG">
 <meta property="article:published_time" content="2020-06-25T01:51:04.000Z">
-<meta property="article:modified_time" content="2020-06-25T08:23:33.408Z">
+<meta property="article:modified_time" content="2020-06-25T10:00:43.718Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
@@ -366,7 +369,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-25T16:23:33+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-25T18:00:43+08:00">
                 2020-06-25
               </time>
             
@@ -437,7 +440,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.7k字
+                  4.5k字
                 </span>
               
 
@@ -453,7 +456,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9分钟
+                  15分钟
                 </span>
               
             </div>
@@ -507,8 +510,26 @@
 <p><strong>证明过程</strong>：我们要求 存在一对 i 和 j ，i ≠ j ，满足 $r_i$ = $r_j$ 的概率，我们求互斥事件的概率，就是说我们所求概率为 1 减去 对所有 i ≠ j 都有 $r_i$ ≠ $r_j$ 的概率（这意味着我们选择的 n 个样本里没有发生碰撞）。当我们选择 $r_i$ 时，这是我们第一次选择，所以是不会发生任何碰撞的，但当我们取 $r_2$ 时，$r_2$ 不与 $r_1$ 碰撞的概率是 (B-1)/B ，类似的，当我们选择 $r_3$ ，$r_3$ 不与 $r_1$ 或 $r_2$ 碰撞的概率是 (B-2)/B ，…，直到我们获得了最后的 $r_n$，$r_n$ 不与 不与之前所有的 $r_i$ 碰撞的概率是 (B- (n-1) )/B ，也就是 (B-n+1)/B ，将这些概率乘起来正是因为这些 $r_i$ 是<u>相互独立的</u>。</p>
 <img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="生日悖论的证明">
 <img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E5%9B%BE%E8%A1%A8.PNG" class title="生日悖论的图表">
-<h1><span id="the-merkle-damgard-paradigm">The Merkle-Damgard Paradigm</span></h1><p>Merkle-Damgard 是一个非常通用的机制，用于组建抗碰撞的哈希函数。</p>
-
+<h1><span id="the-merkle-damgard-paradigm">The Merkle-Damgard Paradigm</span></h1><h2><span id="抗碰撞的哈希函数的构建">抗碰撞的哈希函数的构建</span></h2><p>我们的目标是构建一个抗碰撞的哈希函数，对这些函数，即使找到一个碰撞也是困难的（尽管我们知道有很多碰撞存在），没有有效的算法可以输出哪怕一个碰撞。那么我们要构建这些哈希函数，我们分两步构建这些哈希函数：</p>
+<p>①如果给我一个处理短信息的抗碰撞哈希函数，我们可以扩展它来构建一个处理长得多的信息的抗碰撞的哈希函数。</p>
+<p>②构建安全压缩函数。</p>
+<p>Merkle-Damgard 是一个非常通用的机制，所有的标准哈希函数都遵循这个机制，由一个压缩函数，构建抗碰撞的哈希函数。</p>
+<p><strong>Merkle-Damgard 工作过程</strong>：这里我们有函数 H ，我们假设 H 是抗碰撞的哈希函数，可以处理短输入，我们使用这个小函数 h ，h 有时叫做<u>压缩函数</u>（从 T 中取元素，正好与哈希函数相反），我们将取长信息 M 把它分成若干分组，然后我们使用一个固定值叫做 IV ，这里 IV 永远是固定的，它内嵌在代码和标准里，只是一个固定的 ID ，是函数的一部分。然后我们对第一个信息分组应用小的压缩函数 h ，一并使用这个 ID ，得到的叫做<u>链接变量</u>，将被交给下一压缩函数来压缩下一分组，一并使用前一链接变量输出下一链接变量，直到我们到达最后分组。在最后分组上，我们要做一个特别的事情，我们必须把补齐分组 PB 附在信息后面，在附上补齐分组之后，我们还是要压缩最后的链接变量与最后的分组，得到的输出就是实际哈希函数的输出。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/Merkle-Damgard%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="Merkle-Damgard工作过程">
+<p><strong>补齐分组</strong>：我们看到，序列 1000 为实际明文分组的结尾，这个分组最重要的部分是 我们对信息长度进行的编码，在这个补齐分组里，信息长度域固定为 64 位，所以在所有所有的 SHA 哈希函数中，最大信息长度为 2^64 - 1 ，事实上信息长度应当适应于 64 位分组，2^64 - 1 位的信息长度的上界对应我们能释放的信息来说足够长了。</p>
+<p>如果最后一个分组长度是压缩函数分组长度的倍数，我们怎么办？通常，答案是如果在最后分组中没有空间留给补齐分组时，那么我们就必须加另外一个假分组把补齐函数放在那里。当然以正确的方式写 1000… 有一点非常重要，那就是<u>补齐分组包含信息长度</u>。</p>
+<h2><span id="相关定理的证明">相关定理的证明</span></h2><p>Merkle-Damgard 这个机制流行的原因是，下面这个定理告诉我们，如果小的压缩函数是抗碰撞的，那么大的 Merkle-Damgard 哈希函数也是抗碰撞的。换句话说，<u>如果我们要为长输入构建抗碰撞的哈希函数，我们只需要构建一个抗碰撞的压缩函数</u>。</p>
+<p>我们证它的逆否命题，也就是，“如果你能找到这个大哈希函数的一个碰撞，那么我们可以推出这个小压缩函数的一个碰撞”，因此，如果 h 是抗碰撞的，那么 H 也是。</p>
+<p><strong>证明过程</strong>：</p>
+<p>假设给我一个大压缩函数的碰撞，即 两个不同的信息 M 和 M’ ，它们正好被哈希到同一个输出，我们将使用 M 和 M’ 来构建这个小压缩函数的一个碰撞。首先我们必须记住 Merkle-Damgard 机制的过程，特别地，当我们哈希 M 和 M’ ，给链接变量起一些名字当我们计算信息 M 的哈希值时，会得到这些链接变量，那么 $H_0$ 固定的 IV 开启整个过程，$H_1$ 是用 IV 计算第一个分组的哈希结果，直到最后一个链接变量，也是 Merkle-Damgard 链的最后输出。类似地，对于 M’ ，做同样操作得到最后的哈希值。现在注意信息 M 和 M’ 的长度不一定是一样的，特别地，M 的长度为 t ，M‘ 的长度为 r ，因为发生了碰撞，我们知道这两个值是一样的，即 H(M) = H(M’) ，换句话说，最后的链接变量相同。</p>
+<p>现在仔细看 $H_t+1$ 和 $H_r+1$ 是如何计算的，前者是由压缩函数应用到之前的链接变量，并使用 M 的最后分组得到的，包括补齐分组，注意，这里假设补齐分组可以放在 M 的最后分组里，即使最后的补齐分组在它自己的分组里，也没有任何区别，为了简便，我们假设补齐分组在 M 最后分组里，那么，通过计算最后分组的哈希，要用到补齐分组和最后的链接变量，我们获得了 $H_t+1$ ，类似地，也可以对 M’ 做同样的事情，通过计算最后的信息分组和最后的链接变量的哈希，我们获得了 $H_r+1$ ，由于这两个值相等，突然间我们有了一个候选的压缩函数的碰撞，即下图最后等式两侧小括号中的参数，这两个参数交给压缩函数，正好产生了同样的输出值。我们唯一的捕获的任何碰撞的方法是，如果参数正好是一样的，换句话说，如果压缩函数的参数不同，那么我们就获得了 h 的一个碰撞，证明结束。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="相关定理的证明">
+<p>有一种情况我们的证明还没有结束，那就是 两个倒数第二个链接变量相等，且两个信息的最后分组也相等，且两个信息的补齐分组也相等。两个补齐分组相等意味着什么？信息长度被编码在补齐分组里的，特别地，这意味着 M 的长度 和 M’ 的长度一致，即 t=r ，那么现在就可以假设 t=r 了，现在我们可以对倒数第二个链接变量应用同样的参数，换句话说，$H_t$ 是如何计算的？$H_t$ 是计算前一个链接变量 $H_t-1$ 用倒数第二个信息分组哈希得到的，类似地，$H’t$ 也被计算出来，因为这两个值相等，现在我们获得了另一个候选的压缩函数的碰撞，换句话说，如果 $H_t-1$ ≠ $H’t-1$ 或 $M_t-1$ ≠ $M’t-1$ ，那么我们有一个 h 的碰撞，证明结束。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.PNG" class title="相关定理的证明的特殊情况">
+<p>如果继续发生如上情况，我们可以继续往前迭代，迭代到信息的开始，下面两者之一一定成立：</p>
+<p>①找到压缩函数的碰撞。</p>
+<p>②M 和 M’ 的所有分组都相同，与碰撞的前提相矛盾。</p>
+<h1><span id="constructing-compression-functions">Constructing Compression Functions</span></h1><h2><span id="安全压缩函数的构建">安全压缩函数的构建</span></h2>
       
     </div>
     
@@ -690,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">抗碰撞被直接应用于信息的完整性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Generic birthday attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">针对抗碰撞哈希函数的通用攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">生日悖论的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Merkle-Damgard Paradigm</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">抗碰撞被直接应用于信息的完整性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Generic birthday attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">针对抗碰撞哈希函数的通用攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">生日悖论的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Merkle-Damgard Paradigm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">抗碰撞的哈希函数的构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">相关定理的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Constructing Compression Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">安全压缩函数的构建</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1008,7 +1029,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">20.8k</span>
+	  <span class="post-count">22.6k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
