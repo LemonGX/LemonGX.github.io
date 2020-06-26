@@ -115,8 +115,12 @@
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC%E5%B7%A5%E4%BD%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/NMAC.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%951.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%952.PNG">
 <meta property="article:published_time" content="2020-06-25T01:51:04.000Z">
-<meta property="article:modified_time" content="2020-06-26T05:54:49.979Z">
+<meta property="article:modified_time" content="2020-06-26T07:00:13.570Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
@@ -386,7 +390,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-26T13:54:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-26T15:00:13+08:00">
                 2020-06-26
               </time>
             
@@ -457,7 +461,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6.7k字
+                  7.9k字
                 </span>
               
 
@@ -473,7 +477,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  23分钟
+                  28分钟
                 </span>
               
             </div>
@@ -560,7 +564,7 @@
 <h3><span id="sha-256">SHA-256</span></h3><p>SHA-256 使用了 <strong>Merkel-Damgard 机制</strong> 和 <strong>Davies-Meyer 压缩函数</strong>，那么，Davies-Meyer 的底层分组密码是什么？这个分组密码叫做 <strong>SHACAL-2</strong> ，它的参数使用了 512 位密钥，密钥是从信息分组里提取的，信息分组是 512 位，一次会处理它的 512 位输入信息，这个分组密码的分组大小是 256 位。</p>
 <img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/SHA-256.PNG" class title="SHA-256">
 <h2><span id="由数论里的困难问题构建压缩函数">由数论里的困难问题构建压缩函数</span></h2><p>我们说这些压缩函数是可证实的，因为如果你可以找到这种压缩函数的碰撞，那么你就可以解决非常困难的理论问题，一般这类问题是难解的。因此，如果数论问题是难解的，得到的压缩函数可被证实是抗碰撞的。</p>
-<p><strong>工作过程</strong>：我们选取一个非常大的质数，约 700 个十进制数，2000 位二进制数，我们在 1 到 p 之间选择两个随机数 u 和 v ，现在如下定义压缩函数，它在 0 到 p-1 之间取两个数，输出 0 和 p-1 之间的一个数，那么其压缩率为 2:1 ，然后计算双重指数，计算 $u^H$ <em> $v^m$ ，现在这个定理表述为一个事实，事实上，如果你找到这个压缩函数的一个碰撞，那么你就可以解一个标准的数论难题，叫做<em>*离散对数问题</em></em>。</p>
+<p><strong>工作过程</strong>：我们选取一个非常大的质数，约 700 个十进制数，2000 位二进制数，我们在 1 到 p 之间选择两个随机数 u 和 v ，现在如下定义压缩函数，它在 0 到 p-1 之间取两个数，输出 0 和 p-1 之间的一个数，那么其压缩率为 2:1 ，然后计算双重指数，计算 $u^H$ × $v^m$ ，现在这个定理表述为一个事实，事实上，如果你找到这个压缩函数的一个碰撞，那么你就可以解一个标准的数论难题，叫做<strong>离散对数问题</strong>。</p>
 <p>所有人都相信离散对数问题是难解的，因此这个压缩函数可证实是抗碰撞的。为什么在实际中我们不使用这种压缩函数呢？因为与分组密码相比，这个压缩函数速度太慢了。</p>
 <img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%95%B0%E8%AE%BA%E5%9B%B0%E9%9A%BE%E9%97%AE%E9%A2%98%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG" class title="数论困难问题构建的压缩函数">
 <h1><span id="hmaca-mac-from-sha-256">HMAC：a MAC from SHA-256</span></h1><p>我们能否不依赖 PRF ，直接用 大的哈希函数 来构建 MAC 呢？</p>
@@ -575,8 +579,19 @@
 <img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/NMAC.PNG" class title="NMAC">
 <p>为了证明这是 NMAC 机制，我们必须假设这个压缩函数 h 是 PRF ，密钥是下面的函数输入，我们说这些密码本 ipad 和 opad 它们是固定的 512 位的常数。</p>
 <p>我们回头看，发现 HMAC 与 NMAC 的主要不同之处是这些密钥 k⊕ipad ，k⊕opad 互相是有关联的，它们只不过是同样的密钥异或上不同的常数。本质上，密钥 $k_1$ 和 $k_2$ 也是互相关联的，因为它们是在同样的固定值 IV 上应用 PRF 计算得到的。</p>
-<p>为了证明 $k_1$ 和 $k_2$ 是伪随机且相互独立的，我们必须证明压缩函数不仅当其上面的输入是密钥时，它是 PRF ，而且当使用关联密钥时，它也是 PRF。基于这些假设，应用对 NMAC 一模一样的分析来分析 HMAC ，我们可以证明 HMAC 是安全的 MAC，其安全的界定与 NMAC 一致，换句话说，你不必改变密钥，只要求 MAC 的信息数小于输出标签的一半空间大小（本质上就是生日攻击里的平方根）。对于 HMAC 和 SHA-256 ，输出空间是 $2^256$ ，平方根是 $2^128$ ，</p>
-
+<p>为了证明 $k_1$ 和 $k_2$ 是伪随机且相互独立的，我们必须证明压缩函数不仅当其上面的输入是密钥时，它是 PRF ，而且当使用关联密钥时，它也是 PRF。基于这些假设，应用对 NMAC 一模一样的分析来分析 HMAC ，我们可以证明 HMAC 是安全的 MAC，其安全的界定与 NMAC 一致，换句话说，你不必改变密钥，只要求 MAC 的信息数小于输出标签的一半空间大小（本质上就是生日攻击里的平方根）。对于 HMAC 和 SHA-256 ，输出空间是 2^256 ，平方根是 2^128 ，这意味着你可以使用 HMAC 和 SHA-256 ，想处理多少信息都可以，而且是始终保持安全的。</p>
+<p>TLS 要求支持 HMAC 和 SHA-196 ，意味着 HMAC 由 SHA-1 函数构建，并截断到 96 位，SHA-1 输出 160 位。SHA-1 不再被认为是安全的哈希函数，那怎么能在 HMAC 里使用 SHA-1 呢？实际上，这是没问题的，因为 HMAC 的安全性分析不需要 SHA-1 是抗碰撞的，当输入运行是密钥时，只需要压缩函数 SHA-1 是 PRF ，目前我们知道，这对 SHA-1 的底层压缩函数也成立，即使它可能不是抗碰撞的。</p>
+<h1><span id="timing-attacks-on-mac-verification">Timing attacks on MAC verification</span></h1><h2><span id="计时攻击">计时攻击</span></h2><p>一个特别的 HMAC 验证的实现，这个实现来自 Keyczar 库。输入为 密钥、信息和标签，我们的验证方法是重新计算信息的 HMAC ，然后比较得到的 16 字节与实际给的签名 16 字节。事实上很多人已经实现了它，问题是，如果看下图 “==” 的比较是如何实现的，你可能觉得比较应该是逐字节地进行，第一次发现它不相等的话，循环终止，说两字符串不相等，这造成了针对该密码库的一个严重的<strong>计时攻击</strong>，这是一个非常合理的实现 MAC 验证的程序。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB.PNG" class title="计时攻击">
+<p><strong>攻击过程</strong>：设想你是攻击者，你有信息 m ，你想获得 m 的一个有效标签。现在，你的目标是攻击一个服务器，这个服务器存放着 HMAC 的密钥。这个服务器开放了一个接口，这个接口接收信息与 MAC ，检查这个 MAC 是否有效，如果 MAC 有效，服务器用这个信息进行操作；如果 MAC 无效，服务器拒绝，退回到信息发送方或拒绝这条信息。现在这个攻击者有机会提交大量信息，看看能不能推出特定的攻击信息的标签，我们可以使用计时攻击来做，攻击者提交许多信息询问信息的标签，而信息始终是一样的，但对于标签来说，攻击者尝试很多不同的标签。</p>
+<p>①在第一个询问里，攻击者提交目标信息和一个随机标签，然后攻击者测量服务器的反应时间。</p>
+<p>②他提交的下一个询问将尝试的第一字节的所有 256 种情况。标签中剩下的字节是任意选取的，它们是什么并不重要，但对于第一个字节，攻击者会提交一个以 0 字节开头的标签，然后他观察服务器是否比之前花稍长一点的时间验证标签。如果服务器花了与第一步严格相同的时间来验证这个标签，那么攻击者会再次尝试，这次以字节 1 开头，如果服务器依然反应迅速，攻击者会尝试以字节 2 开头，直到服务器花了稍微长一点的时间给出反应，就意味着当服务器比较正确的 MAC 和攻击者提交的 MAC 时，在这个字节上，两个 MAC 是一样的，而不一样的是第二个字节。</p>
+<p>③攻击者知道第一个字节后，他可以对第二个字节实施一模一样的攻击，直到服务器接受正确的 MAC 。然后我们继续在这个假信息上做手脚，攻击服务器。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.PNG" class title="计时攻击过程">
+<h2><span id="防御方法">防御方法</span></h2><h3><span id="第一种防御方法">第一种防御方法</span></h3><p>Keyczar 严格地实现了这种防御，首先我们看攻击者提交的签名的字节数是否正确，如果不是，我们就不承认这是个有效的 MAC ，如果签名确实有正确的长度，我们实现比较器，他们总是花相同的时间比较两个字符串。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%951.PNG" class title="防御方法1">
+<h3><span id="第二种防御方法">第二种防御方法</span></h3><p>不被广泛实现，这种攻击试图把字符串的比较对攻击者隐藏起来，这里的验证算法取密钥、信息和一个攻击者提供的候选 MAC 作为输入，然后我们进行比较，首先计算信息的正确 MAC ，但然后不直接比较 MAC 和攻击者的签名，我们再取一次哈希值，我们计算 MAC 的哈希值，计算签名的哈希值，让然如果参数一样，它们的哈希也是一样的，所以这个比较会成功。如果签名和 MAC 的第一个字节一样，先不管其他字节的情况，我们再计算一次哈希，很有可能这两个得到的值是完全不一样的，因此，逐字节的比较器会在第一轮就完成输出，这个攻击者将无法知道到底在比较什么字符串，因此不能实施计时攻击。</p>
+<img src="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%952.PNG" class title="防御方法2">
       
     </div>
     
@@ -758,7 +773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">抗碰撞被直接应用于信息的完整性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Generic birthday attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">针对抗碰撞哈希函数的通用攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">生日悖论的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Merkle-Damgard Paradigm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">抗碰撞的哈希函数的构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">相关定理的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Constructing Compression Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">由分组密码构建压缩函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.1.</span> <span class="nav-text">利用Davies-Meyer构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.2.</span> <span class="nav-text">一个不抗碰撞压缩函数的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.3.</span> <span class="nav-text">利用Miyaguchi-Preneel构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.4.</span> <span class="nav-text">SHA-256</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">由数论里的困难问题构建压缩函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">HMAC：a MAC from SHA-256</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">第一个点子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">HMAC</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">抗碰撞被直接应用于信息的完整性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Generic birthday attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">针对抗碰撞哈希函数的通用攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">生日悖论的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Merkle-Damgard Paradigm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">抗碰撞的哈希函数的构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">相关定理的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Constructing Compression Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">由分组密码构建压缩函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.1.</span> <span class="nav-text">利用Davies-Meyer构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.2.</span> <span class="nav-text">一个不抗碰撞压缩函数的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.3.</span> <span class="nav-text">利用Miyaguchi-Preneel构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.4.</span> <span class="nav-text">SHA-256</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">由数论里的困难问题构建压缩函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">HMAC：a MAC from SHA-256</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">第一个点子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">HMAC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text">Timing attacks on MAC verification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.1.</span> <span class="nav-text">计时攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.2.</span> <span class="nav-text">防御方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.1.</span> <span class="nav-text">第一种防御方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.2.</span> <span class="nav-text">第二种防御方法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1076,7 +1091,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">24.7k</span>
+	  <span class="post-count">25.9k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
