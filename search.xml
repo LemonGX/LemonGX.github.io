@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【CTF】simple HTTP method</title>
-    <url>/2020/03/10/%E3%80%90CTF%E3%80%91simpleHTTPmethod/</url>
-    <content><![CDATA[<p>$_GET[] 与 $_POST[] 的区别：</p>
-<p>GET方式会将表单中的数据以URL字符串的形式发送给服务器<br>将test.php以GET方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php?key1=value1&amp;key2=value2" target="_blank" rel="noopener">http://localhost/test.php?key1=value1&amp;key2=value2</a><br>以”?”开头的字符串称为URL字符串，则$_GET[“key1”]=value1、$_GET[“key2”]=value2;</p>
-<p>将test.php以POST方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php" target="_blank" rel="noopener">http://localhost/test.php</a></p>
-]]></content>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DanBoneh】Block Ciphers</title>
-    <url>/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/</url>
-    <content><![CDATA[<p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
-<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
-<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
-<a id="more"></a>
-<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
-<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
-<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
-<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
-<p><strong>DES</strong>：核心思想是Feistel网络。</p>
-<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
-<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
+    <title>【总结归纳】对称加密知识点串讲</title>
+    <url>/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/</url>
+    <content><![CDATA[<h4><span id="流密码">流密码</span></h4><p>\1.    一个东西是不是随机的与长什么模样无关，即使是一串0或者一串1他也有可能是随机的。一个随机的东西符合两点，①它的每一个比特是等概率产生的，即产生每一个比特的概率都是1/2，②任何一个比特的产生与其它比特的产生都是相互独立的。随机与产生的方式有关，与产生的结果无关。</p>
+<p>\2.    第一个给“安全”①正式下定义的是香农，他也②提出了完善保密性，并证明了一次一密OTP能够达到完善保密性，③给出了香农定理，提出若一个体制能够达到完善保密性，它就一定要求密钥的长度不能小于明文的长度。一次一密它虽然能达到完善保密性，但并不实用。</p>
+<p>\3.    考虑安全性应考虑两个方面，①攻击者能发动什么样的攻击，②攻击者的目标是什么。</p>
+<p>\4.    完善保密性是在唯密文攻击下的概念，目标是给了两个明文，区分密文里包含的是哪一个明文。</p>
+<p>\5.    虽然一次一密不实用，但它加解密都十分容易只要做一个异或就可以了，人们想既保留优点又实用，因此提出流密码。</p>
+<p>\6.    想要实用，需要一个短的密钥去加密明文，又要达到完善保密性，这与香农定理冲突，因此，需要对“安全”重新下定义。</p>
+<p>\7.    一次一密的密文没有泄露明文的任何一个信息。为了实用，人们提出计算上安全的概念，即在计算资源有限的情况下，允许密文泄露一些明文信息，只要泄露的信息在计算资源有限的条件下对破译密文的帮助可忽略即可。</p>
+<p>\8.    语义安全模型下，攻击者只能询问挑战者一次m0或m1，并且m0和m1的长度相等，挑战者返回密文，在这个条件下攻击者区分密文对应的是m0还是m1。</p>
+<p>\9.    PRG，给它一个很短的种子，它能产生一个很长的输出，与明文进行异或。</p>
+<p>\10.   一个PRG必须满足不可预测性。</p>
+<p>\11.   PRG的安全性和流密码的安全性是两回事，PRG的安全性要求它的输出与真随机的输出必须是不可区分的，流密码的安全性要求能够达到语义安全性。</p>
+<p>\12.   “PRG具有不可预测性”与“PRG的输出与真随机的输出不可区分，即PRG是安全的”是等价的，只不过探讨的角度不同。</p>
+<p>\13.   PRG的输出是可以截断的，截取PRG中的一段，它与等长的真随机是不可区分的。</p>
+<p>\14.   使用流密码时，密钥不能重复使用。</p>
+<p>\15.   语义安全性是选择明文攻击下的概念，目的是区分两个不同的消息。语义安全性的模型攻击者只能询问一次，CPA下攻击者可以询问多次。</p>
+<p>一次一密在唯密文攻击下可以达到完善保密性，在选择明文攻击下可以达到语义安全性。</p>
+<h4><span id="分组密码">分组密码</span></h4><p>\1.    分组密码输入是一个固定长度的明文分组，输出一般是和明文分组长度相同的分组叫做密文分组（DES：64bits，AES：128bits），分组密码只能处理固定长度的分组信息。</p>
+<p>\2.    根据香农的研究，在设计分组密码的时候有两个常用的基本技术，①混乱，②扩散，主要目的是抵抗攻击者对密码系统的统计分析。</p>
+<p>\3.    混乱，经常用代换（S盒）的技术实现；扩散，通常用置换（P盒）的技术实现。</p>
+<p>\4.    绝大多数的分组密码都是通过迭代技术构造的，迭代技术是一轮一轮的，每一轮都会有一个密钥（轮密钥or子密钥），每一轮也会有一个函数（轮函数），把上一轮的输出作为输入，最后一轮的输出就是密文，第一轮的输入就是明文，轮密钥是由一个密钥扩展来的，扩展的过程会用一个密钥扩展函数把输入的密钥进行一些变换产生每一轮的子密钥。密钥长度不同，轮数不同。（DES 16轮，AES 10轮）</p>
+<p>\5.    DES的核心是Feistel网络，Feistel网络由Feistel置换组合在一起，DES的每一轮都是一个Feistel置换，16轮置换构成Feistel网络，不论Feistel网络的f是不是可逆的，最终组合在一起都是可以置换的。（搞懂Feistel网络为什么是可逆的）</p>
+<p>\6.    DES明文长度，密文长度，密钥长度都是64bits，密钥虽然是64bits，但有8bits在转换成子密钥时是不用的，因此有效密钥长度只有56bits。</p>
+<p>\7.    目前，没有一个实用的攻击对DES有效，不用DES而用AES是因为DES的密钥长度太短，穷举就可以攻破。</p>
+<p>\8.    AES使用SPN网络，S盒和P盒交替使用。</p>
+<p>\9.    伪随机函数PRF和伪随机置换PRP是用来研究分组密码安全性的，证明时用它们代替分组密码。</p>
+<p>\10.   随机函数是指在一个空间有一大堆函数，我们随机挑选一个出来就叫随机函数，不论这个函数的输出怎样，只要是从这个空间随机选择出来的就叫随机函数。是不是随机函数与函数的输出结果无关，与选择的方式有关。</p>
+<p>\11.   伪随机置换与伪随机函数类似，是从所有的置换空间随机选择一个出来。</p>
+<p>\12.   PRP是PRF的一个特例。</p>
+<p>\13.   一个PRP就是一个PRF，但一个安全的PRP未必就是一个安全的PRF。</p>
+<p>\14.   PRF安全引理，只有当分组的长度足够大的时候，一个安全的PRP才是一个安全的PRF。</p>
+<h4><span id="分组密码的工作模式">分组密码的工作模式</span></h4><p>\1.    ECB模式（电子密码本模式），是一种不安全的模式，不是语义安全的，简单地把明文分成一组一组，用分组密码进行加密，两个相同的明文分组加密后的密文分组相同，当攻击者看到两个相同的密文，虽然不知道明文的内容，但知道对应的明文也相同。</p>
+<p>\2.    ECB不是语义安全的。</p>
+<p>\3.    CTR（确定的计数器模式），用PRF构造PRG，可并行。</p>
+<p>\4.    CPA安全性（选择明文攻击下的语义安全性），攻击者发送多次询问，获得多次对应的密文，即密钥可重复使用。在语义安全性的模型里攻击者只能发送一次询问，获得一次密文，即密钥只用一次。</p>
+<p>\5.    凡是确定的加密方案（DES、AES），一定不是CPA安全的。因为给定相同的明文，加密的结果总是相同，但是是语义安全的，因为语义安全刻画的是密钥使用一次。</p>
+<p>\6.    一个加密体制如果不是语义安全的，那它也一定不是CPA安全的。</p>
+<p>\7.    CPA安全性改造思路：加密相同的明文，输出不同的密文。</p>
+<p>\8.    改造方法：①随机化加密。选择一个随机数，用密钥和随机数一起加密明文。导致密文必然会比明文要长，密文里不仅包含明文信息，还包含了随机数信息。②nonce-based加密。每加密一个明文就换一个新的nonce（新鲜值），nonce可以作为加密算法的输入，保证加密明文nonce不能重复，除非换一个新的密钥，即（k，n）这个组合不重复使用。</p>
+<p>\9.    nonce的选择方法：①计数器方式。初始为0，每次加1。如果发送者和接收者保持相同状态，则nonce无需发送。②随机数方式。随机数需与密文一起发送。</p>
+<p>\10.   CBC模式（密码分组链接模式）和CTR模式（计数器模式）都能够证明在CPA安全性下是安全的，使用时密钥可以重用。</p>
+<p>\11.   CBC模式是一种级联的形式，整个加密过程是一个串行的过程，解密可以并行。在加密下一个明文时需要用到前一个密文分组，与当前的明文分组进行异或，再加密。为了隐藏第一个明文的信息，在加密时需要一个初始向量与第一个明文分组进行异或，初始向量在发送给接收者时不需要加密，以明文的形式和密文一起发送给接收者。</p>
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E5%8A%A0%E5%AF%86.png" class title="CBC加密">
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E8%A7%A3%E5%AF%86.png" class title="CBC解密">
+<p>\12.    CBC模式中差错传播，单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.png" class title="CBC差错传播">
+<p>\13.    CBC模式中初始向量IV的选择：①取随机数（不能是可预测的，即从上一个IV可预测下一个IV），与密文一起发送。如果IV可预测，则不是CPA安全的。②用nonce作为IV，若nonce随机，则与前面随机数取IV相同，若nonce不随机，可预测，则使用前必须对其进行一次加密，使用双密钥，其中一个密钥用来加密IV，另外一个密钥用在CBC链条里。使用nonce的好处是双方都知道下一个nonce，不需要再发送。</p>
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/nonce-basedCBC.png" class title="nonce-basedCBC">
+<p>\14.    CBC模式中，若分组后最后一个分组的长度不够，则需要进行填充。若明文分组的长度是分组长度的整数倍，依然需要填充，需要额外追加一个完整的分组（dummy block），接收者就会知道不管长度够不够都有填充，若长度不够时填充，整数倍不填充，接收者不知道是否填充，可能会导致解密失败。注：密文窃取填充技术中，不需要追加dummy block。</p>
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/%E5%A1%AB%E5%85%85%E6%8A%80%E6%9C%AF.png" class title="填充技术">
+<p>\15.    CTR模式，本质上是用一个PRF来构造一个流密码，加解密都可以并行。首先对IV、IV+1、IV+2…进行加密，然后分别与每一个明文分组进行异或，得到密文分组，IV与密文分组一起发送给接收方。CTR不存在差错传播，但不影响其他的分组。</p>
+<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CTR%E5%8A%A0%E5%AF%86.png" class title="CTR加密">
+<p>\16.    CTR模式中初始向量IV的选择：①取随机数，与密文一起发送。②nonce加密，需要保证Fk(x)不会重复出现。</p>
+<h4><span id="pdf-文件">PDF 文件</span></h4>
+
+	<div class="row">
+    <embed src="对称加密知识点串讲.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
 ]]></content>
       <categories>
         <category>密码学之路</category>
@@ -140,59 +177,51 @@
       </tags>
   </entry>
   <entry>
-    <title>【CTF】代码审计-01</title>
-    <url>/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/</url>
-    <content><![CDATA[<p><strong>md5加密相等绕过</strong></p>
-<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="variable">$test</span>=<span class="variable">$_GET</span>[<span class="string">'test'</span>]; </span><br><span class="line"><span class="variable">$test</span>=md5(<span class="variable">$test</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$test</span>==<span class="string">'0'</span>) &#123; </span><br><span class="line">        print <span class="string">'You passed stage 1.&lt;br /&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">        print <span class="string">"Game over at stage 1."</span>; </span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>【hexo】next踩坑侧边栏菜单链接乱码问题</title>
+    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h4><span id="乱码一">乱码一</span></h4><p>点击首页、归档、分类、标签、关于等导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
 <a id="more"></a>
-<p>如果hash值以“0e”开头，后边都是数字，再与数字比较，就会被解释为0*10^n，还是为0，就会被判断相等，绕过登录环节。</p>
-<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
-<p>eg：</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br></pre></td></tr></table></figure>
-<p><strong>sha()函数比较绕过</strong></p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">'name'</span>] == <span class="variable">$_GET</span>[<span class="string">'password'</span>])&#123;</span><br><span class="line">        print <span class="string">'Your password can not be your name.'</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sha1(<span class="variable">$_GET</span>[<span class="string">'name'</span>]) === sha1(<span class="variable">$_GET</span>[<span class="string">'password'</span>]))&#123;</span><br><span class="line">        print <span class="string">'You passed stage 2.&lt;br /&gt;'</span>;</span><br><span class="line">        print <span class="string">'Flag: '</span>.<span class="variable">$flag</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看似不可能，但如果把这两个字段构造为数组，如：?name[]=a&amp;password[]=b，这样在第一处判断时两数组确实是不同的，但在第二处判断时由于<strong>sha1()函数无法处理数组类型</strong>，将报错并返回false，if 条件成立，获得flag。经验证md5()函数同样存在此漏洞。</p>
-<p><strong>bool欺骗</strong></p>
-<p>当存在json_decode和unserialize的时候，部分结构会被解释成bool类型，也会造成欺骗。</p>
-<p><strong>通过数组绕过函数</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'content'</span>]))&#123;</span></span><br><span class="line"><span class="php">    $filename = <span class="string">'config.php'</span>;</span></span><br><span class="line"><span class="php">    $content = $_GET[<span class="string">'content'</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(is_int(stripos($content, <span class="string">'php'</span>)) || is_int(stripos($content, <span class="string">'&lt;'</span>))) &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Invalid input'</span>;</span></span><br><span class="line"><span class="php">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">        file_put_contents($filename, $content);</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Success'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
-<p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
-<p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
-<p>参考链接：</p>
-<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
-<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E5%AF%BC%E8%88%AA%E6%A0%8F.PNG" class title="导航栏">
+<p><strong>解决方案</strong></p>
+<p>链接中的%20代表空格，修改主题配置文件_config.yml，将||之前的所有空格删掉，问题解决。</p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.PNG" class title="主题配置文件">
+<h4><span id="乱码二">乱码二</span></h4><p>点击“日志”导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E6%97%A5%E5%BF%97%E5%AF%BC%E8%88%AA.PNG" class title="日志导航">
+<p><strong>解决方案</strong></p>
+<p>在 themes\next\layout_macro 下找到 sidebar.swig 文件，找到如下代码：</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> config.archive_dir != '/' and site.posts.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"site-state-item site-state-posts"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> theme.menu.archives %&#125;</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives).split('||')[0] | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(config.archive_dir) &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml">	  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"site-state-item-count"</span>&gt;</span></span><span class="template-variable">&#123;&#123; site.posts.length &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">	  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"site-state-item-name"</span>&gt;</span></span><span class="template-variable">&#123;&#123; __('state.posts') &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br></pre></td></tr></table></figure>
+<p>将</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives).split('||')[0] | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>替换为</p>
+<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives.split('||')[0]) | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>hexo踩坑记</category>
+      </categories>
       <tags>
-        <tag>CTF</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】One Time Pad</title>
-    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/</url>
-    <content><![CDATA[<p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
-<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
-<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
-<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
-<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
+    <title>【hexo】next踩坑no such file or directory open ... \.swig </title>
+    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/</url>
+    <content><![CDATA[<p>更换 hexo 主题为 next 时，首先根据 hexo 官方文档进行主题设定。</p>
+<p>官方文档链接：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/getting-started.html</a></p>
 <a id="more"></a>
-<p>给定明文 M 和密文 C 很容易求出密钥 K ，C = M⊕K，C⊕M = M⊕K⊕M，<code>K=M⊕C</code>，同时可以得出，<u>只有一个</u>密钥 K ，能够满足 E(K,M) = C。</p>
-<p>关于<strong>应用</strong>：Alice和Bob想要通信，必须传递一个和明文等长的密钥，这和直接安全传递明文没有区别，实际中很难应用。</p>
-<p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
-<p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
-<p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
-<p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
-<p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
+<p>主题设定完成，发布过程<strong>报错</strong></p>
+<p>ERROR ENOENT: no such file or directory, open ‘D:\MyWork\hexo\themes\next\layout_scripts\schemes.swig’</p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/cmd%E6%8A%A5%E9%94%99.PNG" class title="cmd报错">
+<p><strong>解决方案</strong></p>
+<p>对主题配置文件代码（_config.yml）进行格式检查，推荐使用 YAML Lint 在线检测。</p>
+<p>检测地址链接：<a href="http://www.yamllint.com/" target="_blank" rel="noopener">http://www.yamllint.com/</a></p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/yamllint%E6%A3%80%E6%B5%8B.PNG" class title="yamllint检测">
+<p>检测发现第100行代码冒号后缺少空格，错误得以解决。</p>
 ]]></content>
       <categories>
-        <category>密码学之路</category>
+        <category>hexo踩坑记</category>
       </categories>
       <tags>
-        <tag>DanBoneh密码学</tag>
-        <tag>密码学</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -284,233 +313,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】Stream Ciphers</title>
-    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/</url>
-    <content><![CDATA[<p>在流密码中，密钥不是完全随机的，而是一种<u>伪随机密钥</u>。</p>
-<p><strong>伪随机数发生器</strong>（PRG）：是一个<u>本身没有随机性</u>的<u>完全确定</u>的<u>函数 G</u> ，取一个种子为输入（<u>种子具有随机性</u>），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做<u>种子空间</u>，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，<code>G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s</code>。种子可能只有128位，但能扩展成一个长得多的字符串。</p>
-<p>以<u>种子</u>为私钥 k ，使用<u>发生器</u>将种子扩张成长得多看起来随机的<u>伪随机序列</u> G(k) ，将伪随机序列和明文异或，得到密文。<code>c = E(K,m) = m⊕G(k)</code>；<code>m = D(K,c) = c⊕G(k)</code>。</p>
-<p>流密码是安全的，安全性依赖于使用的发生器，但其密钥比明文短得多，不是完美安全的。</p>
-<a id="more"></a>
-<p><strong>不可预测性</strong>：对于各个位置，即对所有 i ，没有有效的破解算法 A ，以不可忽略的概率预测出第 i+1 位。</p>
-<p>安全的发生器必须具有<strong>不可预测性</strong>，即不能由前面的部分预测出后面的部分。如：拿到密文，而明文的前半部分已知，可以异或出伪随机序列的前半部分，如果伪随机序列可预测，就可以预测出完整的伪随机序列，从而密文完全破解，还原整个明文。</p>
-<p><strong>线性同余法</strong>：将当前伪随机数的数值乘以 A 再加上 C ，然后将除以 M 得到的余数作为下一个随机数，A 和 C 是整数，M 是质数，迭代执行 <code>$R_0$ = (A × 种子 + C) mod M</code>，输出后一位。线性同余法<u>不具备不可预测性</u>，不能用于密码技术。</p>
-<h5><span id="对一次性密码本的攻击">对一次性密码本的攻击</span></h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
-<p>$C_1$ ← $m_1$⊕PRG(k)</p>
-<p>$C_2$ ← $m_2$⊕PRG(k)</p>
-<p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
-<p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
-<h5><span id="几种流密码">几种流密码</span></h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
-<p>Google在 HTTPS 中使用RC4。</p>
-<p>RC4已被伪随机数发生器取代。</p>
-<p>RC4弱点：</p>
-<ol>
-<li>第二个字节等于 0 的概率为 2/256 ，而不是 1/256 ，加密时，第二个字节可能不会被加密。此外，第一个和第三个字节也是不均匀的。</li>
-<li>观察一段很长的输出，出现序列 00 的可能性更大。</li>
-<li>密钥关联攻击。</li>
-</ol>
-<p><strong>CSS</strong>（面向硬件）：已被完全破解，用于加密DVD电影。CSS是基于线性反馈移位寄存器（LFSR）的。</p>
-<p>CSS密钥是 5 个字节，40 位。（seed = 5 bytes = 40 bits）</p>
-<p>CSS使用 2 个LFSR，一个 17 位（1联结上前2个字节），一个 25 位（1联结上后3个字节）。</p>
-<p><strong>eStream</strong>：</p>
-<p>PRG：{0,1}^s × R →{0,1}ⁿ，n&gt;&gt;s，{0,1}^s 为seed，R 为新鲜值（只要密钥定下来，永不重复的值）。</p>
-<p><code>E(k, m; r) = m⊕PRG(k; r)</code>。(k; r) 这个有序对永不重复，不被多次使用，底线是可以重复使用密钥，新鲜值确保了有序对唯一。</p>
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG" class title="PRG">
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG" class title="统计测试">
-<p>一个生成器是安全的，不仅特定的统计测试认为它的输出是随机的，事实上，对于所有<u>有效</u>（测试算法总在有限步内终止并返回结果）的统计测试，都认为输出是随机的。</p>
-<p><strong>完美安全</strong>：</p>
-<p>对于任意等长的消息m，只要这个m属于消息空间（就是说用这个加密算法可以加密m），那么用加密密钥k加密后，加密结果“看起来都一样”，没法看出来这是从m，还是从其他什么消息加密得来的。</p>
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg" class title="完美安全">
-<p><strong>语义安全</strong>：</p>
-<p>计算机在多项式复杂度内看加密结果，觉得“看起来都一样”。</p>
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg" class title="语义安全">
-<p>可参考链接：<a href="https://www.zhihu.com/question/37203836" target="_blank" rel="noopener">https://www.zhihu.com/question/37203836</a></p>
-<p><u>安全的PRG是语义安全的</u>。</p>
-]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>DanBoneh密码学</tag>
-        <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DanBoneh】Using Block Ciphers</title>
-    <url>/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/</url>
-    <content><![CDATA[<p><strong>电子密码本</strong>（ECB）不是语义安全的，永远不应被用来加密长于一个分组的信息。</p>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/ECB.PNG" class title="ECB">
-<a id="more"></a>
-<p>在确定的计数器模式下，由分组密码构建一个流密码。</p>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/PRF%E6%9E%84%E9%80%A0%E7%9A%84%E6%B5%81%E5%AF%86%E7%A0%81.PNG" class title="PRF构造的流密码">
-<p>同一个密钥加密多个信息，允许攻击者实施<strong>选择明文攻击</strong>（<strong>CPA</strong>，即攻击者可任选一条信息交给Alice加密，然后给攻击者相应的密文。）目标是破解语义安全。</p>
-<p>确定的加密机制不可能是 CPA 安全的。</p>
-<p>用同一个密钥加密两段相同的明文，最好产生两段不同的密文，可以通过<u>随机加密</u>（在加密过程中，选择一些随机的字符串进行加密）和<u>基于新鲜值的加密</u>（构造对选择明文攻击安全的加密机制）来解决。</p>
-<p><strong>密码分组链接模式</strong>（CBC）：使用一个分组密码，以实现对选择明文攻击是安全的。首先选择一个随机的<u>初始向量 IV</u> （ IV 必须不可预测，其大小就是分组密码的一个分组大小，IV就是一个分组密码），IV 和第一个明文分组进行异或，得到的结果使用分组密码进行加密，输出第一个分组的密文。以此类推，将第二个明文分组与第一个密文分组进行异或，再加密，得到第二个分组的密文。最后的密文是选择的 IV 以及所有的密文分组。</p>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC.PNG" class title="CBC">
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC%E8%A7%A3%E5%AF%86.PNG" class title="CBC解密">
-<p>无法对单独的一个中间明文分组加密。解密时，若一个密文分组受损，只要长度不变化，只会影响 2 个明文分组，若长度变化，分组错位，则无法解密。</p>
-<p>带 IV （IV不可预测）的 CBC 模式对选择明文攻击是语义安全的。</p>
-<p><strong>基于新鲜值的CBC加密</strong>：IV 被某个<u>不随机</u>但<u>唯一</u>的新鲜值取代。在这个模式中，要使用两个独立的密钥 k 和 $k_1$ ，k 用来加密单独的明文分组， $k_1$ 用来加密新鲜值。在CBC链接使用新鲜值前需要使用  $k_1$ 加密新鲜值，没有的话就不是 CPA 安全的。</p>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC.PNG" class="nonce-based" title="nonce-based CBC">
-<p>当加密的明文长度不是分组密码的分组长度的倍数时，需要在最后一个分组后面进行补齐，解密者会将其移除。如果不需要补齐，为避免出错，最后还是需要加一个没用的分组，解密者根据信息内容会将其移除。</p>
-<p><strong>随机计数器模式</strong>（CTR）：使用安全的 PRF ，不使用分组密码。是一种通过逐次累加的计数器进行加密来生成密钥流的流密码，能以任意顺序处理分组，实现<u>并行</u>计算。IV 被包含在密文里，密文要比明文稍微长一点。</p>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CTR.PNG" class title="CTR">
-<p><strong>CTR与CBC的比较</strong></p>
-<ol>
-<li>CBC 必须使用分组密码，解密过程时逆向的运行分组密码，CTR 只使用正向的加密功能。</li>
-<li>CBC 串行，CTR 可并行。</li>
-<li>CTR 的安全上界、误差项比 CBC 好。</li>
-<li>CBC 需要加一个假的补齐分组，有一个 CBC 变种叫做 CBC 密文偷窃可以用来避免产生假的分组。</li>
-<li>基于新鲜值的模式下，新鲜值需要被扩展成 16 字节的分组才能加密，CBC 模式的密文比原来扩展了 16 倍；CTR 模式可以加密一字节的信息，通过与 CTR 模式产生的流的第一个字节进行异或，产生的每个密文都是一个字节的，无需扩张，和明文一样。</li>
-</ol>
-<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CTRvsCBC.PNG" class title="CTRvsCBC">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>DanBoneh密码学</tag>
-        <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DanBoneh】绪论</title>
-    <url>/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/</url>
-    <content><![CDATA[<p><strong>TLS</strong>（安全传输层协议）：由两部分组成。第一部分为<strong>握手协议</strong>（Handshake），Alice与Bob互相交谈，在握手的最后，双方分享一个密钥，Alice与Bob都知道这个密钥，但攻击者不知道会话密钥K，运用了公钥密码技术。第二部分为<strong>记录协议</strong>（Record），双方共享密钥时，如何使用密钥加以保护通信数据。</p>
-<p><strong>对称加密</strong>：以分组的形式保护流量的技术。在对称加密系统中，只有通信双方知道密钥K，他们使用<strong>加密算法 E</strong> 和<strong>解密算法 D</strong> 进行通信加密。加密算法以<u>原信息</u>和<u>密钥</u>为输入，产生<u>密文</u>；解密算法以<u>密文</u>和<u>密钥</u>为输入，输出<u>原信息</u>。<strong>算法是公开的，密钥是保密的</strong>。很多私有的算法一旦被逆向工程很容易破解。</p>
-<p><strong>一次密钥</strong>（one time key）每个密钥只加密一个信息。</p>
-<a id="more"></a>
-<p><strong>WEP</strong>用来加密WiFi流量。</p>
-<p>密码学的核心是安全通信，含有两个部分：<strong>安全的密钥建立</strong>、<strong>安全的通信</strong>。</p>
-<p>现代密码学描述的每一个概念都依照非常严格的三步：</p>
-<ol>
-<li>当引入新的原型时，如数字签名，要准确描述模型的威胁是什么，如攻击者如何攻击数字签名、伪造签名的目的。</li>
-<li>提出架构，证明攻击者在这个威胁模型下可以攻击这个架构。</li>
-<li>攻击者可以用来解决根本性难题，如果问题很难，则证明攻击者无法在威胁模型下破解这个架构。</li>
-</ol>
-<p>eg：对于数字签名，我们定义数字签名不可伪造的意义，然后给出一个架构，假如有人能够破解这个架构，他也可以用他破解的方法来解决因子分解问题。</p>
-<p><strong>凯撒密码</strong>：并不是密码，因为没有密钥，是一个固定替换的替换式密码，利用字母移位，<em>可轻易破解</em>。</p>
-<p><strong>简单的替换式密码</strong>：密钥是一张字母映射替换表，替换表是随机选择的。假设有26个字母，密钥空间是 26！个，约为 2^88 ，意味着描述一个替换密钥需要88位，每个密钥以88位表示，但依然不安全，可以通过<strong>唯密文攻击</strong>仅凭密文就能还原密钥以及明文，首先可以使用<u>字母的频率</u> e&gt;t&gt;a 分析，其次，通过<u>字母配对的频率</u> he、an、in、th 等。所以，替换式密码<em>可轻易破解</em>。</p>
-<p><strong>Vigener加密</strong>：密钥是一个单词，将密钥字母不断重复以覆盖整个明文信息，将密钥字母和信息字母相加，模 26 得到密文。解密时，将密文信息（不够则 +26 ）减去密钥。通过<strong>唯密文攻击</strong>破解，破解时，首先假设<u>密钥长度已知</u>为 6 ，将密文按照密钥长度分组，然后看每组的第一个字母，它们都被同一个字母加密，eg：假设第一个密钥字母为 C ，则密文分组第一个字母是明文移动 3 位。收集所有字母，最常见的字母很可能是 E 的加密结果，设想每隔 5 个字母最常见的是 M ，我们知道 E 加上第一个密钥字母等于 M ，则 M-E=H，得出 H 为第一个密钥字母。同理，看每个密文分组的第二个字母，重复操作，找出最常见字母，它很可能是 E 的加密结果，减去 E 就是密钥的第二个字母，可以还原整个密钥。<u>密钥长度未知</u>的情况下，先假定密钥长度是 1 ，然后假定长度是 2 、是 3 等等，再运行解密过程，知道了密钥长度和密钥信息，直到得到一个说得通的明文信息。</p>
-<p><strong>单个轴轮机</strong>：密钥在碟片里，每按一次打字机，碟片转一个刻痕，实际上是一个<u>替换表的编码</u>，如图所示，连续按下 C 三次，三次输出均不同，依次为 T、S、K。通过<strong>唯密文攻击</strong>破解，分析<u>字母频率</u>、<u>配对频率</u>、<u>三合字母频率</u>。</p>
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E8%BD%B4%E8%BD%AE%E6%9C%BA.PNG" class title="轴轮机">
-<p><strong>Enigma机</strong>：是一种复杂的轴轮机，使用了3、4或5个轴轮。密钥是轴轮的初始设定，打字时，轴轮以不同速率旋转输出密文，4 个轴有 26^4 个不同的密钥，约 2^18，密钥空间较小。可通过<strong>唯密文攻击</strong>破解。</p>
-<p><strong>DES</strong>：一种将 64 比特的明文加密成 64 比特的密文的对称密码算法，密钥长度为 56 比特，每隔 7 比特会设置一个用于错误检查比特，密钥空间为 2^56 ，一次加密 64 位（8个字母），密钥空间很小，可以使用<strong>暴力破解</strong>，新项目中不能继续使用。</p>
-<p><strong>AES</strong>：分组长度固定，使用 128 位密钥，密钥长度 128、192、256 比特。</p>
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8701.JPG" class title="离散概率01">
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8702.JPG" class title="离散概率02">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>DanBoneh密码学</tag>
-        <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【PHP】Basic PHP</title>
-    <url>/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/</url>
-    <content><![CDATA[<p><strong>PHP基础知识</strong></p>
-<ul>
-<li>PHP支持的8种原始数据类型</li>
-</ul>
-<ul>
-<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p>
-<a id="more"></a>
-</li>
-<li><p>布尔值：true、false，不区分大小写</p>
-</li>
-<li>整型值0、浮点值0.0、空白字符串、字符串“0”、没有成员变量的数组、NULL都是false，除此之外为true</li>
-<li>整数可以用十进制、十六进制（0x）、八进制（0）符号制定</li>
-<li>字符串：<strong>单引号</strong>定义的字符串如实输出，<strong>双引号</strong>定义的字符串可以输出变量、换行符等</li>
-<li>数组：<ul>
-<li>索引数组：形如：<code>$arr=array(1,2,3,4);</code></li>
-<li>关联数组：形如：<code>$arr=array(&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2, &#39;c&#39;=&gt;3);</code></li>
-<li>用array()定义：<code>$users=array(&quot;name1&quot;=&gt;&quot;test1&quot;, &quot;name2&quot;=&gt;&quot;test2&quot;);</code></li>
-<li>用方括号定义：<code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code> <code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code></li>
-</ul>
-</li>
-<li><p><strong>NULL类型：</strong></p>
-<ul>
-<li>NULL表示一个变量没有值</li>
-<li>NULL不区分大小写</li>
-<li>尚未被赋值的变量为NULL</li>
-<li>被unset()的变量为NULL</li>
-<li>NULL类型唯一可能的值是NULL</li>
-<li>预定义变量</li>
-</ul>
-</li>
-<li><p>$GLOBALS      当前脚本全局变量</p>
-</li>
-<li>$_SERVER        变量由web服务器设定</li>
-<li>$_GET              网页提交的GET变量</li>
-<li>$_POST           网页提交的POST变量</li>
-<li>$_COOKIE       网页cookie变量</li>
-<li>$_FILES           上传文件的变量</li>
-<li><p>$_ENV             执行环境提交至脚本的变量</p>
-<ul>
-<li>常见函数</li>
-</ul>
-</li>
-<li><p>strlen()       检查字符串长度</p>
-</li>
-<li>strpos()      检索字符串内指定的字符或文本<ul>
-<li>strcmp() / strcasecmp() / strncmp()   字符串比较函数</li>
-<li>ctrcmp(str1,str2)，如果str1<str2 返回<0；如果str1>str2 返回&gt;0；如果str1=str2 返回=0。假如str2为一个array，也返回0。</str2></li>
-</ul>
-</li>
-<li>strstr() / stristr()                  查找替换</li>
-<li>trim() / ltrim() / rtrim()       删除空白符<ul>
-<li>逻辑运算符优先级从高到低是：&amp;&amp;、||、AND、OR</li>
-<li><strong>“==” 与 “===”</strong></li>
-</ul>
-</li>
-<li>=== 在比较的时候，会判断两种字符串的类型是否相等，再比较</li>
-<li>== 在比较的时候，会先将字符串类型转化成相同，再比较</li>
-<li>如果 比较一个数字和字符串 或者 比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行<ul>
-<li><strong>empty</strong>：当var存在，并且是一个非空非零的值时返回FALSE，否则返回TRUE。以下东西被认为是空的：</li>
-</ul>
-</li>
-<li>“”（空字符串）</li>
-<li>0（作为整数的0）</li>
-<li>0.0（作为浮点数的0）</li>
-<li>“0”（作为字符串的0）</li>
-<li>NULL</li>
-<li>FALSE</li>
-<li>array()（一个空数组）</li>
-<li>$var;（一个声明了，但是没有值的变量）</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>PHP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【hexo】next踩坑侧边栏菜单链接乱码问题</title>
-    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h4><span id="乱码一">乱码一</span></h4><p>点击首页、归档、分类、标签、关于等导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
-<a id="more"></a>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E5%AF%BC%E8%88%AA%E6%A0%8F.PNG" class title="导航栏">
-<p><strong>解决方案</strong></p>
-<p>链接中的%20代表空格，修改主题配置文件_config.yml，将||之前的所有空格删掉，问题解决。</p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.PNG" class title="主题配置文件">
-<h4><span id="乱码二">乱码二</span></h4><p>点击“日志”导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E6%97%A5%E5%BF%97%E5%AF%BC%E8%88%AA.PNG" class title="日志导航">
-<p><strong>解决方案</strong></p>
-<p>在 themes\next\layout_macro 下找到 sidebar.swig 文件，找到如下代码：</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> config.archive_dir != '/' and site.posts.length &gt; 0 %&#125;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"site-state-item site-state-posts"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> theme.menu.archives %&#125;</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives).split('||')[0] | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(config.archive_dir) &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml">	  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"site-state-item-count"</span>&gt;</span></span><span class="template-variable">&#123;&#123; site.posts.length &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">	  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"site-state-item-name"</span>&gt;</span></span><span class="template-variable">&#123;&#123; __('state.posts') &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br></pre></td></tr></table></figure>
-<p>将</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives).split('||')[0] | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>替换为</p>
-<figure class="highlight django"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"</span></span></span><span class="template-variable">&#123;&#123; url_for(theme.menu.archives.split('||')[0]) | trim &#125;&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>hexo踩坑记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【pptx】对称密码2</title>
     <url>/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/</url>
     <content><![CDATA[<p><strong>分组密码</strong>：见《DanBoneh-Block Ciphers》分组密码。</p>
@@ -587,67 +389,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </categories>
       <tags>
         <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【hexo】next踩坑no such file or directory open ... \.swig </title>
-    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/</url>
-    <content><![CDATA[<p>更换 hexo 主题为 next 时，首先根据 hexo 官方文档进行主题设定。</p>
-<p>官方文档链接：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">http://theme-next.iissnan.com/getting-started.html</a></p>
-<a id="more"></a>
-<p>主题设定完成，发布过程<strong>报错</strong></p>
-<p>ERROR ENOENT: no such file or directory, open ‘D:\MyWork\hexo\themes\next\layout_scripts\schemes.swig’</p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/cmd%E6%8A%A5%E9%94%99.PNG" class title="cmd报错">
-<p><strong>解决方案</strong></p>
-<p>对主题配置文件代码（_config.yml）进行格式检查，推荐使用 YAML Lint 在线检测。</p>
-<p>检测地址链接：<a href="http://www.yamllint.com/" target="_blank" rel="noopener">http://www.yamllint.com/</a></p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/yamllint%E6%A3%80%E6%B5%8B.PNG" class title="yamllint检测">
-<p>检测发现第100行代码冒号后缺少空格，错误得以解决。</p>
-]]></content>
-      <categories>
-        <category>hexo踩坑记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【vps】vps搭建</title>
-    <url>/2020/03/12/%E3%80%90vps%E3%80%91vps%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<ul>
-<li><p>github博客搭建，参考链接</p>
-<p><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa</a></p>
-</li>
-</ul>
-<p><strong>vps搭建</strong></p>
-<ul>
-<li><p>Vultr购买账号</p>
-</li>
-<li><p>利用 Xshell 和 ShadowSocks 搭建vps，参考链接</p>
-<p><a href="http://www.pianshen.com/article/133225018/" target="_blank" rel="noopener">http://www.pianshen.com/article/133225018/</a></p>
-<p><a href="http://www.pianshen.com/article/8499260352/" target="_blank" rel="noopener">http://www.pianshen.com/article/8499260352/</a></p>
-<p><a href="https://www.jianshu.com/p/4716cc35750f" target="_blank" rel="noopener">https://www.jianshu.com/p/4716cc35750f</a></p>
-</li>
-</ul>
-<p><strong>错误</strong>：vps代理连接失败，经学长指导，关闭vps防火墙，连接成功</p>
-<p><strong>解决方法</strong>：</p>
-<a id="more"></a>
-<ol>
-<li><p>在Xshell输入以下代码，关闭vps防火墙</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">mkdir -p ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">curl https:/</span><span class="regexp">/1248.ml/my</span><span class="regexp">/keys/</span>Phuker.keys &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys &amp;&amp; \</span><br><span class="line">chmod <span class="number">700</span> ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">chmod 600 ~/</span>.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在cmd设置代理地址</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">set</span> <span class="attribute">ALL_PROXY</span>=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在cmd尝试连接网页</p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">curl -vv http<span class="variable">s:</span>//ip.<span class="keyword">cn</span>/   或者  curl -vv http<span class="variable">s:</span>//www.google.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在浏览器尝试连接，连接成功（以上操作随时观察vps详细日志记录）</p>
-</li>
-</ol>
-]]></content>
-      <tags>
-        <tag>vps</tag>
       </tags>
   </entry>
   <entry>
@@ -730,97 +471,216 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【现代密码学理论与实践】一个简单的通信游戏“电话掷币”</title>
-    <url>/2020/03/18/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/</url>
-    <content><![CDATA[<p><strong>协议</strong>：一个适当定义的、在<strong>多个参与实体</strong>之间执行的规程。（如果一个规程仅由一个实体执行，那么它只是一种程序，不能称之为协议。）</p>
-<p><strong>奇妙函数f</strong></p>
+    <title>【DanBoneh】Using Block Ciphers</title>
+    <url>/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/</url>
+    <content><![CDATA[<p><strong>电子密码本</strong>（ECB）不是语义安全的，永远不应被用来加密长于一个分组的信息。</p>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/ECB.PNG" class title="ECB">
+<a id="more"></a>
+<p>在确定的计数器模式下，由分组密码构建一个流密码。</p>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/PRF%E6%9E%84%E9%80%A0%E7%9A%84%E6%B5%81%E5%AF%86%E7%A0%81.PNG" class title="PRF构造的流密码">
+<p>同一个密钥加密多个信息，允许攻击者实施<strong>选择明文攻击</strong>（<strong>CPA</strong>，即攻击者可任选一条信息交给Alice加密，然后给攻击者相应的密文。）目标是破解语义安全。</p>
+<p>确定的加密机制不可能是 CPA 安全的。</p>
+<p>用同一个密钥加密两段相同的明文，最好产生两段不同的密文，可以通过<u>随机加密</u>（在加密过程中，选择一些随机的字符串进行加密）和<u>基于新鲜值的加密</u>（构造对选择明文攻击安全的加密机制）来解决。</p>
+<p><strong>密码分组链接模式</strong>（CBC）：使用一个分组密码，以实现对选择明文攻击是安全的。首先选择一个随机的<u>初始向量 IV</u> （ IV 必须不可预测，其大小就是分组密码的一个分组大小，IV就是一个分组密码），IV 和第一个明文分组进行异或，得到的结果使用分组密码进行加密，输出第一个分组的密文。以此类推，将第二个明文分组与第一个密文分组进行异或，再加密，得到第二个分组的密文。最后的密文是选择的 IV 以及所有的密文分组。</p>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC.PNG" class title="CBC">
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC%E8%A7%A3%E5%AF%86.PNG" class title="CBC解密">
+<p>无法对单独的一个中间明文分组加密。解密时，若一个密文分组受损，只要长度不变化，只会影响 2 个明文分组，若长度变化，分组错位，则无法解密。</p>
+<p>带 IV （IV不可预测）的 CBC 模式对选择明文攻击是语义安全的。</p>
+<p><strong>基于新鲜值的CBC加密</strong>：IV 被某个<u>不随机</u>但<u>唯一</u>的新鲜值取代。在这个模式中，要使用两个独立的密钥 k 和 $k_1$ ，k 用来加密单独的明文分组， $k_1$ 用来加密新鲜值。在CBC链接使用新鲜值前需要使用  $k_1$ 加密新鲜值，没有的话就不是 CPA 安全的。</p>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CBC.PNG" class="nonce-based" title="nonce-based CBC">
+<p>当加密的明文长度不是分组密码的分组长度的倍数时，需要在最后一个分组后面进行补齐，解密者会将其移除。如果不需要补齐，为避免出错，最后还是需要加一个没用的分组，解密者根据信息内容会将其移除。</p>
+<p><strong>随机计数器模式</strong>（CTR）：使用安全的 PRF ，不使用分组密码。是一种通过逐次累加的计数器进行加密来生成密钥流的流密码，能以任意顺序处理分组，实现<u>并行</u>计算。IV 被包含在密文里，密文要比明文稍微长一点。</p>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CTR.PNG" class title="CTR">
+<p><strong>CTR与CBC的比较</strong></p>
 <ol>
-<li>对任意整数x，由x计算f(x)是容易的，而给出f(x)，要找出对应的原像x是不可能的，不管x是奇数还是偶数。</li>
-<li>不可能找出一对整数(x,y)，满足x≠y且f(x)=f(y)。</li>
+<li>CBC 必须使用分组密码，解密过程时逆向的运行分组密码，CTR 只使用正向的加密功能。</li>
+<li>CBC 串行，CTR 可并行。</li>
+<li>CTR 的安全上界、误差项比 CBC 好。</li>
+<li>CBC 需要加一个假的补齐分组，有一个 CBC 变种叫做 CBC 密文偷窃可以用来避免产生假的分组。</li>
+<li>基于新鲜值的模式下，新鲜值需要被扩展成 16 字节的分组才能加密，CBC 模式的密文比原来扩展了 16 倍；CTR 模式可以加密一字节的信息，通过与 CTR 模式产生的流的第一个字节进行异或，产生的每个密文都是一个字节的，无需扩张，和明文一样。</li>
 </ol>
-<p>奇妙函数是构成现代密码学的一个基本要素—<strong>单向函数</strong>。</p>
-<ol>
-<li>单向函数的存在性意味着安全密码系统的存在性。</li>
-<li>安全密码系统的存在性意味着单向函数的存在性。</li>
-</ol>
-<p><strong>实际效率</strong>：一个密码算法一方面应该设计成容易处理的，以便能被合法用户使用；另一方面还应该是困难的，以便对非用户和攻击者构成一个要解的困难问题。</p>
-<p><strong>通信轮数</strong>：通信交互的次数。一个协议的通信轮数超过线性函数，它就不会被人为是实际有效的。</p>
-]]></content>
+<img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CTRvsCBC.PNG" class title="CTRvsCBC">]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
       <tags>
+        <tag>DanBoneh密码学</tag>
         <tag>密码学</tag>
       </tags>
   </entry>
   <entry>
-    <title>【总结归纳】对称加密知识点串讲</title>
-    <url>/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/</url>
-    <content><![CDATA[<h4><span id="流密码">流密码</span></h4><p>\1.    一个东西是不是随机的与长什么模样无关，即使是一串0或者一串1他也有可能是随机的。一个随机的东西符合两点，①它的每一个比特是等概率产生的，即产生每一个比特的概率都是1/2，②任何一个比特的产生与其它比特的产生都是相互独立的。随机与产生的方式有关，与产生的结果无关。</p>
-<p>\2.    第一个给“安全”①正式下定义的是香农，他也②提出了完善保密性，并证明了一次一密OTP能够达到完善保密性，③给出了香农定理，提出若一个体制能够达到完善保密性，它就一定要求密钥的长度不能小于明文的长度。一次一密它虽然能达到完善保密性，但并不实用。</p>
-<p>\3.    考虑安全性应考虑两个方面，①攻击者能发动什么样的攻击，②攻击者的目标是什么。</p>
-<p>\4.    完善保密性是在唯密文攻击下的概念，目标是给了两个明文，区分密文里包含的是哪一个明文。</p>
-<p>\5.    虽然一次一密不实用，但它加解密都十分容易只要做一个异或就可以了，人们想既保留优点又实用，因此提出流密码。</p>
-<p>\6.    想要实用，需要一个短的密钥去加密明文，又要达到完善保密性，这与香农定理冲突，因此，需要对“安全”重新下定义。</p>
-<p>\7.    一次一密的密文没有泄露明文的任何一个信息。为了实用，人们提出计算上安全的概念，即在计算资源有限的情况下，允许密文泄露一些明文信息，只要泄露的信息在计算资源有限的条件下对破译密文的帮助可忽略即可。</p>
-<p>\8.    语义安全模型下，攻击者只能询问挑战者一次m0或m1，并且m0和m1的长度相等，挑战者返回密文，在这个条件下攻击者区分密文对应的是m0还是m1。</p>
-<p>\9.    PRG，给它一个很短的种子，它能产生一个很长的输出，与明文进行异或。</p>
-<p>\10.   一个PRG必须满足不可预测性。</p>
-<p>\11.   PRG的安全性和流密码的安全性是两回事，PRG的安全性要求它的输出与真随机的输出必须是不可区分的，流密码的安全性要求能够达到语义安全性。</p>
-<p>\12.   “PRG具有不可预测性”与“PRG的输出与真随机的输出不可区分，即PRG是安全的”是等价的，只不过探讨的角度不同。</p>
-<p>\13.   PRG的输出是可以截断的，截取PRG中的一段，它与等长的真随机是不可区分的。</p>
-<p>\14.   使用流密码时，密钥不能重复使用。</p>
-<p>\15.   语义安全性是选择明文攻击下的概念，目的是区分两个不同的消息。语义安全性的模型攻击者只能询问一次，CPA下攻击者可以询问多次。</p>
-<p>一次一密在唯密文攻击下可以达到完善保密性，在选择明文攻击下可以达到语义安全性。</p>
-<h4><span id="分组密码">分组密码</span></h4><p>\1.    分组密码输入是一个固定长度的明文分组，输出一般是和明文分组长度相同的分组叫做密文分组（DES：64bits，AES：128bits），分组密码只能处理固定长度的分组信息。</p>
-<p>\2.    根据香农的研究，在设计分组密码的时候有两个常用的基本技术，①混乱，②扩散，主要目的是抵抗攻击者对密码系统的统计分析。</p>
-<p>\3.    混乱，经常用代换（S盒）的技术实现；扩散，通常用置换（P盒）的技术实现。</p>
-<p>\4.    绝大多数的分组密码都是通过迭代技术构造的，迭代技术是一轮一轮的，每一轮都会有一个密钥（轮密钥or子密钥），每一轮也会有一个函数（轮函数），把上一轮的输出作为输入，最后一轮的输出就是密文，第一轮的输入就是明文，轮密钥是由一个密钥扩展来的，扩展的过程会用一个密钥扩展函数把输入的密钥进行一些变换产生每一轮的子密钥。密钥长度不同，轮数不同。（DES 16轮，AES 10轮）</p>
-<p>\5.    DES的核心是Feistel网络，Feistel网络由Feistel置换组合在一起，DES的每一轮都是一个Feistel置换，16轮置换构成Feistel网络，不论Feistel网络的f是不是可逆的，最终组合在一起都是可以置换的。（搞懂Feistel网络为什么是可逆的）</p>
-<p>\6.    DES明文长度，密文长度，密钥长度都是64bits，密钥虽然是64bits，但有8bits在转换成子密钥时是不用的，因此有效密钥长度只有56bits。</p>
-<p>\7.    目前，没有一个实用的攻击对DES有效，不用DES而用AES是因为DES的密钥长度太短，穷举就可以攻破。</p>
-<p>\8.    AES使用SPN网络，S盒和P盒交替使用。</p>
-<p>\9.    伪随机函数PRF和伪随机置换PRP是用来研究分组密码安全性的，证明时用它们代替分组密码。</p>
-<p>\10.   随机函数是指在一个空间有一大堆函数，我们随机挑选一个出来就叫随机函数，不论这个函数的输出怎样，只要是从这个空间随机选择出来的就叫随机函数。是不是随机函数与函数的输出结果无关，与选择的方式有关。</p>
-<p>\11.   伪随机置换与伪随机函数类似，是从所有的置换空间随机选择一个出来。</p>
-<p>\12.   PRP是PRF的一个特例。</p>
-<p>\13.   一个PRP就是一个PRF，但一个安全的PRP未必就是一个安全的PRF。</p>
-<p>\14.   PRF安全引理，只有当分组的长度足够大的时候，一个安全的PRP才是一个安全的PRF。</p>
-<h4><span id="分组密码的工作模式">分组密码的工作模式</span></h4><p>\1.    ECB模式（电子密码本模式），是一种不安全的模式，不是语义安全的，简单地把明文分成一组一组，用分组密码进行加密，两个相同的明文分组加密后的密文分组相同，当攻击者看到两个相同的密文，虽然不知道明文的内容，但知道对应的明文也相同。</p>
-<p>\2.    ECB不是语义安全的。</p>
-<p>\3.    CTR（确定的计数器模式），用PRF构造PRG，可并行。</p>
-<p>\4.    CPA安全性（选择明文攻击下的语义安全性），攻击者发送多次询问，获得多次对应的密文，即密钥可重复使用。在语义安全性的模型里攻击者只能发送一次询问，获得一次密文，即密钥只用一次。</p>
-<p>\5.    凡是确定的加密方案（DES、AES），一定不是CPA安全的。因为给定相同的明文，加密的结果总是相同，但是是语义安全的，因为语义安全刻画的是密钥使用一次。</p>
-<p>\6.    一个加密体制如果不是语义安全的，那它也一定不是CPA安全的。</p>
-<p>\7.    CPA安全性改造思路：加密相同的明文，输出不同的密文。</p>
-<p>\8.    改造方法：①随机化加密。选择一个随机数，用密钥和随机数一起加密明文。导致密文必然会比明文要长，密文里不仅包含明文信息，还包含了随机数信息。②nonce-based加密。每加密一个明文就换一个新的nonce（新鲜值），nonce可以作为加密算法的输入，保证加密明文nonce不能重复，除非换一个新的密钥，即（k，n）这个组合不重复使用。</p>
-<p>\9.    nonce的选择方法：①计数器方式。初始为0，每次加1。如果发送者和接收者保持相同状态，则nonce无需发送。②随机数方式。随机数需与密文一起发送。</p>
-<p>\10.   CBC模式（密码分组链接模式）和CTR模式（计数器模式）都能够证明在CPA安全性下是安全的，使用时密钥可以重用。</p>
-<p>\11.   CBC模式是一种级联的形式，整个加密过程是一个串行的过程，解密可以并行。在加密下一个明文时需要用到前一个密文分组，与当前的明文分组进行异或，再加密。为了隐藏第一个明文的信息，在加密时需要一个初始向量与第一个明文分组进行异或，初始向量在发送给接收者时不需要加密，以明文的形式和密文一起发送给接收者。</p>
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E5%8A%A0%E5%AF%86.png" class title="CBC加密">
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E8%A7%A3%E5%AF%86.png" class title="CBC解密">
-<p>\12.    CBC模式中差错传播，单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.png" class title="CBC差错传播">
-<p>\13.    CBC模式中初始向量IV的选择：①取随机数（不能是可预测的，即从上一个IV可预测下一个IV），与密文一起发送。如果IV可预测，则不是CPA安全的。②用nonce作为IV，若nonce随机，则与前面随机数取IV相同，若nonce不随机，可预测，则使用前必须对其进行一次加密，使用双密钥，其中一个密钥用来加密IV，另外一个密钥用在CBC链条里。使用nonce的好处是双方都知道下一个nonce，不需要再发送。</p>
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/nonce-basedCBC.png" class title="nonce-basedCBC">
-<p>\14.    CBC模式中，若分组后最后一个分组的长度不够，则需要进行填充。若明文分组的长度是分组长度的整数倍，依然需要填充，需要额外追加一个完整的分组（dummy block），接收者就会知道不管长度够不够都有填充，若长度不够时填充，整数倍不填充，接收者不知道是否填充，可能会导致解密失败。注：密文窃取填充技术中，不需要追加dummy block。</p>
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/%E5%A1%AB%E5%85%85%E6%8A%80%E6%9C%AF.png" class title="填充技术">
-<p>\15.    CTR模式，本质上是用一个PRF来构造一个流密码，加解密都可以并行。首先对IV、IV+1、IV+2…进行加密，然后分别与每一个明文分组进行异或，得到密文分组，IV与密文分组一起发送给接收方。CTR不存在差错传播，但不影响其他的分组。</p>
-<img src="/2020/06/19/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/CTR%E5%8A%A0%E5%AF%86.png" class title="CTR加密">
-<p>\16.    CTR模式中初始向量IV的选择：①取随机数，与密文一起发送。②nonce加密，需要保证Fk(x)不会重复出现。</p>
-<h4><span id="pdf-文件">PDF 文件</span></h4>
-
-	<div class="row">
-    <embed src="对称加密知识点串讲.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
+    <title>【DanBoneh】Block Ciphers</title>
+    <url>/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/</url>
+    <content><![CDATA[<p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
+<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
+<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
+<a id="more"></a>
+<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
+<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
+<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
+<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
+<p><strong>DES</strong>：核心思想是Feistel网络。</p>
+<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
+<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
 ]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
       <tags>
         <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Stream Ciphers</title>
+    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/</url>
+    <content><![CDATA[<p>在流密码中，密钥不是完全随机的，而是一种<u>伪随机密钥</u>。</p>
+<p><strong>伪随机数发生器</strong>（PRG）：是一个<u>本身没有随机性</u>的<u>完全确定</u>的<u>函数 G</u> ，取一个种子为输入（<u>种子具有随机性</u>），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做<u>种子空间</u>，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，<code>G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s</code>。种子可能只有128位，但能扩展成一个长得多的字符串。</p>
+<p>以<u>种子</u>为私钥 k ，使用<u>发生器</u>将种子扩张成长得多看起来随机的<u>伪随机序列</u> G(k) ，将伪随机序列和明文异或，得到密文。<code>c = E(K,m) = m⊕G(k)</code>；<code>m = D(K,c) = c⊕G(k)</code>。</p>
+<p>流密码是安全的，安全性依赖于使用的发生器，但其密钥比明文短得多，不是完美安全的。</p>
+<a id="more"></a>
+<p><strong>不可预测性</strong>：对于各个位置，即对所有 i ，没有有效的破解算法 A ，以不可忽略的概率预测出第 i+1 位。</p>
+<p>安全的发生器必须具有<strong>不可预测性</strong>，即不能由前面的部分预测出后面的部分。如：拿到密文，而明文的前半部分已知，可以异或出伪随机序列的前半部分，如果伪随机序列可预测，就可以预测出完整的伪随机序列，从而密文完全破解，还原整个明文。</p>
+<p><strong>线性同余法</strong>：将当前伪随机数的数值乘以 A 再加上 C ，然后将除以 M 得到的余数作为下一个随机数，A 和 C 是整数，M 是质数，迭代执行 <code>$R_0$ = (A × 种子 + C) mod M</code>，输出后一位。线性同余法<u>不具备不可预测性</u>，不能用于密码技术。</p>
+<h5><span id="对一次性密码本的攻击">对一次性密码本的攻击</span></h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
+<p>$C_1$ ← $m_1$⊕PRG(k)</p>
+<p>$C_2$ ← $m_2$⊕PRG(k)</p>
+<p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
+<p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
+<h5><span id="几种流密码">几种流密码</span></h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
+<p>Google在 HTTPS 中使用RC4。</p>
+<p>RC4已被伪随机数发生器取代。</p>
+<p>RC4弱点：</p>
+<ol>
+<li>第二个字节等于 0 的概率为 2/256 ，而不是 1/256 ，加密时，第二个字节可能不会被加密。此外，第一个和第三个字节也是不均匀的。</li>
+<li>观察一段很长的输出，出现序列 00 的可能性更大。</li>
+<li>密钥关联攻击。</li>
+</ol>
+<p><strong>CSS</strong>（面向硬件）：已被完全破解，用于加密DVD电影。CSS是基于线性反馈移位寄存器（LFSR）的。</p>
+<p>CSS密钥是 5 个字节，40 位。（seed = 5 bytes = 40 bits）</p>
+<p>CSS使用 2 个LFSR，一个 17 位（1联结上前2个字节），一个 25 位（1联结上后3个字节）。</p>
+<p><strong>eStream</strong>：</p>
+<p>PRG：{0,1}^s × R →{0,1}ⁿ，n&gt;&gt;s，{0,1}^s 为seed，R 为新鲜值（只要密钥定下来，永不重复的值）。</p>
+<p><code>E(k, m; r) = m⊕PRG(k; r)</code>。(k; r) 这个有序对永不重复，不被多次使用，底线是可以重复使用密钥，新鲜值确保了有序对唯一。</p>
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG" class title="PRG">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG" class title="统计测试">
+<p>一个生成器是安全的，不仅特定的统计测试认为它的输出是随机的，事实上，对于所有<u>有效</u>（测试算法总在有限步内终止并返回结果）的统计测试，都认为输出是随机的。</p>
+<p><strong>完美安全</strong>：</p>
+<p>对于任意等长的消息m，只要这个m属于消息空间（就是说用这个加密算法可以加密m），那么用加密密钥k加密后，加密结果“看起来都一样”，没法看出来这是从m，还是从其他什么消息加密得来的。</p>
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg" class title="完美安全">
+<p><strong>语义安全</strong>：</p>
+<p>计算机在多项式复杂度内看加密结果，觉得“看起来都一样”。</p>
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg" class title="语义安全">
+<p>可参考链接：<a href="https://www.zhihu.com/question/37203836" target="_blank" rel="noopener">https://www.zhihu.com/question/37203836</a></p>
+<p><u>安全的PRG是语义安全的</u>。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】One Time Pad</title>
+    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/</url>
+    <content><![CDATA[<p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
+<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
+<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
+<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
+<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
+<a id="more"></a>
+<p>给定明文 M 和密文 C 很容易求出密钥 K ，C = M⊕K，C⊕M = M⊕K⊕M，<code>K=M⊕C</code>，同时可以得出，<u>只有一个</u>密钥 K ，能够满足 E(K,M) = C。</p>
+<p>关于<strong>应用</strong>：Alice和Bob想要通信，必须传递一个和明文等长的密钥，这和直接安全传递明文没有区别，实际中很难应用。</p>
+<p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
+<p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
+<p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
+<p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
+<p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】绪论</title>
+    <url>/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<p><strong>TLS</strong>（安全传输层协议）：由两部分组成。第一部分为<strong>握手协议</strong>（Handshake），Alice与Bob互相交谈，在握手的最后，双方分享一个密钥，Alice与Bob都知道这个密钥，但攻击者不知道会话密钥K，运用了公钥密码技术。第二部分为<strong>记录协议</strong>（Record），双方共享密钥时，如何使用密钥加以保护通信数据。</p>
+<p><strong>对称加密</strong>：以分组的形式保护流量的技术。在对称加密系统中，只有通信双方知道密钥K，他们使用<strong>加密算法 E</strong> 和<strong>解密算法 D</strong> 进行通信加密。加密算法以<u>原信息</u>和<u>密钥</u>为输入，产生<u>密文</u>；解密算法以<u>密文</u>和<u>密钥</u>为输入，输出<u>原信息</u>。<strong>算法是公开的，密钥是保密的</strong>。很多私有的算法一旦被逆向工程很容易破解。</p>
+<p><strong>一次密钥</strong>（one time key）每个密钥只加密一个信息。</p>
+<a id="more"></a>
+<p><strong>WEP</strong>用来加密WiFi流量。</p>
+<p>密码学的核心是安全通信，含有两个部分：<strong>安全的密钥建立</strong>、<strong>安全的通信</strong>。</p>
+<p>现代密码学描述的每一个概念都依照非常严格的三步：</p>
+<ol>
+<li>当引入新的原型时，如数字签名，要准确描述模型的威胁是什么，如攻击者如何攻击数字签名、伪造签名的目的。</li>
+<li>提出架构，证明攻击者在这个威胁模型下可以攻击这个架构。</li>
+<li>攻击者可以用来解决根本性难题，如果问题很难，则证明攻击者无法在威胁模型下破解这个架构。</li>
+</ol>
+<p>eg：对于数字签名，我们定义数字签名不可伪造的意义，然后给出一个架构，假如有人能够破解这个架构，他也可以用他破解的方法来解决因子分解问题。</p>
+<p><strong>凯撒密码</strong>：并不是密码，因为没有密钥，是一个固定替换的替换式密码，利用字母移位，<em>可轻易破解</em>。</p>
+<p><strong>简单的替换式密码</strong>：密钥是一张字母映射替换表，替换表是随机选择的。假设有26个字母，密钥空间是 26！个，约为 2^88 ，意味着描述一个替换密钥需要88位，每个密钥以88位表示，但依然不安全，可以通过<strong>唯密文攻击</strong>仅凭密文就能还原密钥以及明文，首先可以使用<u>字母的频率</u> e&gt;t&gt;a 分析，其次，通过<u>字母配对的频率</u> he、an、in、th 等。所以，替换式密码<em>可轻易破解</em>。</p>
+<p><strong>Vigener加密</strong>：密钥是一个单词，将密钥字母不断重复以覆盖整个明文信息，将密钥字母和信息字母相加，模 26 得到密文。解密时，将密文信息（不够则 +26 ）减去密钥。通过<strong>唯密文攻击</strong>破解，破解时，首先假设<u>密钥长度已知</u>为 6 ，将密文按照密钥长度分组，然后看每组的第一个字母，它们都被同一个字母加密，eg：假设第一个密钥字母为 C ，则密文分组第一个字母是明文移动 3 位。收集所有字母，最常见的字母很可能是 E 的加密结果，设想每隔 5 个字母最常见的是 M ，我们知道 E 加上第一个密钥字母等于 M ，则 M-E=H，得出 H 为第一个密钥字母。同理，看每个密文分组的第二个字母，重复操作，找出最常见字母，它很可能是 E 的加密结果，减去 E 就是密钥的第二个字母，可以还原整个密钥。<u>密钥长度未知</u>的情况下，先假定密钥长度是 1 ，然后假定长度是 2 、是 3 等等，再运行解密过程，知道了密钥长度和密钥信息，直到得到一个说得通的明文信息。</p>
+<p><strong>单个轴轮机</strong>：密钥在碟片里，每按一次打字机，碟片转一个刻痕，实际上是一个<u>替换表的编码</u>，如图所示，连续按下 C 三次，三次输出均不同，依次为 T、S、K。通过<strong>唯密文攻击</strong>破解，分析<u>字母频率</u>、<u>配对频率</u>、<u>三合字母频率</u>。</p>
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E8%BD%B4%E8%BD%AE%E6%9C%BA.PNG" class title="轴轮机">
+<p><strong>Enigma机</strong>：是一种复杂的轴轮机，使用了3、4或5个轴轮。密钥是轴轮的初始设定，打字时，轴轮以不同速率旋转输出密文，4 个轴有 26^4 个不同的密钥，约 2^18，密钥空间较小。可通过<strong>唯密文攻击</strong>破解。</p>
+<p><strong>DES</strong>：一种将 64 比特的明文加密成 64 比特的密文的对称密码算法，密钥长度为 56 比特，每隔 7 比特会设置一个用于错误检查比特，密钥空间为 2^56 ，一次加密 64 位（8个字母），密钥空间很小，可以使用<strong>暴力破解</strong>，新项目中不能继续使用。</p>
+<p><strong>AES</strong>：分组长度固定，使用 128 位密钥，密钥长度 128、192、256 比特。</p>
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8701.JPG" class title="离散概率01">
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8702.JPG" class title="离散概率02">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【现代密码学理论与实践】概率论和信息论</title>
+    <url>/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
+    <content><![CDATA[<h4><span id="标准符号">标准符号</span></h4><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B701.png" class title="标准符号01">
+<a id="more"></a>
+<img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B702.png" class title="标准符号02">
+<h4><span id="概率论的基本概念">概率论的基本概念</span></h4><p>令S为一个任意确定的点的集合，称之为<strong>概率空间</strong>（或<strong>样本空间</strong>）。任意元素 x∈S 成为<strong>样点</strong>（也称为<strong>结果</strong>、<strong>简单事件</strong>或<strong>不可分事件</strong>。一个<strong>事件</strong>（也成为<strong>合成事件</strong>或<strong>可分事件</strong>）是 S 的一个子集，通常用以一个大写字母表示（比如 E ）。<strong>一次实验或观察</strong>是一种从 S 中产生（取出）一个点的动作。一个事件 E 的发生就是一个实验产生某个点 x∈S ，并满足 x∈E 。</p>
+<h5><span id="概率的经典定义">概率的经典定义</span></h5><p>假设一个实验可以从 n=#S 个等可能的点中产生一个点，并且每次实验必须产生一个点。令 m 表示事件 E 包含的点的数目，那么称 m/n 为事件 E 发生的概率，并记为</p>
+<script type="math/tex; mode=display">
+Prob[E]=\frac{m}{n}</script><h5><span id="概率的统计定义">概率的统计定义</span></h5><p>假设在相同条件下进行了 n 次实验，其中事件 E 发生了 μ 次。如果对所有足够大的 n ， μ/n 保持不变，那么就说事件E的概率为 μ/n ，记为</p>
+<script type="math/tex; mode=display">
+Prob[E]≈\frac{μ}{n}</script><h4><span id="基本运算">基本运算</span></h4><h5><span id="加法规则">加法规则</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%8A%A0%E6%B3%95%E8%A7%84%E5%88%99.png" class title="加法规则">
+<h6><span id="条件概率">条件概率</span></h6><p>设 E、F 为两个事件，且 E 的概率不为 0 。在 E 发生的条件下 F 发生的概率称为已知 E 时 F 的条件概率，记为</p>
+<script type="math/tex; mode=display">
+Prob[E|F]=\frac{Prob[E∩F]}{Prob[E]}</script><h6><span id="独立事件">独立事件</span></h6><p>事件 E、F 是相互独立的，当且仅当</p>
+<script type="math/tex; mode=display">
+Prob[E|F]=Prob[F]</script><h5><span id="乘法规则">乘法规则</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%B9%98%E6%B3%95%E8%A7%84%E5%88%99.png" class title="乘法规则">
+<h5><span id="全概率定律">全概率定律★</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%85%A8%E6%A6%82%E7%8E%87%E5%AE%9A%E5%BE%8B.png" class title="全概率定律">
+<h4><span id="随机变量及其概率分布">随机变量及其概率分布</span></h4><h5><span id="离散随机变量及其分布函数">离散随机变量及其分布函数</span></h5><ol>
+<li><p>一个（离散）随机变量是一个实验的数字化结果。它是定义在一个（离散）样本空间上的函数。</p>
+</li>
+<li><p>设 S 为一个（离散）概率空间，ξ 为一个随机变量。ξ 的（离散）分布函数是 S→R 的一个函数，以一个概率值</p>
+<script type="math/tex; mode=display">
+Prob[ξ=x_i]=p_i（i=1,2,...,S）</script><p>列表为条件，并满足下面的条件</p>
+<script type="math/tex; mode=display">
+1.p_i≥0</script><script type="math/tex; mode=display">
+2.\sum_{1}^{S}{p_i}=1</script></li>
+</ol>
+<h5><span id="二项式分布">二项式分布</span></h5><p>如果随机变量 ξn 取值为0，1，…，n，且对每一个 p ，0&lt;p&lt;1 ，有</p>
+<script type="math/tex; mode=display">
+Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn 服从<strong>贝努利分布</strong>，用 b(k ; n , p) 表示一个贝努利项，其中 k=0,1,2,…,n 且 0&lt;p&lt;1 。</p>
+<h6><span id="中心项">中心项</span></h6><p>相邻的二项式两项的比值是</p>
+<script type="math/tex; mode=display">
+\frac{b(k；n，p)}{b(k-1 ；n ，p)}=\frac{(n-k+1)p}{k(1-p)}=1+\frac{(n+1)p-k}{k(1-p)}</script><p>当 k&lt;(n+1)p 时，其值为正；当 k&gt;(n+1)p 时，其值为负。因此在 k=(n+1)p 时，二项式 b(k ; n , p) 达到最大值。此二项式 b((n+1)p ; n , p) 称为<strong>中心项</strong>。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
         <tag>密码学</tag>
       </tags>
   </entry>
@@ -867,45 +727,185 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【现代密码学理论与实践】概率论和信息论</title>
-    <url>/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
-    <content><![CDATA[<h4><span id="标准符号">标准符号</span></h4><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B701.png" class title="标准符号01">
-<a id="more"></a>
-<img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B702.png" class title="标准符号02">
-<h4><span id="概率论的基本概念">概率论的基本概念</span></h4><p>令S为一个任意确定的点的集合，称之为<strong>概率空间</strong>（或<strong>样本空间</strong>）。任意元素 x∈S 成为<strong>样点</strong>（也称为<strong>结果</strong>、<strong>简单事件</strong>或<strong>不可分事件</strong>。一个<strong>事件</strong>（也成为<strong>合成事件</strong>或<strong>可分事件</strong>）是 S 的一个子集，通常用以一个大写字母表示（比如 E ）。<strong>一次实验或观察</strong>是一种从 S 中产生（取出）一个点的动作。一个事件 E 的发生就是一个实验产生某个点 x∈S ，并满足 x∈E 。</p>
-<h5><span id="概率的经典定义">概率的经典定义</span></h5><p>假设一个实验可以从 n=#S 个等可能的点中产生一个点，并且每次实验必须产生一个点。令 m 表示事件 E 包含的点的数目，那么称 m/n 为事件 E 发生的概率，并记为</p>
-<script type="math/tex; mode=display">
-Prob[E]=\frac{m}{n}</script><h5><span id="概率的统计定义">概率的统计定义</span></h5><p>假设在相同条件下进行了 n 次实验，其中事件 E 发生了 μ 次。如果对所有足够大的 n ， μ/n 保持不变，那么就说事件E的概率为 μ/n ，记为</p>
-<script type="math/tex; mode=display">
-Prob[E]≈\frac{μ}{n}</script><h4><span id="基本运算">基本运算</span></h4><h5><span id="加法规则">加法规则</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%8A%A0%E6%B3%95%E8%A7%84%E5%88%99.png" class title="加法规则">
-<h6><span id="条件概率">条件概率</span></h6><p>设 E、F 为两个事件，且 E 的概率不为 0 。在 E 发生的条件下 F 发生的概率称为已知 E 时 F 的条件概率，记为</p>
-<script type="math/tex; mode=display">
-Prob[E|F]=\frac{Prob[E∩F]}{Prob[E]}</script><h6><span id="独立事件">独立事件</span></h6><p>事件 E、F 是相互独立的，当且仅当</p>
-<script type="math/tex; mode=display">
-Prob[E|F]=Prob[F]</script><h5><span id="乘法规则">乘法规则</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%B9%98%E6%B3%95%E8%A7%84%E5%88%99.png" class title="乘法规则">
-<h5><span id="全概率定律">全概率定律★</span></h5><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E5%85%A8%E6%A6%82%E7%8E%87%E5%AE%9A%E5%BE%8B.png" class title="全概率定律">
-<h4><span id="随机变量及其概率分布">随机变量及其概率分布</span></h4><h5><span id="离散随机变量及其分布函数">离散随机变量及其分布函数</span></h5><ol>
-<li><p>一个（离散）随机变量是一个实验的数字化结果。它是定义在一个（离散）样本空间上的函数。</p>
-</li>
-<li><p>设 S 为一个（离散）概率空间，ξ 为一个随机变量。ξ 的（离散）分布函数是 S→R 的一个函数，以一个概率值</p>
-<script type="math/tex; mode=display">
-Prob[ξ=x_i]=p_i（i=1,2,...,S）</script><p>列表为条件，并满足下面的条件</p>
-<script type="math/tex; mode=display">
-1.p_i≥0</script><script type="math/tex; mode=display">
-2.\sum_{1}^{S}{p_i}=1</script></li>
+    <title>【现代密码学理论与实践】一个简单的通信游戏“电话掷币”</title>
+    <url>/2020/03/18/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E9%80%9A%E4%BF%A1%E6%B8%B8%E6%88%8F/</url>
+    <content><![CDATA[<p><strong>协议</strong>：一个适当定义的、在<strong>多个参与实体</strong>之间执行的规程。（如果一个规程仅由一个实体执行，那么它只是一种程序，不能称之为协议。）</p>
+<p><strong>奇妙函数f</strong></p>
+<ol>
+<li>对任意整数x，由x计算f(x)是容易的，而给出f(x)，要找出对应的原像x是不可能的，不管x是奇数还是偶数。</li>
+<li>不可能找出一对整数(x,y)，满足x≠y且f(x)=f(y)。</li>
 </ol>
-<h5><span id="二项式分布">二项式分布</span></h5><p>如果随机变量 ξn 取值为0，1，…，n，且对每一个 p ，0&lt;p&lt;1 ，有</p>
-<script type="math/tex; mode=display">
-Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn 服从<strong>贝努利分布</strong>，用 b(k ; n , p) 表示一个贝努利项，其中 k=0,1,2,…,n 且 0&lt;p&lt;1 。</p>
-<h6><span id="中心项">中心项</span></h6><p>相邻的二项式两项的比值是</p>
-<script type="math/tex; mode=display">
-\frac{b(k；n，p)}{b(k-1 ；n ，p)}=\frac{(n-k+1)p}{k(1-p)}=1+\frac{(n+1)p-k}{k(1-p)}</script><p>当 k&lt;(n+1)p 时，其值为正；当 k&gt;(n+1)p 时，其值为负。因此在 k=(n+1)p 时，二项式 b(k ; n , p) 达到最大值。此二项式 b((n+1)p ; n , p) 称为<strong>中心项</strong>。</p>
+<p>奇妙函数是构成现代密码学的一个基本要素—<strong>单向函数</strong>。</p>
+<ol>
+<li>单向函数的存在性意味着安全密码系统的存在性。</li>
+<li>安全密码系统的存在性意味着单向函数的存在性。</li>
+</ol>
+<p><strong>实际效率</strong>：一个密码算法一方面应该设计成容易处理的，以便能被合法用户使用；另一方面还应该是困难的，以便对非用户和攻击者构成一个要解的困难问题。</p>
+<p><strong>通信轮数</strong>：通信交互的次数。一个协议的通信轮数超过线性函数，它就不会被人为是实际有效的。</p>
 ]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
       <tags>
         <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【CTF】代码审计-01</title>
+    <url>/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/</url>
+    <content><![CDATA[<p><strong>md5加密相等绕过</strong></p>
+<p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="variable">$test</span>=<span class="variable">$_GET</span>[<span class="string">'test'</span>]; </span><br><span class="line"><span class="variable">$test</span>=md5(<span class="variable">$test</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$test</span>==<span class="string">'0'</span>) &#123; </span><br><span class="line">        print <span class="string">'You passed stage 1.&lt;br /&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">        print <span class="string">"Game over at stage 1."</span>; </span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>如果hash值以“0e”开头，后边都是数字，再与数字比较，就会被解释为0*10^n，还是为0，就会被判断相等，绕过登录环节。</p>
+<p>PHP在处理哈希字符串时，会利用”<code>!=</code>”或”<code>==</code>”来对哈希值进行比较，它把每一个以“0e”开头的哈希值都解释为0。如果两个不同的值经过哈希以后，都是“0e”开头，那么PHP将会认为他们相同。</p>
+<p>eg：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br></pre></td></tr></table></figure>
+<p><strong>sha()函数比较绕过</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$_GET</span>[<span class="string">'name'</span>] == <span class="variable">$_GET</span>[<span class="string">'password'</span>])&#123;</span><br><span class="line">        print <span class="string">'Your password can not be your name.'</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (sha1(<span class="variable">$_GET</span>[<span class="string">'name'</span>]) === sha1(<span class="variable">$_GET</span>[<span class="string">'password'</span>]))&#123;</span><br><span class="line">        print <span class="string">'You passed stage 2.&lt;br /&gt;'</span>;</span><br><span class="line">        print <span class="string">'Flag: '</span>.<span class="variable">$flag</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看似不可能，但如果把这两个字段构造为数组，如：?name[]=a&amp;password[]=b，这样在第一处判断时两数组确实是不同的，但在第二处判断时由于<strong>sha1()函数无法处理数组类型</strong>，将报错并返回false，if 条件成立，获得flag。经验证md5()函数同样存在此漏洞。</p>
+<p><strong>bool欺骗</strong></p>
+<p>当存在json_decode和unserialize的时候，部分结构会被解释成bool类型，也会造成欺骗。</p>
+<p><strong>通过数组绕过函数</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'content'</span>]))&#123;</span></span><br><span class="line"><span class="php">    $filename = <span class="string">'config.php'</span>;</span></span><br><span class="line"><span class="php">    $content = $_GET[<span class="string">'content'</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="php">    <span class="keyword">if</span>(is_int(stripos($content, <span class="string">'php'</span>)) || is_int(stripos($content, <span class="string">'&lt;'</span>))) &#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Invalid input'</span>;</span></span><br><span class="line"><span class="php">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="php">        file_put_contents($filename, $content);</span></span><br><span class="line"><span class="php">        <span class="keyword">echo</span> <span class="string">'Success'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
+<p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
+<p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
+<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【PHP】Basic PHP</title>
+    <url>/2020/03/14/%E3%80%90PHP%E3%80%91BasicPHP/</url>
+    <content><![CDATA[<p><strong>PHP基础知识</strong></p>
+<ul>
+<li>PHP支持的8种原始数据类型</li>
+</ul>
+<ul>
+<li><p>| 4种标量类型 | boolean布尔型；integer整形；float浮点型；string字符串型 |<br>| —————- | ———————————————————————————- |<br>| 2种复合类型 | array数组；object对象                                   |<br>| 2种特殊类型 | resource资源；NULL                                      |</p>
+<a id="more"></a>
+</li>
+<li><p>布尔值：true、false，不区分大小写</p>
+</li>
+<li>整型值0、浮点值0.0、空白字符串、字符串“0”、没有成员变量的数组、NULL都是false，除此之外为true</li>
+<li>整数可以用十进制、十六进制（0x）、八进制（0）符号制定</li>
+<li>字符串：<strong>单引号</strong>定义的字符串如实输出，<strong>双引号</strong>定义的字符串可以输出变量、换行符等</li>
+<li>数组：<ul>
+<li>索引数组：形如：<code>$arr=array(1,2,3,4);</code></li>
+<li>关联数组：形如：<code>$arr=array(&#39;a&#39;=&gt;1, &#39;b&#39;=&gt;2, &#39;c&#39;=&gt;3);</code></li>
+<li>用array()定义：<code>$users=array(&quot;name1&quot;=&gt;&quot;test1&quot;, &quot;name2&quot;=&gt;&quot;test2&quot;);</code></li>
+<li>用方括号定义：<code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code> <code>$users[&#39;name1&#39;]=&#39;test1&#39;;</code></li>
+</ul>
+</li>
+<li><p><strong>NULL类型：</strong></p>
+<ul>
+<li>NULL表示一个变量没有值</li>
+<li>NULL不区分大小写</li>
+<li>尚未被赋值的变量为NULL</li>
+<li>被unset()的变量为NULL</li>
+<li>NULL类型唯一可能的值是NULL</li>
+<li>预定义变量</li>
+</ul>
+</li>
+<li><p>$GLOBALS      当前脚本全局变量</p>
+</li>
+<li>$_SERVER        变量由web服务器设定</li>
+<li>$_GET              网页提交的GET变量</li>
+<li>$_POST           网页提交的POST变量</li>
+<li>$_COOKIE       网页cookie变量</li>
+<li>$_FILES           上传文件的变量</li>
+<li><p>$_ENV             执行环境提交至脚本的变量</p>
+<ul>
+<li>常见函数</li>
+</ul>
+</li>
+<li><p>strlen()       检查字符串长度</p>
+</li>
+<li>strpos()      检索字符串内指定的字符或文本<ul>
+<li>strcmp() / strcasecmp() / strncmp()   字符串比较函数</li>
+<li>ctrcmp(str1,str2)，如果str1<str2 返回<0；如果str1>str2 返回&gt;0；如果str1=str2 返回=0。假如str2为一个array，也返回0。</str2></li>
+</ul>
+</li>
+<li>strstr() / stristr()                  查找替换</li>
+<li>trim() / ltrim() / rtrim()       删除空白符<ul>
+<li>逻辑运算符优先级从高到低是：&amp;&amp;、||、AND、OR</li>
+<li><strong>“==” 与 “===”</strong></li>
+</ul>
+</li>
+<li>=== 在比较的时候，会判断两种字符串的类型是否相等，再比较</li>
+<li>== 在比较的时候，会先将字符串类型转化成相同，再比较</li>
+<li>如果 比较一个数字和字符串 或者 比较涉及到数字内容的字符串，则字符串会被转换成数值并且比较按照数值来进行<ul>
+<li><strong>empty</strong>：当var存在，并且是一个非空非零的值时返回FALSE，否则返回TRUE。以下东西被认为是空的：</li>
+</ul>
+</li>
+<li>“”（空字符串）</li>
+<li>0（作为整数的0）</li>
+<li>0.0（作为浮点数的0）</li>
+<li>“0”（作为字符串的0）</li>
+<li>NULL</li>
+<li>FALSE</li>
+<li>array()（一个空数组）</li>
+<li>$var;（一个声明了，但是没有值的变量）</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【vps】vps搭建</title>
+    <url>/2020/03/12/%E3%80%90vps%E3%80%91vps%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<ul>
+<li><p>github博客搭建，参考链接</p>
+<p><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa</a></p>
+</li>
+</ul>
+<p><strong>vps搭建</strong></p>
+<ul>
+<li><p>Vultr购买账号</p>
+</li>
+<li><p>利用 Xshell 和 ShadowSocks 搭建vps，参考链接</p>
+<p><a href="http://www.pianshen.com/article/133225018/" target="_blank" rel="noopener">http://www.pianshen.com/article/133225018/</a></p>
+<p><a href="http://www.pianshen.com/article/8499260352/" target="_blank" rel="noopener">http://www.pianshen.com/article/8499260352/</a></p>
+<p><a href="https://www.jianshu.com/p/4716cc35750f" target="_blank" rel="noopener">https://www.jianshu.com/p/4716cc35750f</a></p>
+</li>
+</ul>
+<p><strong>错误</strong>：vps代理连接失败，经学长指导，关闭vps防火墙，连接成功</p>
+<p><strong>解决方法</strong>：</p>
+<a id="more"></a>
+<ol>
+<li><p>在Xshell输入以下代码，关闭vps防火墙</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">mkdir -p ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">curl https:/</span><span class="regexp">/1248.ml/my</span><span class="regexp">/keys/</span>Phuker.keys &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys &amp;&amp; \</span><br><span class="line">chmod <span class="number">700</span> ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">chmod 600 ~/</span>.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在cmd设置代理地址</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="builtin-name">set</span> <span class="attribute">ALL_PROXY</span>=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在cmd尝试连接网页</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">curl -vv http<span class="variable">s:</span>//ip.<span class="keyword">cn</span>/   或者  curl -vv http<span class="variable">s:</span>//www.google.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器尝试连接，连接成功（以上操作随时观察vps详细日志记录）</p>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>vps</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【CTF】simple HTTP method</title>
+    <url>/2020/03/10/%E3%80%90CTF%E3%80%91simpleHTTPmethod/</url>
+    <content><![CDATA[<p>$_GET[] 与 $_POST[] 的区别：</p>
+<p>GET方式会将表单中的数据以URL字符串的形式发送给服务器<br>将test.php以GET方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php?key1=value1&amp;key2=value2" target="_blank" rel="noopener">http://localhost/test.php?key1=value1&amp;key2=value2</a><br>以”?”开头的字符串称为URL字符串，则$_GET[“key1”]=value1、$_GET[“key2”]=value2;</p>
+<p>将test.php以POST方式提交，浏览器地址栏会显示<br><a href="http://localhost/test.php" target="_blank" rel="noopener">http://localhost/test.php</a></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
       </tags>
   </entry>
 </search>
