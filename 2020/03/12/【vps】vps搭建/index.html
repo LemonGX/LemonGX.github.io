@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  214字
+                  194字
                 </span>
               
 
@@ -467,13 +467,13 @@
 <a id="more"></a>
 <ol>
 <li><p>在Xshell输入以下代码，关闭vps防火墙</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~&#x2F;.ssh &amp;&amp; \</span><br><span class="line">curl https:&#x2F;&#x2F;1248.ml&#x2F;my&#x2F;keys&#x2F;Phuker.keys &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys &amp;&amp; \</span><br><span class="line">chmod 700 ~&#x2F;.ssh &amp;&amp; \</span><br><span class="line">chmod 600 ~&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">curl https:/</span><span class="regexp">/1248.ml/my</span><span class="regexp">/keys/</span>Phuker.keys &gt;&gt; ~<span class="regexp">/.ssh/</span>authorized_keys &amp;&amp; \</span><br><span class="line">chmod <span class="number">700</span> ~<span class="regexp">/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="regexp">chmod 600 ~/</span>.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在cmd设置代理地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set ALL_PROXY&#x3D;http:&#x2F;&#x2F;127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">set</span> <span class="attribute">ALL_PROXY</span>=http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在cmd尝试连接网页</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -vv https:&#x2F;&#x2F;ip.cn&#x2F;   或者  curl -vv https:&#x2F;&#x2F;www.google.com&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -vv http<span class="variable">s:</span>//ip.<span class="keyword">cn</span>/   或者  curl -vv http<span class="variable">s:</span>//www.google.<span class="keyword">com</span>/</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在浏览器尝试连接，连接成功（以上操作随时观察vps详细日志记录）</p>
 </li>
@@ -954,7 +954,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">22.6k</span>
+	  <span class="post-count">22.5k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">

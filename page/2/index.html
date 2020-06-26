@@ -1497,7 +1497,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  632字
+                  583字
                 </span>
               
 
@@ -1537,7 +1537,7 @@
         
           <p><strong>md5加密相等绕过</strong></p>
 <p>md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$test&#x3D;$_GET[&#39;test&#39;]; </span><br><span class="line">$test&#x3D;md5($test); </span><br><span class="line"></span><br><span class="line">if($test&#x3D;&#x3D;&#39;0&#39;) &#123; </span><br><span class="line">        print &#39;You passed stage 1.&lt;br &#x2F;&gt;&#39;;</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">        print &quot;Game over at stage 1.&quot;; </span><br><span class="line">        exit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$test</span>=<span class="variable">$_GET</span>[<span class="string">'test'</span>]; </span><br><span class="line"><span class="variable">$test</span>=md5(<span class="variable">$test</span>); </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$test</span>==<span class="string">'0'</span>) &#123; </span><br><span class="line">        print <span class="string">'You passed stage 1.&lt;br /&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">        print <span class="string">"Game over at stage 1."</span>; </span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/#more" rel="contents">
@@ -1886,7 +1886,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  214字
+                  194字
                 </span>
               
 
@@ -2583,7 +2583,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">22.6k</span>
+	  <span class="post-count">22.5k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
