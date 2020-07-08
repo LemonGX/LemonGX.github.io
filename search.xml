@@ -72,6 +72,26 @@
       </tags>
   </entry>
   <entry>
+    <title>【测试题】对称加密测试题</title>
+    <url>/2020/07/08/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">请输入密码</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="1c85ffbe16ec5a37611eecf4cf92efd1f830dfcafc2c8a0b155182a28c5ab42c">71b325dce680c4c63edae8201ec9a80a9177dcc0568132ef5d46a8aac14ca052e65e0cb2d11f083bee18d7e488d616f36aeeb7284fee2d52ced863d33db98e0dae7659d9214b77473c5a7515d30e00c17f6528206931e2cb806630124a295fd3bf93de98c7d6f7526b32ab18cf1faa7b17fbedaba0ca5d849217682295d027f0be0b96368cb98ef901c0846ec7cf5ee4f2174b353e2ff6560084f8a4dfdb91e05ec822f82589c00f37c0f11c1b76627e88ff75a03b5f74826698e16c651cf796</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【DanBoneh】Collision Resistance</title>
     <url>/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/</url>
     <content><![CDATA[<h1><span id="introduction">Introduction</span></h1><h2><span id="抗碰撞的哈希函数">抗碰撞的哈希函数</span></h2><p><strong>HMAC</strong>：基于<u>抗碰撞的哈希函数</u>构建的。</p>
