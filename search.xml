@@ -74,15 +74,15 @@
   <entry>
     <title>【测试题】对称加密测试题</title>
     <url>/2020/07/08/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<h1><span id="otp-和-stream-ciphers测试题">otp 和 stream ciphers测试题</span></h1>
-
-	<div class="row">
-    <embed src="otp和streamciphers测试题.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-
-]]></content>
+    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">请输入密码</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="f7d0c0b7009d46c82fd761637497728823895610ca11a764980b73169b4cbfbe">71b325dce680c4c63edae8201ec9a80a9177dcc0568132ef5d46a8aac14ca052e65e0cb2d11f083bee18d7e488d616f36aeeb7284fee2d52ced863d33db98e0dae7659d9214b77473c5a7515d30e00c17f6528206931e2cb806630124a295fd3bf93de98c7d6f7526b32ab18cf1faa7b17fbedaba0ca5d849217682295d027f012f4f336f311637b6bff94fb6ae9a6f8f75ad4a835e76459059d8c25237d21859818f48be656ab4bc033ff302d480af4b8eeab2938dfe01c757f2221edd23ded62830fc0ab258b1b2fe189c6a40a1e89f9d3dcbb28d0c486cd952c942d56630b</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
