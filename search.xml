@@ -111,7 +111,14 @@
 <img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/EME.PNG" class title="EME">
 <p>如果底层分组密码 E 是个安全的 PRP ，这个 EME 机制在这个大分组上是安全的 PRP 。这个机制的好处是，他是可并行的。事实上，EME 可能比 SIV 慢很多，PRP 机制擅长处理短明文信息，而 SIV 擅长处理长信息的加密。</p>
 <p><strong>如果我们想对于这个基于 PRP 的机制加上完整性，怎么办？</strong></p>
-]]></content>
+<p>取明文信息，在信息后面附一堆 0 ，然后应用 PRP 给出密文。</p>
+<p>解密时，看获得的明文的这些低位如果它们不等于 0 ，就拒绝这个明文；如果等于 0 ，就输出有效信息。</p>
+<img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8EPRP%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AE%A4%E8%AF%81%E5%8A%A0%E5%AF%86.PNG" class title="基于PRP的确定性认证加密">
+<p>如果附了 n 个 0 ，你需要 1/$2_n$ 是可忽略的，如果是这样，这个直接基于 PRP 的加密提供了确定性的认证加密，为什么呢？我们已经论证了 CPA 安全，只需论证它提供了密文完整性。</p>
+<p>在这个密文游戏里，输入空间是明文空间和 n 位 0 ，攻击者会提交 q 个明文信息，然后收到了 q 个他选择的点联结上 n 位后对应的 PRP 的值，对于随机置换来说，他会看到，这个置换在他选的 q 个点的值，在这个密文完整性游戏中，攻击者的目标是产生一些与他之前获得的密文都不同的新的密文，这些新密文可以顺利解密，顺利解密的意思是，当我们对密文 C 应用逆置换后，C 的最低 n 位最好都是 0 ，这个发生的可能性有多大呢？最多是 1/$2_n$ 。因此，攻击者以可忽略的概率赢得这场游戏。</p>
+<img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AF%86%E6%96%87%E5%AE%8C%E6%95%B4%E6%80%A7%E6%B8%B8%E6%88%8F.PNG" class title="密文完整性游戏">
+<h1><span id="tweakable-encryption">Tweakable encryption</span></h1><p>微调加密。</p>
+<h2><span id="硬盘加密">硬盘加密</span></h2>]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>

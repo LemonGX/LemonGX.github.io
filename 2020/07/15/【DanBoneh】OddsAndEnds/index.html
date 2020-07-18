@@ -110,8 +110,10 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9A%8F%E6%9C%BA%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84SIV%E8%A7%A3%E5%AF%86%E8%BF%87%E7%A8%8B.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BD%BF%E7%94%A8PRP%E6%9E%84%E5%BB%BA%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84CPA%E5%AE%89%E5%85%A8.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/EME.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8EPRP%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AE%A4%E8%AF%81%E5%8A%A0%E5%AF%86.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AF%86%E6%96%87%E5%AE%8C%E6%95%B4%E6%80%A7%E6%B8%B8%E6%88%8F.PNG">
 <meta property="article:published_time" content="2020-07-15T10:26:18.000Z">
-<meta property="article:modified_time" content="2020-07-18T02:30:25.757Z">
+<meta property="article:modified_time" content="2020-07-18T03:03:01.196Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
@@ -381,7 +383,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-18T10:30:25+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-18T11:03:01+08:00">
                 2020-07-18
               </time>
             
@@ -452,7 +454,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6.4k字
+                  6.7k字
                 </span>
               
 
@@ -468,7 +470,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  22分钟
+                  23分钟
                 </span>
               
             </div>
@@ -576,7 +578,14 @@
 <img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/EME.PNG" class title="EME">
 <p>如果底层分组密码 E 是个安全的 PRP ，这个 EME 机制在这个大分组上是安全的 PRP 。这个机制的好处是，他是可并行的。事实上，EME 可能比 SIV 慢很多，PRP 机制擅长处理短明文信息，而 SIV 擅长处理长信息的加密。</p>
 <p><strong>如果我们想对于这个基于 PRP 的机制加上完整性，怎么办？</strong></p>
-
+<p>取明文信息，在信息后面附一堆 0 ，然后应用 PRP 给出密文。</p>
+<p>解密时，看获得的明文的这些低位如果它们不等于 0 ，就拒绝这个明文；如果等于 0 ，就输出有效信息。</p>
+<img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8EPRP%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AE%A4%E8%AF%81%E5%8A%A0%E5%AF%86.PNG" class title="基于PRP的确定性认证加密">
+<p>如果附了 n 个 0 ，你需要 1/$2_n$ 是可忽略的，如果是这样，这个直接基于 PRP 的加密提供了确定性的认证加密，为什么呢？我们已经论证了 CPA 安全，只需论证它提供了密文完整性。</p>
+<p>在这个密文游戏里，输入空间是明文空间和 n 位 0 ，攻击者会提交 q 个明文信息，然后收到了 q 个他选择的点联结上 n 位后对应的 PRP 的值，对于随机置换来说，他会看到，这个置换在他选的 q 个点的值，在这个密文完整性游戏中，攻击者的目标是产生一些与他之前获得的密文都不同的新的密文，这些新密文可以顺利解密，顺利解密的意思是，当我们对密文 C 应用逆置换后，C 的最低 n 位最好都是 0 ，这个发生的可能性有多大呢？最多是 1/$2_n$ 。因此，攻击者以可忽略的概率赢得这场游戏。</p>
+<img src="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AF%86%E6%96%87%E5%AE%8C%E6%95%B4%E6%80%A7%E6%B8%B8%E6%88%8F.PNG" class title="密文完整性游戏">
+<h1><span id="tweakable-encryption">Tweakable encryption</span></h1><p>微调加密。</p>
+<h2><span id="硬盘加密">硬盘加密</span></h2>
       
     </div>
     
@@ -739,12 +748,6 @@
 
           
           
-            <div class="cc-license motion-element" itemprop="license">
-              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
-                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-              </a>
-            </div>
-          
 
           
           
@@ -764,7 +767,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Key Derivation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">从一个密钥推出多个密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">非均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">HKDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">基于密码的 KDF（PBKDF&#x2F;从密码中提取密钥）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Deterministic Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">查找加密数据库的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">CPA（选择明文攻击）的游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.4.</span> <span class="nav-text">确定性的CPA安全游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.5.</span> <span class="nav-text">带固定 IV 的 CBC 不是确定的 CPA 安全的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Deterministic Encryption Constructions: SIV and wide PRP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">确定性 CPA 安全的机制 1：SIV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">确定性 CPA 安全的机制 2：just use a PRP</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Key Derivation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">从一个密钥推出多个密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">非均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">HKDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">基于密码的 KDF（PBKDF&#x2F;从密码中提取密钥）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Deterministic Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">查找加密数据库的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">CPA（选择明文攻击）的游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.4.</span> <span class="nav-text">确定性的CPA安全游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.5.</span> <span class="nav-text">带固定 IV 的 CBC 不是确定的 CPA 安全的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Deterministic Encryption Constructions: SIV and wide PRP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">确定性 CPA 安全的机制 1：SIV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">确定性 CPA 安全的机制 2：just use a PRP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Tweakable encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">硬盘加密</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1082,7 +1085,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">44k</span>
+	  <span class="post-count">44.3k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
