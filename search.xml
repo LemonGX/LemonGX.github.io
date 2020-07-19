@@ -22,7 +22,7 @@
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】BasicKeyExchange</title>
+    <title>【DanBoneh】Basic Key Exchange</title>
     <url>/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</url>
     <content><![CDATA[<h1><span id="trusted-3rd-parties">Trusted 3^rd parties</span></h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>
 <a id="more"></a>
