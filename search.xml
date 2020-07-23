@@ -22,6 +22,43 @@
       </tags>
   </entry>
   <entry>
+    <title>【DanBoneh】Number Theory</title>
+    <url>/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/</url>
+    <content><![CDATA[<h1><span id="notation">Notation</span></h1><p>N 表示正整数，p 表示正质数。</p>
+<p>$Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。</p>
+<a id="more"></a>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG" class title="Z_N">
+<p>所有关于加法和乘法的运算法则，在 $Z_N$ 中也同样适用。</p>
+<h2><span id="最大公约数-gcd">最大公约数 gcd</span></h2><p>假设给你两个整数 x 和 y ，我们说 x 和 y 的 gcd 是它们的最大共有因数，即 最大的可以同时整除 x 和 y 的整数。</p>
+<p>如果给你两个数 x 和 y ，总是存在另外两个整数 a  和 b ，使得 ab + by 是 x 和 y 的 gcd 。gcd(x,y) 是 x 和 y 使用整数 a 和 b 的一个线性组合，根据整数模 N 乘法群中逆元的存在性，可知 a 和 b 存在但不唯一，有一个简单有效的算法可以找到这些整数 a 和 b，这个算法被称为扩展的欧几里德算法，能在 x 和 y 的对数的平方的时间里找到 a 和 b 。</p>
+<p>如果 gcd(x,y)=1 ，那么，x 和 y 是互质的。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0.PNG" class title="最大公约数">
+<h2><span id="模逆">模逆</span></h2><p>模逆：数和它的逆的乘法结果等于单位元 1 。即，2 的逆是 1/2 。</p>
+<p><strong>当我们工作在模 N 上时，逆是什么？</strong></p>
+<p>$Z_N$ 中的一个元素 x 的逆，就是 $Z_N$ 中的另一元素 y ，使得 xy 等于 $Z_N$ 中的 1 。换句话说， xy =1 in $Z_N$ 。y 记为 x^(-1) ，如果 y 存在，事实上它是唯一的。</p>
+<p>N 是一个奇数，求 2 在 $Z_N$ 上的逆？(N+1)/2 。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%A8%A1%E9%80%86.PNG" class title="模逆">
+<p><strong>$Z_N$ 中哪些元素有逆？</strong></p>
+<p>引理：<strong>如果 $Z_N$ 中的一个元素 x 有逆，当且仅当 x 与 N 互质。</strong></p>
+<p>证明：</p>
+<p>假设 gcd(x,N)=1，那么 x 与 N 互质，根据 gcd 的性质，存在整数 a 和 b ，满足 ax+bN 等于 x 和 N 的 gcd ，也就是 1 ，即 ax+bN=1，两边取模 N ，意思是在 $Z_N$ 中，ax=1，只要我们对这个方程取模 N ，bN 这一项会被消除，因为 bN 被 N 整除，因此是 0 模 N 。</p>
+<p>事实上，x 在 $Z_N$ 中的逆就是 a ，所以因为 x 与 N 互质，可以证明 x 可逆，并且构造出了 x^(-1) mod N 。</p>
+<p>如果 gcd&gt;1 会怎样？那么我们想证明没有逆。</p>
+<p>如果说 a 正好是 x 的模 N 逆，我们看 ax ，ax=1 mod N ，但如果 gcd(x,N)&gt;1 ，那么 gcd(ax,N)&gt;1 ，如果 gcd(ax,N)&gt;1 ，那么 ax 不可能等于 1，所以 ax 必须也大于 1 ，因此 a 不可能是 x 的模 N 逆。</p>
+<p>这就证明了，事实上，当 gcd&gt;1，x 不可能有逆，因为没有 a ，使得 ax=1 mod N 。</p>
+<p>举个例子，假设 gcd(x,N)=2，我们声称因此 x 不是模 N 逆的，为什么？对于所有的 a ，我们知道 ax 一定是偶数，原因是，2 整除 x ，2 整除 N ，这意味着不可能有 ax=1 mod N ，特别地，不可能有 ax=bx+1 ，因为，2整除 N ，bN 是偶数，bN+1 是奇数，偶数不可能等于奇数，所以对于任意的整数 b ，ax=bN+1 都不可能成立。特别地，这意味着 a 不可能是 x 的逆，因为 ax 不可能是 1 mod N ，所以 x 不是模 N 逆的。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%BC%95%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="引理的证明">
+<p>记 $Z_N^*$ 为 $Z_N$ 中所有可逆元素。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>DanBoneh密码学</tag>
+        <tag>密码学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【DanBoneh】Basic Key Exchange</title>
     <url>/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</url>
     <content><![CDATA[<h1><span id="trusted-3rd-parties">Trusted 3^rd parties</span></h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>

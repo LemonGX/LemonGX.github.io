@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="密码学," />
+  <meta name="keywords" content="DanBoneh密码学,密码学," />
 
 
 
@@ -86,32 +86,23 @@
 
 
 
-<meta name="description" content="分组密码：见《DanBoneh-Block Ciphers》分组密码。 https:&#x2F;&#x2F;lemongx.github.io&#x2F;2020&#x2F;03&#x2F;27&#x2F;DanBoneh-BlockCiphers&#x2F; 设计分组密码的两种基本技术：为了抵抗攻击者对密码系统的统计分析，香农提出混乱和扩散。">
+<meta name="description" content="NotationN 表示正整数，p 表示正质数。 $Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【pptx】对称密码2">
-<meta property="og:url" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/index.html">
+<meta property="og:title" content="【DanBoneh】Number Theory">
+<meta property="og:url" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="分组密码：见《DanBoneh-Block Ciphers》分组密码。 https:&#x2F;&#x2F;lemongx.github.io&#x2F;2020&#x2F;03&#x2F;27&#x2F;DanBoneh-BlockCiphers&#x2F; 设计分组密码的两种基本技术：为了抵抗攻击者对密码系统的统计分析，香农提出混乱和扩散。">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG">
-<meta property="og:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG">
-<meta property="article:published_time" content="2020-03-30T06:53:18.000Z">
-<meta property="article:modified_time" content="2020-06-23T08:54:21.204Z">
+<meta property="og:description" content="NotationN 表示正整数，p 表示正质数。 $Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%A8%A1%E9%80%86.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%BC%95%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
+<meta property="article:published_time" content="2020-07-23T00:49:06.000Z">
+<meta property="article:modified_time" content="2020-07-23T09:06:27.132Z">
 <meta property="article:author" content="lucky_Leo">
+<meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG">
 
 
 
@@ -141,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/30/【pptx】对称密码2/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/07/23/【DanBoneh】NumberTheory/"/>
 
 
 
 
 
-  <title>【pptx】对称密码2 | 鳕鱼堡er</title>
+  <title>【DanBoneh】Number Theory | 鳕鱼堡er</title>
   
 
 
@@ -328,7 +319,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lucky_Leo">
@@ -345,7 +336,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【pptx】对称密码2</h1>
+          <h1 class="post-title" itemprop="name headline">【DanBoneh】Number Theory</h1>
         
 
         <div class="post-meta">
@@ -360,8 +351,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-30T14:53:18+08:00">
-                2020-03-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-23T08:49:06+08:00">
+                2020-07-23
               </time>
             
 
@@ -376,8 +367,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T16:54:21+08:00">
-                2020-06-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-23T17:06:27+08:00">
+                2020-07-23
               </time>
             
           </span>
@@ -413,8 +404,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/" itemprop="commentCount"></span>
+                <a href="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -422,7 +413,7 @@
 
           
           
-             <span id="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/" class="leancloud_visitors" data-flag-title="【pptx】对称密码2">
+             <span id="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" class="leancloud_visitors" data-flag-title="【DanBoneh】Number Theory">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -447,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  893字
+                  861字
                 </span>
               
 
@@ -484,75 +475,32 @@
       
 
       
-        <p><strong>分组密码</strong>：见《DanBoneh-Block Ciphers》分组密码。</p>
-<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
-<p>设计分组密码的两种基本技术：为了<u>抵抗攻击者对密码系统的统计分析</u>，香农提出<strong>混乱</strong>和<strong>扩散</strong>。</p>
+        <h1><span id="notation">Notation</span></h1><p>N 表示正整数，p 表示正质数。</p>
+<p>$Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。</p>
 <a id="more"></a>
-<p><strong>混乱</strong></p>
-<ol>
-<li>目的：使明文和密文之间、密文和密文之间的相关统计特性极小化，从而使攻击者无法找到密钥。</li>
-<li>方法：代换。</li>
-</ol>
-<p><strong>扩散</strong></p>
-<ol>
-<li>目的：将明文及密钥的影响尽可能迅速地散布到较多个密文比特中。</li>
-<li>方法：置换。</li>
-</ol>
-<p>目前，绝大多数的分组密码都是通过<strong>迭代技术</strong>构造的。轮密钥（子密钥）：$k_1$~$k_d$，轮函数：R($k_i$,..)。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG" class title="分组密码迭代">
-<h5><span id="des">DES</span></h5><p>核心思想：<strong>Feistel网络</strong>，是使用<u>任意函数</u>构造<u>可逆函数</u>（分组密码）的一般方法。d 个函数无需可逆，构造出的Feistel网络仍然可逆。</p>
-<p>Feistel网络</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG" class title="Feistel网络">
-<p>Feistel网络求逆</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG" class title="Feistel网络求逆">
-<p>DES结构</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG" class title="DES结构">
-<p>Feistel网络一轮的结构中，乘积函数 F 有三个关键函数 E-box、S-box、P-box。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG" class title="DES一轮结构">
-<p>DES安全性：密钥空间只有 $2_56$ ≈ $10_17$，56 bits不足以抵抗<u>穷举攻击</u>。DES 依靠 S-box 实现非线性变换，但 NSA 被指责在 S-box 设计上隐藏了“陷门”。</p>
-<p><strong>PRF and PRP</strong>：见《DanBoneh-Block Ciphers》PRF、PRP。</p>
-<p><a href="https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/27/DanBoneh-BlockCiphers/</a></p>
-<p><strong>PRF开关引理</strong></p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG" class title="PRF开关引理">
-<p><strong>分组密码工作模式</strong></p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG" class title="分组密码工作模式">
-<h5><span id="ecb模式">ECB模式</span></h5><p>对于包含两个或两个以上分组的明文，ECB 不是语义安全的。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="ECB语义安全证明">
-<p>优点</p>
-<ol>
-<li>简单、高速。</li>
-<li>无差错传播：单个密文分组在传输或存储时出现错误，只会影响该分组的解密，不会影响到其他分组。</li>
-</ol>
-<p>缺点：安全性差，暴露明文数据的格式和统计特征</p>
-<p><strong>确定的计数器模式</strong></p>
-<p>F 是安全的 PRF，与真随机函数不可区分，可以构造一个安全的 PRG。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG" class title="确定的计数器模式">
-<h5><span id="cpa">CPA</span></h5><p>CPA安全性：<u>选择明文攻击下</u>的<u>语义安全性</u>（密钥可以重复使用）。</p>
-<p>对称加密体制不是CPA安全的。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG" class title="对称加密体制">
-<p><strong>随机化加密</strong></p>
-<p>选取随机数和密钥 k 共同加密明文，使得加密相同的明文，输出不同的密文。</p>
-<p>密文比明文长，密文长度 =  明文长度 + “随机比特长度”，“随机比特长度” ≠ 随机比特长度，只是相关。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG" class title="随机化加密">
-<p><strong>nonce-based加密</strong></p>
-<p>nonce：只使用一次的数值，每加密一个明文，就换一个新的。(k，n)不重复使用。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG" class title="nonce-based加密">
-<p>如何选择nonce？</p>
-<ol>
-<li>计数器方式：设置nonce为计数器，使用每次数值加 1 ，如果发送者和接收者保持相同的状态，则nonce无需发送。</li>
-<li>随机数方式：设置nonce为随机数，随机数需与密文一起发送。</li>
-</ol>
-<p>文件加密：随机数方式（加密文件时无需保持状态）</p>
-<p>SSL（按顺序发送）: 计数器方式 （无需向对方发送nonce）</p>
-<p>IP sec（无序发送）: 计数器方式即可, 但发送每个报文时，需附带所用nonce一起发送</p>
-<h5><span id="cbc模式">CBC模式</span></h5><p>密钥可以重复使用，CPA安全的。加密串行，解密可以并行。使用 PRP。</p>
-<p>见《DanBoneh-Using Block Ciphers》CBC。</p>
-<p><a href="https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/" target="_blank" rel="noopener">https://lemongx.github.io/2020/03/28/DanBoneh-UsingBlockCiphers/</a></p>
-<p>差错传播：单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。</p>
-<p>可自同步：只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG" class title="CBC差错传播">
-<h5><span id="ctr模式">CTR模式</span></h5><p>密钥可以重复使用，CPA安全的。加密、解密都可以并行。使用安全的 PRF。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG" class title="CTR的IV选择">
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG" class title="Z_N">
+<p>所有关于加法和乘法的运算法则，在 $Z_N$ 中也同样适用。</p>
+<h2><span id="最大公约数-gcd">最大公约数 gcd</span></h2><p>假设给你两个整数 x 和 y ，我们说 x 和 y 的 gcd 是它们的最大共有因数，即 最大的可以同时整除 x 和 y 的整数。</p>
+<p>如果给你两个数 x 和 y ，总是存在另外两个整数 a  和 b ，使得 ab + by 是 x 和 y 的 gcd 。gcd(x,y) 是 x 和 y 使用整数 a 和 b 的一个线性组合，根据整数模 N 乘法群中逆元的存在性，可知 a 和 b 存在但不唯一，有一个简单有效的算法可以找到这些整数 a 和 b，这个算法被称为扩展的欧几里德算法，能在 x 和 y 的对数的平方的时间里找到 a 和 b 。</p>
+<p>如果 gcd(x,y)=1 ，那么，x 和 y 是互质的。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0.PNG" class title="最大公约数">
+<h2><span id="模逆">模逆</span></h2><p>模逆：数和它的逆的乘法结果等于单位元 1 。即，2 的逆是 1/2 。</p>
+<p><strong>当我们工作在模 N 上时，逆是什么？</strong></p>
+<p>$Z_N$ 中的一个元素 x 的逆，就是 $Z_N$ 中的另一元素 y ，使得 xy 等于 $Z_N$ 中的 1 。换句话说， xy =1 in $Z_N$ 。y 记为 x^(-1) ，如果 y 存在，事实上它是唯一的。</p>
+<p>N 是一个奇数，求 2 在 $Z_N$ 上的逆？(N+1)/2 。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%A8%A1%E9%80%86.PNG" class title="模逆">
+<p><strong>$Z_N$ 中哪些元素有逆？</strong></p>
+<p>引理：<strong>如果 $Z_N$ 中的一个元素 x 有逆，当且仅当 x 与 N 互质。</strong></p>
+<p>证明：</p>
+<p>假设 gcd(x,N)=1，那么 x 与 N 互质，根据 gcd 的性质，存在整数 a 和 b ，满足 ax+bN 等于 x 和 N 的 gcd ，也就是 1 ，即 ax+bN=1，两边取模 N ，意思是在 $Z_N$ 中，ax=1，只要我们对这个方程取模 N ，bN 这一项会被消除，因为 bN 被 N 整除，因此是 0 模 N 。</p>
+<p>事实上，x 在 $Z_N$ 中的逆就是 a ，所以因为 x 与 N 互质，可以证明 x 可逆，并且构造出了 x^(-1) mod N 。</p>
+<p>如果 gcd&gt;1 会怎样？那么我们想证明没有逆。</p>
+<p>如果说 a 正好是 x 的模 N 逆，我们看 ax ，ax=1 mod N ，但如果 gcd(x,N)&gt;1 ，那么 gcd(ax,N)&gt;1 ，如果 gcd(ax,N)&gt;1 ，那么 ax 不可能等于 1，所以 ax 必须也大于 1 ，因此 a 不可能是 x 的模 N 逆。</p>
+<p>这就证明了，事实上，当 gcd&gt;1，x 不可能有逆，因为没有 a ，使得 ax=1 mod N 。</p>
+<p>举个例子，假设 gcd(x,N)=2，我们声称因此 x 不是模 N 逆的，为什么？对于所有的 a ，我们知道 ax 一定是偶数，原因是，2 整除 x ，2 整除 N ，这意味着不可能有 ax=1 mod N ，特别地，不可能有 ax=bx+1 ，因为，2整除 N ，bN 是偶数，bN+1 是奇数，偶数不可能等于奇数，所以对于任意的整数 b ，ax=bN+1 都不可能成立。特别地，这意味着 a 不可能是 x 的逆，因为 ax 不可能是 1 mod N ，所以 x 不是模 N 逆的。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%BC%95%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="引理的证明">
+<p>记 $Z_N^*$ 为 $Z_N$ 中所有可逆元素。</p>
+
       
     </div>
     
@@ -569,6 +517,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
             <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
  密码学</a>
           
@@ -583,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%811/" rel="next" title="【pptx】对称密码1">
-                <i class="fa fa-chevron-left"></i> 【pptx】对称密码1
+              <a href="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" rel="next" title="【DanBoneh】Basic Key Exchange">
+                <i class="fa fa-chevron-left"></i> 【DanBoneh】Basic Key Exchange
               </a>
             
           </div>
@@ -592,10 +543,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/02/%E3%80%90DanBoneh%E3%80%91MessageIntegrity/" rel="prev" title="【DanBoneh】Message Integrity">
-                【DanBoneh】Message Integrity <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -735,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">DES</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">ECB模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">CPA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">CBC模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">CTR模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">最大公约数 gcd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">模逆</span></a></li></ol></li></ol></div>
             
 
           </div>
