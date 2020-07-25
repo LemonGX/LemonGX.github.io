@@ -109,8 +109,10 @@
 <meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%BC%95%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E6%A8%A1p%E7%9A%84%E4%BA%8C%E6%AC%A1%E6%96%B9%E7%A8%8B.PNG">
 <meta property="article:published_time" content="2020-07-23T00:49:06.000Z">
-<meta property="article:modified_time" content="2020-07-24T11:28:47.429Z">
+<meta property="article:modified_time" content="2020-07-25T02:47:31.583Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
@@ -380,8 +382,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-24T19:28:47+08:00">
-                2020-07-24
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-25T10:47:31+08:00">
+                2020-07-25
               </time>
             
           </span>
@@ -451,7 +453,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.6k字
+                  4.1k字
                 </span>
               
 
@@ -467,7 +469,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13分钟
+                  15分钟
                 </span>
               
             </div>
@@ -564,11 +566,20 @@
 <p><strong>如果 p 是一个奇质数，$Z_p$ 中的二次剩余一共有多少个？</strong><u>这个平方函数是 2 到 1 的映射，意味着  $Z_p$ 中有一半的元素在这个映射中没有原像</u>，所以二次剩余的总数是 (p-1)/2+1 ，因为我们知道 $Z_p$ 中的一半元素是二次剩余的，因为平方函数是 2 到 1 的映射，所以映射的像最多有 (p-1)/2 个元素，在 $Z_p^*$ 里有 (p-1)/2 个二次剩余，<u>$Z_p$ 中还有 0 也是二次剩余的</u>，$Z_p$ 中一共有(p-1)/2+1 个二次剩余。</p>
 <p><strong>我们能否对 $Z_p^*$ 里的一个元素 x 判断出 x 是否有平方根呢？</strong></p>
 <p>欧拉提出了一个非常清楚的标准测试这些元素是否是二次剩余。特别地，他说<strong>在 $Z_p$ 中，x 是二次剩余，当且仅当 $x^{(p-1)/2}$=1 mod p</strong> 。</p>
-<p>当我们工作在模 11 下时，可以看到 $x^{(p-1)/2}$ 始终是 1 或 -1 ，在二次剩余1，3，4，5，9上它一定是 1 ；而其它元素不是二次剩余，没有平方根。事实上，工作在模 11 下，如果我们取一个非 0 的数 x ，我们看 $x^{(p-1)/2}$ ，我们可以把它写成 $x^{p-1}$ 的平方根，根据费马小定理，$x^{p-1}$=1 ，$x^{(p-1)/2}$ 就是 1 的平方根，一定是 1 或 -1 。</p>
+<p>当我们工作在模 11 下时，可以看到 $x^{(p-1)/2}$ 始终是 1 或 -1 ，<u>在二次剩余1，3，4，5，9上它一定是 1</u> ；而其它元素不是二次剩余，没有平方根。事实上，工作在模 11 下，如果我们取一个非 0 的数 x ，我们看 $x^{(p-1)/2}$ ，我们可以把它写成 $x^{p-1}$ 的平方根，根据费马小定理，$x^{p-1}$=1 ，$x^{(p-1)/2}$ 就是 1 的平方根，一定是 1 或 -1 。</p>
 <p>$x^{(p-1)/2}$ 这个值有个名字叫<strong>勒让德符号</strong>，<u>$Z_p$ 中所有元素的勒让德符号不是 1 就是 -1 取决于 x 是否是二次剩余的</u>。</p>
 <img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%BC%95%E7%90%86.PNG" class title="欧拉引理">
 <p>如果我们想计算一个二次剩余的平方根，这个引理并没有告诉我们怎么办。</p>
-<h2><span id="计算质数模的平方根">计算质数模的平方根</span></h2><p>分两种情况</p>
+<h2><span id="计算质数模的平方根">计算质数模的平方根</span></h2><p>分两种情况。</p>
+<p><strong>第一种情况</strong>：p=3 (mod 4) 时，非常容易计算平方根，这种情况下，c 的平方根就是 $c^{(p+1)/4}$ ，p=3 (mod 4) 必然有 p+1=0 mod 4 ，意味着 p+1 被 4 整除，因此 (p+1)/4 是一个整数，就允许计算这个幂，给了我们 c 的平方根。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5.PNG" class title="第一种情况">
+<p><strong>解模 p 的二次方程</strong>：假设给你一个二次方程，让你找到 $Z_p$ 中这个二次方程的解，使用如图方法。</p>
+<img src="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E6%A8%A1p%E7%9A%84%E4%BA%8C%E6%AC%A1%E6%96%B9%E7%A8%8B.PNG" class title="解模p的二次方程">
+<p><strong>计算合数模的根</strong></p>
+<p>什么时候模 N 的 e 次方根存在？如果我们知道它存在能否有效地计算它？</p>
+<p>事实上，我们只知道计算合数模的 e 次方根与分解合数一样困难，现在，对于一个普通的数 e 不知道是否是最优的，但我们有的最好的计算模 N 的 e 次方根的算法，需要我们分解这个模，一旦我们分解了这个模，那么实际上每个质数因数的 e 次方根是容易计算的，我们可以组合所有的这些 e 次方根，来得到合数模 N 的 e 次方根。</p>
+<h1><span id="arithmetic-algorithms">Arithmetic algorithms</span></h1><p>如何在计算机里表示大整数？假设我们有一台 64 位机我们想把表示的大数进行分割，32 位一组，然后我们会有 n/32 个组，它们可以表示这个数，我们想把它存储到计算机上</p>
+<p>加法有进位，减法有借位，这些都是线性时间操作，换句话说，如果你想加或者减两个 n 位整数，运行时间与 n 成线性。天然的乘法会花平方时间，1960年 Karatsuba 发现运行时间只需要 $n^{1585}$ ，很常用。实际上可以用大约 n·log(n) 的时间（几乎线性的时间）来计算乘法，它忽略了很大的常数，只有当乘数十分巨大时才实用，实际上用的不多。</p>
 
       
     </div>
@@ -751,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">最大公约数 gcd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">模逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Fermat and Euler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">费马小定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">$Z_p^*$的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">欧拉定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Modular e’th roots</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">简单例子(e与p-1互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">经典例子(e与p-1不互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">计算质数模的平方根</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Notation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">最大公约数 gcd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">模逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Fermat and Euler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">费马小定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">$Z_p^*$的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">欧拉定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Modular e’th roots</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">简单例子(e与p-1互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">经典例子(e与p-1不互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text">计算质数模的平方根</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">Arithmetic algorithms</span></a></li></ol></div>
             
 
           </div>
@@ -1069,7 +1080,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">57k</span>
+	  <span class="post-count">57.5k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
