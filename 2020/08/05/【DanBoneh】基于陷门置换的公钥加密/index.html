@@ -86,18 +86,23 @@
 
 
 
-<meta name="description" content="公钥加密机制的定义与安全公钥加密 安全的公钥加密">
+<meta name="description" content="公钥加密系统定义公钥加密机制的应用：会话建立、密钥交换等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【DanBoneh】基于陷门置换的公钥加密">
 <meta property="og:url" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
-<meta property="og:description" content="公钥加密机制的定义与安全公钥加密 安全的公钥加密">
+<meta property="og:description" content="公钥加密系统定义公钥加密机制的应用：会话建立、密钥交换等。">
+<meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/CCA%E5%AE%89%E5%85%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95.PNG">
 <meta property="article:published_time" content="2020-08-05T05:35:35.000Z">
-<meta property="article:modified_time" content="2020-08-05T05:39:54.923Z">
+<meta property="article:modified_time" content="2020-08-05T10:00:04.896Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG">
 
 
 
@@ -362,7 +367,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-05T13:39:54+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-08-05T18:00:04+08:00">
                 2020-08-05
               </time>
             
@@ -433,7 +438,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  23字
+                  1.4k字
                 </span>
               
 
@@ -449,7 +454,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1分钟
+                  4分钟
                 </span>
               
             </div>
@@ -470,9 +475,31 @@
       
 
       
-        <h1><span id="公钥加密机制的定义与安全">公钥加密机制的定义与安全</span></h1><p>公钥加密</p>
-<p>安全的公钥加密</p>
-
+        <h1><span id="公钥加密系统">公钥加密系统</span></h1><h2><span id="定义">定义</span></h2><p>公钥加密机制的应用：会话建立、密钥交换等。</p>
+<a id="more"></a>
+<p>相关链接：<a href="https://lemongx.github.io/2020/07/19/[DanBoneh]BasicKeyExchange/" target="_blank" rel="noopener">https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</a></p>
+<p><strong>仅对窃听攻击安全的密钥交换协议的工作过程</strong>：Alice 会产生一个公钥、私钥对，把公钥发给 Bob ，Bob 产生一个随机 x ，x 被作为共享密钥，Bob 将 x 使用 Alice 的公钥加密后发送给 Alice ，Alice 解密还原 x 。他们可以使用共享密钥 x 进行通信。攻击者只能看到公钥和使用公钥加密后的 x ，根据这些他不应该能获得任何关于 x 的信息。</p>
+<p>我们将更加精确的定义不能学到任何关于 x 的信息是什么意思。</p>
+<h2><span id="对抗窃听的安全性">对抗窃听的安全性</span></h2><p>见 《4.2 公钥加密系统的安全游戏》</p>
+<p><a href="https://lemongx.github.io/2020/07/19/[DanBoneh]BasicKeyExchange/" target="_blank" rel="noopener">https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</a></p>
+<p>当讨论<strong>对称密码</strong>的窃听攻击时，我们区分了两种情况，①密钥只使用一次，②密钥使用多次。</p>
+<p>对于<strong>公钥加密</strong>，如果系统的一次性密钥是安全的，那么它对多次密钥也是安全的。我们不必赋予攻击者请求加密他选择的明文的能力，因为他可以自己创建这些加密。公钥私钥对 天生就是用来加密多个信息的。</p>
+<h2><span id="对抗主动攻击的安全性">对抗主动攻击的安全性</span></h2><p>看一个电子邮件的例子，Bob 想发送邮件给他的朋友 Caroline ，Caroline 正好在 Gmail 上有账号，过程如下：这份加密的邮件发送给 Gmail 服务器，Gmail 服务器解密邮件查看接收方，如果接收方是 Caroline ，它会把这份邮件转发给 Caroline ，如果接收方是攻击者，它会把邮件转发给攻击者。</p>
+<p>假设 Bob 加密了邮件，使用的系统允许攻击者篡改密文，且不会被检测到。想象这份邮件是使用计数器模式加密的，当攻击者截获了这个邮件，他可以改变接收方，使得接收方变成 attacker ，对于计数器模式这是非常容易做到的，攻击者知道邮件是发往 Caroline 的，他只对邮件内容感兴趣，所以他可以修改接收方，这样当服务器接收到邮件时，他会解密，看到接收方是攻击者，就把邮件转发给了攻击者。这是一个经典的主动攻击的例子，注意，攻击者只能解密接收方是攻击者的邮件。</p>
+<p>我们的目标是设计安全的公钥系统，即使攻击者可以篡改密文，还可以解密特定的密文。攻击者的目标是获得明文内容。</p>
+<img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG" class title="经典的主动攻击">
+<h2><span id="选择密文安全">选择密文安全</span></h2><p>事实上，这是公钥加密的标准安全性观念。</p>
+<p>我们有一个加密机制 (G,E,D) ，我们定义在明文空间和密文空间 (M,C) 上，定义两个实验，实验0 和 实验1 ，b 表示挑战者是实现 实验0 或是 实验1 。</p>
+<p>挑战者开始时生成一对公钥和私钥，然后把公钥给攻击者，现在攻击者可以请求解密很多密文，攻击者提交密文 $c_1$ ，获得了密文 $c_1$ 的解密 $m_1$ ，攻击者可以一次次这么做，然后说游戏结束。现在，他提交两个等长度的明文 $m_0$ 和 $m_1$ ，他会收到<u>挑战密文 c</u> ，也就是 $m_0$ 或 $m_1$ 的加密，现在攻击者可以继续提交这些密文询问，他可以继续请求解密，那么他提交了一个密文并获得了该密文的解密。</p>
+<p>注意，如果攻击者可以提交他选择的任意密文，那么他可以破解这个挑战，他只需提交挑战密文 c 作为解密请求，然后他被告知他在挑战阶段获得的是 $m_0$ 还是 $m_1$ 的加密结果，因为我们有这么一个限制，攻击者可以提交任何他选择的密文，<strong>除了挑战密文</strong>，那么攻击者可以询问他选择的任何密文的解密，除了挑战密文。即使攻击者有所有这些的解密，他依然不能分辨出他得到的是 $m_0$ 还是 $m_1$ 的加密。</p>
+<img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="选择密文安全游戏">
+<p>通常，攻击者无法判断密文来自 $m_0$ 还是 $m_1$ ，我们说这个选择密文 CCA 安全的。</p>
+<img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/CCA%E5%AE%89%E5%85%A8.PNG" class title="CCA安全">
+<h2><span id="选择密文安全的攻击方法">选择密文安全的攻击方法</span></h2><p>假设使用的加密系统满足 给定信息的加密，攻击者可以改变接收方，那么我们可以这样赢得游戏。</p>
+<p>①攻击者得到了公钥，发出两个等长度的明文，第一个明文内容是 0 ，第二个明文内容是 1 ，两个明文都给 Alice ，Alice 回复后，攻击者会得到挑战密文 c 。</p>
+<p>②攻击者修改接收方，返回给 Alice 一个密文 c’ ，c’ 是 ”给 Charlie 的明文，挑战密文的内容 b“ 的加密结果，现在因为明文不同，我们知道密文也不同，c’ 一定和挑战密文 c 不一样，根据 CCA 游戏的定义，挑战者必须解密任何不同于挑战密文的密文，挑战者解密后给攻击者解密结果 m’ ，他给了攻击者 b ，攻击者可以输出挑战结果 b ，他以优势 1 赢得了游戏。</p>
+<img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95.PNG" class title="选择密文安全的攻击方法">
+<h1><span id="公钥加密的构建">公钥加密的构建</span></h1><h2><span id="陷门函数">陷门函数</span></h2>
       
     </div>
     
@@ -654,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">公钥加密机制的定义与安全</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">公钥加密系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">对抗窃听的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">对抗主动攻击的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">选择密文安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">选择密文安全的攻击方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">公钥加密的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">陷门函数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -972,7 +999,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">59.7k</span>
+	  <span class="post-count">61.1k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
