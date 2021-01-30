@@ -22,28 +22,27 @@
       </tags>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/2021/01/30/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p>啊可是大家彼此</p>
-<h2 id="二级"><a href="#二级" class="headerlink" title="二级"></a>二级</h2><p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<h2 id="二级2"><a href="#二级2" class="headerlink" title="二级2"></a>二级2</h2><p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<p>空间是贝多芬</p>
-<h1 id="一级2"><a href="#一级2" class="headerlink" title="一级2"></a>一级2</h1>]]></content>
+    <title>【hexo】next踩坑TOC锚点undefined问题</title>
+    <url>/2021/01/30/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91TOC%E9%94%9A%E7%82%B9undefined%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>hexo 搭建博客，文章的导航栏不能正常使用：文章左侧导航栏可以正常生成，但是在点击导航栏后并不能跳转到文章的对应位置，查看网页源代码，Console 报错如下：</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">Uncaught TypeError: Cannot <span class="keyword">read</span> <span class="keyword">property</span><span class="title"> </span>'top' of undefined</span><br></pre></td></tr></table></figure>
+<p><strong>报错原因</strong></p>
+<p> Markdown 的插件并未渲染 heading 的 id ，所以导致锚点失效。</p>
+<p>原来会被编译成 <code>&lt;h2 id=&quot;title&quot;&gt;title&lt;/h2&gt;</code></p>
+<p>而现在会被编译成 <code>&lt;h2&gt;&lt;span id=&quot;title&quot;&gt;title&lt;/span&gt;&lt;/h2&gt;</code></p>
+<p><strong>解决方案</strong></p>
+<p>进入你项目根目录的 <code>node_modules/hexo-toc/lib/filter.js</code> 中，把28行~31行修改为：</p>
+<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="variable">$title</span>.attr(<span class="string">'id'</span>,<span class="built_in"> id</span>);</span><br></pre></td></tr></table></figure>
+<p>即，仅保留28行，其他的内容注释掉。</p>
+<p>问题得以解决。</p>
+<p>[]: <a href="https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/</a>    “参考链接”</p>
+]]></content>
+      <categories>
+        <category>hexo踩坑记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>【Crypto】EIGamal</title>
