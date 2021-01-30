@@ -22,6 +22,46 @@
       </tags>
   </entry>
   <entry>
+    <title>【Crypto】EIGamal</title>
+    <url>/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/</url>
+    <content><![CDATA[<h1><span id="eigamal公钥密码体制">EIGamal公钥密码体制</span></h1><p>EIGamal 密码体制基于离散对数问题。</p>
+<a id="more"></a>
+<h2><span id="同余定理">同余定理</span></h2><p>给定一个正整数m，如果两个整数a和b满足（a-b）能够被m整除，即（a-b）/m得到一个整数，那么就称整数a与b对模m同余，记作<code>a ≡ b(mod m)</code>。</p>
+<p>两个整数a、b，若它们除以整数m所得的余数相等，则称a与b对模m同余或a同余于b模m，记作<code>a ≡ b(mod m)</code>。</p>
+<h3><span id="同余性质">同余性质</span></h3><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%90%8C%E4%BD%99%E6%80%A7%E8%B4%A8.JPG" class title="同余性质">
+<h2><span id="离散对数">离散对数</span></h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0.PNG" class title="离散对数">
+<h2><span id="密码体制">密码体制</span></h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6.PNG" class title="密码体制">
+<p>！！！开心O(∩_∩)O，了解 EIGamal 公钥密码体制后，《基于配对的密码学》P47 第一个公式迎刃而解</p>
+<h1><span id="eigamal签名方案">EIGamal签名方案</span></h1><h2><span id="签名方案">签名方案</span></h2><h2><span id="签名方案的安全性">签名方案的安全性</span></h2><p>$x^{-1}$ $Z_N$</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>密码学原理与实践</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【记录】实验室学习(研一寒假篇)</title>
+    <url>/2021/01/30/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%AD%A6%E4%B9%A0-%E7%A0%94%E4%B8%80%E5%AF%92%E5%81%87%E7%AF%87/</url>
+    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">请输入密码</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="cce3bef7df69476c831bb8e227ca14d0d3784d29ace87516c6f06e08d4310708">e296525cf6912b489988d79073b8a09e723c4164de3a4014578448e699c1eb76fbcb02d284ee0fd1219d0343ae821a6abc64cf4d5df31ac8338e03e30ed9675e5f8b7da6ee80beb5343a903e7e67450be92448b0a70dd44de8fe85c0cfd7997ac467df216792ce8221a5654c87a58116228f9c757817769920c7b9e601e0268fe6ef65ff9a7f09f352339304e185eeb19f4e7dc25c1ba50baf94429a286ccb28c0d25846f36ebe1965983e4afd03ef82dda7805e7b4140bdc3fffef7694df7af4d625c06252fc17d86588ecac5a4401bedf3f025845543c0b8619cb23aa39cee0a280216ab74d14f6c9d0be8ece6578bf570b654d8c913f3fd80597a33ae0a98516173cf261479e2198848ec9f8cc6de82468be4b0025caa145573f62797dac1e7f4bf0834baecac8d0c1452893681e07062510b14b2ac22499c22ae768fcdca3095b4cde3c68748ca0cecba6dc8f1c4a4410744f8173d2a966f579c2c80dc791822b9a6ed699ab20e39251ae464a3b3b885d124104bf0ef4285fd43c9eb96ef93857d8a7d7ee5d8e6f7a7ebe87c7eee8a1de8e2f034c4dd9036fab46040ac74d3ed971ef70fdad7ada1e32c7f8c6116a517880e0ef53d27a3d0e4e6544d6967fe7112b4f437431fea8080624e9a3dd067d7304cbb8756a387fbec70c5c636da679b86ac823373531d9160a5ca06313a6d387b84cc9791d38760202f0b4b0f72320e10bfe70475d08b7ac6b1fb13398937fcb351e67837528e3ee8748bcbd944963e02ab2f53a601f7c14853b9bee365374f33366a0fbf4f1e114ca0659000495547e7584b24b453a6129508983cc4d54041c021f8d5b403e4cebcf10892e429427ae0904e9d4d1b9380abe3f84a44d1adcda8f3d648b377d1db1db4c034ae89fc34612d7ee89720adac2352d6ad805942020b7b3d12efa7b354c5f686cbbce296c96210bf9a95a49dc877f0dd17f70e095c06a66c44648207e874b2fbfd477807d11d53044da407d807b573126f1d3a6cbe387dfd9cc6f755990d8e04087aa2474fa47d5f640e383492d1703ddc8c244b6fef4d516e517853dcf2910f5d72b999f11d139eb89c96cb9bbac5c2e818d01b5465231cbebe5c7c762101166382d95c7b1251bb703cd1efad3c96ffa934e96f87fa7ef5300ad0cb38a4f2bfcb9b089220f1e88891f460f132a068bf4d0ac1bde4f1a7f86c2347dde365fb89ed6b67072c1c3ac6a47e4bb7760b3ca77afcd701fab1c35905dfac6eff25bad26140879b93ef26c7dd716702820c943969dd387afa0f8ac9da02ccb69f8ac03305354ebf6f42b5a56630f9709ca48e21249cd0a3982d99f6521d621b47ee22e9d0e94f9b18ccc0bdfe68242f8aaef130abb005d7ac099de9a9c371064240f91b84f22c65d51076dba1fa9f27c5303adaf7a066dc1f11eeeac8c7c9a6a0a28dac95504d4ab2e0d5eb7c9475804707bff8d68e0e48ca7d773bd09f7b4f5973fd5a1de84c0343516ec7ac681c1c1a58cfe9ccbe8975834fb595f66dab081f56eaa4b01da367b18a671e2a09b0c485c4e0bbcad38401232960e316864d25ad2d5ed484d4e750aad529b4e4ed32c68689cc27aa4fa9c1a939992e04c7e84126ca659b142fd84620e29c365c8c30888eb0925e944610c2d64a9c7c2410715172273b493ed135362ef47729ac8e5fe97ad39369554515aec1396a3b7a3caf62dffe7e0aafb6cd40a84a8a146b6eddf1059b240ea06f991f466550d22ea138d8f6f52f12cd4e9ddaaee429aefe93e58763124058d466c3667097a19a4e14498e9893b2c988c7f64ea5be9392eec3637f2108fc64ebf04e7caf5b0867ace6bf318cdc893aefd63fcce5a011cf77901e3a8c78acb425f9cb58432bd7e2aed1ce7dae68a82462a848b2130ca8a41dc8c693106fbe442b899419af7567eccb652be3bab5e21c40cfe7bbed1a29ef5e0f5bb01b547b68e2162912af1d16d2a83e64866035b25c32d9fc63fc1f5492df5484e56210b1ad808309b835ce10fa75e434b56b0e936c86f13db717aaddff6c1aa950462416db9e379433d598ea13d27c093b698f8f5ec8926fe022a554c016e98a04464d25c883bb0d12ac191527f86c42eba434ffc45c2e4a6fd2af1ff268b99193b9903b780e8ad63e06084497437a386e4e6ec9ed98665516465f8e066ad6caa13e9f84b89087566ee2ce09fd465c17fb21899a6450201dbd95e30bf3696a9383e7b89483cf4e8591e763361c2d247c9120793103baf6adb808a5216c1c7d8ccbb897ed4b4d22e78f8370bb0cc7ccabbf30d569b3af098c1c70564a313978335b51e69fffb614f375794712a0173fbb190b574e5e267140</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>研究生之路</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【记录】实验室学习(一)</title>
     <url>/2020/12/02/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%AD%A6%E4%B9%A0-%E4%B8%80/</url>
     <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
