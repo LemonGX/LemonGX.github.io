@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【测试题】对称加密测试题</title>
-    <url>/2020/07/10/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <div class="hbe-input-container">
-  <input type="password" id="hbePass" placeholder="" />
-    <label for="hbePass">请输入密码</label>
-    <div class="bottom-line"></div>
-  </div>
-  <script id="hbeData" type="hbeData" data-hmacdigest="e94ae51143d4da88978ab84a0e343a8b7276331d8490fc017ae4e118318c376c">7ea42cefe023de50c92941734f4224b38bd3bf098f8b64d92a7feab6729b9bce05934475024d562899b318a3c4946573fd0da49607d9c938252c3a1858c0edfdf56c7f02e7f498f1100528e83c922e209a6469232565372b39b1cb98a965c5e6a80b2c0c6955af5c8c5c8e092ebfbe644b3b8e119db656d7633873ed1a26e41117c77eb5e442bf2581f22b8a6cf122500dfd80d479d850a3df645779c4b6afc55d6d6d3b6fe5cfad27448344034f61df1151d265b87e92f321ea99de243cd6f7f9a9b0af380c4e71f2cd4e48e50cfc19132c9bb4ba49abe1a54040091cd8ab5338bcde252cacfa770df87fb086dc42be5debd103e66007ae7c22f2b2adbb75fff19ac66b0050aaae1b3eb761c2740a14a0bb32d7490ada4cb587d06e61716e1ad2729ef78a920429d7b73dc9794a89eb28309cc68e32a1543b92be60e7563935b3ccce6b90a01f07d057fcf2f73eb4222c703f84878d4ced14c3967f67cf5e6acc06d97ab03cbfe6511af6c210a64eb1909d684a364fdc7108c14fe3b79e9da4dc4556b80cd5859c0068d1b810e53f9220cef2e0ddfa54e1de20904cb0d545d3f4152247cee5d71f042970db31abdf55d805d6af64f5be6ddc8edc7003100e70a314091cd26426840c8ea559844f05095b16a167868b37c610051d277169e9e8a7e8cf1f1f8376abaf28235ceefdfcf455c21329f9dee46610e41e302b22657fd3953c8e02165c6b319c6f87344c29709adb6785671540a29f6595f18b0807634b1fa16a651eccbfc1a286ebbd567282ab3445a53337584f75052cc6fb705bac738f099506fcaf815c2d82de74d328008dd01d86f9a7505281cde5303c6ab432f52393dbe45aa2ad08a2daa865c717ae10f9c3b225b872749eb12185349bb5da951d92cd80c8f809c90fd04ab88c7b166c4ad498930f837fb4e84d19b80bf3e1feb3760f0895a2a6a0662145f8d70ee1e7507623b5c394e09936f186a2d9a96b63cb330797795a2fd5b5c052fa363f1819b05f6bb2958840827a90e63460f1e1fe358baeb935c7c147b286072ff5c640e2db1b05c0967d4d1eeeacb70e62917cf152d2d9084580009ac11c2f9d3d03e66a74c427f8239f8b985af2741abc062c7d4443ed076b3ff307965b12f80cb65f8eb444784093cb0b143a611e97b553db06b2aee04a3c0f22b09c21f72bed90165828df77c2727825dba07a0e87393dbf0ec18c322b10c4172512842ce83cbef2326598380f837bc675201a7f4eaa43fe0b1864b2d31d91f51ab0b0e8e4bf4f24ebfb47548fcc0b1608a81cfe308213b921e0bddd1f66c77a87d71d373036bf3cf70447a331dc2513782bf39736302b40cfd5c817c78228e04c6a6b723e890c51d4f89d614c778b8baa2f6a19dd5531ba0090cdf6a95cae429cab6773965c015dd5457a231fbcc190846cf51b6295dada269242f32c14ec6f84a42b9eb6a2f73e8e4f3ebec867c2568b92d417e28fa6a83e9ab43a04d281a94564c99e2d239a90bdf479cf680f868bdcec03cf8a405647f02225cfbb4ba81d7072bd34bd7823b6db3f5d671515e9c7a76b8b3c6d22ac46c01d356029e5c0434827bbb6441be22fb7faa6f0ee2a96f444afec76ad8a5196499744146cc1d4a5bb7572de8c56b77702a1faff438b2f8fcd645853cb5b5fcb13c4eee58a05b7830a14e45013d369804681d9c8581f8f8b24ba4ce1e24a7b60ee61e351d4c1e776e8b0fb1c3f57ab52720a9ab1dffceb009d3f671012e778b96db9aec697211465fc7024837a38f9fe0e76acc07f8d8308c770e50888238d73fb97262abe312c7924d5287ac7e1dab83c04059175cb4075e6f55ff320e22c185019bce5c1249d9a5d7de4b53aa30b0d71e09ef3143c63dc6e562df7afcc9d6630acdbc94dbd863a6c8635885ecda2e9d9c311d944ea5e9b6caa419068c34d8ee84d4da83ae691d99b8096dae6ab3190e3049e4a30be468eaecc4687a3211ec62d03673054fa58607aae8a13b310adf90fc56ec908dbfea71f7f0e98bfd0325cb0beeda8f6d60433f2a6a0e31325afc661269721c6fda23f74d229e4779be63fabffdad04e632e038c3b94dde70390bb03ccdda2f70f691eaccb5d8af63c925ad483edac53090af6d29395018e9d73ab774ebcf3836b6cd82624b09ab637f9885d199f9f258eacc395206bfec4dbd9c7e409048aff0340b0338b1e85dd920e89efaa8fbbf23f379df0276f914f18391fa7951365ac37baef8c95194cbc0d7f78bf1cc924006c1efd652fd869fc367c0b3615df90a830d5ff62df7c0c54f4942f71e2fca654aa586251b0d7a2bf5cbed41ccfd904b481b00d8320b5452404b13b0469557dc6b03c87eae711d0e9e21ed321a82950e00fb3e1dfa3c69f1a4463b530c580d93b00bb201c8f7850cf65945970e2e31dd4ed2f46f0df57d30d1bdf3c3f1f8b411e312ee8e4f4f23ae7701a65cda7718ba73ad83a38a9f80c50d7989891c1d8cabfeff6bcced6c6326d68f3e11e32e3fb2d313608b94e605224ac043310c2e7796766631ed71ade8e278de0351aa911f495878e7411c3eb263eafe6136be69d07329bf766a1460664914a815a50000213731e5a1297ef0726e862fff8870e5da0c98cbf6df4654e868229c1af3302296ce7050e2452cd9e4d98f0bd525123f8a75e0f041f4475dad295de5bcab4799d2a4dc62575f3f6a3ef63b55a9c67d2ab592d0419060e9f30c0e8eb1fb358a8c8a48217f12c173ec101a3ebe7c37831ea96f361f6b174a2b03332011182810d336f1b41c2aa67ffaf3aeb3f52b1279f3e51cc43fcd57151817e23a64da2a0df4cd44cd8cf4b41d851bf50b47554e9ae9c1247c201e9c74edd4adf8610484bf0206c89b7579ca15de3fa3b62832bc6dc67f61a1aed4a134479f0c91e746cbe98f262b9c60237afeecc2ad542295478f5e85f5393f92ece2711e561e0edd84b971a40a1c219e73b69b5016467553dcd42eff19a34208e862141b2268b4e2d1761ee63a330af6b3db71f04db706667895a029010b28e13da5fcbac853a11d8274524a68ea8309bae4a1f86395e453f3a39897ff9ef9506dd3b67afe0a4d5b5d8c6974c50ac455e3b4d03b363dcfcfe4b748bf78d516102c1022ec6c2ce2e8a</script>
-</div>
-<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
-        <tag>测试题</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【hexo】next踩坑TOC锚点undefined问题</title>
     <url>/2021/01/30/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91TOC%E9%94%9A%E7%82%B9undefined%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>hexo 搭建博客，文章的导航栏不能正常使用：文章左侧导航栏可以正常生成，但是在点击导航栏后并不能跳转到文章的对应位置，查看网页源代码，Console 报错如下：</p>
 <figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">Uncaught TypeError: Cannot <span class="keyword">read</span> <span class="keyword">property</span><span class="title"> </span>'top' of undefined</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><strong>报错原因</strong></p>
 <p> Markdown 的插件并未渲染 heading 的 id ，所以导致锚点失效。</p>
 <p>原来会被编译成 <code>&lt;h2 id=&quot;title&quot;&gt;title&lt;/h2&gt;</code></p>
@@ -35,7 +15,7 @@
 <figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="variable">$title</span>.attr(<span class="string">'id'</span>,<span class="built_in"> id</span>);</span><br></pre></td></tr></table></figure>
 <p>即，仅保留28行，其他的内容注释掉。</p>
 <p>问题得以解决。</p>
-<p>[]: <a href="https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/</a>    “参考链接”</p>
+<p>参考链接：<a href="https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/</a></p>
 ]]></content>
       <categories>
         <category>hexo踩坑记</category>
@@ -904,6 +884,27 @@ Adv_{CCA}[A,E]\leq2q\cdot Adv_{CI}[B_1,E]+Adv_{CPA}[B_2,E]</script><p>由于这�
         <tag>密码学</tag>
         <tag>DanBoneh密码学</tag>
         <tag>总结归纳</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【测试题】对称加密测试题</title>
+    <url>/2020/07/10/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">请输入密码</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="e94ae51143d4da88978ab84a0e343a8b7276331d8490fc017ae4e118318c376c">7ea42cefe023de50c92941734f4224b38bd3bf098f8b64d92a7feab6729b9bce05934475024d562899b318a3c4946573fd0da49607d9c938252c3a1858c0edfdf56c7f02e7f498f1100528e83c922e209a6469232565372b39b1cb98a965c5e6a80b2c0c6955af5c8c5c8e092ebfbe644b3b8e119db656d7633873ed1a26e41117c77eb5e442bf2581f22b8a6cf122500dfd80d479d850a3df645779c4b6afc55d6d6d3b6fe5cfad27448344034f61df1151d265b87e92f321ea99de243cd6f7f9a9b0af380c4e71f2cd4e48e50cfc19132c9bb4ba49abe1a54040091cd8ab5338bcde252cacfa770df87fb086dc42be5debd103e66007ae7c22f2b2adbb75fff19ac66b0050aaae1b3eb761c2740a14a0bb32d7490ada4cb587d06e61716e1ad2729ef78a920429d7b73dc9794a89eb28309cc68e32a1543b92be60e7563935b3ccce6b90a01f07d057fcf2f73eb4222c703f84878d4ced14c3967f67cf5e6acc06d97ab03cbfe6511af6c210a64eb1909d684a364fdc7108c14fe3b79e9da4dc4556b80cd5859c0068d1b810e53f9220cef2e0ddfa54e1de20904cb0d545d3f4152247cee5d71f042970db31abdf55d805d6af64f5be6ddc8edc7003100e70a314091cd26426840c8ea559844f05095b16a167868b37c610051d277169e9e8a7e8cf1f1f8376abaf28235ceefdfcf455c21329f9dee46610e41e302b22657fd3953c8e02165c6b319c6f87344c29709adb6785671540a29f6595f18b0807634b1fa16a651eccbfc1a286ebbd567282ab3445a53337584f75052cc6fb705bac738f099506fcaf815c2d82de74d328008dd01d86f9a7505281cde5303c6ab432f52393dbe45aa2ad08a2daa865c717ae10f9c3b225b872749eb12185349bb5da951d92cd80c8f809c90fd04ab88c7b166c4ad498930f837fb4e84d19b80bf3e1feb3760f0895a2a6a0662145f8d70ee1e7507623b5c394e09936f186a2d9a96b63cb330797795a2fd5b5c052fa363f1819b05f6bb2958840827a90e63460f1e1fe358baeb935c7c147b286072ff5c640e2db1b05c0967d4d1eeeacb70e62917cf152d2d9084580009ac11c2f9d3d03e66a74c427f8239f8b985af2741abc062c7d4443ed076b3ff307965b12f80cb65f8eb444784093cb0b143a611e97b553db06b2aee04a3c0f22b09c21f72bed90165828df77c2727825dba07a0e87393dbf0ec18c322b10c4172512842ce83cbef2326598380f837bc675201a7f4eaa43fe0b1864b2d31d91f51ab0b0e8e4bf4f24ebfb47548fcc0b1608a81cfe308213b921e0bddd1f66c77a87d71d373036bf3cf70447a331dc2513782bf39736302b40cfd5c817c78228e04c6a6b723e890c51d4f89d614c778b8baa2f6a19dd5531ba0090cdf6a95cae429cab6773965c015dd5457a231fbcc190846cf51b6295dada269242f32c14ec6f84a42b9eb6a2f73e8e4f3ebec867c2568b92d417e28fa6a83e9ab43a04d281a94564c99e2d239a90bdf479cf680f868bdcec03cf8a405647f02225cfbb4ba81d7072bd34bd7823b6db3f5d671515e9c7a76b8b3c6d22ac46c01d356029e5c0434827bbb6441be22fb7faa6f0ee2a96f444afec76ad8a5196499744146cc1d4a5bb7572de8c56b77702a1faff438b2f8fcd645853cb5b5fcb13c4eee58a05b7830a14e45013d369804681d9c8581f8f8b24ba4ce1e24a7b60ee61e351d4c1e776e8b0fb1c3f57ab52720a9ab1dffceb009d3f671012e778b96db9aec697211465fc7024837a38f9fe0e76acc07f8d8308c770e50888238d73fb97262abe312c7924d5287ac7e1dab83c04059175cb4075e6f55ff320e22c185019bce5c1249d9a5d7de4b53aa30b0d71e09ef3143c63dc6e562df7afcc9d6630acdbc94dbd863a6c8635885ecda2e9d9c311d944ea5e9b6caa419068c34d8ee84d4da83ae691d99b8096dae6ab3190e3049e4a30be468eaecc4687a3211ec62d03673054fa58607aae8a13b310adf90fc56ec908dbfea71f7f0e98bfd0325cb0beeda8f6d60433f2a6a0e31325afc661269721c6fda23f74d229e4779be63fabffdad04e632e038c3b94dde70390bb03ccdda2f70f691eaccb5d8af63c925ad483edac53090af6d29395018e9d73ab774ebcf3836b6cd82624b09ab637f9885d199f9f258eacc395206bfec4dbd9c7e409048aff0340b0338b1e85dd920e89efaa8fbbf23f379df0276f914f18391fa7951365ac37baef8c95194cbc0d7f78bf1cc924006c1efd652fd869fc367c0b3615df90a830d5ff62df7c0c54f4942f71e2fca654aa586251b0d7a2bf5cbed41ccfd904b481b00d8320b5452404b13b0469557dc6b03c87eae711d0e9e21ed321a82950e00fb3e1dfa3c69f1a4463b530c580d93b00bb201c8f7850cf65945970e2e31dd4ed2f46f0df57d30d1bdf3c3f1f8b411e312ee8e4f4f23ae7701a65cda7718ba73ad83a38a9f80c50d7989891c1d8cabfeff6bcced6c6326d68f3e11e32e3fb2d313608b94e605224ac043310c2e7796766631ed71ade8e278de0351aa911f495878e7411c3eb263eafe6136be69d07329bf766a1460664914a815a50000213731e5a1297ef0726e862fff8870e5da0c98cbf6df4654e868229c1af3302296ce7050e2452cd9e4d98f0bd525123f8a75e0f041f4475dad295de5bcab4799d2a4dc62575f3f6a3ef63b55a9c67d2ab592d0419060e9f30c0e8eb1fb358a8c8a48217f12c173ec101a3ebe7c37831ea96f361f6b174a2b03332011182810d336f1b41c2aa67ffaf3aeb3f52b1279f3e51cc43fcd57151817e23a64da2a0df4cd44cd8cf4b41d851bf50b47554e9ae9c1247c201e9c74edd4adf8610484bf0206c89b7579ca15de3fa3b62832bc6dc67f61a1aed4a134479f0c91e746cbe98f262b9c60237afeecc2ad542295478f5e85f5393f92ece2711e561e0edd84b971a40a1c219e73b69b5016467553dcd42eff19a34208e862141b2268b4e2d1761ee63a330af6b3db71f04db706667895a029010b28e13da5fcbac853a11d8274524a68ea8309bae4a1f86395e453f3a39897ff9ef9506dd3b67afe0a4d5b5d8c6974c50ac455e3b4d03b363dcfcfe4b748bf78d516102c1022ec6c2ce2e8a</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+        <tag>测试题</tag>
       </tags>
   </entry>
   <entry>
