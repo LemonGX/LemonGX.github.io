@@ -473,13 +473,13 @@
       
 
       
-        <h4><span id="乱码一">乱码一</span></h4><p>点击首页、归档、分类、标签、关于等导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
+        <h4 id="乱码一"><a href="#乱码一" class="headerlink" title="乱码一"></a>乱码一</h4><p>点击首页、归档、分类、标签、关于等导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
 <a id="more"></a>
 <img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E5%AF%BC%E8%88%AA%E6%A0%8F.PNG" class title="导航栏">
 <p><strong>解决方案</strong></p>
 <p>链接中的%20代表空格，修改主题配置文件_config.yml，将||之前的所有空格删掉，问题解决。</p>
 <img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.PNG" class title="主题配置文件">
-<h4><span id="乱码二">乱码二</span></h4><p>点击“日志”导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
+<h4 id="乱码二"><a href="#乱码二" class="headerlink" title="乱码二"></a>乱码二</h4><p>点击“日志”导航时，链接地址为：<a href="https://xxx.github.io/%20，页面出现404错误。" target="_blank" rel="noopener">https://xxx.github.io/%20，页面出现404错误。</a></p>
 <img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/%E6%97%A5%E5%BF%97%E5%AF%BC%E8%88%AA.PNG" class title="日志导航">
 <p><strong>解决方案</strong></p>
 <p>在 themes\next\layout_macro 下找到 sidebar.swig 文件，找到如下代码：</p>
@@ -616,7 +616,7 @@
 				<a href="/archives">
 
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">乱码一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">乱码二</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#乱码一"><span class="nav-number">1.</span> <span class="nav-text">乱码一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#乱码二"><span class="nav-number">2.</span> <span class="nav-text">乱码二</span></a></li></ol></div>
             
 
           </div>
@@ -989,7 +989,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">69.2k</span>
+	  <span class="post-count">69.4k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">

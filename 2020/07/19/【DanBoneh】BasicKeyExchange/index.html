@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="DanBoneh密码学,密码学," />
+  <meta name="keywords" content="密码学,DanBoneh密码学," />
 
 
 
@@ -114,8 +114,8 @@
 <meta property="article:published_time" content="2020-07-19T00:54:38.000Z">
 <meta property="article:modified_time" content="2020-07-19T10:02:31.866Z">
 <meta property="article:author" content="lucky_Leo">
-<meta property="article:tag" content="DanBoneh密码学">
 <meta property="article:tag" content="密码学">
+<meta property="article:tag" content="DanBoneh密码学">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%9C%A8%E7%BA%BF%E5%8F%AF%E4%BF%A1%E4%BB%BB%E7%AC%AC%E4%B8%89%E6%96%B9.PNG">
 
@@ -490,9 +490,9 @@
       
 
       
-        <h1><span id="trusted-3rd-parties">Trusted 3^rd parties</span></h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>
+        <h1 id="trusted-3rd-parties"><a href="#Trusted-3-rd-parties" class="headerlink" title="Trusted 3^rd parties"></a>Trusted 3^rd parties</h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>
 <a id="more"></a>
-<h2><span id="密钥管理">密钥管理</span></h2><p>试想，世界上有 n 位用户，那么这些用户如何管理这些密钥？</p>
+<h2 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h2><p>试想，世界上有 n 位用户，那么这些用户如何管理这些密钥？</p>
 <p>假设 n=4 ，一种方案是，每一对用户共享一对密钥，这样用户需要管理的共享密钥太多。</p>
 <p>有一种方法叫<strong>在线可信任第三方</strong>，使用 TTP 表示可信任第三方，每个用户与可信任第三方共享一个单独的密钥，这个设计的好处是每个用户只需记住一个密钥。当 Alice 想和 Bob 通信时会发生什么？</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%9C%A8%E7%BA%BF%E5%8F%AF%E4%BF%A1%E4%BB%BB%E7%AC%AC%E4%B8%89%E6%96%B9.PNG" class title="在线可信任第三方">
@@ -511,7 +511,7 @@
 <p>②由 Diffie 与 Hellman 于 1976年提出。</p>
 <p>③由 Rivest，Shamir，Adleman 于1977年提出。</p>
 <p>近年的新想法：①基于身份的加密（IBE）2001。②泛函加密，2011。</p>
-<h1><span id="merkle-puzzles">Merkle Puzzles</span></h1><p>不借助可信第三方的密钥交换协议。</p>
+<h1 id="merkle-puzzles"><a href="#Merkle-Puzzles" class="headerlink" title="Merkle Puzzles"></a>Merkle Puzzles</h1><p>不借助可信第三方的密钥交换协议。</p>
 <p>这里我们通常的设定是，有 Alice 和 Bob ，他们想生成一个共享密钥，他们互相发送信息，在协议的最后，他们必须获得某个双方都知道的共享密钥 k ，窃听通信流量的攻击者绝对无法得知这个 k 是什么，目前，我们只关心监听会话的攻击者，我们将看到三个协议来达到这一目标。</p>
 <p>能借助对称密码学做到吗？可不可以只使用分组密码或哈希函数等？答案是肯定的，但是得到的协议<u>非常低效，在实际中从未被使用</u>，不过这些协议非常简单，<strong>Merkle 谜题协议工作流程</strong>如下：</p>
 <p>这个协议的主要工具叫做一个“谜题”，谜题是指难解的问题，但通过努力还是可以解出的。假设我们有一个对称密码，使用 128 位密钥，以 AES 为例，假设我选择的 AES 密钥的前 96 位都是 0 ，只有剩下的 32 位是非零的，并随机选取的。现在我加密一段固定的明文，比如“message”，使用 128 位密钥，大部分位都是 0 ，加密的结果叫做“谜题”，称之为谜题是因为不难找到密钥 P ，只需要尝试 2^32 种可能性，看是否得到明文“message”，如果是的话，就知道已经发现了正确的 P 。</p>
@@ -527,7 +527,7 @@
 <p>事实上，如果我们把分组密码或哈希函数当作黑盒神谕来使用，换句话说，参与者只能询问分组密码或询问哈希函数在特定点的值并获得结果，如果这些是参与者所能做到的全部，换句话说，参与者不能实际使用分组密码或哈希函数的实现，那么事实上有一个结果告诉我们，<strong>如果参与者只能询问分组密码在 n 个点的值，那么总有一个攻击运行在 n 平方的时间里</strong>。这就是说，如果你只能使用分组密码作为一个黑盒进行询问，那么无论交换什么密钥，这个密钥交换总有一个平方时间的攻击。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/tip.PNG" class title="tip">
 <p>我们发现，我们需要比分组密码和哈希函数更多的技术，实际上，我们需要具备非常特殊性质的函数，为了构建这些函数，我们实际上必须依赖于某些代数。</p>
-<h1><span id="the-diffie-hellman-protocol">The Diffie-Hellman protocol</span></h1><h2><span id="diffie-hellman-协议">Diffie-Hellman 协议</span></h2><p>这是我们第一个实用的密钥交换机制。</p>
+<h1 id="the-diffie-hellman-protocol"><a href="#The-Diffie-Hellman-protocol" class="headerlink" title="The Diffie-Hellman protocol"></a>The Diffie-Hellman protocol</h1><h2 id="diffie-hellman-协议"><a href="#Diffie-Hellman-协议" class="headerlink" title="Diffie-Hellman 协议"></a>Diffie-Hellman 协议</h2><p>这是我们第一个实用的密钥交换机制。</p>
 <p>Alice 和 Bob 素未谋面，却想交换一个共享密钥，然后他们可以使用这个密钥来用于相互安全通信，我们只看对窃听攻击的安全性，攻击者不能篡改网络中的数据，在密钥交换协议的最后，Alice 和 Bob 应该有一个共享密钥，但窃听攻击者无法知道交换的密钥是什么。<strong>我们能否做与Merkle谜题协议同样的事情，但现在能获得一个指数级鸿沟，横亘在攻击者和参与者的工作之间？</strong>我们不能仅凭分组密码技术获得这个指数级鸿沟，我们必须使用拥有比对称原型更多结构的难解问题，那么我们使用一点代数。</p>
 <p><strong>Diffie-Hellman 协议是如何工作的呢？</strong></p>
 <p>首先，我们选某个固定的大质数，记为 p ，然后我们选一个固定的整数 g ，g 正好在从 1 到 p 的范围中，这里的 p 和 g 是 Diffie-Hellman 协议的参数，它们一经选择就不再改变。这个协议如下工作：</p>
@@ -542,26 +542,26 @@
 <p><strong>如果要使用 Diffie-Hellman 协议来交换会话密钥，用于分组密码的会话密钥要有合适的密钥大小，使得密钥交换协议的安全性和之后使用的分组密码的安全性相当。</strong></p>
 <p>计算在椭圆曲线域上的 Diffie-Hellman 函数要比计算质数模乘法上的 Diffie-Hellman 困难得多，因为问题更加困难，可以使用小得多的代数对象。这些模在椭圆曲线上增长的不快，通常从使用模算术到使用椭圆曲线域有一个缓慢的转换。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%9F%9F.PNG" class title="椭圆曲线域">
-<h2><span id="中间人攻击">中间人攻击</span></h2><p>Diffie-Hellman 协议对抗主动攻击时，是完全不安全的，当存在<strong>中间人攻击</strong>时，我们需要对这个协议做些补充，让它对中间人攻击也是安全的。</p>
+<h2 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Diffie-Hellman 协议对抗主动攻击时，是完全不安全的，当存在<strong>中间人攻击</strong>时，我们需要对这个协议做些补充，让它对中间人攻击也是安全的。</p>
 <p><strong>这个协议为什么对主动攻击是不安全的？</strong></p>
 <p>假设我们有中间人 MiTM 试图窃听 Alice 和 Bob 之间的会话，协议开始时，Alice 发送 $g^a$ 给 Bob ，中间人截获了这个 $g^a$ ，他将取 Alice 发出的信息，换成他自己的信息，记为 A’ ，写成 $g^a$’ ，中间人选择了他自己的 a’ ，发送给 Bob 。</p>
 <p>Bob并不知道中间人对通信流量做了手脚，他只能获得 A’ ，Bob 会回复他的值 B ，$g^b$ 给 Alice ，中间人截获 B ，产生自己的 b’ ，然后发送 B’=$g^b$’ 给 Alice 。</p>
 <p>Alice 将计算她的密钥得到 g^(ab’) ，Bob 计算他的密钥 g^(ba’) ，而对于中间人，他既知道 A’ ，又知道 B’ ，他可以计算 g^(ab’) ，也可以计算 g^(ba’) ，因此现在它可以扮演中间人。</p>
 <p>当 Alice 发送一个加密的信息给 Bob ，中间人可以轻松解密这个信息，然后中间人重新使用 Bob 的密钥加密这个信息发送给 Bob ，这样 Alice 发送信息给 Bob ，Bob 接收信息认为这个信息是安全的。中间人可以完全读到信息内容，如果他愿意，可以修改它，所以这个协议是完全不安全的。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="中间人攻击">
-<h2><span id="diffie-hellman-协议的非互动性">Diffie-Hellman 协议的非互动性</span></h2><p>这个协议可以被视为一个非互动的协议，设想我们有一组几百万用户，他们中每个都将选取一个随机的私密值，然后在他们的 Facebook 页面上写下他们对 Diffie-Hellman 协议的贡献。</p>
+<h2 id="diffie-hellman-协议的非互动性"><a href="#Diffie-Hellman-协议的非互动性" class="headerlink" title="Diffie-Hellman 协议的非互动性"></a>Diffie-Hellman 协议的非互动性</h2><p>这个协议可以被视为一个非互动的协议，设想我们有一组几百万用户，他们中每个都将选取一个随机的私密值，然后在他们的 Facebook 页面上写下他们对 Diffie-Hellman 协议的贡献。</p>
 <p>现在，如果 Alice 和 Charlie 想建立一个共享密钥，他们无需相互通信，Alice 只要去 Charlie 的公共页面，Charlie 只要去 Alice 的公共页面，刹那间，他们就共享了一个密钥，Alice 知道了 g^ca ，Charlie 知道了 g^ac ，某种意义上，一旦他们在公共页面发布了他们对 Diffie-Hellman 协议的共享，他们根本不需要互相通信就能建立共享密钥。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Diffie-Hellman%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%80%A7%E8%B4%A8.PNG" class title="Diffie-Hellman协议的性质">
 <p><strong>开放问题</strong>：我们能否对多于两方的用户做这些呢？换句话说，比如我们有 4 方，所有人都在他们的 Facebook 公共页面上发布了他们的值，现在我们想只通过阅读 Facebook 页面，所有人都可以建立共享密钥。我们是否可以非互动的建立这些共享密钥？n=2 就是 Diffie-Hellman 协议；n=3 ，我们也知道怎么做，有一个已知的协议由 Joux 提出的使用了非常高级的数学；对于 n=4,5… 这个问题是完全开放的，即使只有 4 人，我们也不知道怎么做。</p>
-<h1><span id="public-key-encryption">Public-key encryption</span></h1><p>一个基于公钥加密的不同的方法，依然只看对窃听的安全性，不允许攻击者修改数据或实施其他形式的主动攻击。</p>
-<h2><span id="公钥加密">公钥加密</span></h2><p>就像对称加密一样，有一个加密算法和解密算法，不过这里的加密算法有一个密钥，叫做<strong>公钥</strong> PK，这个公钥属于 Bob ，而解密算法有一个不同的密钥，叫做<strong>私钥</strong> SK，也属于 Bob 。这两个密钥优势叫做<strong>密钥对</strong>。通常，加密这个信息的算法是，加密算法产生一个使用公钥加密的密文，当密文交给解密算法时，解密算法会输出对应的明文</p>
+<h1 id="public-key-encryption"><a href="#Public-key-encryption" class="headerlink" title="Public-key encryption"></a>Public-key encryption</h1><p>一个基于公钥加密的不同的方法，依然只看对窃听的安全性，不允许攻击者修改数据或实施其他形式的主动攻击。</p>
+<h2 id="公钥加密"><a href="#公钥加密" class="headerlink" title="公钥加密"></a>公钥加密</h2><p>就像对称加密一样，有一个加密算法和解密算法，不过这里的加密算法有一个密钥，叫做<strong>公钥</strong> PK，这个公钥属于 Bob ，而解密算法有一个不同的密钥，叫做<strong>私钥</strong> SK，也属于 Bob 。这两个密钥优势叫做<strong>密钥对</strong>。通常，加密这个信息的算法是，加密算法产生一个使用公钥加密的密文，当密文交给解密算法时，解密算法会输出对应的明文</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="公钥加密">
 <p>公钥加密实际上由三个算法组成：密钥生成算法 G，E，D。当运行 G 时，会产生两个密钥，分别是公钥和私钥，通常，我们有<u>一致性</u>，即密钥生成算法输出的公钥和私钥，如果我们使用公钥加密明文，然后使用私钥解密，我们可以获得最初的明文。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%862.PNG" class title="公钥加密2">
-<h2><span id="公钥加密系统的安全游戏">公钥加密系统的安全游戏</span></h2><p>使用与之前用过的语义安全同样的概念，但游戏不同。这里，挑战者运行密钥生成算法来产生一对公钥和私钥，他会把公钥给攻击者，挑战者对私钥进行保密。攻击者会输出两个长度相等的明文 $m_0$ 和 $m_1$ ，挑战者会给攻击者 $m_0$ 或 $m_1$ 的加密结果，我们定义两个实验，在 实验0 中，攻击者得到 $m_0$ 加密的结果，在 实验1 中，攻击者得到 $m_1$ 加密的结果，攻击者的目标是<u>猜他得到的是哪个明文的加密结果</u>，我们把他的猜测作为 实验0 或 实验1 的输出。在公钥加密中，没必要赋予攻击者以实施选择明文攻击的能力，因为在对称密钥系统中，攻击者必须请求他选择的明文的加密，而在公钥系统中，攻击者拥有公钥，他可以自己加密任何他想加密的明文。</p>
+<h2 id="公钥加密系统的安全游戏"><a href="#公钥加密系统的安全游戏" class="headerlink" title="公钥加密系统的安全游戏"></a>公钥加密系统的安全游戏</h2><p>使用与之前用过的语义安全同样的概念，但游戏不同。这里，挑战者运行密钥生成算法来产生一对公钥和私钥，他会把公钥给攻击者，挑战者对私钥进行保密。攻击者会输出两个长度相等的明文 $m_0$ 和 $m_1$ ，挑战者会给攻击者 $m_0$ 或 $m_1$ 的加密结果，我们定义两个实验，在 实验0 中，攻击者得到 $m_0$ 加密的结果，在 实验1 中，攻击者得到 $m_1$ 加密的结果，攻击者的目标是<u>猜他得到的是哪个明文的加密结果</u>，我们把他的猜测作为 实验0 或 实验1 的输出。在公钥加密中，没必要赋予攻击者以实施选择明文攻击的能力，因为在对称密钥系统中，攻击者必须请求他选择的明文的加密，而在公钥系统中，攻击者拥有公钥，他可以自己加密任何他想加密的明文。</p>
 <p>我们说，如果攻击者无法区分 实验0 和 实验1 ，一个公钥系统 (G,E,D) 是语义安全的。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="公钥加密系统的安全游戏">
-<h2><span id="共享密钥的建立">共享密钥的建立</span></h2><p>①Alice 开始时会使用密钥生成算法为自己产生一个随机公钥、密钥对，然后把公钥 PK 发送给 Bob ，并告诉 Bob 这个信息来自 Alice 。</p>
+<h2 id="共享密钥的建立"><a href="#共享密钥的建立" class="headerlink" title="共享密钥的建立"></a>共享密钥的建立</h2><p>①Alice 开始时会使用密钥生成算法为自己产生一个随机公钥、密钥对，然后把公钥 PK 发送给 Bob ，并告诉 Bob 这个信息来自 Alice 。</p>
 <p>②Bob 会产生一个随机的 128 位值 x ，回复 Alice 这个信息来自 Bob ，他还会返回用 Alice 的公钥加密的 x 。</p>
 <p>③Alice 收到这个密文使用私钥进行解密，解密结果会给她值 x 。</p>
 <p>现在，x 可以被用来作为双方共享的密钥。</p>
@@ -571,7 +571,7 @@
 <p>在这个协议中，攻击者看到这个公钥和用公钥加密的 x ，他想得到 x ，现在我们知道这个公钥系统是语义安全的，这意味着攻击者不能区分 x 的加密和某个随机信息的加密，它仅仅是一个随机值，攻击者不能猜到。</p>
 <p>即使这个协议对窃听是安全的，对抗中间人攻击时，它也是完全不安全的。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%AF%B9%E7%AA%83%E5%90%AC%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="对窃听安全的公钥加密">
-<h2><span id="中间人攻击">中间人攻击</span></h2><p>Alice 产生她的公钥、密钥对，中间人也产生他自己的公钥、密钥对，当 Alice 发送她的公钥给 Bob 时，中间人会截获这个公钥，然后对 Bob 说这个信息来自 Alice，Alice 的公钥是 PK’ 。</p>
+<h2 id="中间人攻击"><a href="#中间人攻击-1" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Alice 产生她的公钥、密钥对，中间人也产生他自己的公钥、密钥对，当 Alice 发送她的公钥给 Bob 时，中间人会截获这个公钥，然后对 Bob 说这个信息来自 Alice，Alice 的公钥是 PK’ 。</p>
 <p>Bob 接收了这个信息，他认为自己获得了从 Alice 发来的信息，他会选择随机数 x 进行回复，它会返回用 PK’ 加密的 x ，中间人 截获这个信息，他会用其他信息来代替它，他的目标是确保这个密钥交换成功，中间人应该发送什么给 Alice 呢？我们把 Bob 发送的密文记为 c ，中间人使用自己的私钥解密 c 得知 x ，然后他继续用 Alice 的公钥加密 x ，把加密值发回给 Alice ，Alice 获得 x ，完成了与 Bob 的密钥交换。</p>
 <p>中间人也知道这个 x ，中间人可以修改 Alice 和 Bob 互发的信息，这个协议是完全不安全的。</p>
 <img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="公钥加密的中间人攻击">
@@ -591,11 +591,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
- DanBoneh密码学</a>
-          
             <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
  密码学</a>
+          
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
           
         </div>
       
@@ -705,7 +705,7 @@
 				<a href="/archives">
 
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -760,7 +760,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Trusted 3^rd parties</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">密钥管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Merkle Puzzles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Diffie-Hellman protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">Diffie-Hellman 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">中间人攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">Diffie-Hellman 协议的非互动性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Public-key encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">公钥加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">公钥加密系统的安全游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">共享密钥的建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.4.</span> <span class="nav-text">中间人攻击</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#trusted-3rd-parties"><span class="nav-number">1.</span> <span class="nav-text">Trusted 3^rd parties</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥管理"><span class="nav-number">1.1.</span> <span class="nav-text">密钥管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#merkle-puzzles"><span class="nav-number">2.</span> <span class="nav-text">Merkle Puzzles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#the-diffie-hellman-protocol"><span class="nav-number">3.</span> <span class="nav-text">The Diffie-Hellman protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#diffie-hellman-协议"><span class="nav-number">3.1.</span> <span class="nav-text">Diffie-Hellman 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间人攻击"><span class="nav-number">3.2.</span> <span class="nav-text">中间人攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diffie-hellman-协议的非互动性"><span class="nav-number">3.3.</span> <span class="nav-text">Diffie-Hellman 协议的非互动性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#public-key-encryption"><span class="nav-number">4.</span> <span class="nav-text">Public-key encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥加密"><span class="nav-number">4.1.</span> <span class="nav-text">公钥加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥加密系统的安全游戏"><span class="nav-number">4.2.</span> <span class="nav-text">公钥加密系统的安全游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享密钥的建立"><span class="nav-number">4.3.</span> <span class="nav-text">共享密钥的建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间人攻击"><span class="nav-number">4.4.</span> <span class="nav-text">中间人攻击</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1078,7 +1078,7 @@ if(canvas.getContext){
       <i class="fa fa-area-chart"></i>
     </span>
     <span title="站点总字数">
-	  <span class="post-count">69.2k</span>
+	  <span class="post-count">69.4k</span>
 	</span>
 	<span class="post-meta-divider">|</span>
 	<span class="post-meta-item-icon">
