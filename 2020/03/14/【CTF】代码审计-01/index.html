@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="鳕鱼堡er">
 <meta property="og:description" content="md5加密相等绕过 md5()中需要一个是string类型的参数，但当传递一个array时，md5()不会报错，只是无法正确求出array的md5值，这样会导致任意两个array的md5值都会相等。 12345678910$test&#x3D;$_GET[&#39;test&#39;]; $test&#x3D;md5($test); if($test&#x3D;&#x3D;&#39;0&#39;) &amp;#123;         print &#39;You passed st">
 <meta property="article:published_time" content="2020-03-14T07:14:24.000Z">
-<meta property="article:modified_time" content="2020-06-25T01:03:09.515Z">
+<meta property="article:modified_time" content="2021-01-31T02:41:38.882Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary">
@@ -361,8 +361,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-25T09:03:09+08:00">
-                2020-06-25
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-31T10:41:38+08:00">
+                2021-01-31
               </time>
             
           </span>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  583字
+                  573字
                 </span>
               
 
@@ -466,9 +466,8 @@
 <p>stripos()函数：查找字符串在另一字符串中第一次出现的位置（不区分大小写），即在content文件中查找‘php’第一次出现的位置和’&lt;’第一次出现的位置，有则返回位置，没有则返回false。字符串位置从 0 开始，不是从 1 开始。</p>
 <p>file_put_contents()函数：把一个字符串写入文件中，把content参数的值写入config.php文件中。</p>
 <p>绕过stripos()函数，就不用执行if分支。可以使用数组绕过，即让content为数组形式，在config.php里得到flag。</p>
-<p>参考链接：</p>
-<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a></p>
-<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">https://www.cnblogs.com/gaonuoqi/p/11408083.html</a></p>
+<p><a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">参考链接1</a></p>
+<p><a href="https://www.cnblogs.com/gaonuoqi/p/11408083.html" target="_blank" rel="noopener">参考链接2</a></p>
 
       
     </div>
@@ -588,7 +587,7 @@
 				<a href="/archives">
 
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -653,7 +652,7 @@
 			<h3 class="widget-title"></h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="200" height="200" id="resCanvas" style="width=100%">
-					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>

@@ -121,7 +121,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%A7%84%E7%BA%A6.PNG">
 <meta property="og:image" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%AF%95%E5%9B%BE%E6%8F%90%E9%AB%98RSA%E6%80%A7%E8%83%BD%E7%9A%84%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90.PNG">
 <meta property="article:published_time" content="2020-08-05T05:35:35.000Z">
-<meta property="article:modified_time" content="2020-12-05T12:33:47.694Z">
+<meta property="article:modified_time" content="2021-01-31T02:56:26.604Z">
 <meta property="article:author" content="lucky_Leo">
 <meta property="article:tag" content="密码学">
 <meta property="article:tag" content="DanBoneh密码学">
@@ -391,8 +391,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-12-05T20:33:47+08:00">
-                2020-12-05
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-31T10:56:26+08:00">
+                2021-01-31
               </time>
             
           </span>
@@ -501,11 +501,10 @@
       
         <h1 id="公钥加密系统"><a href="#公钥加密系统" class="headerlink" title="公钥加密系统"></a>公钥加密系统</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>公钥加密机制的应用：会话建立、密钥交换等。</p>
 <a id="more"></a>
-<p>相关链接：<a href="https://lemongx.github.io/2020/07/19/[DanBoneh]BasicKeyExchange/" target="_blank" rel="noopener">https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</a></p>
+<p><a href="https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" target="_blank" rel="noopener">相关链接</a></p>
 <p><strong>仅对窃听攻击安全的密钥交换协议的工作过程</strong>：Alice 会产生一个公钥、私钥对，把公钥发给 Bob ，Bob 产生一个随机 x ，x 被作为共享密钥，Bob 将 x 使用 Alice 的公钥加密后发送给 Alice ，Alice 解密还原 x 。他们可以使用共享密钥 x 进行通信。攻击者只能看到公钥和使用公钥加密后的 x ，根据这些他不应该能获得任何关于 x 的信息。</p>
 <p>我们将更加精确的定义不能学到任何关于 x 的信息是什么意思。</p>
-<h2 id="对抗窃听的安全性"><a href="#对抗窃听的安全性" class="headerlink" title="对抗窃听的安全性"></a>对抗窃听的安全性</h2><p>见 《4.2 公钥加密系统的安全游戏》</p>
-<p><a href="https://lemongx.github.io/2020/07/19/[DanBoneh]BasicKeyExchange/" target="_blank" rel="noopener">https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</a></p>
+<h2 id="对抗窃听的安全性"><a href="#对抗窃听的安全性" class="headerlink" title="对抗窃听的安全性"></a>对抗窃听的安全性</h2><p>见 <a href="https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" target="_blank" rel="noopener">《4.2 公钥加密系统的安全游戏》</a></p>
 <p>当讨论<strong>对称密码</strong>的窃听攻击时，我们区分了两种情况，①密钥只使用一次，②密钥使用多次。</p>
 <p>对于<strong>公钥加密</strong>，如果系统的一次性密钥是安全的，那么它对多次密钥也是安全的。我们不必赋予攻击者请求加密他选择的明文的能力，因为他可以自己创建这些加密。公钥私钥对 天生就是用来加密多个信息的。</p>
 <h2 id="对抗主动攻击的安全性"><a href="#对抗主动攻击的安全性" class="headerlink" title="对抗主动攻击的安全性"></a>对抗主动攻击的安全性</h2><p>看一个电子邮件的例子，Bob 想发送邮件给他的朋友 Caroline ，Caroline 正好在 Gmail 上有账号，过程如下：这份加密的邮件发送给 Gmail 服务器，Gmail 服务器解密邮件查看接收方，如果接收方是 Caroline ，它会把这份邮件转发给 Caroline ，如果接收方是攻击者，它会把邮件转发给攻击者。</p>
@@ -557,8 +556,7 @@
 <p>事实上，解密是加密的逆过程，这是完全不安全的。最简单的方法证明它不安全，在于这是一个确定的加密，在这里没有随机性被使用到，当我们加密一个明文 m ，由于算法是确定的，它不可能是语义安全的。当我们将这个陷门函数具象化，使用特定的实现，例如 RSA 陷门函数，那么这种机制会有很多可能的攻击。</p>
 <img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8TDF%E6%9E%84%E5%BB%BA%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F.PNG" class title="错误使用TDF构建的公钥加密系统">
 <h1 id="陷门置换-rsa-的构建"><a href="#陷门置换-RSA-的构建" class="headerlink" title="陷门置换 RSA 的构建"></a>陷门置换 RSA 的构建</h1><h2 id="数论回顾"><a href="#数论回顾" class="headerlink" title="数论回顾"></a>数论回顾</h2><img src="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E6%95%B0%E8%AE%BA%E5%9B%9E%E9%A1%BE.PNG" class title="数论回顾">
-<p>详见 《Number Theory》</p>
-<p><a href="https://lemongx.github.io/2020/07/23/[DanBoneh]NumberTheory/" target="_blank" rel="noopener">https://lemongx.github.io/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/</a></p>
+<p>详见 <a href="https://lemongx.github.io/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" target="_blank" rel="noopener">《Number Theory》</a></p>
 <h2 id="rsa-陷门置换"><a href="#RSA-陷门置换" class="headerlink" title="RSA 陷门置换"></a>RSA 陷门置换</h2><p>SSL 和 TLS 都使用了 RSA ，用于证书和密钥交换；有很多安全的电子邮件系统和安全的文件系统，使用了 RSA 加密电子邮件和文件系统里的文件。</p>
 <p>RSA 是一个陷门置换，本身不是一个加密系统，只是一个函数。</p>
 <p>密钥生成算法函数 f 和 逆函数 $f^{-1}$ </p>
@@ -787,7 +785,7 @@
 				<a href="/archives">
 
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -868,7 +866,7 @@
 			<h3 class="widget-title"></h3>
 			<div id="myCanvasContainer" class="widget tagcloud">
 				<canvas width="200" height="200" id="resCanvas" style="width=100%">
-					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul>
 				</canvas>
 			</div>
 		</div>
