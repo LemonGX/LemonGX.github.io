@@ -96,14 +96,14 @@
 <meta property="og:url" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
 <meta property="og:description" content="密码由加密算法 E（经常是一个随机算法） 和解密算法 D（是确定算法） 组成。定义为一个三元组 （K, M, E），全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。E：K×M→E ；D：K×E→M。 一致性方程：∀m∈M，k∈K，D(k,E(k,m)) &#x3D; m。 Vernam密码（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进">
-<meta property="og:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG">
 <meta property="article:published_time" content="2020-03-24T01:22:31.000Z">
 <meta property="article:modified_time" content="2020-06-23T08:53:34.000Z">
 <meta property="article:author" content="XUEYU">
 <meta property="article:tag" content="密码学">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG">
 
 
 
@@ -487,7 +487,7 @@
 <p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
 <p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
 <p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
-<img src="/.com//03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
 <p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
 <p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
 

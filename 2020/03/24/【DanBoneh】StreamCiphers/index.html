@@ -96,17 +96,17 @@
 <meta property="og:url" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/index.html">
 <meta property="og:site_name" content="鳕鱼堡er">
 <meta property="og:description" content="在流密码中，密钥不是完全随机的，而是一种伪随机密钥。 伪随机数发生器（PRG）：是一个本身没有随机性的完全确定的函数 G ，取一个种子为输入（种子具有随机性），用 {0,1}^s 表示所有长度为 s 的字符串，{0,1}^s 叫做种子空间，将 s 位种子映射到一个长得多的字符串 {0,1}ⁿ ，G：{0,1}^s→{0,1}ⁿ，n&gt;&gt;s。种子可能只有128位，但能扩展成一个长得多的字符">
-<meta property="og:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG">
-<meta property="og:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG">
-<meta property="og:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg">
-<meta property="og:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg">
 <meta property="article:published_time" content="2020-03-24T02:32:47.000Z">
 <meta property="article:modified_time" content="2021-01-31T02:45:28.000Z">
 <meta property="article:author" content="XUEYU">
 <meta property="article:tag" content="密码学">
 <meta property="article:tag" content="DanBoneh密码学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG">
 
 
 
@@ -487,12 +487,12 @@
 <p><strong>不可预测性</strong>：对于各个位置，即对所有 i ，没有有效的破解算法 A ，以不可忽略的概率预测出第 i+1 位。</p>
 <p>安全的发生器必须具有<strong>不可预测性</strong>，即不能由前面的部分预测出后面的部分。如：拿到密文，而明文的前半部分已知，可以异或出伪随机序列的前半部分，如果伪随机序列可预测，就可以预测出完整的伪随机序列，从而密文完全破解，还原整个明文。</p>
 <p><strong>线性同余法</strong>：将当前伪随机数的数值乘以 A 再加上 C ，然后将除以 M 得到的余数作为下一个随机数，A 和 C 是整数，M 是质数，迭代执行 <code>$R_0$ = (A × 种子 + C) mod M</code>，输出后一位。线性同余法<u>不具备不可预测性</u>，不能用于密码技术。</p>
-<h5><span id="对一次性密码本的攻击">对一次性密码本的攻击</span></h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
+<h5 id="对一次性密码本的攻击"><a href="#对一次性密码本的攻击" class="headerlink" title="对一次性密码本的攻击"></a>对一次性密码本的攻击</h5><p><strong>两次密码本攻击</strong>：如果同样的密码本为不同的明文加密，就不再安全。</p>
 <p>$C_1$ ← $m_1$⊕PRG(k)</p>
 <p>$C_2$ ← $m_2$⊕PRG(k)</p>
 <p>攻击者截获 $C_1$ 和 $C_2$ 可以得出 $m_1$⊕$m_2$ ，由于英语有足够的冗余，如果给定两明文的异或，是可以还原出两个明文的。因此，<u>流密钥不能被重复使用</u>。</p>
 <p><strong>利用可修改性攻击</strong>：一次性密码本和流密钥不提供完整性保护。攻击者截获密文 m⊕k ，将密文和一特定值 p （子置换密钥）异或得到 (m⊕k⊕p)⊕k ，解密后得到 m⊕p ，成功对明文造成特定影响，而对密文的修改不会被检测出来。</p>
-<h5><span id="几种流密码">几种流密码</span></h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
+<h5 id="几种流密码"><a href="#几种流密码" class="headerlink" title="几种流密码"></a>几种流密码</h5><p><strong>RC4</strong>（面向软件）：种子大小可变，被用作流密码的密钥。将 128 位密钥扩展成 2048 位，执行一个简单的循环，每轮输出一个字节。</p>
 <p>Google在 HTTPS 中使用RC4。</p>
 <p>RC4已被伪随机数发生器取代。</p>
 <p>RC4弱点：</p>
@@ -507,15 +507,15 @@
 <p><strong>eStream</strong>：</p>
 <p>PRG：{0,1}^s × R →{0,1}ⁿ，n&gt;&gt;s，{0,1}^s 为seed，R 为新鲜值（只要密钥定下来，永不重复的值）。</p>
 <p><code>E(k, m; r) = m⊕PRG(k; r)</code>。(k; r) 这个有序对永不重复，不被多次使用，底线是可以重复使用密钥，新鲜值确保了有序对唯一。</p>
-<img src="/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG" class title="PRG">
-<img src="/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG" class title="统计测试">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/PRG.PNG" class title="PRG">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E7%BB%9F%E8%AE%A1%E6%B5%8B%E8%AF%95.JPG" class title="统计测试">
 <p>一个生成器是安全的，不仅特定的统计测试认为它的输出是随机的，事实上，对于所有<u>有效</u>（测试算法总在有限步内终止并返回结果）的统计测试，都认为输出是随机的。</p>
 <p><strong>完美安全</strong>：</p>
 <p>对于任意等长的消息m，只要这个m属于消息空间（就是说用这个加密算法可以加密m），那么用加密密钥k加密后，加密结果“看起来都一样”，没法看出来这是从m，还是从其他什么消息加密得来的。</p>
-<img src="/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg" class title="完美安全">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E5%AE%8C%E7%BE%8E%E5%AE%89%E5%85%A8.jpg" class title="完美安全">
 <p><strong>语义安全</strong>：</p>
 <p>计算机在多项式复杂度内看加密结果，觉得“看起来都一样”。</p>
-<img src="/.com//03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg" class title="语义安全">
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8.jpg" class title="语义安全">
 <p><a href="https://www.zhihu.com/question/37203836" target="_blank" rel="noopener">可参考链接</a></p>
 <p><u>安全的PRG是语义安全的</u>。</p>
 
@@ -711,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">对一次性密码本的攻击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">几种流密码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#对一次性密码本的攻击"><span class="nav-number">1.</span> <span class="nav-text">对一次性密码本的攻击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#几种流密码"><span class="nav-number">2.</span> <span class="nav-text">几种流密码</span></a></li></ol></div>
             
 
           </div>
