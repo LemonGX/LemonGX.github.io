@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="密码学,DanBoneh密码学," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="鳕鱼堡er" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="NotationN 表示正整数，p 表示正质数。 $Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DanBoneh】Number Theory">
+<meta property="og:url" content="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/index.html">
+<meta property="og:site_name" content="鳕鱼堡er">
+<meta property="og:description" content="NotationN 表示正整数，p 表示正质数。 $Z_N$ 表示集合 {0,1,2,…,N-1} ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的。">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%A8%A1%E9%80%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%BC%95%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%8F%AF%E9%80%86%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%8F%AF%E9%80%86%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88%E7%9A%84%E7%BB%93%E6%9E%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/g%E7%9A%84%E9%98%B6.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/g%E7%9A%84%E9%98%B62.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/e%E6%AC%A1%E6%96%B9%E6%A0%B9.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%BC%95%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E6%A8%A1p%E7%9A%84%E4%BA%8C%E6%AC%A1%E6%96%B9%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E9%87%8D%E5%A4%8D%E5%B9%B3%E6%96%B9%E6%B3%95.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E9%87%8D%E5%A4%8D%E5%B9%B3%E6%96%B9%E6%B3%952.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%B0%8F%E7%BB%93.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AE%80%E5%8D%95%E9%97%AE%E9%A2%98.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E4%BA%9A%E6%8C%87%E6%95%B0%E7%AE%97%E6%B3%95.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E5%9B%B0%E9%9A%BE%E6%80%A7%E7%9A%84%E7%9B%B4%E6%8E%A5%E5%BA%94%E7%94%A8.PNG">
+<meta property="article:published_time" content="2020-07-23T00:49:06.000Z">
+<meta property="article:modified_time" content="2021-01-31T02:44:30.000Z">
+<meta property="article:author" content="XUEYU">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="DanBoneh密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/23/【DanBoneh】NumberTheory/"/>
+
+
+
+
+
+  <title>【DanBoneh】Number Theory | 鳕鱼堡er</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?702343d7b417e8c7fb52c949a3414d6c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鳕鱼堡er</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个誓死不当程序猿的信院研究僧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XUEYU">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鳕鱼堡er">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【DanBoneh】Number Theory</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-23T08:49:06+08:00">
+                2020-07-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-31T10:44:30+08:00">
+                2021-01-31
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" class="leancloud_visitors" data-flag-title="【DanBoneh】Number Theory">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6.3k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="notation">Notation</span></h1><p>N 表示正整数，p 表示正质数。</p>
+<p><strong>$Z_N$ 表示集合 {0,1,2,…,N-1}</strong> ，事实上这不仅是一个整数集合，我们可以在上面做加法和乘法，只要我们始终取模 N 即可。<strong>$Z_N$ 表示了一个环，其加法和乘法都定义为模 N 的</strong>。</p>
+<a id="more"></a>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/Z_N.PNG" class title="Z_N">
+<p>所有关于加法和乘法的运算法则，在 $Z_N$ 中也同样适用。</p>
+<h2><span id="最大公约数-gcd">最大公约数 gcd</span></h2><p>假设给你两个整数 x 和 y ，我们说 x 和 y 的 gcd 是它们的最大共有因数，即 最大的可以同时整除 x 和 y 的整数。</p>
+<p>如果给你两个数 x 和 y ，总是存在另外两个整数 a  和 b ，使得 ax + by 是 x 和 y 的 gcd 。gcd(x,y) 是 x 和 y 使用整数 a 和 b 的一个线性组合，根据整数模 N 乘法群中逆元的存在性，可知 a 和 b 存在但不唯一，有一个简单有效的算法可以找到这些整数 a 和 b，这个算法被称为<strong>扩展的欧几里德算法</strong>，能在 x 和 y 的对数的平方的时间里找到 a 和 b 。</p>
+<p><strong>如果 gcd(x,y)=1 ，那么，x 和 y 是互质的。</strong></p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0.PNG" class title="最大公约数">
+<h2><span id="模逆">模逆</span></h2><p>模逆：数和它的逆的乘法结果等于单位元 1 。即，2 的逆是 1/2 。</p>
+<p><strong>当我们工作在模 N 上时，逆是什么？</strong></p>
+<p>$Z_N$ 中的一个元素 x 的逆，就是 $Z_N$ 中的另一元素 y ，使得 xy 等于 $Z_N$ 中的 1 。换句话说， xy =1 in $Z_N$ 。y 记为 $x^{-1}$ ，如果 y 存在，事实上它是唯一的。</p>
+<p>N 是一个奇数，求 2 在 $Z_N$ 上的逆？(N+1)/2 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%A8%A1%E9%80%86.PNG" class title="模逆">
+<p><strong>$Z_N$ 中哪些元素有逆？</strong></p>
+<p>引理：<strong>如果 $Z_N$ 中的一个元素 x 有逆，当且仅当 x 与 N 互质。</strong></p>
+<p>证明：</p>
+<p>假设 gcd(x,N)=1，那么 x 与 N 互质，根据 gcd 的性质，存在整数 a 和 b ，满足 ax+bN 等于 x 和 N 的 gcd ，也就是 1 ，即 ax+bN=1，两边取模 N ，意思是在 $Z_N$ 中，ax=1，只要我们对这个方程取模 N ，bN 这一项会被消除，因为 bN 被 N 整除，因此是 0 模 N 。</p>
+<p>事实上，x 在 $Z_N$ 中的逆就是 a ，所以因为 x 与 N 互质，可以证明 x 可逆，并且构造出了 $x^{-1}$ mod N 。</p>
+<p>如果 gcd&gt;1 会怎样？那么我们想证明没有逆。</p>
+<p>如果说 a 正好是 x 的模 N 逆，我们看 ax ，ax=1 mod N ，但如果 gcd(x,N)&gt;1 ，那么 gcd(ax,N)&gt;1 ，如果 gcd(ax,N)&gt;1 ，那么 ax 不可能等于 1，所以 ax 必须也大于 1 ，因此 a 不可能是 x 的模 N 逆。</p>
+<p>这就证明了，事实上，当 gcd&gt;1，x 不可能有逆，因为没有 a ，使得 ax=1 mod N 。</p>
+<p>举个例子，假设 gcd(x,N)=2，我们声称因此 x 不是模 N 逆的，为什么？对于所有的 a ，我们知道 ax 一定是偶数，原因是，2 整除 x ，2 整除 N ，这意味着不可能有 ax=1 mod N ，特别地，不可能有 ax=bx+1 ，因为，2整除 N ，bN 是偶数，bN+1 是奇数，偶数不可能等于奇数，所以对于任意的整数 b ，ax=bN+1 都不可能成立。特别地，这意味着 a 不可能是 x 的逆，因为 ax 不可能是 1 mod N ，所以 x 不是模 N 逆的。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%BC%95%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="引理的证明">
+<p>记 <strong>$Z_N^*$ 为 $Z_N$ 中所有可逆元素</strong>（所有满足 gcd(x,N)=1 的元素组成的集合）。</p>
+<p>举个例子，从一个质数 p 开始，我们知道从 0 到 p-1 的所有整数除了整数 0 ，其它都与 p 互质，因为 gcd(p,0) 不是 1 ，==所以如果 p 是质数， $Z_p^*$ 就是 $Z_p$ 除去 0 ，意味着 $Z_p$ 中除 0 外的所有元素都是可逆的==。</p>
+<p>所以，如果想计算 $Z_p^*$ 的大小，答案就是 p-1 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%8F%AF%E9%80%86%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88.PNG" class title="可逆元素集合">
+<p>如果给你一个 $Z_p^*$ 里的元素 x ，你可以使用扩展的欧几里德算法很快地找出它的逆。如果给你一个线性方程，让你在模 N 下解出来是非常容易的，只需要把 b 移到另一边就有了一个 -b ，然后再乘以 $a^{-1}$ ，使用欧几里德算法找到 $a^{-1}$ ，再用 -b乘以它，取模 N ，得到这个线性方程的解。</p>
+<p>欧几里德算法实际上花掉 $log^2$N 的时间，与 $(logN)^2$ 成正比，对于解模 N 的线性方程而言，这是一个平方算法。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B.PNG" class title="解线性方程">
+<h1><span id="fermat-and-euler">Fermat and Euler</span></h1><h2><span id="费马小定理">费马小定理</span></h2><p>假设给大家一个质数 p ，对 $Z_p^*$ 里的任意元素 x ，如果研究 $x^{p-1}$ ，我在 $Z_p$ 中就会得到 1 。</p>
+<p>简单应用1：假设我看 $Z_p^*$ 里的一个元素 x ，p 必须是质数，我们知道 $x^{p-1}$=1 ，那么 x·$x^{p-2}$=1 ，这就是说 x 模 p 的逆正好就是 $x^{p-2}$ ，这就给了我们另外一个计算 x 模质数的逆的算法，计算 $x^{p-2}$ 就会得到 x 的逆。这个算法与欧几里德算法相比有两个不足，①它只能工作在质数模上，而欧几里德算法也能工作在合数模上，②效率低，运行时间实际上是 O($(log)^3$p) 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86.PNG" class title="费马小定理">
+<p>简单应用2：假设我们想生成一个随机的大质数，我们要找的质数是 $2^{1024}$ 的量级，我们可以从一个指定的区间里面选择一个随机整数，然后检测这个选取的整数是不是满足费马小定理，如果等式不成立，那么我们选择的 p 一定不是质数，我们需要返回第一步尝试另一个数，一次次这么做直到最终找到一个整数满足费马小定理的条件，然后输出。事实上，如果一个随机数通过了检测，那么它极有可能是质数，特别地，对于 1024 位的数来说，p 不是质数的概率非常小，小于 $2^{-60}$ 。随着数的变大，一个数通过检测却不是质数的概率迅速向 0 衰减。</p>
+<p>我们无法保证输出一定是质数，只知道它非常可能是一个质数。在实际中，并不用这个方法来生成质数。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG" class title="费马小定理简单应用">
+<h2><span id="z_p的结构">$Z_p^*$的结构</span></h2><p>$Z_p^*$ 是一个<u>循环群</u>。</p>
+<p>这意味着 $Z_p^*$ 里有某个元素 g ，如果我们取 g，计算 g 的一组幂，$g^2$ 、$g^3$ 、$g^4$ 直到 $g^{p-2}$ ，没有点超过 $g^{p-2}$ ，因为根据费马小定理，$g^{p-1}$=1 ，回到了 1 得到了一个循环。</p>
+<p>欧拉证明了事实上，有这么一个元素 g ，如果你看到了它的所有幂，可以<u>扩展成整个群</u> $Z_p^*$ 。</p>
+<p>g 的幂给出了 $Z_p^*$ 里的所有元素，这样的元素 g 叫做<u>生成元</u>。不是每个元素都是生成元。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E5%8F%AF%E9%80%86%E5%85%83%E7%B4%A0%E9%9B%86%E5%90%88%E7%9A%84%E7%BB%93%E6%9E%84.PNG" class title="可逆元素集合的结构">
+<p>给定 $Z_p^*$ 里的一个元素 g ，如果我们看 g 的全体幂组成的集合，得到的集合叫做 <u> g 的生成群</u>，记为 <g> 。</g></p>
+<p>我们把 g 的生成群的大小叫做 <u>g 在 $Z_p^*$ 里的阶</u>，记为 $ord_p$(g) 。</p>
+<p><g>=$ord_p$(g) ，g 的阶是满足在 $Z_p$中，$g^a$=1 的最小的整数 a 。</g></p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/g%E7%9A%84%E9%98%B6.PNG" class title="g的阶">
+<p>事实上，1 模任意质数的阶总是 1 。</p>
+<p><strong>拉格朗日定理</strong>：有限子群的阶必然整除有限群的阶。拉格朗日定理意味着，<u>如果你看 g 模 p 的阶，这个阶始终整除 p-1</u> 。费马小定理某种意义上是拉格朗日定理的直接推论。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/g%E7%9A%84%E9%98%B62.PNG" class title="g的阶2">
+<h2><span id="欧拉定理">欧拉定理</span></h2><p>欧拉定理是一个费马小定理的直接推广。</p>
+<p>给定一个整数 N ，欧拉定义了函数 φ ，φ(N) 表示 $Z_p^*$ 的大小，有时也叫做<u>欧拉的 φ 函数</u>。</p>
+<p>我们知道，$Z_p^*$ 包含了 $Z_p$ 中除 0 以外的全部元素，因此，对于任意质数 p ，φ(p)=p-1 。有一个特例，如果 N 正好是两个质数 p 和 q 的乘积，那么 φ(N)=N-p-q+1 ，为什么？N 是 $Z_N$ 的大小，现在我们需要移除所有与 m 不是互质的元素，一个元素如何才能不与 m 互质呢？它要不被 p 整除，要不就被 q 整除，在 0 到 m-1 之间，有多少元素能被 p 整除？一定有 q 个。有多少元素能被 q 整除？一定有 p 个。那么我们减去 p ，来除去那些被 q 整除的数；减去 q ，来除去那些被 p 整除的数，注意我们减了 0 两次，因为 0 被 p 和 q 同时整除，所以我们再加 1 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0.PNG" class title="欧拉函数">
+<p><strong>欧拉定理</strong>：如果给我 $Z_N^*$ 中任意的元素 x ，事实上，$x^{φ(N)} 在 $Z_N$ 中一定等于 1 。特别地，费马小定理只适用于质数的情况，对质数而言，我们知道 φ(p)=p-1 ，换句话说，如果 N 是质数，将 φ(N) 可替换为 p-1 ，就得到了费马小定理。</p>
+<p><strong>欧拉定理不仅仅适用于质数，还适用于合数。</strong>欧拉定理也是拉格朗日定理的特例。</p>
+<p>事实上，欧拉定理是 RSA 密码系统的基础。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86.PNG" class title="欧拉定理">
+<h1><span id="modular-eth-roots">Modular e’th roots</span></h1><p>我们已经知道通过使用求逆的算法去解线性方程，那么，怎么解高次多项式方程呢？</p>
+<p>我们固定质数 p ，c 是 $Z_p$ 中的某元素，在 $Z_p$ 中，x 满足 $x^e$=c ，我们就说 x 是 c 的 e 次方根。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/e%E6%AC%A1%E6%96%B9%E6%A0%B9.PNG" class title="e次方根">
+<p>注意，这些 e 次方根不一定总是存在的。例如，$2^{1/2}$ 在 $Z_{11}$ 中不存在。</p>
+<p>什么时候这些 e 次方根存在？当我们知道它们存在时，我们能否有效地计算它们？</p>
+<h2><span id="简单例子e与p-1互质">简单例子(e与p-1互质)</span></h2><p>看一个简单的例子，当我们想计算某个数的 e 次方根时，正好有 e 与 p-1 互质，这时 $c^{1/e}$ 始终存在，且有一非常容易的算法可以计算出 c 在 $Z_p$ 中的 e 次方根。</p>
+<p>首先，因为 e 与 p-1 互质，我们知道 e 模 p-1 有逆，我们计算这个逆，并记之为 d ，然后我们宣称，事实上， $c^{1/e}$ 就是 $c^d$ mod p ，如果这个等式成立，那么首先它证明了对 $Z_p$ 中的所有 c ，c 的 e 次方根总是存在。进一步地，它给出了一个非常有效的算法来计算 c 的 e 次方根，通过简单计算 e 模 p-1 的逆，然后计算 c 的逆次方。</p>
+<p>那么，$c^{1/e}$ = $c^d$ mod p 这个方程为何成立？首先，一个事实是，d·e=1 mod p-1 ，这意味着存在某个整数 k ，使得 d·e=k(p-1)+1 ，现在可以确认 $c^d$ 是 c 的一个 e 次方根了，如何确定？取 $c^d$，计算它的 e 次方，如果 $c^d$ 真的是 c 的一个 e 次方根，那么当我们计算它的 e 次方，我们应该会得到 c ，为什么？如图推导，因为 c 在 $Z_p$ 中，根据费马定理，我们知道 $c^{p-1}$=1 ，从而推出最后结果 c ，证明了 $c^d$ 是 c 的 e 次方根。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90.PNG" class title="简单例子">
+<p><strong>事实上，当 e 与 p-1 互质时，e 次方根总是存在，根是容易计算的。</strong></p>
+<h2><span id="经典例子e与p-1不互质">经典例子(e与p-1不互质)</span></h2><p>当 e 与 p-1 不互质时，一个经典例子是当 e=2 的情况。</p>
+<p>假设我们想计算在 $Z_p$ 中 c 的平方根，那么如果 p 是一个奇质数，事实上从今往后我们一直都关心奇质数，事实上，p-1 是偶数，意味着 2 整除 p-1 ，gcd(2,p-1)≠1 ，所以这不是容易的情况。</p>
+<p>当我们工作在奇质数模下，平方函数实际上是 2 到 1 函数，它把 x 和 -x 映射到了同一个值 $x^2$ ，因此说这个函数是 2 到 1 函数。</p>
+<p>看当我们计算模 11 的平方会发生什么，1 和 -1 模 11 都被映射到了 1 ；2 和 -2 模 11 都被映射到了 4 ；… ，事实上，1，4，9，5，3，都是有平方根的，比如，4 的平方根是 2 和 9 。事实上，$Z_11$ 里的其它元素都没有平方根，这就引出<strong>二次剩余</strong>。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99.PNG" class title="二次剩余">
+<p><strong>二次剩余</strong>：说一个  $Z_p$ 中的元素 x ，如果事实上它在  $Z_p$ 中<u>有一个平方根</u>，我们称之为一个二次剩余；如果没有，就称为二次非剩余。例如，4 模 11 是一个二次剩余。</p>
+<p><strong>如果 p 是一个奇质数，$Z_p$ 中的二次剩余一共有多少个？</strong><u>这个平方函数是 2 到 1 的映射，意味着  $Z_p$ 中有一半的元素在这个映射中没有原像</u>，所以二次剩余的总数是 (p-1)/2+1 ，因为我们知道 $Z_p$ 中的一半元素是二次剩余的，因为平方函数是 2 到 1 的映射，所以映射的像最多有 (p-1)/2 个元素，在 $Z_p^*$ 里有 (p-1)/2 个二次剩余，<u>$Z_p$ 中还有 0 也是二次剩余的</u>，$Z_p$ 中一共有(p-1)/2+1 个二次剩余。</p>
+<p><strong>我们能否对 $Z_p^*$ 里的一个元素 x 判断出 x 是否有平方根呢？</strong></p>
+<p>欧拉提出了一个非常清楚的标准测试这些元素是否是二次剩余。特别地，他说<strong>在 $Z_p$ 中，x 是二次剩余，当且仅当 $x^{(p-1)/2}$=1 mod p</strong> 。</p>
+<p>当我们工作在模 11 下时，可以看到 $x^{(p-1)/2}$ 始终是 1 或 -1 ，<u>在二次剩余1，3，4，5，9上它一定是 1</u> ；而其它元素不是二次剩余，没有平方根。事实上，工作在模 11 下，如果我们取一个非 0 的数 x ，我们看 $x^{(p-1)/2}$ ，我们可以把它写成 $x^{p-1}$ 的平方根，根据费马小定理，$x^{p-1}$=1 ，$x^{(p-1)/2}$ 就是 1 的平方根，一定是 1 或 -1 。</p>
+<p>$x^{(p-1)/2}$ 这个值有个名字叫<strong>勒让德符号</strong>，<u>$Z_p$ 中所有元素的勒让德符号不是 1 就是 -1 取决于 x 是否是二次剩余的</u>。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%AC%A7%E6%8B%89%E5%BC%95%E7%90%86.PNG" class title="欧拉引理">
+<p>如果我们想计算一个二次剩余的平方根，这个引理并没有告诉我们怎么办。</p>
+<h2><span id="计算质数模的平方根">计算质数模的平方根</span></h2><p>分两种情况。</p>
+<p><strong>第一种情况</strong>：p=3 (mod 4) 时，非常容易计算平方根，这种情况下，c 的平方根就是 $c^{(p+1)/4}$ ，p=3 (mod 4) 必然有 p+1=0 mod 4 ，意味着 p+1 被 4 整除，因此 (p+1)/4 是一个整数，就允许计算这个幂，给了我们 c 的平方根。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5.PNG" class title="第一种情况">
+<p><strong>解模 p 的二次方程</strong>：假设给你一个二次方程，让你找到 $Z_p$ 中这个二次方程的解，使用如图方法。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%A7%A3%E6%A8%A1p%E7%9A%84%E4%BA%8C%E6%AC%A1%E6%96%B9%E7%A8%8B.PNG" class title="解模p的二次方程">
+<p><strong>计算合数模的根</strong></p>
+<p>什么时候模 N 的 e 次方根存在？如果我们知道它存在能否有效地计算它？</p>
+<p>事实上，我们只知道计算合数模的 e 次方根与分解合数一样困难，现在，对于一个普通的数 e 不知道是否是最优的，但我们有的最好的计算模 N 的 e 次方根的算法，需要我们分解这个模，一旦我们分解了这个模，那么实际上每个质数因数的 e 次方根是容易计算的，我们可以组合所有的这些 e 次方根，来得到合数模 N 的 e 次方根。</p>
+<h1><span id="arithmetic-algorithms">Arithmetic algorithms</span></h1><p>加法有进位，减法有借位，这些都是<u>线性时间操作</u>，换句话说，如果你想加或者减两个 n 位整数，运行时间与 n 成线性。</p>
+<p>天然的乘法会花<u>平方时间</u>，1960年 Karatsuba 发现运行时间只需要 <u>$n^{1585}$</u> ，很常用，大多数的密码学库都是用这个算法实现乘法。实际上可以用大约 n·log(n) 的时间（几乎线性的时间）来计算乘法，它忽略了很大的常数，只有当乘数十分巨大时才实用，实际上用的不多。</p>
+<p>带余数的除法，实际上也是个<u>平方时间算法</u>。</p>
+<h2><span id="求幂问题">求幂问题</span></h2><p>这个指数问题，设想我们有一个有限循环群 G ，这意味着这个群是由生成元 g 的各个幂生成的，共有群的阶数个幂。比如群 $Z_p^*$ ，g 是某个 G 的生成元，事实上还有很多有限循环群的例子。</p>
+<p>现在，我们的目标是，给定这个生成元 g ，以及某个指数 x ，计算 $g^x$ 。通常情况下你会认为，如果 x=3 ，我要计算 $g^3$ 。这会花费指数级时间，<strong>如何在 x 非常大的情况下依然很快地计算 $g^x$ ？</strong>使用<strong>重复平方算法</strong>。</p>
+<p><strong>重复平方算法工作过程</strong>：假设要计算 53 个 g 的乘积，把 53 写成二进制，如图，53 是 32+16+4+1 ，这意味着 $g^{53}$ 就是 $g^{32+16+4+1}$ ，我们可以把指数分解开，使用指数法则。这给出了一个计算想法，我们取 g ，然后开始计算平方、再平方等，然后简单的乘合适的幂，就可以得到结果。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E9%87%8D%E5%A4%8D%E5%B9%B3%E6%96%B9%E6%B3%95.PNG" class title="重复平方法">
+<p>下图中，z 累乘着合适的幂。循环次数是 $log_2$x 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E9%87%8D%E5%A4%8D%E5%B9%B3%E6%96%B9%E6%B3%952.PNG" class title="重复平方法2">
+<h2><span id="运行时间小结">运行时间小结</span></h2><p>假设我们有一个 N 位模，$Z_N$ 上的加减法花线性时间；简化乘法需平方时间；指数需要 log(x) 次循环，每轮做两次乘法即 log(x) 次乘法，乘法的时间是平方的，所以运行时间是 $n^2$log(x) ，指数算法是立方时间算法。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%B0%8F%E7%BB%93.PNG" class title="运行时间小结">
+<h1><span id="intractable-problems">Intractable problems</span></h1><h2><span id="简单问题">简单问题</span></h2><p>如果给我一个整数 N ，给我一个 $Z_N$ 中的指数 x ，使用欧几里德算法找到 x 的逆是很容易的。</p>
+<p>如果给我一个质数 p ，给我某个多项式 f ，找到 $Z_N$ 中的一个元素，使得它是这个多项式的根也很容易。实际上有一个有效的算法，用时与多项式次数呈线性，至少对于低次数的多项式，找到这些方程的质数模的根很容易。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%AE%80%E5%8D%95%E9%97%AE%E9%A2%98.PNG" class title="简单问题">
+<h2><span id="经典的质数模的困难问题">经典的质数模的困难问题</span></h2><p>困难的问题组成了许多公钥密码系统的基础。</p>
+<p>固定某个大质数 p ，固定 $Z_p^*$ 中的某个元素 g ，我们假设这个元素 g 的阶正好是数 q ，现在，考虑一个指数函数，将 x 映射到 $g^x$ ，，这个函数是容易计算的。</p>
+<p>现在，看相反的问题，给定 $g^x$ ，想找出它的对数，即值 x 。在实数上，给定 $g^x$ ，找 x 就是对数函数的定义，但在这里找的是模 p 下的对数，这个问题叫<strong>离散对数问题</strong>，Dlog ，<u>$g^x$ 的以 g 为底的离散对数是这个指数 x</u> 。我们的目标是输出指数 x ，x 在 0 到 q-2 的范围里正好是 $log_2$x 。</p>
+<p>看一个例子，假设看整数模 11 ，写下 $Z_11$ 里的离散对数函数，底数为 2 ，这个函数如下工作：首先，1 的离散对数是 0 ，因为 $2^0$ 是 1 。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98.PNG" class title="离散对数问题">
+<p>一般情况下的离散对数函数的计算是很困难的，当然，对于小质数而言是很容易的，做一张表可以读到离散对数值，但如果质数 p 是个大数，计算离散对数是很困难的。</p>
+<p><strong>更一般地定义离散对数问题</strong>，不再局限于群 $Z_p^*$ ，更为抽象的看一个普通群。</p>
+<p>我们有一个有限循环群，生成元是 g ，这意味着，这个群由 g 的各次幂组成。我们取所有的幂，一共有阶数个，这里 G 的阶正好是 q ，那么我们取 g 所有的幂，组成了群 G ，群 G 的离散对数问题是困难的，事实上没有有效的算法能够计算离散对数函数。</p>
+<p>如果你从群 G 中随机选择一个元素 g ，再随机选择一个指数 x ，同时给出这个群的描述、阶数，但最初的元素只有 g 和 $g^x$ ，这个算法会计算出离散对数的概率是可忽略的。如果这点对所有的有效算法都成立，那么我们说在群 G 上，离散对数问题是困难的。</p>
+<p>没有有效的算法能以不可忽略的概率计算出离散对数。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E6%9B%B4%E4%B8%80%E8%88%AC%E7%9A%84%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E9%97%AE%E9%A2%98.PNG" class title="更一般的离散对数问题">
+<h2><span id="亚指数算法">亚指数算法</span></h2><p>在 $Z_p^*$ 中计算离散对数有一个亚指数算法，如果你有一个 n 位的质数，这个算法的运行时间的指数大约是 n 的立方根，事实上，在这个算法的运行时间里，这里有很多其他项，但最主要的项是质数的位数的立方根，即 n 的立方根。因为有这个算法，如果我们想让离散对数问题变得与破解相应的对称密钥一样难，我们必须使用较大的模 p 。</p>
+<p>如果看椭圆曲线群，参数会好很多，事实上在一个椭圆曲线群里，我们对离散对数的最好算法运行时间为 $2^{n/2}$ 。</p>
+<p>椭圆曲线大小是对称密钥大小两倍的原因是由于指数里的因子 2 ，我们必须将椭圆曲线群的大小扩大一倍，以获得 $2^n$ 的运行时间。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E4%BA%9A%E6%8C%87%E6%95%B0%E7%AE%97%E6%B3%95.PNG" class title="亚指数算法">
+<p><a href="https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" target="_blank" rel="noopener">相关笔记链接</a></p>
+<h2><span id="离散对数困难性的直接应用">离散对数困难性的直接应用</span></h2><p>特别地，我们基于离散对数问题构建一个抗碰撞哈希函数，我们选择一个群 G ，G 上的离散对数问题是困难的，可以把 G 想象成群 $Z_p^*$ ，我们假设群 G 有质数阶 q ，那么 q 是某个质数且正好为 |G| ，即群 G 里元素的个数，现在我们选择群 G 中的两个元素 g 和 h 定义如下哈希函数 H ：哈希函数的输入为 x 和 y 时，输出 $g^x$· $h^y$ 。</p>
+<p>这个函数 H 事实上是抗碰撞的，就是说，找到一个 H 的碰撞与计算 G 上的离散对数一样困难。特别地，如果你可以找到一个 H 的碰撞，你就能计算 g 底 h 的离散对数，由于计算离散对数是困难的，所以找 H 的碰撞也是困难的。</p>
+<p>证明：假设我们有一个函数 H 的碰撞，碰撞为两对不同的信息对，($x_0$,$y_0$) 与 ($x_1$,$y_1$) ，它们正好在函数 H 上发生碰撞，也就是说，如果计算函数值 H($x_0$,$y_0$) 和 H($x_1$,$y_1$) ，就会得到一个碰撞，也就是会得到相等的结果。然后做一些变换，取两边的 ($y_1$-$y_0$) 次方根，另一边得到 h 。我们用 g 的某个幂表示了 h ，所以就计算出了 g 底 h 的离散对数。那么这个指数里除以 ($y_1$-$y_0$) 是什么意思呢？这个意思就是让我们计算 ($y_1$-$y_0$) 的模 q 的逆，然后把结果与 ($x_0$-$x_1$) 相乘。</p>
+<img src="/.com//07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E5%9B%B0%E9%9A%BE%E6%80%A7%E7%9A%84%E7%9B%B4%E6%8E%A5%E5%BA%94%E7%94%A8.PNG" class title="离散对数困难性的直接应用">
+<p>这也展示了为什么我们希望 q 是质数，因为我们需要确保 ($y_1$-$y_0$) 始终可逆，那么事实上我们知道，当我工作在质数模时，除了 0 ，所有数都可逆，这就遇到了一个难以理解的地方，如果 $y_1$-$y_0$=0 会怎样？如果是这种情况，我们无法得到离散对数，我们不能除以 0 ，如果 $y_1$-$y_0$=0 ，意味着 $y_1$=$y_0$ ，看上图式子最左侧，$x_1$ 也必须等于 $x_0$ ，这与碰撞的前提相矛盾，相当于给了同样的信息对两次，因此，不需要去找离散对数了。但如果给我一个碰撞，$y_1$ 与 $y_0$ 有必要是不同的，然后将计算 h 底 g 的离散对数，由于群 G 上的离散对数被认为是困难的，这意味着这个非常简单的函数 H 一定是抗碰撞的。</p>
+<p>尽管这个函数有一个漂亮的抗碰撞的证明，但不怎么用，因为每次哈希需要计算两次指数，相对较慢。</p>
+<h2><span id="合数模的经典难题">合数模的经典难题</span></h2><p>1024 位数，定义集合 $Z_{(2)}(n)$ 表示所有的整数，正好是两个质数的乘积，这两个质数都是 n 位的，2 对应于这个集合的数都有两个质因子，这两个质因子差不多大小都是 n 位的质数</p>
+<p><strong>难题一</strong>：如果选择 $Z_{(2)}(n)$ 中的一个随机整数，如何分解它？</p>
+<p>1024 位的数尽管还没有被解出来，但很有可能这个数量级的数将很快被因子分解，现在推荐的值是 2048 位的数。</p>
+<p><strong>难题二</strong>：给出某个非线性多项式，如果多项式次数大于 1 ，给出 $Z_{(2)}(n)$ 中的某个随机的合数，如何找到这个方程的根 x ？</p>
+<p>如果次数等于 1 那就是解线性方程，很容易；但当次数变成非线性时，我们不知道怎么解这个模 N 的方程。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ 密码学</a>
+          
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" rel="next" title="【DanBoneh】Basic Key Exchange">
+                <i class="fa fa-chevron-left"></i> 【DanBoneh】Basic Key Exchange
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/" rel="prev" title="【DanBoneh】基于陷门置换的公钥加密">
+                【DanBoneh】基于陷门置换的公钥加密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="XUEYU" />
+            
+              <p class="site-author-name" itemprop="name">XUEYU</p>
+              <p class="site-description motion-element" itemprop="description">你只管善良，上天自有衡量。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+				<a href="/archives">
+
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">最大公约数 gcd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">模逆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Fermat and Euler</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">费马小定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">$Z_p^*$的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">欧拉定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Modular e’th roots</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">简单例子(e与p-1互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">经典例子(e与p-1不互质)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">计算质数模的平方根</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Arithmetic algorithms</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">求幂问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">运行时间小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">Intractable problems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">简单问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">经典的质数模的困难问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.3.</span> <span class="nav-text">亚指数算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.4.</span> <span class="nav-text">离散对数困难性的直接应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.5.</span> <span class="nav-text">合数模的经典难题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+	  
+		
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		
+		<div class="widget-wrap">
+			<h3 class="widget-title"></h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="200" height="200" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E4%BA%8E%E9%85%8D%E5%AF%B9%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">基于配对的密码学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+		
+		
+		
+<div style="">
+  <canvas id="canvas" style="width:60%;" height="100" width="700">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+<!--访问量访问人数-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">
+	  <span class="post-count">71k</span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+	<i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XUEYU</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="timeDate"></span><span id="times"></span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Running "+dnum+" Days "; 
+    } 
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz',
+        appKey: 'oNioHGf9lbC9krBNHyPsX05z',
+        placeholder: '欢迎交流讨论...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz", "oNioHGf9lbC9krBNHyPsX05z");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

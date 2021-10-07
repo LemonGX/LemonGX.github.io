@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="密码学,DanBoneh密码学," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="鳕鱼堡er" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Key Derivation从一个密钥推出多个密钥设想我们有一个特定的源密钥，源密钥有很多种方法生成，设想源密钥是由一个硬件随机数发生器生成的，或者可能是由密钥交换协议生成的，攻击者不知道源密钥是什么。在很多情况下，我们需要很多密钥来保证会话的安全，不仅仅是单个源密钥。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DanBoneh】Odds And Ends">
+<meta property="og:url" content="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/index.html">
+<meta property="og:site_name" content="鳕鱼堡er">
+<meta property="og:description" content="Key Derivation从一个密钥推出多个密钥设想我们有一个特定的源密钥，源密钥有很多种方法生成，设想源密钥是由一个硬件随机数发生器生成的，或者可能是由密钥交换协议生成的，攻击者不知道源密钥是什么。在很多情况下，我们需要很多密钥来保证会话的安全，不仅仅是单个源密钥。">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E6%BA%90%E5%AF%86%E9%92%A5.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%AE%E7%9A%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E6%BA%90%E5%AF%86%E9%92%A5.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E2%80%9C%E5%85%88%E6%8F%90%E5%8F%96%E5%86%8D%E6%89%A9%E5%B1%95%E2%80%9D%E6%9C%BA%E5%88%B6%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/HKDF.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8E%E5%AF%86%E7%A0%81%E7%9A%84KDF.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8A%A0%E5%AF%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8A%A0%E5%AF%86%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%98%AF%E9%80%89%E6%8B%A9%E6%98%8E%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/CPA%E6%B8%B8%E6%88%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%A4%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7CPA%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%B8%A6%E5%9B%BA%E5%AE%9AIV%E7%9A%84CBC%E4%B8%8D%E6%98%AF%E7%A1%AE%E5%AE%9A%E7%9A%84CPA%E5%AE%89%E5%85%A8%E7%9A%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%B8%A6%E5%9B%BA%E5%AE%9AIV%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8D%E6%98%AF%E7%A1%AE%E5%AE%9A%E7%9A%84CPA%E5%AE%89%E5%85%A8%E7%9A%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/SIV.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9A%8F%E6%9C%BA%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84SIV%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9A%8F%E6%9C%BA%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84SIV%E8%A7%A3%E5%AF%86%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BD%BF%E7%94%A8PRP%E6%9E%84%E5%BB%BA%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84CPA%E5%AE%89%E5%85%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/EME.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8EPRP%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AE%A4%E8%AF%81%E5%8A%A0%E5%AF%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AF%86%E6%96%87%E5%AE%8C%E6%95%B4%E6%80%A7%E6%B8%B8%E6%88%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B2.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%BE%AE%E8%B0%83%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AE%89%E5%85%A8%E7%9A%84%E5%BE%AE%E8%B0%83%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BE%8B%E5%AD%901.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/XTS%E6%9C%BA%E5%88%B6.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%8D%E5%9C%A8%E5%BE%AE%E8%B0%83%E5%89%8D%E5%8A%A0%E5%AF%86%E7%9A%84%E4%BE%8B%E5%AD%90.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/XTS%E6%80%BB%E7%BB%93.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%80%BB%E7%BB%93.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BF%9D%E6%A0%BC%E5%BC%8F%E5%8A%A0%E5%AF%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BF%9D%E6%A0%BC%E5%BC%8F%E5%8A%A0%E5%AF%862.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%9C%BA%E5%88%B6%E7%9A%84%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B1.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%9C%BA%E5%88%B6%E7%9A%84%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B2.PNG">
+<meta property="article:published_time" content="2020-07-15T10:26:18.000Z">
+<meta property="article:modified_time" content="2020-07-18T10:21:46.000Z">
+<meta property="article:author" content="XUEYU">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="DanBoneh密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E6%BA%90%E5%AF%86%E9%92%A5.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/15/【DanBoneh】OddsAndEnds/"/>
+
+
+
+
+
+  <title>【DanBoneh】Odds And Ends | 鳕鱼堡er</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?702343d7b417e8c7fb52c949a3414d6c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鳕鱼堡er</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个誓死不当程序猿的信院研究僧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XUEYU">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鳕鱼堡er">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【DanBoneh】Odds And Ends</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-15T18:26:18+08:00">
+                2020-07-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-18T18:21:46+08:00">
+                2020-07-18
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/" class="leancloud_visitors" data-flag-title="【DanBoneh】Odds And Ends">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  10.5k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  36分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="key-derivation">Key Derivation</span></h1><h2><span id="从一个密钥推出多个密钥">从一个密钥推出多个密钥</span></h2><p>设想我们有一个特定的源密钥，源密钥有很多种方法生成，设想源密钥是由一个<u>硬件随机数发生器</u>生成的，或者可能是由<u>密钥交换协议</u>生成的，攻击者不知道源密钥是什么。在很多情况下，我们需要很多密钥来保证会话的安全，不仅仅是单个源密钥。</p>
+<a id="more"></a>
+<p><strong>如何使用一个源密钥，从一个硬件过程或密钥交换，来生成一堆密钥来保证我们的会话安全？</strong></p>
+<p>使用<strong>密钥推导函数</strong>（<strong>KDF</strong>）来实现。</p>
+<h2><span id="均匀分布的源密钥构建-kdf">均匀分布的源密钥构建 KDF</span></h2><p>首先，假设我们有一个安全的 PRF ，正好有密钥空间 K ，现在假设我们的源密钥 SK 在密钥空间 K 中均匀分布，这时，源密钥实际上是安全 PRF F 的一个均匀随机密钥，我们可以直接使用它来生成多个密钥。在这种情况下，KDF 很简单，工作过程如下：取<u>源密钥</u>、<u>一个上下文参数</u>、<u>输入的长度</u>为输入，然后计算 PRF 在 0 处的值、1 处的值、… 、直到 L ，使用输出中你需要的那么多位来<u>截断输出</u>，来生成会话的全部密钥。如果需要生成单向密钥，每个方向都有一个密钥，包括加密密钥和一个 MAC 密钥，当你生成了足够多的密钥来保护会话，就截断输出。</p>
+<p>CTX（上下文参数）：是一个作为应用身份唯一的字符串，所以实际上可以在一个系统上有多个应用，多个应用试着建立多种安全密钥。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E6%BA%90%E5%AF%86%E9%92%A5.PNG" class title="均匀分布的源密钥">
+<p>假设有三个进程都有密钥生成，这个上下文变量试图把他们三个分开，<strong>上下文变量的目的是什么？</strong>上下文变量用来<strong>分离各个进程</strong>，使得每个进程有属于自己的会话密钥，即使多个进程正好有同样的源密钥 SK 。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%AE%E7%9A%84.PNG" class title="上下文字符串目的">
+<h2><span id="非均匀分布的源密钥构建-kdf">非均匀分布的源密钥构建 KDF</span></h2><p>如果源密钥不是均匀分布的密钥，对于伪随机函数来说，我们不能继续假设 伪随机函数的输出是与随机函数的输出 不可区分的了，事实上，我们只使用刚刚描述的 KDF ，其输出看起来可能并不随机，这样，攻击者可能可以预期某些我们使用的会话密钥，进而破解会话。</p>
+<p><strong>为什么这个源密钥会不是随机分布的呢？</strong>原因有很多，比如：</p>
+<p>①如果使用一个密钥交换协议，很可能这个密钥交换协议会生成一个高熵的密钥（高熵，意味着字符串的分布接近均匀，但不是均匀分布），高熵的密钥分布于密钥空间的一个子空间，那么这个密钥不是均匀分布的字符串，它会是某个更大集合的子集上的均匀分布，所以，KDF 必须适应密钥交换协议不能生成均匀分布的字符串这一事实。</p>
+<p>②大家使用的硬件随机数发生器可能也会生成不均匀的输出，我们不想依赖输出不均匀的硬件随机数发生器，所以，我们只假设输出结果含有高熵，但可能是不均匀的。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9D%9E%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83%E7%9A%84%E6%BA%90%E5%AF%86%E9%92%A5.PNG" class title="非均匀分布的源密钥">
+<p>在这种情况下，我们必须从某种意义上清楚这种不均匀，因此引入了<strong>“先提取再扩展”机制</strong>构建 KDF 。</p>
+<p><strong>“先提取再扩展”机制工作过程</strong>：</p>
+<p>①从实际源密钥中<u>提取一个伪随机密钥</u>。从下图可知，某种意义上，源密钥有多种可能的值，下图为这些值的概率分布，左图是一个分布崎岖的函数，说明源密钥并不是再密钥空间上均匀分布的，这里我们使用提取器（这种提取器最后不一定产生均匀分布的输出，但生成的分布与真的均匀分布不可区分。）取这个不均匀的函数为输入，把它变成一个密钥空间上的均匀分布。现在，提取器取一个<strong>盐</strong>作为输入，这个盐的作用就是捣乱，不管输入分布如何，输出分布依然与随机分布不可区分。盐不是秘密的字符串，是公开知道的，攻击者知道盐也无所谓，而且，盐是<u>固定的</u>值，盐是<u>随机选择的</u>，试图提取的有趣的分布在本质上并不依赖于选择的盐，因此使用盐的结果是得到一个看起来与随机分布不可区分的分布，某种意义上，盐是用来防御可能会干扰提取器的恶意的坏分布。</p>
+<p>②使用安全的 PRF 把密钥扩展成我们需要的那么多位来保证会话安全。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E2%80%9C%E5%85%88%E6%8F%90%E5%8F%96%E5%86%8D%E6%89%A9%E5%B1%95%E2%80%9D%E6%9C%BA%E5%88%B6%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="“先提取再扩展”机制工作过程">
+<h2><span id="hkdf">HKDF</span></h2><p>HKDF 是一个 KDF ，是使用 HMAC 构建的密钥推导函数，这里 HMAC 既用于 PRF 进行扩展，又用于提取器来提取最初的伪随机密钥。</p>
+<p><strong>工作过程</strong>：</p>
+<p>在进一步提取中，我们使用盐（随机选择的、固定的、公开的）作为 HMAC 的密钥，然后把源密钥作为 HMAC 的数据，当我们使用 HMAC 时，获得的密钥看起来与随机的不可区分。</p>
+<p>假设源密钥有足够的熵，现在我们有了这个伪随机密码，我们将要使用 HMAC 作为一个 PRF 来生成一个我们需要的、用于会话密钥那么多位的会话密钥。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/HKDF.PNG" class title="HKDF">
+<p>注意！一旦有了从硬件或密钥交换协议得来的源密钥，把它转换成会话密钥，不是通过使用直接的取样，永远不要直接使用源密钥作为协议里的会话密钥。将源密钥交给一个 KDF ，KDF 会给你所有的密钥和你需要的输出。</p>
+<h2><span id="基于密码的-kdfpbkdf从密码中提取密钥">基于密码的 KDF（PBKDF/从密码中提取密钥）</span></h2><p>密码通常含有较低的熵，约为 20 位左右，对于根据密码生成会话密钥来说是不够的，因此，我们需要根据密码推导加密密钥和 MAC 密钥，做法如下：首先，出于这种目的，不要使用 HKDF ，因为其设计与我们的目标不符，若使用 HKDF ，推导出的密钥对于字典攻击是脆弱的。</p>
+<p>PBKDF 通过两种手段防御造成字典攻击的低熵问题，①在使用盐前，盐是一个公开的固定值；②使用慢哈希函数。</p>
+<p><strong>PKCS#5</strong> ：一种从密码推导密钥的标准方法，我们讨论 PBKDF1 版本，这个机制在大多数密码学库中都已实现，我们不应该自己去实现，我们只需要调用一个函数，由密码推导密钥，不过，这个密钥没有高熵，而这个 PBKDF 试图<u>让这个猜测问题尽可能困难</u>（只是更困难，不是不可能），工作过程如下：首先，它们计算密码联结上盐后所得字符串的哈希值，然后这个哈希函数被设计成一个非常慢的哈希函数，构造一个慢哈希函数的方法是取一个特定的哈希函数，迭代它很多次，记为 c 次（只需要很短的时间），所说的迭代，是取密码和盐放在这个哈希函数的输入里，然后应用哈希函数获得一个输出，然后再应用哈希函数获得另一个输出，一次又一次后，我们获得了最后的输出作为这个密钥推导函数的密钥输出。</p>
+<p>但是，攻击者可以尝试字典里的所有密码，因为人们更愿意选择字典里的密码，攻击者也知道公开的盐，他可以一个一个尝试这个哈希，但字典里的密码很多，需要花掉很长时间，从而减缓了字典攻击，从而使得攻击者更难猜中会话密钥。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8E%E5%AF%86%E7%A0%81%E7%9A%84KDF.PNG" class title="基于密码的KDF">
+<h1><span id="deterministic-encryption">Deterministic Encryption</span></h1><p>确定性加密，是指一个加密系统总是把给定明文映射到同一个密文，没有用到新鲜值，只是一个一致性加密机制。</p>
+<h2><span id="查找加密数据库的例子">查找加密数据库的例子</span></h2><p>有一个服务器，存储了一个加密数据库，它存储的是记录，每条记录都有一个索引，一些数据存储在记录里，现在，服务器首先要加密这条记录，索引被密钥 $k_1$ 加密了，数据被密钥 $k_2$ 加密了，加密好的记录发送给数据库，同样的事情发生在许多记录上，这样整个数据库保存了许多加密的记录。</p>
+<p>如果加密是确定性的，当服务器想提取数据库中的一条记录时，他只需要向数据库发送加密后的服务器感兴趣的记录的索引，这里它会发送加密后的索引 Alice ，获得的密文与最初写入数据库时生成的密文一样，数据库可以找到这个记录，把结果发送给服务器，在这里，数据库完全不知道自己存储了什么数据，也不知道服务器提取了什么记录，因为数据库看到的请求都是密文形式的。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8A%A0%E5%AF%86.PNG" class title="确定性加密">
+<p><u>确定性加密不可能是选择明文安全的</u>，攻击者可以看到不同的密文，如果看到同样的密文两次，他就知道被加密的明文一定是一样的，即，通过密文攻击者可以学到一些对应明文的信息。在实际中，这会带来非常严重的攻击，当明文空间很小时，确定性加密是不安全的。在加密数据库的情况下，攻击者会看到，如果有两个记录在索引位置正好有同样的密文，那么他就知道了这两条记录对应同一个索引，尽管他不知道索引是什么，他也能学习到明文的信息。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%8A%A0%E5%AF%86%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%98%AF%E9%80%89%E6%8B%A9%E6%98%8E%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84.PNG" class title="确定性加密不可能是选择明文安全的">
+<h2><span id="cpa选择明文攻击的游戏">CPA（选择明文攻击）的游戏</span></h2><p>这个游戏开始时，攻击者选择发送两条明文信息 $m_0$ 和 $m_0$ ，在这个游戏里，攻击者总能得到左边或右边明文信息的加密结果，在当前情况下，左右两边的明文信息是一样的，攻击者将会得到信息 $m_0$ 的加密，下一次，攻击者会发送明文信息 $m_0$ ，$m_1$，现在，他将获得 $m_0$ 或 $m_1$ 的加密，攻击者的目标是确定他得到的是哪一个信息的加密，由于这个加密是确定的，攻击者很容易分辨，他只需要测试 c 是否等于 $c_0$ ，如果 c=$c_0$ ，他就知道获得的是 $m_0$ 的加密，否则就是 $m_1$ 的加密。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/CPA%E6%B8%B8%E6%88%8F.PNG" class title="CPA游戏">
+<p>事实上，这不是一个确定性加密的 CPA 攻击，因为两次询问了同样的信息 $m_0$ 的加密。</p>
+<h2><span id="解决方法">解决方法</span></h2><p>限制能够使用单个密钥加密的信息的类型，想法是，让加密者永远不要用单个密钥来加密同样的明文信息，换句话说，信息密钥对 (k,m) 总是不同的。</p>
+<p>①如果明文正好是随机的，当我们加密时，事实上，很可能所有使用一个主密钥加密的明文是互不相同的，因为这些密钥不太可能重复。</p>
+<p>②明文之所以不会重复，是因为明文空间中的某些结构，如，加密唯一用户的id。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%A4%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.PNG" class title="两个解决方法">
+<h2><span id="确定性的cpa安全游戏">确定性的CPA安全游戏</span></h2><p>通常我们把密码定义为一对加密、解密算法，所以我们有一个密钥空间、信息空间和密文空间，我们要定义安全性，依照惯例使用两个实验来定义，这个游戏与标准的 CPA 游戏几乎一样。</p>
+<p>攻击者发送询问，可以看到这些询问包含了明文信息 $m_0$ 和 $m_1$ ，并且它们的长度必须一样，对于每个询问，攻击者会获得 $m_0$ 或 $m_1$ 的加密结果，他反复这样做 q 次，在游戏的最后要判断他获得的是左边信息的加密还是右边信息的加密，这是标准的选择明文攻击游戏。</p>
+<p>但是，如果最左侧给挑战者的 <u>b=0</u> ，换句话说，攻击者总能看到左边明文的加密，那么碰巧，<u>左边的信息都是不同的</u>，正是因为所有的信息 $m_0$ 都是不同的，那么，他不会看到同样的信息被同样的密钥加密，类似地，我峨嵋你要求所有的信息 $m_1$ 也都是不同的，如果 b=1 ，攻击者永远不会看到两条信息被同一个密钥加密。以上是说，<u>加密者不会使用同样密钥多次加密同样的明文信息</u>。因此，攻击者不能多次询问，用同样的密钥对同样的信息进行加密的结果。<u>这个机制是语义安全的</u>。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AE%E5%AE%9A%E6%80%A7CPA%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="确定性CPA安全游戏">
+<h2><span id="带固定-iv-的-cbc-不是确定的-cpa-安全的">带固定 IV 的 CBC 不是确定的 CPA 安全的</span></h2><p>假设我们有一个 PRP 正好定义在 n 位分组上，我们要以 CBC 模式使用这个 PRP ，如果信息中有 5 个分组，那么这个 PRP E 会被调用 5 次来解密各个分组，攻击如下进行：</p>
+<p>攻击者首先询问信息 $0_n<script type="math/tex">1_n$ 的加密结果，即，第一个分组全是 0 第二个分组全是 1 .左边的信息等于右边的信息，意味着他想得到 $0_n</script>1_n$ 的密文。为求完整性，写下固定的 IV 作为密文的第一个元素，如果考虑 CBC 然后工作，密文的第二个元素是 IV 异或明文的第一个分组，在这个情况下第一个明文分组全是 0 ，所以我们所加密的就是一个固定的 IV ，那么密文的第二个分组将是这个固定 IV 的加密。</p>
+<p>接下来，攻击者会输出两个单分组的信息，第一个信息在左边，是全 0  的分组，第二个信息在右边，是全 1 的分组，观察到这是一个有效的确定性 CPA 询问，因为左边的信息不相同，右边的信息也不相同，现在，攻击者得到如下回复，如果他获得了左边信息的加密，那么全是 0 的一个分组的明文信息加密后就是固定 IV 的加密结果；如果他获得右边信息的加密，那将是 1 异或固定 IV 后的加密。如果图中两个黄圈中的分组正好是一样的，那么我们知道他收到了左边明文信息的加密，b=0 ，如果不一样，攻击者就知道 b=1 ，这就证明了带固定 IV 的 CBC 不是确定的 CPA 安全的。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%B8%A6%E5%9B%BA%E5%AE%9AIV%E7%9A%84CBC%E4%B8%8D%E6%98%AF%E7%A1%AE%E5%AE%9A%E7%9A%84CPA%E5%AE%89%E5%85%A8%E7%9A%84.PNG" class title="带固定IV的CBC不是确定的CPA安全的">
+<p><strong>关于固定 IV 的计数器模式，是不是确定的 CPA 安全的？</strong></p>
+<p>答案是否定的，因为这是一次性补齐的加密，如果使用这个一次性密码本来加密不同的明文信息，我们会得到一个二次密码本，CPA 安全游戏如图，可以实施两次密码本攻击。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%B8%A6%E5%9B%BA%E5%AE%9AIV%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8D%E6%98%AF%E7%A1%AE%E5%AE%9A%E7%9A%84CPA%E5%AE%89%E5%85%A8%E7%9A%84.PNG" class title="带固定IV的计数器模式不是确定的CPA安全的">
+<h1><span id="deterministic-encryption-constructions-siv-and-wide-prp">Deterministic Encryption Constructions: SIV and wide PRP</span></h1><p>当加密数据库时，确定的安全性加密是需要的，例如，当加密数据库索引时，稍后想要使用这个加密的索引查找记录，由于加密是确定的，能够保证，当查找加密的索引时，这个索引和当初记录被写进数据库时给出的索引是一样的，这个确定性加密可以让我们以简单快捷的方式根据加密的索引查找记录。</p>
+<h2><span id="确定性-cpa-安全的机制-1siv">确定性 CPA 安全的机制 1：SIV</span></h2><p><strong>合成 IV 机制的工作流程</strong>如下：</p>
+<p>有一个通用的 CPA 安全加密系统，以密钥、明文信息、r 为输入，r 是加密算法里使用的随机性，如果一个 CPA 安全系统不使用新鲜值的话，必须是随机的，所以写下变量 r 表示被用于加密算法的随机字符串。</p>
+<p>现在，我们还需要一个伪随机函数 f ，这个函数 f 取信息空间里的任意信息作为输入，输出一个字符串 R ，这个 CPA 安全的加密系统可使用 R 作为随机性，r 实际上是集合 R 的一个元素。</p>
+<p>SIV 使用两个密钥 $k_1$ 和 $k_2$ 来加密明文信息 m ，首先 SIV ①应用伪随机函数 f ，根据明文 M 来推导用于 CPA 安全的加密机制 E 的随机性，然后②使用推导出的随机性来加密明文 m ，③我们会得到密文 c 并输出。</p>
+<p>如果加密机制 E 正好是随机计数器模式的，那么随机性 r 就是随机 IV，这个 IV 会随密文一并输出，这意味着，密文比明文略长，但在这里，不是要去生成短密文，而是要确保加密机制的确定性，所以如果我们多次加密了同样的明文，每次我们应当获得同样的密文，其实我们每次都会获得同样的随机性 r 。</p>
+<p>很容易证明，这个加密机制在确定的选择明文攻击下是语义安全的。因为我们应用伪随机函数 F 来处理多个信息，那么生成的随机字符串看起来像是真随机字符串，每条信息都有不同的随机字符串，因此，这个 CPA 安全的加密机制总是使用真随机字符串。</p>
+<p>这对于一个 AES 分组的明文来说特别合适，事实上，对于短明文信息，我们将看到一个稍有不同的加密机制，更适合这些短明文信息。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/SIV.PNG" class title="SIV">
+<p>SIV 免费获得了密文完整性，事实上，如果想加上完整性的话，我们不必使用特定的 MAC ，某种意义上，SIV 已经构建了完整性机制。</p>
+<p>首先，我们的目标是构建<strong>确定的认证加密</strong>（<strong>DAE</strong>），确定性认证加密的意思是，确定性的 CPA 安全加上密文完整性。密文完整性的意思是，攻击者询问他选择的信息的加密结果，而他不能产生另一个密文可以被解密成有效的明文。</p>
+<p><strong>随机计数器模式的SIV加密过程</strong>：</p>
+<p>看一个 SIV 的特例，其底层的加密机制是随机计数器模式，记为 <strong>SIV-CTR</strong> ，我们取明文信息，然后对明文应用 PRF ，推导出一个 IV ，然后 IV 被用在使用随机计数器模式加密明文信息，特别地，我们要使用这个 PRF Fctr 表示 F 计数器，随机计数器模式计算 Fctr 在 IV 处的值，在 IV+1 处的值，一直到 IV+L ，然后给出最终的密文。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9A%8F%E6%9C%BA%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84SIV%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.PNG" class title="随机计数器模式的SIV加密过程">
+<p><strong>随机计数器模式的SIV解密过程</strong>：</p>
+<p>在随机计数器模式的 SIV 的解密过程中，我们增加一个检查以提供密文完整性，这里我们有包含 IV 和密文的 输入密文，首先我们将使用给定的 IV 解密密文，我们会得到一个候选明文，现在再次应用 PRF F 来处理这个得到的明文信息，根据 SIV 的定义，如果得到的明文有效，我们应该获得与攻击者在密文中所提供的同样的 IV，如果我们得到一个不同的 IV ，那么这个明文不是有效的，我们就拒绝这个明文，解密中的这个检查实际上足以提供密文完整性。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E9%9A%8F%E6%9C%BA%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84SIV%E8%A7%A3%E5%AF%86%E8%BF%87%E7%A8%8B.PNG" class title="随机计数器模式的SIV解密过程">
+<p>所以，确定的认证加密，用一个简单的定理来表述：<strong>如果 F 是一个安全的 PRF ，在计数器模式中这是由 CPA 安全的 Fctr 推出的，然后事实上得到的机制是确定性的认证加密系统</strong>。</p>
+<p>为了证明这个定理，我们只需要证明密文完整性，因为之前已经证明了这个系统有确定性的 CPA 安全。</p>
+<p>为了证明这个系统有密文完整性，我们看这个密文完整性是如何工作的：攻击者询问一组他选择的明文的加密结果，然后他获得相应的密文，目标是<u>产生一个新的有效的密文</u>，如果这个有效密文在解密时被解密成了全新的明文，那么我们把这个新信息带入 PRF F ，我们将获得某个随机 IV ，这个 IV 基本上不可能是攻击者在输出的密文中提供的 IV ，这就是说，当攻击者输出它的伪造密文时，伪造密文里的信息应该等于他在选择明文询问里得到的信息之一，否则，得到的 IV 以很高的概率不等于伪造的密文中提供的 IV，但如果明文等于攻击者问过的明文之一，那么我们得到的密文将等于提供给攻击者的密文之一，也就是说，攻击者伪造的密文就是我们曾给他的密文之一，所以，这不是一个有效的伪造。</p>
+<h2><span id="确定性-cpa-安全的机制-2just-use-a-prp">确定性 CPA 安全的机制 2：just use a PRP</span></h2><p>这个机制很简单，只需要直接使用 PRP ，假设 (E,D) 是一个安全的 PRP ，E 是加密，D 是解密，如果我们直接使用 E ，就已经给了我们确定性 CPA 安全性。证明如下：</p>
+<p>假设 F 是从 X 到 X 的真随机可逆函数，在 实验0 里，攻击者将看到他提交的一组明文信息，也就是左边的信息，攻击者会看到函数 f 在左边信息上的值，在这个确定性的 CPA 游戏里，所有这些信息都不一样，他会得到 q 个不同 X 中的随机值。现在我们想 实验1 ，在 实验1 中，攻击者收到右边信息的加密，从 m11 到 mq1 ，这些信息也都是不同的所以攻击者韩式获得 q 个 X 中的随机的不同值，实验0 和 实验1 的这两个分布是相等的，因此，他不能区分 实验0 和 实验1 ，由于他对真随机函数不能区分，他对这个 PRP 也不能区分。</p>
+<p>因此，直接用 PRP 加密已经给了我们一个 CPA 安全系统。</p>
+<p>这说明，如果我们只想加密短信息，比如说，少于 16 字节的信息，我们只需要直接使用 AES 加密它们，得到的结果事实上就是确定性的 CPA 安全的。但是注意，这<u>不会提供完整性</u>。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BD%BF%E7%94%A8PRP%E6%9E%84%E5%BB%BA%E7%A1%AE%E5%AE%9A%E6%80%A7%E7%9A%84CPA%E5%AE%89%E5%85%A8.PNG" class title="使用PRP构建确定性的CPA安全">
+<p><strong>如果我们的明文长于 16 个字节，怎么办？</strong></p>
+<p>①使用 SIV。</p>
+<p>②还是使用这个机制，我们能不能构建大明文空间的 PRP ？我们曾根据小明文空间的 PRF ，组建过大明文空间的 PRF ，这里要从小明文空间出发，组建大明文空间的 PRP ，可以这样做：</p>
+<p>假设 E，D 是一个安全的 PRP ，定义在 n 位分组上，有一个标准模式叫做 <strong>EME</strong> ，会组件一个 N 位分组上的 PRP ，N 远远大于 n ，这使得我们可以进行确定性加密，能加密长于 16 字节的明文信息。<strong>EME工作流程</strong>如下：</p>
+<p>EME 使用了两个密钥 K 和 L ，事实上，在 EME 中，L 是由 K 推出的，不过为了我们的目标，我们假定 K 和 L 是不同的密钥。首先，我们取明文 x ，把它分解成若干分组，我们对每个分组使用函数 P 用密钥 L 来推导一个不同的密码本，然后把每个分组都异或这个特定的密码本，接下来我们应用 PRP E，使用密钥 K ，对每个分组进行操作，我们叫这些输出为 PP0，PP1，PP2 。接下来，我们把所有的 PPP 异或起来，我们叫异或结果为 MP ，用 E 和 密钥 K 加密这个 MP ，加密的输出叫做 MC ，然后计算 MP⊕MC ，得到 PM ，我们使用 PM 来推导更多的密码本，然后我们把这个密码本的输出和所有 PPP 异或，得到 CCC ，然后把所有这些 CCC 异或我们得到的一个值叫 CCC0 ，然后我们使用这些 E 再加密一次，用 P 做更多的密码本，最后我们得到 EME 的输出。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/EME.PNG" class title="EME">
+<p>如果底层分组密码 E 是个安全的 PRP ，这个 EME 机制在这个大分组上是安全的 PRP 。这个机制的好处是，他是可并行的。事实上，EME 可能比 SIV 慢很多，PRP 机制擅长处理短明文信息，而 SIV 擅长处理长信息的加密。</p>
+<p><strong>如果我们想对于这个基于 PRP 的机制加上完整性，怎么办？</strong></p>
+<p>取明文信息，在信息后面附一堆 0 ，然后应用 PRP 给出密文。</p>
+<p>解密时，看获得的明文的这些低位如果它们不等于 0 ，就拒绝这个明文；如果等于 0 ，就输出有效信息。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%9F%BA%E4%BA%8EPRP%E7%9A%84%E7%A1%AE%E5%AE%9A%E6%80%A7%E8%AE%A4%E8%AF%81%E5%8A%A0%E5%AF%86.PNG" class title="基于PRP的确定性认证加密">
+<p>如果附了 n 个 0 ，你需要 1/$2^n$ 是可忽略的，如果是这样，这个直接基于 PRP 的加密提供了确定性的认证加密，为什么呢？我们已经论证了 CPA 安全，只需论证它提供了密文完整性。</p>
+<p>在这个密文游戏里，输入空间是明文空间和 n 位 0 ，攻击者会提交 q 个明文信息，然后收到了 q 个他选择的点联结上 n 位后对应的 PRP 的值，对于随机置换来说，他会看到，这个置换在他选的 q 个点的值，在这个密文完整性游戏中，攻击者的目标是产生一些与他之前获得的密文都不同的新的密文，这些新密文可以顺利解密，顺利解密的意思是，当我们对密文 C 应用逆置换后，C 的最低 n 位最好都是 0 ，这个发生的可能性有多大呢？最多是 1/$2^n$ 。因此，攻击者以可忽略的概率赢得这场游戏。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AF%86%E6%96%87%E5%AE%8C%E6%95%B4%E6%80%A7%E6%B8%B8%E6%88%8F.PNG" class title="密文完整性游戏">
+<h1><span id="tweakable-encryption">Tweakable encryption</span></h1><h2><span id="硬盘加密">硬盘加密</span></h2><p>硬盘加密是指我们想加密硬盘上的扇区，比如，每个扇区是 4KB 长度，问题是没有空间来扩展，那么密文大小也必须是 4KB ，我们的目标是，<u>构建一个不扩展的加密，其密文长度严格等于明文长度</u>。加密不能扩展是什么意思？就是说明文空间等于密文空间。在这个情况下，我们必须使用确定性的加密，因为如果加密是随机的，那么将<u>没有空间来存储随机性</u>，同样，因为不能扩展密文，也不能加完整性的位，<u>也没有空间来存储完整性</u>，因此，最多可以获得确定性的 CPA 安全性。</p>
+<p>实际上，可以证明一个简单的引理：<strong>如果给我一个确定性的 CPA 安全的密码，其明文空间等于密文空间，没有扩展，那么这个密码事实上是个 PRP</strong> 。没有扩展，必须使用二号机制 PRP 加密。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86.PNG" class title="硬盘加密">
+<p>我们把硬盘分解成各个扇区，现在，如果我们使用 PRP 用同样的密钥来加密每一个扇区，我们要看确定性加密的标准问题，如果 扇区1 和 扇区3 正好有同样的明文，那么解密后的 扇区1 正好等于解密后的 扇区3 ，攻击者就知道对应的明文是一样的。如果一些扇区是空的，它们的数据都被设置为 0 ，那么事实上加密的扇区将是一样的，攻击者就会知道哪些扇区是空的。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B.PNG" class title="硬盘加密流程">
+<p>我们首先想到的方法是，对每个扇区使用不同的密钥来加密，即使 扇区1=扇区3 ，它们的密文也不会相同，这样就防止了之前讨论的信息泄露，但是，这个模式下也会有很多信息泄露，如果用户正好改变了 1 号扇区里的一位然后这个扇区被加密成了一个不同的密文，就完全被篡改了，因为这是一个伪随机置换，即使明文中的一位改变了，这个扇区也会被映射到一个完全崭新的随机输出，但是，如果撤销了这个改变还原到原先的扇区，那么加密的扇区也会回到原先的状态，攻击者可以知道，一个改变做出后又撤销了，所以还是有一点信息泄露的，但是这种信息泄露，如果不牺牲系统性能，我们无能为力，所以我们忽略这点，姑且认为是可以接受的。</p>
+<p>现在，我们的硬盘容量越来越大，有很多扇区这意味着我们要产生很多的密钥，不过我们不需要去存储所有的这些密钥，我们可以使用一个伪随机函数生成这些密钥，工作方法是：有一个主密钥 k ，记扇区号为 t ，各个扇区使用主密钥加密，加密的结果是特定扇区的密钥 $k_t$ ，这步是安全的，因为 PRF 与随机函数不可区分。但是，我们对每个扇区都必须应用这个 PRF 就有问题了，怎样做的更好呢？</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E7%A1%AC%E7%9B%98%E5%8A%A0%E5%AF%86%E6%B5%81%E7%A8%8B2.PNG" class title="硬盘加密流程2">
+<p>实际上我们可以引入<strong>微调分组密码</strong>的概念。</p>
+<h2><span id="微调分组密码">微调分组密码</span></h2><p>我们只需要一个主密钥 k ，我们需要这个主密钥来推导很多 PRP ，一种方法是使用 PRP 数加密密钥 k ，不过还有一个更有效的方法，现在这个 PRP 数就是所谓的微调。</p>
+<p>在微调分组密码中，加密和解密算法，通常取密钥 K 、微调 T 、数据 X 为输入，T 为微调空间，输出集合 X 里的数据。</p>
+<p>有一个性质是，对每个微调空间里的微调 t ，对每个随机密钥 k ，如果我们固定密钥和微调，那么我们会得到一个可逆的函数，集合 X 上一一映射的函数。因为密钥是随机的，这个函数事实上与随机函数不可区分，换句话说，对每个微调的设定，我们都有一个 X 到 X 的独立 PRP 。</p>
+<p>作为这个的应用，我们使用扇区号作为微调，这样一来，每个扇区都有它自己的独立的 PRP 。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%BE%AE%E8%B0%83%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81.PNG" class title="微调分组密码">
+<h2><span id="安全的微调分组密码">安全的微调分组密码</span></h2><p>有一个微调空间 T 和一个信息输入空间 X ，通常我们定义两个实验，在 实验1 中，我们选择一个真随机置换集合，我们不仅仅只选择一个置换，而是与微调数目一样多的置换。我们将选择一个随机密钥，我们根据微调空间里的微调来定义我们的置换集合，然后攻击者提交一个微调和一个 x ，他将看到由微调 $t_1$ 定义的置换在点 $x_1$ 处的值，攻击者会一次又一次地看到这些，攻击者地目标是，<u>分辨出他是在与真随机置换交互，还是与伪随机置换交互</u>，如果攻击者不能做到正确分辨，我们就说这个微调分组密码是安全的。</p>
+<p>它<strong>与常规的分组密码的区别</strong>是，在常规的分组密码中，你只能与一个置换进行互动，那么你的目标是，分辨出你是在与一个伪随机置换交互，还是在和一个真随机置换交互；而在这里你是在和 |T| 个随机置换交互，那么你的目标是，区分这 |T| 个随机置换是真是伪。如果攻击者在这两个实验中表现相同，我们说这个 PRP 是一个安全的微调 PRP 。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E5%AE%89%E5%85%A8%E7%9A%84%E5%BE%AE%E8%B0%83%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81.PNG" class title="安全的微调分组密码">
+<h2><span id="安全微调分组密码的例子">安全微调分组密码的例子</span></h2><h3><span id="例子1简单机制">例子1：简单机制</span></h3><p>在这个例子中，我们假设密钥输入空间等于输入信息空间，这个 PRP 将 X×X 映射到 X 。</p>
+<p>以 AES 为例，密钥空间 128 位，数据空间 128 位，输出空间也是 128 位，我们定义一个微调分组密码为有一个密钥、一个微调、待加密的输入数据，使用微调和主密钥，然后使用得到的随机密钥加密数据。如果我们想使用这个微调分组密码来加密 n 个分组，会要求 2n 次分组密码的计算，n 次用于加密给定的微调，另外 n 次用于加密给定的数据。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BE%8B%E5%AD%901.PNG" class title="例子1">
+<h3><span id="例子2xts-机制">例子2：XTS 机制</span></h3><p>XTS 机制起源于 Phil Rogaway 的 XEX 模式，如下工作：</p>
+<p>假设给我一个常规的定义在 n 位分组上的分组密码（不是微调分组密码），我们来定义一个微调分组密码，这个微调分组密码取两个密钥作为输入，为了简便，我们假设这个微调空间由两个值组成 t 和 i ，t 是某个微调值，i 是某个索引，x 是 n 位字符串，我们将用微调分组密码加密 x 。</p>
+<p>首先我们使用密钥 $k_2$ 加密微调 t 的左半部分，把加密结果记为 N ，接下来我们把信息 m 和某个密码本函数在 N 处的值进行异或，索引是 i ，这个密码本函数极快，可以忽略它的运行时间。接下来，我们使用密钥 $k_2$ 加密，然后再使用同样的密码本进行异或，得到密文 c 。</p>
+<p>这个机制的好处在于，如果我们想加密 n 个分组，我们只需要计算 n+1 次，然后对索引 1，2，3，4，对每个分组，我们只需要计算 PRP E 一次。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/XTS%E6%9C%BA%E5%88%B6.PNG" class title="XTS机制">
+<p><strong>真的有必要在用微调前加密它嘛？</strong>如下机制是否是一个安全的微调分组密码？</p>
+<p>在这个机制中，这个微调被直接使用，作为密码本函数的输入，再异或。这不是一个安全的微调分组密码。</p>
+<p>如果我们把数据设为 P(t,1)，然后把它和对应的微调进行异或，对应的微调也是 P(t,1)，所以我们得到的是 0 ，所以我们无论输出什么，我们的加密就是 0 ，我们记输出为 $c_0$ ，那么实际输出为 $c_0$⊕P(t,1) ，现在我们对 P(t,2) 做同样的事，我们会得到 $c_0$⊕P(t,2) ，两者进行异或，我们得到 P(t,1)⊕P(t,2)。这意味着，攻击者可以以这个微调和这个数据询问挑战者，如果等式成立，我们是在和一个伪随机函数交互，否则我们是在和一个真随机函数交互。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%B8%8D%E5%9C%A8%E5%BE%AE%E8%B0%83%E5%89%8D%E5%8A%A0%E5%AF%86%E7%9A%84%E4%BE%8B%E5%AD%90.PNG" class title="不在微调前加密的例子">
+<p><strong>总结</strong>：XTS 用于硬盘加密，把扇区分为若干分组，每个分组 16 字节，分组1 使用微调 $t_1$ 加密，</p>
+<p>分组2 使用微调 $t_2$ 加密，… ，每个分组都有自己的 PRP ，整个扇区使用一系列 PRP 被加密，这是一个分组级别的 PRP ，不是扇区级别的 PRP ，事实上，不是每个扇区都用它自己的 PRP 加密的，只是每个分组是用它自己的 PRP 加密的，扇区与分组之间的差别在某种意义上是人为的。实际上，这个 <strong>XTS 模式提供了扇区级的确定性的 CPA 安全的加密</strong>。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/XTS%E6%80%BB%E7%BB%93.PNG" class title="XTS总结">
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%80%BB%E7%BB%93.PNG" class title="总结">
+<h1><span id="format-preserving-encryption">Format preserving encryption</span></h1><p>一般来说，信用卡号有 16 位数字，分成 4 组，每组 4 个数字，，前 6 个数字叫做 <strong>BIN 码</strong>，代表了发行方的 ID ，后面 9 位数字是账号，最后一位是校验和，由前 15 位计算得到。</p>
+<p>假设我们想加密信用卡号，使得当用户在销售终端刷信用卡时，使用密钥 k 加密信用卡号，并始终保持加密直到银行需要，这些信用卡号经历了许多处理环节，它们都希望获得某些看起来像是信用卡号的信息。如果我们只想在端点加密，在另一端点解密，这并不容易，因为如果我们使用 AES 加密，即使我们使用的是确定的 AES ，加密后的信用卡号将是 128 位的分组，16 字节，将会从一个系统发送给下一个系统，直到它到达目的地，但是这些处理节点每个都必须改变，因为它们都希望获得信用卡号，所以，问题是我们能否在销售终端处加密，使得获得的加密本身看上去像是一个信用卡号，因此，这些中间系统都无需做出改变，只有端点需要改变。</p>
+<p>通过这样做，我们实际上获得了端到端的加密，不需要改变太多的沿途的软件，如何构造这种机制，即所谓的<strong>保格式加密</strong>呢？我们的目标是：<strong>加密一个信用卡号能产生某些类似信用卡号的信息</strong>，加密的信用卡号应该看起来像一个正常的有效信用卡号。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BF%9D%E6%A0%BC%E5%BC%8F%E5%8A%A0%E5%AF%86.PNG" class title="保格式加密">
+<h2><span id="保格式加密的构建">保格式加密的构建</span></h2><p>我们试图在集合 {0，1，… ，s-1} 上构建一个伪随机置换，s 是任意的，对于信用卡号的集合来说，s 大约为 2^42 ，我们的目标是：<strong>构建一个从 0 到 s-1 的区间上的 PRP</strong> 。</p>
+<p>我们已有某个 PRF ，这个 PRF 可以处理长得多的分组，某种意义上，我们试图压缩这个 PRF 的定义域，使之适应我们已有的数据，怎么办呢？</p>
+<p>①取给定的信用卡号，我们加密它，使它能用从 0 到信用卡号总数之间的某个数来表示。</p>
+<p>②应用 PRP ，加密这个信用卡号，使用确定性加密的 2 号机制。</p>
+<p>③把最后的数映射到一个有效的信用卡号，然后发送。</p>
+<p>这也是非扩展加密，我们目前最多只能使用 PRP 加密，这里的困难之处在于，我们需要一个 PRP 在这个看上去很有趣的集合上操作。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E4%BF%9D%E6%A0%BC%E5%BC%8F%E5%8A%A0%E5%AF%862.PNG" class title="保格式加密2">
+<p><strong>机制的构建过程</strong>：</p>
+<p>①压缩 PRF 的定义域，t 是最接近以 2 为底 s 的对数的值，即，$2^t$ 最接近 s ，这个机制使用 Luby-Rackoff 机制，我们需要一个 PRF F’ ，在长度为 t/2 的分组上操作，信用卡例子 s=42 ，一种方法是取 AES 分组密码，把它当成 128 位输入的 PRF ，然后截断输出，取低 21位。实际上有更好的截断 n 位 PRF 的方法，以生成 t 位 PRF 。姑且用第一种方法，现在，我们已经把 AES 分组密码转换成了一个 t/2 的 PRF ，但我们真正想要的是一个 PRP ，所以，我们只要把我们的新 PRF F’ 直接带入到 Luby-Rackoff 机制中，这是一个 Feistel 机制，将一个安全的 PRF 转换成一个安全的 PRP ，事实上，7 轮 Feistel 机制具有最好的误差参数。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%9C%BA%E5%88%B6%E7%9A%84%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B1.PNG" class title="机制的构建过程1">
+<p>②取 {0,1}^t 里的值，映射到我们感兴趣的集合 {0,1,…,s-1} ，我们有这个 PRP 了，可以置换这个 t 位集合里的元素，我们想让这个 PRP 可以在更小的集合上工作。我们有输入 x，x 属于我们想要的集合 {0,1,…,s-1} ，接下来，一次次地迭代以下流程：首先，把 x 映射到某个临时变量 y ，现在加密输入 x ，把结果放在 y 里，如果 y 在我们的目标集合里，我们就停止迭代，输出 y ；如果不在，就继续迭代下去，直到 y 落在我们的目标集合里，输出 y 。很显然，这是可逆的，求逆时，我们只要解密，然后反方向逐次尝试，解密，再解密，直到落在集合 {0,1,…,s-1} 中，这就给了一个点地逆置换结果。我们平均需要迭代多少次才能知道过程收敛？2次。</p>
+<img src="/.com//07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/%E6%9C%BA%E5%88%B6%E7%9A%84%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B2.PNG" class title="机制的构建过程2">
+<p>第②步是紧的，即，没有附加的安全性开销，从 {0,1}^t 到 {0,1,…,s-1}，下图定理可以证明：如果给我两个集合 Y 和 X ，Y 包含于 X ，那么应用刚才看到的变换，从一个 X 到 X 的随机置换出发，得到一个 Y 到 Y 的随机置换，这意味着，如果我们从一个 X 上的真随机置换出发，最后会得到一个 Y 上的真随机置换。因此，我们开始时的置换与 X 上的随机置换不可区分。</p>
+<p>第①步的分析与 Luby-Rackoff 的分析一致。</p>
+<p><u>这里没有任何的密文完整性，没有任何随机性，我们能取得的最好结果是确定的 CPA 安全</u>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ 密码学</a>
+          
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/11/%E3%80%90DanBoneh%E3%80%91AuthenticatedEncryption/" rel="next" title="【DanBoneh】Authenticated Encryption">
+                <i class="fa fa-chevron-left"></i> 【DanBoneh】Authenticated Encryption
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" rel="prev" title="【DanBoneh】Basic Key Exchange">
+                【DanBoneh】Basic Key Exchange <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="XUEYU" />
+            
+              <p class="site-author-name" itemprop="name">XUEYU</p>
+              <p class="site-description motion-element" itemprop="description">你只管善良，上天自有衡量。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+				<a href="/archives">
+
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Key Derivation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">从一个密钥推出多个密钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">非均匀分布的源密钥构建 KDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">HKDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">基于密码的 KDF（PBKDF&#x2F;从密码中提取密钥）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Deterministic Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">查找加密数据库的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">CPA（选择明文攻击）的游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.4.</span> <span class="nav-text">确定性的CPA安全游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.5.</span> <span class="nav-text">带固定 IV 的 CBC 不是确定的 CPA 安全的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">Deterministic Encryption Constructions: SIV and wide PRP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">确定性 CPA 安全的机制 1：SIV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">确定性 CPA 安全的机制 2：just use a PRP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Tweakable encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">硬盘加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">微调分组密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">安全的微调分组密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.4.</span> <span class="nav-text">安全微调分组密码的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.4.1.</span> <span class="nav-text">例子1：简单机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.4.2.</span> <span class="nav-text">例子2：XTS 机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">Format preserving encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">保格式加密的构建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+	  
+		
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		
+		<div class="widget-wrap">
+			<h3 class="widget-title"></h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="200" height="200" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E4%BA%8E%E9%85%8D%E5%AF%B9%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">基于配对的密码学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+		
+		
+		
+<div style="">
+  <canvas id="canvas" style="width:60%;" height="100" width="700">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+<!--访问量访问人数-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">
+	  <span class="post-count">71k</span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+	<i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XUEYU</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="timeDate"></span><span id="times"></span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Running "+dnum+" Days "; 
+    } 
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz',
+        appKey: 'oNioHGf9lbC9krBNHyPsX05z',
+        placeholder: '欢迎交流讨论...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz", "oNioHGf9lbC9krBNHyPsX05z");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

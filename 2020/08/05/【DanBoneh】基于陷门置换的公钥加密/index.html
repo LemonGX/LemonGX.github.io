@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="密码学,DanBoneh密码学," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="鳕鱼堡er" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="公钥加密系统定义公钥加密机制的应用：会话建立、密钥交换等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DanBoneh】基于陷门置换的公钥加密">
+<meta property="og:url" content="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/index.html">
+<meta property="og:site_name" content="鳕鱼堡er">
+<meta property="og:description" content="公钥加密系统定义公钥加密机制的应用：会话建立、密钥交换等。">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/CCA%E5%AE%89%E5%85%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%AE%89%E5%85%A8%E7%9A%84%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8E%9F%E4%BB%B6.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%9B%BE%E7%A4%BA%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8TDF%E6%9E%84%E5%BB%BA%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E6%95%B0%E8%AE%BA%E5%9B%9E%E9%A1%BE.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RSA%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RSA%E5%81%87%E8%AE%BE.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/SSL%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%AD%E9%97%B4%E7%9B%B8%E9%81%87%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/PKCS1.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%92%88%E5%AF%B9PKCS1%E7%9A%84%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%B9%BC%E5%84%BFBleichenbacher.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RFC.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP+.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/SAEP.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%AF%86SAEP%E5%AF%86%E6%96%87ct.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP%E5%AF%B9%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E6%98%AF%E8%84%86%E5%BC%B1%E7%9A%84.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%A7%84%E7%BA%A6.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%AF%95%E5%9B%BE%E6%8F%90%E9%AB%98RSA%E6%80%A7%E8%83%BD%E7%9A%84%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90.PNG">
+<meta property="article:published_time" content="2020-08-05T05:35:35.000Z">
+<meta property="article:modified_time" content="2021-01-31T02:56:28.000Z">
+<meta property="article:author" content="XUEYU">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="DanBoneh密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/05/【DanBoneh】基于陷门置换的公钥加密/"/>
+
+
+
+
+
+  <title>【DanBoneh】基于陷门置换的公钥加密 | 鳕鱼堡er</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?702343d7b417e8c7fb52c949a3414d6c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鳕鱼堡er</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个誓死不当程序猿的信院研究僧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XUEYU">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鳕鱼堡er">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【DanBoneh】基于陷门置换的公钥加密</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-05T13:35:35+08:00">
+                2020-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-31T10:56:28+08:00">
+                2021-01-31
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/" class="leancloud_visitors" data-flag-title="【DanBoneh】基于陷门置换的公钥加密">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9.3k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  33分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="公钥加密系统">公钥加密系统</span></h1><h2><span id="定义">定义</span></h2><p>公钥加密机制的应用：会话建立、密钥交换等。</p>
+<a id="more"></a>
+<p><a href="https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" target="_blank" rel="noopener">相关链接</a></p>
+<p><strong>仅对窃听攻击安全的密钥交换协议的工作过程</strong>：Alice 会产生一个公钥、私钥对，把公钥发给 Bob ，Bob 产生一个随机 x ，x 被作为共享密钥，Bob 将 x 使用 Alice 的公钥加密后发送给 Alice ，Alice 解密还原 x 。他们可以使用共享密钥 x 进行通信。攻击者只能看到公钥和使用公钥加密后的 x ，根据这些他不应该能获得任何关于 x 的信息。</p>
+<p>我们将更加精确的定义不能学到任何关于 x 的信息是什么意思。</p>
+<h2><span id="对抗窃听的安全性">对抗窃听的安全性</span></h2><p>见 <a href="https://lemongx.github.io/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/" target="_blank" rel="noopener">《4.2 公钥加密系统的安全游戏》</a></p>
+<p>当讨论<strong>对称密码</strong>的窃听攻击时，我们区分了两种情况，①密钥只使用一次，②密钥使用多次。</p>
+<p>对于<strong>公钥加密</strong>，如果系统的一次性密钥是安全的，那么它对多次密钥也是安全的。我们不必赋予攻击者请求加密他选择的明文的能力，因为他可以自己创建这些加密。公钥私钥对 天生就是用来加密多个信息的。</p>
+<h2><span id="对抗主动攻击的安全性">对抗主动攻击的安全性</span></h2><p>看一个电子邮件的例子，Bob 想发送邮件给他的朋友 Caroline ，Caroline 正好在 Gmail 上有账号，过程如下：这份加密的邮件发送给 Gmail 服务器，Gmail 服务器解密邮件查看接收方，如果接收方是 Caroline ，它会把这份邮件转发给 Caroline ，如果接收方是攻击者，它会把邮件转发给攻击者。</p>
+<p>假设 Bob 加密了邮件，使用的系统允许攻击者篡改密文，且不会被检测到。想象这份邮件是使用计数器模式加密的，当攻击者截获了这个邮件，他可以改变接收方，使得接收方变成 attacker ，对于计数器模式这是非常容易做到的，攻击者知道邮件是发往 Caroline 的，他只对邮件内容感兴趣，所以他可以修改接收方，这样当服务器接收到邮件时，他会解密，看到接收方是攻击者，就把邮件转发给了攻击者。这是一个经典的主动攻击的例子，注意，攻击者只能解密接收方是攻击者的邮件。</p>
+<p>我们的目标是设计安全的公钥系统，即使攻击者可以篡改密文，还可以解密特定的密文。攻击者的目标是获得明文内容。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E7%BB%8F%E5%85%B8%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%94%BB%E5%87%BB.PNG" class title="经典的主动攻击">
+<h2><span id="选择密文安全">选择密文安全</span></h2><p>事实上，这是公钥加密的标准安全性观念。</p>
+<p>我们有一个加密机制 (G,E,D) ，我们定义在明文空间和密文空间 (M,C) 上，定义两个实验，实验0 和 实验1 ，b 表示挑战者是实现 实验0 或是 实验1 。</p>
+<p>挑战者开始时生成一对公钥和私钥，然后把公钥给攻击者，现在攻击者可以请求解密很多密文，攻击者提交密文 $c_1$ ，获得了密文 $c_1$ 的解密 $m_1$ ，攻击者可以一次次这么做，然后说游戏结束。现在，他提交两个等长度的明文 $m_0$ 和 $m_1$ ，他会收到<u>挑战密文 c</u> ，也就是 $m_0$ 或 $m_1$ 的加密，现在攻击者可以继续提交这些密文询问，他可以继续请求解密，那么他提交了一个密文并获得了该密文的解密。</p>
+<p>注意，如果攻击者可以提交他选择的任意密文，那么他可以破解这个挑战，他只需提交挑战密文 c 作为解密请求，然后他被告知他在挑战阶段获得的是 $m_0$ 还是 $m_1$ 的加密结果，因为我们有这么一个限制，攻击者可以提交任何他选择的密文，<strong>除了挑战密文</strong>，那么攻击者可以询问他选择的任何密文的解密，除了挑战密文。即使攻击者有所有这些的解密，他依然不能分辨出他得到的是 $m_0$ 还是 $m_1$ 的加密。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="选择密文安全游戏">
+<p>通常，攻击者无法判断密文来自 $m_0$ 还是 $m_1$ ，我们说这个选择密文 CCA 安全的。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/CCA%E5%AE%89%E5%85%A8.PNG" class title="CCA安全">
+<h2><span id="选择密文安全的攻击方法">选择密文安全的攻击方法</span></h2><p>假设使用的加密系统满足 给定信息的加密，攻击者可以改变接收方，那么我们可以这样赢得游戏。</p>
+<p>①攻击者得到了公钥，发出两个等长度的明文，第一个明文内容是 0 ，第二个明文内容是 1 ，两个明文都给 Alice ，Alice 回复后，攻击者会得到挑战密文 c 。</p>
+<p>②攻击者修改接收方，返回给 Alice 一个密文 c’ ，c’ 是 ”给 Charlie 的明文，挑战密文的内容 b“ 的加密结果，现在因为明文不同，我们知道密文也不同，c’ 一定和挑战密文 c 不一样，根据 CCA 游戏的定义，挑战者必须解密任何不同于挑战密文的密文，挑战者解密后给攻击者解密结果 m’ ，他给了攻击者 b ，攻击者可以输出挑战结果 b ，他以优势 1 赢得了游戏。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E5%AE%89%E5%85%A8%E7%9A%84%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95.PNG" class title="选择密文安全的攻击方法">
+<h1><span id="公钥加密的构建">公钥加密的构建</span></h1><h2><span id="陷门函数-tdf">陷门函数 TDF</span></h2><p>陷门函数是一个函数，从集合 X 映射到集合 Y ，它定义为三个算法：一个通用的算法 G ，函数 F ，函数 F 的逆。</p>
+<p>通用算法 G 运行时，会生成一对密钥，一个公钥和一个私钥。公钥定义了一个从集合 X 映射到集合 Y 的特定函数，私钥定义了这个函数的逆，从集合 Y 映射到集合 X 。</p>
+<p>这里的想法是，你可以使用公钥 pk 计算这个函数再任意点的值，你可以使用私钥 sk 来计算函数的逆。<strong>逆是什么意思？</strong>如果我们看这个密钥生成算法 G 生成的公钥、私钥对，如果计算函数在点 x 的值，然后计算所得点的逆，应该获得原点 x 。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0.PNG" class title="陷门函数">
+<h2><span id="安全的陷门函数-tdfs">安全的陷门函数 TDFs</span></h2><p><strong>如果这个函数 F(pk,·) 是所谓的单向函数，我们说这个三元组 (G,F,$F^{-1}$) 是安全的。</strong></p>
+<p>单向函数的想法是，这个函数可以在任一点计算，但如果没有私钥 sk 的话，求它的逆是困难的。通常使用如下游戏定义：</p>
+<p>挑战者生成一个公钥和私钥，生成一个随机 x ，挑战者把公钥发给攻击者，挑战者会计算函数在点 x 的值，然后把所得结果 y 也发给攻击者。攻击者看到一个公钥，定义了这个函数是什么，然后攻击者看到这个函数在一个随机点 x 处的像，他的目标是求这个函数在点 y 的逆，他输出某个 x’ 。</p>
+<p>如果攻击者求出在点 y 的逆的概率是可忽略的，这个陷门函数是安全的。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%AE%89%E5%85%A8%E7%9A%84%E9%99%B7%E9%97%A8%E5%87%BD%E6%95%B0.PNG" class title="安全的陷门函数">
+<h2><span id="使用-tdfs-构建公钥加密系统">使用 TDFs 构建公钥加密系统</span></h2><p>构建公钥加密系统如下需要三个原件：</p>
+<p>我们有①<u>陷门函数</u> (G,F,$F^{-1}$) ，我们需要的另一个工具是一个②<u>对称加密机制</u>，我们假设这个加密机制对主动攻击是安全的，特别地，我需要提供认证加密。</p>
+<p>注意！对称加密系统取 K 中的密钥，陷门函数取 X 中的元素为输入。这是两个不同的集合，所以我们需要③<u>哈希函数</u>从 X 映射到 K ，换句话说，它把集合 X 中的元素映射成密钥用于对称加密系统。</p>
+<p>公钥加密系统的密钥生成 与 陷门函数的密钥生成 是完全一样的。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%89%E4%B8%AA%E5%8E%9F%E4%BB%B6.PNG" class title="公钥加密系统的三个原件">
+<h3><span id="公钥加密系统工作过程">公钥加密系统工作过程</span></h3><p><strong>加密工作流程</strong>：</p>
+<p>①加密算法取一个公钥和明文为输入，它会生成一个集合 X 里的随机元素 x ；</p>
+<p>②然后它会对随机元素 x 应用这个陷门函数，获得 y ，y 是 x 在陷门函数下的像；</p>
+<p>③然后它会通过取 x 的哈希值，生成一个对称密钥，这是对称加密系统的对称密钥；</p>
+<p>④最终它使用刚刚生成的密钥加密明文 m ，然后输出刚刚计算得到的值 y 与 m 在对称密码下的加密结果 c 。</p>
+<p><strong>注意</strong>：<strong>陷门函数只用于随机值 x ，而信息本身是用对称密钥系统由 x 推出的密钥加密的</strong>。</p>
+<p><strong>解密工作流程</strong>：</p>
+<p>①解密算法取私钥和密文作为输入，密文本身包含两个部分，值 y 和 c ，首先应用陷门函数的逆变换，逆向陷门函数作用于值 y 返回 x ；</p>
+<p>②对 x 取哈希值得到与加密时得到的一样的密钥 k ；</p>
+<p>③应用对称解密算法解密密文 c ，获得最初明文 m 。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="公钥加密系统工作过程">
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%9B%BE%E7%A4%BA%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.PNG" class title="图示工作流程">
+<h3><span id="安全性定理">安全性定理</span></h3><p>①如果开始的陷门函数是安全的，换句话说，这是个<u>单向函数</u>；②如果攻击者没有私钥的话，对称加密系统提供了<u>认证加密</u>；③哈希函数是一个<u>随机神谕</u>，即是个从集合 X 映射到密钥空间 K 的随机函数。在这三个条件下，系统是<u>选择密文安全</u>的，即 $CCA^{ro}$ 安全，ro 表示这个安全性是建立在所谓的随机神谕模型上的。</p>
+<p><strong>如果陷门函数是安全的，那么对称加密系统是安全的，能抵抗篡改，提供了认证加密。</strong></p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG" class title="安全性定理">
+<h2><span id="错误使用-tdf-构建的公钥加密系统">错误使用 TDF 构建的公钥加密系统</span></h2><p><strong>为什么不要用陷门函数来加密？</strong></p>
+<p>我们首先能想到的是直接对明文 m 使用陷门函数，我们使用陷门函数加密明文 m ，然后使用陷门函数的逆函数解密密文 c ，以还原明文 m 。</p>
+<p>事实上，解密是加密的逆过程，这是完全不安全的。最简单的方法证明它不安全，在于这是一个确定的加密，在这里没有随机性被使用到，当我们加密一个明文 m ，由于算法是确定的，它不可能是语义安全的。当我们将这个陷门函数具象化，使用特定的实现，例如 RSA 陷门函数，那么这种机制会有很多可能的攻击。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%94%99%E8%AF%AF%E4%BD%BF%E7%94%A8TDF%E6%9E%84%E5%BB%BA%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F.PNG" class title="错误使用TDF构建的公钥加密系统">
+<h1><span id="陷门置换-rsa-的构建">陷门置换 RSA 的构建</span></h1><h2><span id="数论回顾">数论回顾</span></h2><img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E6%95%B0%E8%AE%BA%E5%9B%9E%E9%A1%BE.PNG" class title="数论回顾">
+<p>详见 <a href="https://lemongx.github.io/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" target="_blank" rel="noopener">《Number Theory》</a></p>
+<h2><span id="rsa-陷门置换">RSA 陷门置换</span></h2><p>SSL 和 TLS 都使用了 RSA ，用于证书和密钥交换；有很多安全的电子邮件系统和安全的文件系统，使用了 RSA 加密电子邮件和文件系统里的文件。</p>
+<p>RSA 是一个陷门置换，本身不是一个加密系统，只是一个函数。</p>
+<p>密钥生成算法函数 f 和 逆函数 $f^{-1}$ </p>
+<p><strong>密钥生成算法工作流程</strong>：</p>
+<p>①我们生成两个质数 p 和 q ，每个大约是 1000 位，约 300 十进制位，然后 RSA 模就是这两个质数的乘积。</p>
+<p>②接下来我们选取两个指数 e 和 d ，满足 e·d = 1 (mod φ(N)) ，这意味着 e 和 d 首先必须与 φ(N) 互质，其次，他们必须互为模 φ(N) 的逆。</p>
+<p>③输出公钥为 (N,e) ，私钥为 (N,d) 。这个指数 e 有时被称为<u>加密指数</u>，指数 d 有时被叫做<u>解密指数</u>。</p>
+<p>RSA 函数本身的定义是很简单的，为求简便，把它定义成从 Z_N^<em> 到 Z_N^</em> 的函数，这个函数有输入 x ，我们只需取 x ，计算 $Z_N$ 中 $x^e$ 。</p>
+<p>解密时，我们只需给定输入 y ，计算 $y^d$ 模 N 就行了。假设 y 本身正好是 RSA 函数在某个值 x 处的值，这时，$y^d$ 就是 $RSA(x)^d$ ，而 x 本身 $x^e$ mod N ，因此，$y^d$ 就是 $x^{ed}$ mod N ，由于 e·d = 1 (mod φ(N)) ，这意味着存在某个整数 k 满足 ed = kφ(N)+1 ，根据欧拉定理，$x^{φ(N)}$ = 1 ，得出最后结果 x ，这意味着 d 次方就是 RSA 的逆。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RSA%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2.PNG" class title="RSA陷门置换">
+<p><strong>为什么这个函数是安全的？</strong>即，为什么在没有私钥的条件下这个函数是单向的？</p>
+<p>RSA 假设告诉我们给定公钥，RSA 函数是一个单向置换，因此，它是一个陷门置换，因为它有陷门，<u>陷门指的是私钥里的 d</u> ，这个陷门使得所有知道陷门的人，可以很容易的求逆。</p>
+<p>形式化地，我们说对所有有效的算法 A ，如果我生成两个随机的质数 p 和 q ，把它们乘起来，获得模 N ，然后随机选择一个 $Z_N^<em>$ 中的 y ，指数 e 由公钥指定，可以得到 RSA 在点 y 的逆的概率 $y^{1/e}$ ，这个概率是可忽略的，这个假设叫做 <em>*RSA 假设</em></em>。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RSA%E5%81%87%E8%AE%BE.PNG" class title="RSA假设">
+<h2><span id="公钥加密系统">公钥加密系统</span></h2><p>将 RSA 陷门置换带入 ISO 标准机制，这个机制是基于一个必须提供认证加密的对称加密系统的，还是基于一个哈希函数的，从 RSA 的角度看，这个哈希函数把 $Z_N$ 里的元素映射到对称密钥系统的密钥，<strong>加密机制的工作方式</strong>如下：</p>
+<p>算法 G 运行 RSA 的密钥生成算法，产生一个公钥和一个私钥，这个公钥包含了加密指数，私钥包含了解密指数。</p>
+<p><strong>加密过程</strong>如下：</p>
+<p>①随机选择一个 $Z_N$ 中的元素 x ；</p>
+<p>②对 x 应用 RSA 函数；通过对 x 取哈希先推导出一个对称密钥 k ，在实际中，这个哈希函数 H 使用 SHA-256 实现；</p>
+<p>③输出 y 和使用密钥 k 加密后的信息。</p>
+<p><strong>解密过程</strong>：首先使用密钥来求密文开头的逆，即 y 的 RSA 逆，这回给我们值 x ，我们对 x 应用哈希函数得到密钥 k ，运行解密算法得到明文。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F.PNG" class title="公钥加密系统">
+<h2><span id="对教科书-rsa-的攻击例子">对教科书 RSA 的攻击例子</span></h2><p>如果试图使用教科书 RSA ，换句话说，如果试图<u>直接使用 RSA 来加密一个明文</u>，会受到攻击。</p>
+<p>设想我们有一个网页服务器，这个服务器有 RSA 私钥 (N,d) ，网页浏览器试图与网页服务器建立起一个安全的 SSL 会话，那么 SSL 的工作方式是：</p>
+<p>①网页浏览器开始时发送这个客户端 hello 消息，我想和你建立一个安全会话；</p>
+<p>②网页服务器回复一个服务端 hello 消息，其中包含了服务器的公钥；</p>
+<p>③网页浏览器生成一个随机数，这个随机数叫做<strong>预备主密钥 k</strong> ，把结果以密文形式发送给网页服务器，服务器会解密获得 k 。</p>
+<p>现在，双方都有了共享密钥，他们可以使用它来安全会话。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/SSL%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.PNG" class title="SSL的工作方式">
+<p>如果我们直接使用 RSA 函数加密 k 会发生什么错误？换句话说，如果 k 直接加密成 $k^e$ mod N 的话，为了论证方便，我们假设 k 是一个 64 位密钥，我们把 k 当作范围从 0 到 $2^{64}$ 的一个整数，现在我们做如下事情：</p>
+<p>①首先，假设 k 正好能分解成几个差不多大小的数的乘积，我们可以把 k 写成 $k_1$ 乘 $k_2$ ，$k_1$ 和 $k_2$ 是整数，比如说，两个都小于 $2^{34}$ ，那么实际上，k 可以被写成这样，有 20% 的概率会发生。但现在如果我们把这个 k=$k_1$ × $k_2$ 带入到定义密文的函数 c=$k^e$ in $Z_N$ 中，把 k 替换成 $k_1$ × $k_2$ ，我们会得到方程 c / ${k1}^e$ = ${k2}^e$ in $Z_N$ ，在这个方程中有两个变量 $k_1$ 和 $k_2$ ，我们把它们放在方程的两边，攻击者知道 c 、e 、N ，现在可以进行<strong>中间相遇攻击</strong>了。</p>
+<p>②我们构建一张表，里边存放左边  c / ${k1}^e$ 的所有可能值，有 $2^{34}$ 个，然后对右边  ${k2}^e$ 所有的可能值，我们检查这个值是都在我们构建的表里，如果在，我们就找到了一个碰撞，我们就有了这个方程的一个解。一旦我们找到了一个元素具有形式  ${k2}^e$ 在我们构建的表里面，我们就已经解决了这个方程，并找到了 $k_1$ 和 $k_2$ ，一旦找到了 $k_1$ 和 $k_2$ ，我们可以很容易的还原 k ，k=$k_1$ × $k_2$ ，我们就破解了这个加密系统。暴力的搜索，我们可以在 $2^{64}$ 的时间里破解它。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%AD%E9%97%B4%E7%9B%B8%E9%81%87%E6%94%BB%E5%87%BB.PNG" class title="中间相遇攻击">
+<p><strong>永远不要直接用 RSA 去加密。</strong>必须通过一个加密机制来使用它，比如 ISO 的标准。</p>
+<h1><span id="公钥密码学一号标准-pkcs1">公钥密码学一号标准 PKCS1</span></h1><p>在应用 RSA 函数前，必须对明文做些处理。ISO 的标准，我们生成了一个随机 x ，用 RSA 加密 x ，然后从这个 x 推出一个对称加密密钥，不过这不是 RSA 在实际中的应用。</p>
+<p>在实际中，系统生成一个对称加密密钥，然后让 RSA 去加密这个给定的对称加密密钥，而不是生成加密密钥。在实际中，RSA系统有一个输入的对称密钥需要加密，例如，可能是一个 AES 密钥，128 位，然后这个密钥被加密，首先我们取这 128 位，把它扩展成整个模的大小，例如这个模是 2048 位，然后应用 RSA 函数。<strong>这是怎样预处理的？如何论证得到的系统是安全的呢？</strong>这在实际中是广泛应用的，即 PKCS1 1.5 。</p>
+<h2><span id="pkcs1-v15">PKCS1 v1.5</span></h2><p><u>PKCS1 模式 2 表示加密，模式 1 表示签名</u>。</p>
+<p><strong>PKCS1 加密工作过程</strong>：</p>
+<p>取明文，比如这里是 128 位 AES 密钥，把它放在你要产生的值的最低 128 位，接下来在它前面附上 16 个 1 ，即十六进制的 FF ，接下来把它附在这个随机密码本的后面，这个密码本中任何地方都不含 FF ，最后在结果的最高位放上数 02 ，意味着这个明文已经被 PKCS1 模式 2 编码了。这整个值就是 2048 位的字符串，作为 RSA 函数的输入，去计算它的 e 次方模 N ，得到的就是 PKCS1 的密文。</p>
+<p><strong>PKCS1 解密工作过程</strong>：</p>
+<p>解密者要求 RSA 函数的逆，还原这个分组，他会看最高位，发现是 02 ，意味着这是 PKCS1 格式的，他会移除这些 02 ，移除所有的这些随机密码本，直到遇见 FF ，剩下的就是最初明文，然后用这个明文来解密密文的内容。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/PKCS1.PNG" class title="PKCS1">
+<h2><span id="针对-pkcs1-v15-的攻击">针对 PKCS1 v1.5 的攻击</span></h2><p>在没有安全性证明的情况下，实际上系统会被破解，这里有一个非常优雅的攻击，由 Bleichenbacher 在 1998 年提出。</p>
+<p>当 PKCS1 被使用在 HTTPS 中时的<strong>攻击过程</strong>：</p>
+<p>假设攻击者截获了一个特定密文 ciphertext ，这是 PKCS1 密文，它是用 PKCS1 编码的，然后结果作为 RSA 函数的输入，我们把这个密文叫做 RSA 函数的输出。</p>
+<p>攻击者想解密密文，我们简化 SSL ，比如说攻击者可以直接发送密文给网页服务器，服务器将试图使用它的私钥去解密密文，在解密之后，首先它问：密文的解密结果是否是 PKCS1 编码的？即，它会问最高两位是 02 吗？如果是，才继续正常的解密，然后继续执行协议；如果这些最高位不是 02 ，就会声明一个错误，告诉攻击者他发送了一条无效的密文。这一点，让攻击者得以测试出给定密文的最高 16 位是否为 02 ，从某种意义上讲，这就给了攻击者一个神谕，使得他可以测试任意密文的逆是否以 02 开头。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E9%92%88%E5%AF%B9PKCS1%E7%9A%84%E6%94%BB%E5%87%BB.PNG" class title="针对PKCS1的攻击">
+<p>实际上，这足以完全解密攻击者想解密的任何密文，一点点的信息泄露，因为 RSA 的特性，让攻击者完全解密一个给定密文。攻击者会这么做，他有一个想解密的密文，他把密文直接交给网页服务器询问它是否以 02 开头，接下来，攻击者选择一个随机值 r ，他要构建一个新密文 c’ ，也就是 $r^e$·c mod N ，这会造成什么？如果我们把 r 带入 RSA 函数，我们只是与 RSA 明文相乘，PKCS1 封装的明文 m ，用 r 去乘它，计算整项的 e 次方，r 是攻击者控制的值。然后攻击者会把 c’ 发送给网页服务器，服务器回答是肯定的，以 02 开头；或是否定的，不以 02 开头。</p>
+<p>现在，把这个问题进行抽象，推广到更一般的情况，考虑如下情形：我知道 PKCS1(m) 这个数 x ，这个数是我想获得的 PKCS1 对 m 的编码，然后让你选择 r ，我会告诉你 r·x mod N 是否以 02 开头，实际上通过足够多的这样的问题，你就可以还原 x 的全部了。这意味着攻击者可以抓取一个给定的密文，在攻击的最后给出密文 c 的解密结果。</p>
+<p><strong>怎么能够只通过学习明文的最高位是否是 02 就能还原整个明文呢？</strong></p>
+<p>举个简单的例子，<strong>幼儿 Bleichenbacher</strong> ，只求表达这个攻击的基本想法。</p>
+<p>设想攻击者可以发送密文 c ，网页服务器会用私钥解密，不过我们假设服务器不检查开头是否是 02 ，而是看最高位是否为 1 ，如果最高位是 1 ，网页服务器会说：是，如果最高位不是 1 ，网页服务器会返回：不。</p>
+<p>为求进一步简化，我们假设 RSA 的模 N 是 2 的某次幂，即 N=$2^n$ ，当然，这不是一个有效的 RSA 模，RSA 模是一个两指数的乘积，但为求简便假定 N 是 2 的幂。</p>
+<p>现在发现，通过给网页服务器发送密文 c ，攻击者只是学习<u>明文 x 的最高位</u>，服务器的行为完全泄露了最高位，现在攻击者可以把密文乘以 $2^e$ ，现在乘以 $2^e$ 就有去乘明文 x 的效果，就是把 x 乘以 2 ，因为我们是工作在 2 的 n 次方模下，乘以 2 意味着左移，当我们左移时，事实上我们学到了 2x 的最高位，也就等于学到了 <u>x 的次高位</u>。2x 的最高位，左移了 x ，并取模 N ，那么现在， 2x mod N 的最高位，也就是 x 的次高位，我们就学到了 x 的另一位内容。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%B9%BC%E5%84%BFBleichenbacher.PNG" class title="幼儿Bleichenbacher">
+<p>现在重复这步，询问 c·$4^e$ ，这对应于 ${4x}^e$ ，询问 4x 会得到 4x mod N 的最高位，4 对应着左移两位，这意味着我们学到了 <u>x 的第三高位</u>，当我们一次次重复，对于不同的 c 的倍数，可以看出经过一些询问，就还原了 x 。</p>
+<p>Bleichenbacher 需要一百万次的原因在于，他不是测试一位，而是测试最高两位是否为 02 。</p>
+<h2><span id="抵抗-pkcs1-v15-的攻击">抵抗 PKCS1 v1.5 的攻击</span></h2><p>看 RFC ，提出的方案如下：</p>
+<p>如果在你应用 RSA 解密之后，你会获得一个明文，它并不是 PKCS1 编码的，换句话说，它不是以 02 开头的，你可以选取某个随机字符串 r ，只假定明文是一个随机字符串 r ，只当什么也没发生，稍后协议会失败。具体地说，如果 PKCS1 编码不正确，你会说预备主密钥是这个随机字符串，或只是随机接收的，我们继续协议，当然建立会话会失败，因为客户端和服务端最终达成的交换密钥不一致，这会导致会话终止。</p>
+<p>我们实际上不告诉攻击者明文是否以 02 开头，我们只是假定明文是某个随机值，对于许多网页来说，这只是一点点的代码改动，是容易布置的。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/RFC.PNG" class title="RFC">
+<p><strong>PKCS1 是否应该都被改变，使得我们得以证明选择密文安全？</strong>这让我们以一种不同的方法来进行使用 RSA 的加密，即所谓的<strong>优化非对称加密补齐 OAEP</strong> 。</p>
+<h2><span id="pkcs1-v20-oaep">PKCS1 v2.0 OAEP</span></h2><p>OAEP 是更好的使用 RSA 加密的方法，由 Bellare 和 Rogaway 于 1994 年提出，<strong>OAEP 工作流程</strong>如下：</p>
+<p>取你想加密的明文信息 msg ，例如 128 位的 AES 密钥，然后首先在明文后面附上一小段密码本，在前面附上 01 ，然后再根据标准来加一组 0 ，假设这里有 128 位 0 。然后也可以选择一个随机值 rand ，使得这整个字符串与你的 RSA 模一样大，比如说 2047 位。</p>
+<p>在你应用 RSA 函数之前，首先取你选的随机数，把它交给哈希函数 H ，这个哈希函数产生一个值，这个值与你编码的左边一样大，你把输出求异或，把得到的结果交给另一个哈希函数 G ，你用一个随机值去异或，最后会得到两个值，把它们联结起来得到 2047 位长的字符串，这也就是你应用 RSA 函数的字符串，结果就是 RSA 加密。</p>
+<p>现在有一个 2001 年证明的理论，由 Fujisaki ，Okamoto ，Pointcheval 和 Stern 提出，证明了事实上<strong>如果你只假设 RSA 函数是一个安全的陷门函数，事实上这个模式使用 RSA 加密是选择密文安全的话，我们还必须假设函数 H 和 G 是某种理想的哈希函数才行</strong>，我们假设 H 和 G 是随机函数，从它们的定义域映射到它们的值域，这些叫做随机神谕。在实际中，当实现 OAEP 时，对于 H 和 G ，人们就使用 SHA-256 。这个定理依赖于 RSA 的性质，<u>事实上如果你使用一个普通的陷门置换，这个定理不成立，其它的置换未必具备 RSA 的代数性质</u>。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP.PNG" class title="OAEP">
+<p><strong>为什么这叫做优化非对称加密补齐呢？</strong></p>
+<p>原因在于，如果你看密文，会注意到，其密文是尽可能短的，密文与 RSA 输出一样长，没有附在密文后面的值。例如 ISO 标准中，即使你必须加密一个非常短的明文，你必须使用 RSA 加密 x ，然后在 x 后面附上使用对称加密系统加密的短消息，即使你必须加密 128 位 AES 密钥，根据 ISO 标准，你会获得一个 RSA 输出加上一段对称密码。而在 OAEP 中，你只获得了一个 RSA 输出，没有其他东西。从某种意义上这是优化的，密文长度是优化的。</p>
+<p><strong>如果我们拥有一个普通的陷门置换，如何正确的使用 OAEP 呢？</strong></p>
+<p>实际上，对 OAEP 有一个小修改，可以使得结果更为一般，这是 Shoup 于 2001 年给出的结果。证明了如果给我一个普通陷门置换 f ，实际上如果不用 OAEP 里的固定补齐，而是使用这个哈希函数 W ，它是你要加密的明文 m 和随机性 r 的哈希函数，然后在解密时，检测这个哈希函数的值是否正确，那么当你解密时，检查 W(m,r) 是否与明文中这个位置的内容一致，这种改进后的 OAEP 叫做 <strong>OAEP+</strong> ，事实上，<u>它是 CCA 安全的，对任意陷门置换都是选择密文安全的，不必依赖于 RSA 的特定性质</u>。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP+.PNG" class title="OAEP+">
+<p>还有一个结果叫做<strong>简单非对称加密补齐 SAEP+</strong> ，就是说如果要依赖 RSA 的性质，那么在特殊情况下，当 RSA 的公钥指数等于 3 时，实际上你不需要第二阶段的加密工作，这里这个简单的补齐机制使用了函数 W 就足以保证选择密文安全了。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/SAEP.PNG" class title="SAEP">
+<p>它们是 OAEP 的变种，但并没有被实际使用。</p>
+<p><strong>如何解密 SAEP 密文 ct ？</strong>这里你有密文 ct ，如图那种方法是正确的密文解密？</p>
+<p>第一个。有了密文，我们首先需要应用 RSA 逆函数作用于密文，我们会得到 RSA 明文，正好就是 x 和 r ，接下来我们需要使用函数 h 计算 r 的哈希值，然后把结果与 x 异或，这会给我们 m 和 (m,r) ，最后我们需要确保补齐 W(m,r) 是正确的，我们检查 w 是否等于 W(m,r) ，如果是，我们输出 m ；如果不是，我们输出 ⊥ ，表示密文无效。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%AF%86SAEP%E5%AF%86%E6%96%87ct.PNG" class title="如何解密SAEP密文ct">
+<p>解密中的补齐检查在我们看过的所有的机制中都是很重要的，例如 OAEP+ 和 SAEP+ 就是这样解密的，检查补齐是否正确是很重要的。类似地在 OAEP 中，在解密时这个检查也很重要，如果补齐不是 01000 ，就输出 ⊥说密文是无效的。</p>
+<p><strong>事实上实现 OAEP 可能是很困难的。</strong>假设你写了一个 OAEP 解密程序，首先取密文为输入，对密文应用 RSA 逆函数，比如说你希望得到 n 位值输出，2047 位，在 2048 位 RSA 模的情形下，如果你获得了某个比 $2^{2047}$ 大的数，你就拒绝，我们说错误=1 ，然后离开，接下来我们检查补齐是否是正确的，如果补齐不正确，我们还是拒绝和离开。这个实现的问题是，<strong>对于计时攻击来说是脆弱的</strong>。通过泄露时间信息，攻击者可以解出是什么导致了错误，是 RSA 解密后数太大的错误，还是因为补齐太大的错误，如果攻击者通过计时可以区分这两种错误，那么与 Bleichenbacher 类似，实际上是可能完全解密任何你选择的密文的，一丁点的信息泄露都可以让攻击者完全解密任何他想要的密文。这展示了，即使你正确的实现了 OAEP 的数学部分，你也可能会搞砸，使自己暴露于计时攻击中。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/OAEP%E5%AF%B9%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E6%98%AF%E8%84%86%E5%BC%B1%E7%9A%84.PNG" class title="OAEP对计时攻击是脆弱的">
+<p>不要自己去实现密码学，特别是 RSA 、OAEP 。</p>
+<h1><span id="rsa-陷门置换的安全性">RSA 陷门置换的安全性</span></h1><h2><span id="rsa真的是一个单向函数吗">RSA真的是一个单向函数吗？</span></h2><p>如果一个攻击者想求 RSA 函数的逆，攻击者有公钥 (N,e) ，现在他有 $x^e$ ，他的目标是还原 x 。那么，有了 $x^e$ mod N ，还原 x 的难度有多大？也就是，<strong>计算合数模的 e 次方根有多难？</strong>如果这个问题实际上很难，那么 RSA 事实上就是一个单向函数；如果很简单，那么 RSA 就会被破解了。</p>
+<p>这个问题目前最好的算法，需要我们首先分解模 N ，一旦我们分解了模，就容易计算模 p 的 e 次方根，容易计算模 q 的 e 次方根，然后有了这些 e 次方根，实际上容易把它们组合起来，使用中国剩余定理，即可以还原模 N 的 e 次方根，我们一旦能够分解模，计算模 N 的 e 次方根就会很容易，但是分解模，就目前来看是一个非常困难的问题。</p>
+<p>但一个自然的问题是，<strong>为了计算模 N 的 e 次方根，真的一定要分解模吗？</strong></p>
+<p>就目前我们所知道最好的计算模 N 的 e 次方根的算法，是需要将 N 因子分解的，但是也许就有一条捷径可以让我们计算模 N 的 e 次方根而不用分解模。为了证明这是不可能的，我们必须证明一个规约，就是说我们必须证明，<u>如果我给大家一个有效算法可以计算模 N 的 e 次方根，这个算法也可以被改造成一个计算因子分解的算法，这会证明任何人都不能以比分解模更快的速度计算模 N 的 e 次方根，如果我们有这么一个结果，就会证明破解 RSA 实际上与分解大合数一样难</u>。</p>
+<p>假设我给你一个算法，可以计算模 N 的立方根，对任意 $Z_N$ 中的 x ，这个算法会计算出 x 的模 N 立方根，你能证明，使用这样一个算法能分解模 N 吗？即使整个证明我们还不知道，我们知道的是，e = 2 时，如果我给你一个计算模 N 平方根的算法，那么事实上这就蕴含着分解模的算法，那么，计算平方根事实上与分解模一样困难。如果回想 RSA 的定义要求 ed = 1 mod Φ(N) ，这意味着，e 与 模 Φ(N) 必须是互质的，第一个方程是说，e 是 Φ(N) 可逆的，但是，如果 e 是 Φ(N) 可逆的，这必将意味着 e 必须与 Φ(N) 互质，而 Φ(N)=(p-1)(q-1) ，由于 p 和 q 都是大质数，p-1 和 q-1 总是偶数，因此 gcd(2,Φ(N))=2 ，因为 Φ(N) 是偶数，因此，公钥指数 2 与 Φ(N) 不互质。这意味着，<u>即使我们有了一个从计算平方根到因子分解的规约，e=2 也不能被拿来当作 RSA 指数，真正合法的最小 RSA 指数等于 3 ，但是等于 3 ，问题就是计算立方根，与因子分解一样难</u>。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%A7%84%E7%BA%A6.PNG" class title="一个规约">
+<p>我们目前只知道 RSA 是一个单向函数，事实上，破解 RSA，计算 e 次方根，都要求因子分解模。</p>
+<p>现在有很多研究工作，试图提高 RSA （加密或解密）的性能。</p>
+<h2><span id="一个试图提高-rsa-性能的错误例子">一个试图提高 RSA 性能的错误例子</span></h2><p>设想如果我想加速 RSA 解密，解密是通过计算密文的 d 次方，而指数算法的运行时间与 d 的长度大小成线性关系，与 log(d) 呈线性。试想，如果要加速 RSA 解密，为什么不使用一个小 d 呢？比如说，使用一个解密指数，大约是 $2^{128}$ ，这已经够大了，穷举 d 实际上是不可能的，但正常情况下，解密指数 d 约与模一般大，比如说 2000 位，通过使用仅为 128 位的 d ，从 2000 位降到 100 位，可以提高 RSA 解密速度 20 倍，实际上这是一个非常糟糕的点子。</p>
+<p>看下面的思路，Michael Winener 有一个攻击，证明了事实上，一旦私钥指数 d 小于模的 1/4 次方，RSA 是不安全的。如果模大约是 2048 位，这意味着如果 d 小于 $2^{512}$，那么 RSA 是完全不安全的，而且这是最坏的一种不安全。即，给定一个公钥 e ，你可以很快还原出私钥 d 。有传言说，这个攻击可以针对最多 512 位，那么为什么我们不让这个模，比如说 530 位，那么这个攻击就不能用了，但是我们依然可以让 RSA 解密加速 4 倍，因为我们把指数从 2000 位降到 530 位，实际上，这是不安全的。Wiener 的攻击有一个扩展，证实了如果 d 小于 $N^{0.292}$，那么 RSA 也是不安全的。事实上，这个猜想是说，这对最多 $N^{0.5}$ 来说是正确的，这是一个开放的问题。</p>
+<p>为了准确，当说 RSA 是不安全时，意思是，有了公钥 (N,e) ，你的目标是还原私钥 d 。</p>
+<img src="/.com//08/05/%E3%80%90DanBoneh%E3%80%91%E5%9F%BA%E4%BA%8E%E9%99%B7%E9%97%A8%E7%BD%AE%E6%8D%A2%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86/%E4%B8%80%E4%B8%AA%E8%AF%95%E5%9B%BE%E6%8F%90%E9%AB%98RSA%E6%80%A7%E8%83%BD%E7%9A%84%E9%94%99%E8%AF%AF%E4%BE%8B%E5%AD%90.PNG" class title="一个试图提高RSA性能的错误例子">
+<p>这里的教训是，<strong>任何人都不应该在 d 上强加任何结构以期提高 RSA 性能</strong>。</p>
+<h2><span id="wieners-attack">Wiener’s attack</span></h2><p>它涉及的只是操作一些不等式。在 Wiener 的攻击里，我们有模和 RSA 指数：(N,e)，目的是还原私钥指数 d 。我们只知道 d 是小于 N 的四次方根的，事实上我将假设 d 小于 N 的四次方根再除以 3 ，这个 3 不重要，但这里主要起作用的项是，d 小于 N 的四次方根。</p>
+<p>首先，因为 e 和 d 是 RSA 的公钥和私钥指数，我们知道 ed = 1 mod Φ(N)，这是什么意思？这意味着，存在某个整数 k ，满足 ed = k·Φ(N)+1 ，事实上，ed = k·Φ(N)+1 这个等式是这个攻击的关键所在，首先我们将两边同时除以 d·Φ(N) ，得到 e/Φ(N) - k/d = 1/(d·Φ(N)) ，加上绝对值，不会改变等性，|e/Φ(N) - k/d| = 1/(d·Φ(N))，现在 Φ(N) 几乎等于 N ，</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ 密码学</a>
+          
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/23/%E3%80%90DanBoneh%E3%80%91NumberTheory/" rel="next" title="【DanBoneh】Number Theory">
+                <i class="fa fa-chevron-left"></i> 【DanBoneh】Number Theory
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/28/%E3%80%90%E5%AE%89%E5%85%A8%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E3%80%91%E9%80%86%E5%90%91%E5%AE%9E%E9%AA%8C/" rel="prev" title="【安全综合实践】逆向实验">
+                【安全综合实践】逆向实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="XUEYU" />
+            
+              <p class="site-author-name" itemprop="name">XUEYU</p>
+              <p class="site-description motion-element" itemprop="description">你只管善良，上天自有衡量。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+				<a href="/archives">
+
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">公钥加密系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">对抗窃听的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">对抗主动攻击的安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.4.</span> <span class="nav-text">选择密文安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.5.</span> <span class="nav-text">选择密文安全的攻击方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">公钥加密的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">陷门函数 TDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">安全的陷门函数 TDFs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.3.</span> <span class="nav-text">使用 TDFs 构建公钥加密系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.1.</span> <span class="nav-text">公钥加密系统工作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.3.2.</span> <span class="nav-text">安全性定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.4.</span> <span class="nav-text">错误使用 TDF 构建的公钥加密系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">陷门置换 RSA 的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">数论回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">RSA 陷门置换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.3.</span> <span class="nav-text">公钥加密系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.4.</span> <span class="nav-text">对教科书 RSA 的攻击例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">公钥密码学一号标准 PKCS1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">PKCS1 v1.5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">针对 PKCS1 v1.5 的攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.3.</span> <span class="nav-text">抵抗 PKCS1 v1.5 的攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.4.</span> <span class="nav-text">PKCS1 v2.0 OAEP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">RSA 陷门置换的安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">RSA真的是一个单向函数吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">一个试图提高 RSA 性能的错误例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.3.</span> <span class="nav-text">Wiener’s attack</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+	  
+		
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		
+		<div class="widget-wrap">
+			<h3 class="widget-title"></h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="200" height="200" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E4%BA%8E%E9%85%8D%E5%AF%B9%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">基于配对的密码学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+		
+		
+		
+<div style="">
+  <canvas id="canvas" style="width:60%;" height="100" width="700">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+<!--访问量访问人数-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">
+	  <span class="post-count">71k</span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+	<i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XUEYU</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="timeDate"></span><span id="times"></span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Running "+dnum+" Days "; 
+    } 
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz',
+        appKey: 'oNioHGf9lbC9krBNHyPsX05z',
+        placeholder: '欢迎交流讨论...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz", "oNioHGf9lbC9krBNHyPsX05z");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

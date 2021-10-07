@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="密码学,DanBoneh密码学," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="鳕鱼堡er" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Introduction抗碰撞的哈希函数HMAC：基于抗碰撞的哈希函数构建的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【DanBoneh】Collision Resistance">
+<meta property="og:url" content="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/index.html">
+<meta property="og:site_name" content="鳕鱼堡er">
+<meta property="og:description" content="Introduction抗碰撞的哈希函数HMAC：基于抗碰撞的哈希函数构建的。">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%8D%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E8%A2%AB%E7%9B%B4%E6%8E%A5%E5%BA%94%E7%94%A8%E4%BA%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%92%88%E5%AF%B9%E6%8A%97%E7%A2%B0%E6%92%9E%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%9A%E7%94%A8%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%80%E4%BA%9B%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E4%BE%8B%E5%AD%90.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E5%9B%BE%E8%A1%A8.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/Merkle-Damgard%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%88%A9%E7%94%A8Davies-Meyer%E6%9E%84%E5%BB%BA%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%80%E4%B8%AA%E4%B8%8D%E6%8A%97%E7%A2%B0%E6%92%9E%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0%E7%9A%84%E4%BE%8B%E5%AD%90.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%88%A9%E7%94%A8Miyaguchi-Preneel%E6%9E%84%E5%BB%BA%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/SHA-256.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%95%B0%E8%AE%BA%E5%9B%B0%E9%9A%BE%E9%97%AE%E9%A2%98%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%82%B9%E5%AD%90.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%82%B9%E5%AD%90%E5%9B%BE%E8%A7%A3.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC%E5%B7%A5%E4%BD%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/NMAC.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%951.PNG">
+<meta property="og:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%952.PNG">
+<meta property="article:published_time" content="2020-06-25T01:51:04.000Z">
+<meta property="article:modified_time" content="2020-06-26T07:00:14.000Z">
+<meta property="article:author" content="XUEYU">
+<meta property="article:tag" content="密码学">
+<meta property="article:tag" content="DanBoneh密码学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/06/25/【DanBoneh】CollisionResistance/"/>
+
+
+
+
+
+  <title>【DanBoneh】Collision Resistance | 鳕鱼堡er</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?702343d7b417e8c7fb52c949a3414d6c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鳕鱼堡er</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个誓死不当程序猿的信院研究僧</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XUEYU">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鳕鱼堡er">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【DanBoneh】Collision Resistance</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+			
+			
+			
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-25T09:51:04+08:00">
+                2020-06-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-26T15:00:14+08:00">
+                2020-06-26
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E4%B9%8B%E8%B7%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">密码学之路</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/" class="leancloud_visitors" data-flag-title="【DanBoneh】Collision Resistance">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7.9k字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  28分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1><span id="introduction">Introduction</span></h1><h2><span id="抗碰撞的哈希函数">抗碰撞的哈希函数</span></h2><p><strong>HMAC</strong>：基于<u>抗碰撞的哈希函数</u>构建的。</p>
+<a id="more"></a>
+<p><strong>碰撞的哈希函数</strong>：一个哈希函数，能将某个信息空间 M 映射到一个标签空间 T （信息空间应当比标签空间大得多），<code>H：M→T (|M| &gt;&gt; |T|)</code>，函数 H 的一个碰撞是一对信息 ($m_0$,$m_1$)， $m_0$ 和 $m_1$ 不同，但应用函数 H 会得到同样的输出。H($m_0$) = H($m_1$) 且 $m_0$ ≠ $m_1$，当应用这个函数时，他们会发生碰撞，即信息空间的 $m_0$ 和 $m_1$ 同被映射到标签空间中的同一个输出（输出空间没有足够的空间来不碰撞地容纳所有信息），则称函数 H 是碰撞的。</p>
+<p><strong>抗碰撞的哈希函数</strong>：抗碰撞是指 $m_0$ 和 $m_1$ 不同，使得 H($m_0$) = H($m_1$) 是很难找到的。如果有一个能直接找出这些碰撞的有效算法，我们说这个函数是抗碰撞的。如果对所有有效的算法 A ，这些算法都不能输出函数 H 的碰撞，通常，我们用一个算法 A 能够输出一个碰撞的概率来定义这个优势。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG" class title="抗碰撞的哈希函数">
+<p><strong>简单应用</strong>：特别地，给定一个抗碰撞的哈希函数，我们看如何简单地构建一个 MAC 。假设我们对短信息有一个 MAC ，假设我们有一个哈希函数是抗碰撞的，它从一个很大的信息空间里取值，将几个 G 的信息映射到小的信息空间里，我们用哈希函数输出值 MAC 来定义它。我们如何验证它呢？给定一个标签，我们通过重新计算给定信息的哈希值来验证，检查小 MAC 值是否能验证给定的标签。这是一个非常简单的方法来证明，抗碰撞可以取一个原型，这个原型可以<u>处理短输入</u>，把这个原型扩展成一个<u>为非常长的输入而构建的原型</u>。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8.PNG" class title="简单应用">
+<h2><span id="安全性定理">安全性定理</span></h2><p>如果<u>底层 MAC 是安全的</u>，并且 <u>H 是抗碰撞的</u>，那么这个组合可以计算长信息的 MAC ，得到的 MAC 也是安全的。</p>
+<p>把这个安全性定理应用到 AES ，在 SHA-256 里，输出 256 位，即 32 字节，我们必须构建一个能处理 32 字节的 MAC ，我们可以应用 16 字节的 AES 把它带入到一个两个分组的 CBC 里，两个分组的 CBC 把 AES 从一个 16 字节的 PRF 扩展成了以一个 32 字节的 PRF ，然后取 SHA-256 的输出，把它带入到两分组的基于 AES 的 CBC 里，然后我们获得了一个非常简单的 MAC ，假设 AES 是个 PRF ，并且 SHA-256 是抗碰撞的，这个 MAC 是安全的。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%AE%89%E5%85%A8%E6%80%A7%E5%AE%9A%E7%90%86.PNG" class title="安全性定理">
+<p>抗碰撞是这个组合 MAC 的安全性的本质。假设我们使用的哈希函数 H 不是抗碰撞的，换句话说，存在一个算法，可以找到两个不同的信息，它们的 MAC 是一样的，这种情况下，这个组合 MAC 是不安全的，因为攻击者可以简单地使用一个选择信息攻击来获得 $m_0$ 的标签，然后输出 ($m_1$,t) 作为一个伪造，确实，t 是 $m_1$ 的一个有效 MAC 。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%8D%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0.PNG" class title="不抗碰撞的哈希函数">
+<h2><span id="抗碰撞被直接应用于信息的完整性">抗碰撞被直接应用于信息的完整性</span></h2><p>想象我们有想保护的文件，我们把这些文件想象成软件包，我们想把这些软件安装在系统里，如下图有三个不同的软件包，现在用户想下载软件包，他想确保他下载的软件包的版本不是某个被攻击者篡改后的版本，内容被攻击者修改了。那么用户可以参考一个比较小的公共空间，这个公共空间只需保存这些软件包的哈希值，不需要很多这样的空间，公共空间唯一的要求是只读。</p>
+<p>换句话说，攻击者无法篡改这个空间里的哈希值，然后，一旦用户参考了公共空间，他可以很容易地计算下载的软件包的哈希值，把结果与公共空间进行比较，如果它们相同，用户就知道他下载的版本是正确的。因为函数 H 是抗碰撞的，攻击者无法找到一个戴帽子的 $F_1$ ，可以让它拥有与 $F_1$ 同样的哈希值，因此攻击者无法修改 $F_1$ ，且不会被发现，因为无法让这个戴帽子的 $F_1$ 拥有与公共空间里一样的哈希值。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%8A%97%E7%A2%B0%E6%92%9E%E8%A2%AB%E7%9B%B4%E6%8E%A5%E5%BA%94%E7%94%A8%E4%BA%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AE%8C%E6%95%B4%E6%80%A7.PNG" class title="抗碰撞被直接应用于信息的完整性">
+<p>我们看一个 MAC 与上述类似的情况，在这个 MAC 的例子里，我们需要一个密钥来验证单个文件的标签，但我们不需要一个只读的公共空间；用抗碰撞的哈希函数，我们就不需要用一个密钥来验证，任何人都可以验证，但是我们需要这个多余的资源，即攻击者不能修改的空间，事实上，我们后面看到数字签名可以在完整性和资源两方面都达到最优，届时我们可以既让公众自行验证，又不需要只读空间。</p>
+<p>但目前，只用 MAC 或抗碰撞哈希函数，我们只能达到单方面的要求，事实上，这种机制是非常流行的，实际上，Linux 发行版通常使用公共空间来发布它们软件包的哈希值，任何人在电脑上安装之前，可以确保他们下载了正确的软件包。</p>
+<h1><span id="generic-birthday-attack">Generic birthday attack</span></h1><h2><span id="针对抗碰撞哈希函数的通用攻击">针对抗碰撞哈希函数的通用攻击</span></h2><p>针对<strong>分组密码</strong>的通用攻击是<strong>穷举攻击</strong>，穷举攻击迫使分组密码的密钥大小是 128 位或更多；针对<strong>抗碰撞哈希函数</strong>的通用攻击是<strong>生日攻击</strong>，生日攻击迫使抗碰撞的哈希函数的输出必须多于某个下界。</p>
+<p>这里我们有抗碰撞的哈希函数，假设它输出 n 位，换句话说，它的输出空间大小大约是 2^n 。现在，信息空间要远远大于 n 位，我们说待哈希的信息可能有 100 个 n 位长。看这样一个算法，可以用大约 2^(n/2) 的时间，找到这个函数 H 的碰撞，这个<strong>算法</strong>如下工作：</p>
+<p>①我们从信息空间里随机选择 2^(n/2) 个信息，即 $m_1$ ，…， $m_2$^(n/2) ，现在因为信息本身远远大于 n 位，它们有上百个 n 位，很有可能这些信息是不相同的，它们互不相同的概率很大。</p>
+<p>②但对每一条选中的信息，我们应用哈希函数，获得标签 $t_i$ ，这个 $t_i$ 是 n 位字符串。</p>
+<p>③现在我们在 $t_i$ 中寻找一个碰撞，换句话说，我们找一个 i 和 j ，满足 $t_i$ = $t_j$ ，一旦找到了，就等于是发现了碰撞，因为如前所述，以很高的概率，$m_i$ ≠ $m_j$ ，但 $m_i$ 的哈希值等于 $m_j$ 的哈希值，因此，我们找到了函数 H 的碰撞。现在如果我们找遍了这 2^(n/2) 个 $t_i$ 却没有找到碰撞，我们回到第一步尝试另一组 2^(n/2) 个信息。</p>
+<p>我们需要迭代这个过程多少次才能发现碰撞？事实上，迭代次数是个非常小的数，意味着这个算法可以以大约正比于 2^(n/2) 的时间找到碰撞。由于每轮迭代会以 1/2 的概率找到碰撞，我们平均需要迭代 2 次，因此这个算法的运行时间是 2^(n/2) 乘以 哈希函数的计算时间（这个算法需要大量的空间 O(2^(n/2)) ，但我们先忽略空间的问题）。如果你的哈希函数输出 n 位，总是存在一个攻击算法 用 2^(n/2) 的时间发现碰撞，比如：如果我们输出 128 位，在 2^64 的时间里，可以找到一个碰撞，这将不是充分安全的，这就是为什么抗碰撞的哈希函数通常不输出 128 位。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%92%88%E5%AF%B9%E6%8A%97%E7%A2%B0%E6%92%9E%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%9A%E7%94%A8%E6%94%BB%E5%87%BB.PNG" class title="针对抗碰撞哈希函数的通用攻击">
+<p>从下面的例子可以看出，分组越大，算法越慢，有一些性能上的亏损，但安全性上有很多好处。</p>
+<p>SHA-1 不推荐使用，有一个理论上的碰撞发现算法，需要 2^51 的时间，所以某人发现一个 SHA-1 的碰撞几乎只是时间问题。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%80%E4%BA%9B%E6%8A%97%E7%A2%B0%E6%92%9E%E7%9A%84%E4%BE%8B%E5%AD%90.PNG" class title="一些抗碰撞的例子">
+<h2><span id="生日悖论的证明">生日悖论的证明</span></h2><p>为了分析这种攻击，我们引入生日悖论的知识，它之所以称为悖论，是因为平方根函数增长缓慢，与人的直觉相悖。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA.PNG" class title="生日悖论">
+<p>设想我们有 n 个随机变量 $r_1$ ，$r_2$ ，…，$r_n$ ，取值范围是从 1 到 B 的区间里，我峨嵋你唯一的假设是，这 n 个随机变量是<strong>相互独立</strong>的，而且它们是<strong>同分布</strong>的，例如，它们可能都是在从 1 到 B 的区间里均匀分布的，但它们还是独立的均匀分布的变量。但如果我们把 n 设置为 B 的平方根大小，换句话说，如果我们从区间 1 到 B 内取样约 B 的平方根次，精确的说是 1.2 × B^(1/2) ，那么样本中有两个是一样的概率至少是 1/2 ，事实上，均匀分布是生日悖论中最坏的情况，换句话说，<u>如果 $r_i$ 的分布不是均匀的，事实上，需要取样的次数要少于 1.2 × B^(1/2)</u> 。那么，我们证明均匀分布的情况，也就能证明其他分布的情况，但这里给出的证明只对<u>均匀分布</u>成立。</p>
+<p><strong>证明过程</strong>：我们要求 存在一对 i 和 j ，i ≠ j ，满足 $r_i$ = $r_j$ 的概率，我们求互斥事件的概率，就是说我们所求概率为 1 减去 对所有 i ≠ j 都有 $r_i$ ≠ $r_j$ 的概率（这意味着我们选择的 n 个样本里没有发生碰撞）。当我们选择 $r_i$ 时，这是我们第一次选择，所以是不会发生任何碰撞的，但当我们取 $r_2$ 时，$r_2$ 不与 $r_1$ 碰撞的概率是 (B-1)/B ，类似的，当我们选择 $r_3$ ，$r_3$ 不与 $r_1$ 或 $r_2$ 碰撞的概率是 (B-2)/B ，…，直到我们获得了最后的 $r_n$，$r_n$ 不与 不与之前所有的 $r_i$ 碰撞的概率是 (B- (n-1) )/B ，也就是 (B-n+1)/B ，将这些概率乘起来正是因为这些 $r_i$ 是<u>相互独立的</u>。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="生日悖论的证明">
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA%E7%9A%84%E5%9B%BE%E8%A1%A8.PNG" class title="生日悖论的图表">
+<h1><span id="the-merkle-damgard-paradigm">The Merkle-Damgard Paradigm</span></h1><h2><span id="抗碰撞的哈希函数的构建">抗碰撞的哈希函数的构建</span></h2><p>我们的目标是构建一个抗碰撞的哈希函数，对这些函数，即使找到一个碰撞也是困难的（尽管我们知道有很多碰撞存在），没有有效的算法可以输出哪怕一个碰撞。那么我们要构建这些哈希函数，我们分两步构建这些哈希函数：</p>
+<p>①如果给我一个处理短信息的抗碰撞哈希函数，我们可以扩展它来构建一个处理长得多的信息的抗碰撞的哈希函数。</p>
+<p>②构建安全压缩函数。</p>
+<p>Merkle-Damgard 是一个非常通用的机制，所有的标准哈希函数都遵循这个机制，由一个压缩函数，构建抗碰撞的哈希函数。</p>
+<p><strong>Merkle-Damgard 工作过程</strong>：这里我们有函数 H ，我们假设 H 是抗碰撞的哈希函数，可以处理短输入，我们使用这个小函数 h ，h 有时叫做<u>压缩函数</u>（从 T 中取元素，正好与哈希函数相反），我们将取长信息 M 把它分成若干分组，然后我们使用一个固定值叫做 IV ，这里 IV 永远是固定的，它内嵌在代码和标准里，只是一个固定的 ID ，是函数的一部分。然后我们对第一个信息分组应用小的压缩函数 h ，一并使用这个 ID ，得到的叫做<u>链接变量</u>，将被交给下一压缩函数来压缩下一分组，一并使用前一链接变量输出下一链接变量，直到我们到达最后分组。在最后分组上，我们要做一个特别的事情，我们必须把补齐分组 PB 附在信息后面，在附上补齐分组之后，我们还是要压缩最后的链接变量与最后的分组，得到的输出就是实际哈希函数的输出。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/Merkle-Damgard%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="Merkle-Damgard工作过程">
+<p><strong>补齐分组</strong>：我们看到，序列 1000 为实际明文分组的结尾，这个分组最重要的部分是 我们对信息长度进行的编码，在这个补齐分组里，信息长度域固定为 64 位，所以在所有所有的 SHA 哈希函数中，最大信息长度为 2^64 - 1 ，事实上信息长度应当适应于 64 位分组，2^64 - 1 位的信息长度的上界对应我们能释放的信息来说足够长了。</p>
+<p>如果最后一个分组长度是压缩函数分组长度的倍数，我们怎么办？通常，答案是如果在最后分组中没有空间留给补齐分组时，那么我们就必须加另外一个假分组把补齐函数放在那里。当然以正确的方式写 1000… 有一点非常重要，那就是<u>补齐分组包含信息长度</u>。</p>
+<h2><span id="相关定理的证明">相关定理的证明</span></h2><p>Merkle-Damgard 这个机制流行的原因是，下面这个定理告诉我们，如果小的压缩函数是抗碰撞的，那么大的 Merkle-Damgard 哈希函数也是抗碰撞的。换句话说，<u>如果我们要为长输入构建抗碰撞的哈希函数，我们只需要构建一个抗碰撞的压缩函数</u>。</p>
+<p>我们证它的逆否命题，也就是，“如果你能找到这个大哈希函数的一个碰撞，那么我们可以推出这个小压缩函数的一个碰撞”，因此，<u>如果 h 是抗碰撞的，那么 H 也是</u>。</p>
+<p><strong>证明过程</strong>：</p>
+<p>假设给我一个大压缩函数的碰撞，即 两个不同的信息 M 和 M’ ，它们正好被哈希到同一个输出，我们将使用 M 和 M’ 来构建这个小压缩函数的一个碰撞。首先我们必须记住 Merkle-Damgard 机制的过程，特别地，当我们哈希 M 和 M’ ，给链接变量起一些名字当我们计算信息 M 的哈希值时，会得到这些链接变量，那么 $H_0$ 固定的 IV 开启整个过程，$H_1$ 是用 IV 计算第一个分组的哈希结果，直到最后一个链接变量，也是 Merkle-Damgard 链的最后输出。类似地，对于 M’ ，做同样操作得到最后的哈希值。现在注意信息 M 和 M’ 的长度不一定是一样的，特别地，M 的长度为 t ，M’ 的长度为 r ，因为发生了碰撞，我们知道这两个值是一样的，即 H(M) = H(M’) ，换句话说，最后的链接变量相同。</p>
+<p>现在仔细看 $H_t+1$ 和 $H_r+1$ 是如何计算的，前者是由压缩函数应用到之前的链接变量，并使用 M 的最后分组得到的，包括补齐分组，注意，这里假设补齐分组可以放在 M 的最后分组里，即使最后的补齐分组在它自己的分组里，也没有任何区别，为了简便，我们假设补齐分组在 M 最后分组里，那么，通过计算最后分组的哈希，要用到补齐分组和最后的链接变量，我们获得了 $H_t+1$ ，类似地，也可以对 M’ 做同样的事情，通过计算最后的信息分组和最后的链接变量的哈希，我们获得了 $H_r+1$ ，由于这两个值相等，突然间我们有了一个候选的压缩函数的碰撞，即下图最后等式两侧小括号中的参数，这两个参数交给压缩函数，正好产生了同样的输出值。我们唯一的捕获的任何碰撞的方法是，如果参数正好是一样的，换句话说，如果压缩函数的参数不同，那么我们就获得了 h 的一个碰撞，证明结束。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E.PNG" class title="相关定理的证明">
+<p>有一种情况我们的证明还没有结束，那就是 两个倒数第二个链接变量相等，且两个信息的最后分组也相等，且两个信息的补齐分组也相等。两个补齐分组相等意味着什么？信息长度被编码在补齐分组里的，特别地，这意味着 M 的长度 和 M’ 的长度一致，即 t=r ，那么现在就可以假设 t=r 了，现在我们可以对倒数第二个链接变量应用同样的参数，换句话说，$H_t$ 是如何计算的？$H_t$ 是计算前一个链接变量 $H_t-1$ 用倒数第二个信息分组哈希得到的，类似地，$H’t$ 也被计算出来，因为这两个值相等，现在我们获得了另一个候选的压缩函数的碰撞，换句话说，如果 $H_t-1$ ≠ $H’t-1$ 或 $M_t-1$ ≠ $M’t-1$ ，那么我们有一个 h 的碰撞，证明结束。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%9B%B8%E5%85%B3%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5.PNG" class title="相关定理的证明的特殊情况">
+<p>如果继续发生如上情况，我们可以继续往前迭代，迭代到信息的开始，下面两者之一一定成立：</p>
+<p>①找到压缩函数的碰撞。</p>
+<p>②M 和 M’ 的所有分组都相同，与碰撞的前提相矛盾。</p>
+<h1><span id="constructing-compression-functions">Constructing Compression Functions</span></h1><h2><span id="由分组密码构建压缩函数">由分组密码构建压缩函数</span></h2><h3><span id="利用davies-meyer构建压缩函数">利用Davies-Meyer构建压缩函数</span></h3><p>h 抗碰撞 =&gt; H 抗碰撞</p>
+<p>我们能否从分组密码来构造压缩函数呢？答案是肯定的。</p>
+<p>假设我们这里有一个特定的分组密码，用来处理 n 位分组，输入和输出都是 n 位。有一个经典的机制叫 <strong>Davies-Meyer 机制</strong>：<code>h(H,m) = E(m,H)⊕H</code> ，给定信息分组和链接变量，我们使用<u>信息分组作为密钥</u>来加密链接变量，然后我们在输出上再做一次异或。信息分组 $m_i$ 完全是在攻击者的控制之下，攻击者试图找到碰撞，这样他可以选择他想要的信息分组，我们把这个信息分组作为一个分组密码的密钥，当 E 是一个理想的密码时，我们可以证明这个机制事实上是抗碰撞的。</p>
+<p><strong>定理</strong>：如果 E 是一个理想的分组密码，意味着它是一个 {0,1}^n 上的随即置换的集合，如何置换由密钥 K 确定，在这个 E 是理想的分组密码的假设下，事实上，找到这个压缩函数 h 的碰撞需要 2^(n/2) 的时间，特别地，我们可以证明，任何能找到碰撞的人必须至少能花费 2^(n/2) 的时间来加、解密，这意味着，因为这个压缩函数只有 n 位长，总有一个通用的生日攻击可以在 2^(n/2) 的时间里找到碰撞，所以这个定理是说，这个抗碰撞函数确是抗碰撞的，通过生日攻击以在 2^(n/2) 的时间里找到碰撞，但没有算法可以做的比 2^(n/2) 更好。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%88%A9%E7%94%A8Davies-Meyer%E6%9E%84%E5%BB%BA%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG" class title="利用Davies-Meyer构建压缩函数">
+<h3><span id="一个不抗碰撞压缩函数的例子">一个不抗碰撞压缩函数的例子</span></h3><p>Davies-Meyer 机制有一些特别的地方使得该机制是抗碰撞的，如果仅仅是猜这个机制，很有可能最终得到的不是抗碰撞的压缩函数，我们看如下问题：</p>
+<p>假设我们如下定义了压缩函数，<code>h(H,m) = E(m,H)</code> ，我们使用目前分组作为密钥，加密这个链接变量 H，不同之处在于，我们不做 Davies-Meyer 机制里的异或，我们求证这个压缩函数不是抗碰撞的。</p>
+<p>我们试图构建一个碰撞，即一对不同的 m 和 m’ 能在这个函数 H 下发生碰撞，我们怎么构造这个碰撞呢？选择任意的 H，m，和 m’ ，唯一的要求是 m 与 m’ 不同，如何构建 H’ 可以找出碰撞？首先，我们选择一个简单的方法来解释，如下图第一个选项，如果我们使用加密函数对两边进行加密，左边我们得到了 H’ 用 E 和密钥 m’ 加密的结果 <code>E(m&#39;,H&#39;)</code> ，右边用 m’ 加密，解密操作会被抵消，只剩下 m 的加密结果 <code>E(m,H)</code> ，即为我们想找的碰撞，这里使用了解密函数 D ，容易为压缩函数构建碰撞。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E4%B8%80%E4%B8%AA%E4%B8%8D%E6%8A%97%E7%A2%B0%E6%92%9E%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0%E7%9A%84%E4%BE%8B%E5%AD%90.PNG" class title="一个不抗碰撞压缩函数的例子">
+<h3><span id="利用miyaguchi-preneel构建压缩函数">利用Miyaguchi-Preneel构建压缩函数</span></h3><p>Miyaguchi-Preneel 方法有 12 种变体，通过玩弄各种异或以及把变量放在不同位置等手段，都可以得到一个抗碰撞的机制，但也有许多类似的变体并不是抗碰撞的</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E5%88%A9%E7%94%A8Miyaguchi-Preneel%E6%9E%84%E5%BB%BA%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG" class title="利用Miyaguchi-Preneel构建压缩函数">
+<h3><span id="sha-256">SHA-256</span></h3><p>SHA-256 使用了 <strong>Merkel-Damgard 机制</strong> 和 <strong>Davies-Meyer 压缩函数</strong>，那么，Davies-Meyer 的底层分组密码是什么？这个分组密码叫做 <strong>SHACAL-2</strong> ，它的参数使用了 512 位密钥，密钥是从信息分组里提取的，信息分组是 512 位，一次会处理它的 512 位输入信息，这个分组密码的分组大小是 256 位。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/SHA-256.PNG" class title="SHA-256">
+<h2><span id="由数论里的困难问题构建压缩函数">由数论里的困难问题构建压缩函数</span></h2><p>我们说这些压缩函数是可证实的，因为如果你可以找到这种压缩函数的碰撞，那么你就可以解决非常困难的理论问题，一般这类问题是难解的。因此，如果数论问题是难解的，得到的压缩函数可被证实是抗碰撞的。</p>
+<p><strong>工作过程</strong>：我们选取一个非常大的质数，约 700 个十进制数，2000 位二进制数，我们在 1 到 p 之间选择两个随机数 u 和 v ，现在如下定义压缩函数，它在 0 到 p-1 之间取两个数，输出 0 和 p-1 之间的一个数，那么其压缩率为 2:1 ，然后计算双重指数，计算 $u^H$ × $v^m$ ，现在这个定理表述为一个事实，事实上，如果你找到这个压缩函数的一个碰撞，那么你就可以解一个标准的数论难题，叫做<strong>离散对数问题</strong>。</p>
+<p>所有人都相信离散对数问题是难解的，因此这个压缩函数可证实是抗碰撞的。为什么在实际中我们不使用这种压缩函数呢？因为与分组密码相比，这个压缩函数速度太慢了。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E6%95%B0%E8%AE%BA%E5%9B%B0%E9%9A%BE%E9%97%AE%E9%A2%98%E6%9E%84%E5%BB%BA%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%87%BD%E6%95%B0.PNG" class title="数论困难问题构建的压缩函数">
+<h1><span id="hmaca-mac-from-sha-256">HMAC：a MAC from SHA-256</span></h1><p>我们能否不依赖 PRF ，直接用 大的哈希函数 来构建 MAC 呢？</p>
+<h2><span id="第一个点子">第一个点子</span></h2><p>假设给你一个 Merkel-Damgard 哈希函数，注意到它把长信息哈希成短的摘要，我们想把长信息直接转成 MAC ，首先我们想到，我们为什么不计算 MAC 密钥联结上待求 MAC 的信息后的哈希呢？但实际上，这是<u>完全不安全的</u>，因为由于它的密钥扩展，如果我告诉你一个特定信息的标签 H(m) ，攻击者很容易加上另外一个分组，然后再计算一次压缩函数 h ，现在他们可以获得原信息联结上补齐分组的标签，因此，这是个存在性伪造。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%82%B9%E5%AD%90.PNG" class title="第一个点子">
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%82%B9%E5%AD%90%E5%9B%BE%E8%A7%A3.PNG" class title="第一个点子图解">
+<h2><span id="hmac">HMAC</span></h2><p>有一个标准方法可以把一个抗碰撞的哈希函数转成一个 MAC ，这个标准方法叫做 <strong>HMAC</strong> 。特别地，我们可以使用 SHA-256 这一哈希函数来构建 MAC ，输出 256 位，事实上，人们相信 HMAC 是一个伪随机函数，所以通过 SHA-256 ，我们获得了一个伪随机函数输出 256 位的信息。</p>
+<p><strong>工作过程</strong>：首先我们取密钥 k ，然后我们在密钥后面联结一个叫做 ipad 的内部密码本，这使它成为Merkel-Damgard 机制的一个分组，比如，对于 SHA-256 来说将是 512 位，我们把得到的分组附在信息 m 前面，然后求哈希，刚刚证明了只做这些是完全不安全的，不过除此之外， HMAC 还取这 256 位输出，计算密钥 k 与 外部密码本 opad 异或，把异或结果附在 256 位输出的前面，也会形成 512 位的一个分组，然后 HMAC 取这两个分组的哈希值，最终得到信息 m 的标签。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC.PNG" class title="HMAC">
+<p>如果压缩函数 h 是 PRF ，密钥是第一个上面的输入，那么我们计算 PRF h 在固定 IV 处的值，结果是一个随机值，我们记为 $k_1$ ，然后我们应用到 Merkel-Damgard 链，对外部密码本做同样的事情，认为 h 是 PRF ，密钥是上面的输入，我们使用不同的密钥，应用这个 PRF ，计算在固定值 IV 的值，得到另外一个结果 $k_2$ 。现在，当我们使用这些密钥 $k_1$，$k_2$ 来计算 HMAC 时，这看上去非常熟悉，这就是 NMAC 。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/HMAC%E5%B7%A5%E4%BD%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.PNG" class title="HMAC工作示意图">
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/NMAC.PNG" class title="NMAC">
+<p>为了证明这是 NMAC 机制，我们必须假设这个压缩函数 h 是 PRF ，密钥是下面的函数输入，我们说这些密码本 ipad 和 opad 它们是固定的 512 位的常数。</p>
+<p>我们回头看，发现 HMAC 与 NMAC 的主要不同之处是这些密钥 k⊕ipad ，k⊕opad 互相是有关联的，它们只不过是同样的密钥异或上不同的常数。本质上，密钥 $k_1$ 和 $k_2$ 也是互相关联的，因为它们是在同样的固定值 IV 上应用 PRF 计算得到的。</p>
+<p>为了证明 $k_1$ 和 $k_2$ 是伪随机且相互独立的，我们必须证明压缩函数不仅当其上面的输入是密钥时，它是 PRF ，而且当使用关联密钥时，它也是 PRF。基于这些假设，应用对 NMAC 一模一样的分析来分析 HMAC ，我们可以证明 HMAC 是安全的 MAC，其安全的界定与 NMAC 一致，换句话说，你不必改变密钥，只要求 MAC 的信息数小于输出标签的一半空间大小（本质上就是生日攻击里的平方根）。对于 HMAC 和 SHA-256 ，输出空间是 2^256 ，平方根是 2^128 ，这意味着你可以使用 HMAC 和 SHA-256 ，想处理多少信息都可以，而且是始终保持安全的。</p>
+<p>TLS 要求支持 HMAC 和 SHA-196 ，意味着 HMAC 由 SHA-1 函数构建，并截断到 96 位，SHA-1 输出 160 位。SHA-1 不再被认为是安全的哈希函数，那怎么能在 HMAC 里使用 SHA-1 呢？实际上，这是没问题的，因为 HMAC 的安全性分析不需要 SHA-1 是抗碰撞的，当输入运行是密钥时，只需要压缩函数 SHA-1 是 PRF ，目前我们知道，这对 SHA-1 的底层压缩函数也成立，即使它可能不是抗碰撞的。</p>
+<h1><span id="timing-attacks-on-mac-verification">Timing attacks on MAC verification</span></h1><h2><span id="计时攻击">计时攻击</span></h2><p>一个特别的 HMAC 验证的实现，这个实现来自 Keyczar 库。输入为 密钥、信息和标签，我们的验证方法是重新计算信息的 HMAC ，然后比较得到的 16 字节与实际给的签名 16 字节。事实上很多人已经实现了它，问题是，如果看下图 “==” 的比较是如何实现的，你可能觉得比较应该是逐字节地进行，第一次发现它不相等的话，循环终止，说两字符串不相等，这造成了针对该密码库的一个严重的<strong>计时攻击</strong>，这是一个非常合理的实现 MAC 验证的程序。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB.PNG" class title="计时攻击">
+<p><strong>攻击过程</strong>：设想你是攻击者，你有信息 m ，你想获得 m 的一个有效标签。现在，你的目标是攻击一个服务器，这个服务器存放着 HMAC 的密钥。这个服务器开放了一个接口，这个接口接收信息与 MAC ，检查这个 MAC 是否有效，如果 MAC 有效，服务器用这个信息进行操作；如果 MAC 无效，服务器拒绝，退回到信息发送方或拒绝这条信息。现在这个攻击者有机会提交大量信息，看看能不能推出特定的攻击信息的标签，我们可以使用计时攻击来做，攻击者提交许多信息询问信息的标签，而信息始终是一样的，但对于标签来说，攻击者尝试很多不同的标签。</p>
+<p>①在第一个询问里，攻击者提交目标信息和一个随机标签，然后攻击者测量服务器的反应时间。</p>
+<p>②他提交的下一个询问将尝试的第一字节的所有 256 种情况。标签中剩下的字节是任意选取的，它们是什么并不重要，但对于第一个字节，攻击者会提交一个以 0 字节开头的标签，然后他观察服务器是否比之前花稍长一点的时间验证标签。如果服务器花了与第一步严格相同的时间来验证这个标签，那么攻击者会再次尝试，这次以字节 1 开头，如果服务器依然反应迅速，攻击者会尝试以字节 2 开头，直到服务器花了稍微长一点的时间给出反应，就意味着当服务器比较正确的 MAC 和攻击者提交的 MAC 时，在这个字节上，两个 MAC 是一样的，而不一样的是第二个字节。</p>
+<p>③攻击者知道第一个字节后，他可以对第二个字节实施一模一样的攻击，直到服务器接受正确的 MAC 。然后我们继续在这个假信息上做手脚，攻击服务器。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E8%AE%A1%E6%97%B6%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.PNG" class title="计时攻击过程">
+<h2><span id="防御方法">防御方法</span></h2><h3><span id="第一种防御方法">第一种防御方法</span></h3><p>Keyczar 严格地实现了这种防御，首先我们看攻击者提交的签名的字节数是否正确，如果不是，我们就不承认这是个有效的 MAC ，如果签名确实有正确的长度，我们实现比较器，他们总是花相同的时间比较两个字符串。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%951.PNG" class title="防御方法1">
+<h3><span id="第二种防御方法">第二种防御方法</span></h3><p>不被广泛实现，这种攻击试图把字符串的比较对攻击者隐藏起来，这里的验证算法取密钥、信息和一个攻击者提供的候选 MAC 作为输入，然后我们进行比较，首先计算信息的正确 MAC ，但然后不直接比较 MAC 和攻击者的签名，我们再取一次哈希值，我们计算 MAC 的哈希值，计算签名的哈希值，让然如果参数一样，它们的哈希也是一样的，所以这个比较会成功。如果签名和 MAC 的第一个字节一样，先不管其他字节的情况，我们再计算一次哈希，很有可能这两个得到的值是完全不一样的，因此，逐字节的比较器会在第一轮就完成输出，这个攻击者将无法知道到底在比较什么字符串，因此不能实施计时攻击。</p>
+<img src="/.com//06/25/%E3%80%90DanBoneh%E3%80%91CollisionResistance/%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%952.PNG" class title="防御方法2">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ 密码学</a>
+          
+            <a href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag"><i class="fa fa-tag"></i>
+ DanBoneh密码学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91%E4%BE%A7%E8%BE%B9%E6%A0%8F%E8%8F%9C%E5%8D%95%E9%93%BE%E6%8E%A5%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" rel="next" title="【hexo】next踩坑侧边栏菜单链接乱码问题">
+                <i class="fa fa-chevron-left"></i> 【hexo】next踩坑侧边栏菜单链接乱码问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/10/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="prev" title="【测试题】对称加密测试题">
+                【测试题】对称加密测试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="XUEYU" />
+            
+              <p class="site-author-name" itemprop="name">XUEYU</p>
+              <p class="site-description motion-element" itemprop="description">你只管善良，上天自有衡量。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+				<a href="/archives">
+
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">抗碰撞的哈希函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">安全性定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">抗碰撞被直接应用于信息的完整性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">Generic birthday attack</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">针对抗碰撞哈希函数的通用攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">生日悖论的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">The Merkle-Damgard Paradigm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text">抗碰撞的哈希函数的构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.2.</span> <span class="nav-text">相关定理的证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Constructing Compression Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.1.</span> <span class="nav-text">由分组密码构建压缩函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.1.</span> <span class="nav-text">利用Davies-Meyer构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.2.</span> <span class="nav-text">一个不抗碰撞压缩函数的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.3.</span> <span class="nav-text">利用Miyaguchi-Preneel构建压缩函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">4.1.4.</span> <span class="nav-text">SHA-256</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.2.</span> <span class="nav-text">由数论里的困难问题构建压缩函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">HMAC：a MAC from SHA-256</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">第一个点子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.2.</span> <span class="nav-text">HMAC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text">Timing attacks on MAC verification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.1.</span> <span class="nav-text">计时攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.2.</span> <span class="nav-text">防御方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.1.</span> <span class="nav-text">第一种防御方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.2.2.</span> <span class="nav-text">第二种防御方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+	  
+	  
+		
+		<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+		
+		<div class="widget-wrap">
+			<h3 class="widget-title"></h3>
+			<div id="myCanvasContainer" class="widget tagcloud">
+				<canvas width="200" height="200" id="resCanvas" style="width=100%">
+					<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DanBoneh%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">DanBoneh密码学</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag">Web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gdb/" rel="tag">gdb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vps/" rel="tag">vps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E4%BA%8E%E9%85%8D%E5%AF%B9%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">基于配对的密码学</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" rel="tag">密码学</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E8%B7%B5/" rel="tag">密码学原理与实践</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/" rel="tag">总结归纳</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95%E9%A2%98/" rel="tag">测试题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a><span class="tag-list-count">1</span></li></ul>
+				</canvas>
+			</div>
+		</div>
+		
+		
+		
+		
+<div style="">
+  <canvas id="canvas" style="width:60%;" height="100" width="700">当前浏览器不支持canvas，请更换浏览器后再试</canvas>
+</div>
+<script>
+(function(){
+
+   var digit=
+    [
+        [
+            [0,0,1,1,1,0,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,0,1,1,0],
+            [0,0,1,1,1,0,0]
+        ],//0
+        [
+            [0,0,0,1,1,0,0],
+            [0,1,1,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [1,1,1,1,1,1,1]
+        ],//1
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,1,1],
+            [1,1,1,1,1,1,1]
+        ],//2
+        [
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//3
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,0],
+            [0,0,1,1,1,1,0],
+            [0,1,1,0,1,1,0],
+            [1,1,0,0,1,1,0],
+            [1,1,1,1,1,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,1,1]
+        ],//4
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,1,1,1,1,0],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//5
+        [
+            [0,0,0,0,1,1,0],
+            [0,0,1,1,0,0,0],
+            [0,1,1,0,0,0,0],
+            [1,1,0,0,0,0,0],
+            [1,1,0,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//6
+        [
+            [1,1,1,1,1,1,1],
+            [1,1,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0],
+            [0,0,1,1,0,0,0]
+        ],//7
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,1,1,0]
+        ],//8
+        [
+            [0,1,1,1,1,1,0],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [1,1,0,0,0,1,1],
+            [0,1,1,1,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,0,1,1],
+            [0,0,0,0,1,1,0],
+            [0,0,0,1,1,0,0],
+            [0,1,1,0,0,0,0]
+        ],//9
+        [
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,1,1,1,0,0],
+            [0,0,0,0,0,0,0]
+        ]//:
+    ];
+
+var canvas = document.getElementById('canvas');
+
+if(canvas.getContext){
+    var cxt = canvas.getContext('2d');
+    //声明canvas的宽高
+    var H = 100,W = 700;
+    canvas.height = H;
+    canvas.width = W;
+    cxt.fillStyle = '#f00';
+    cxt.fillRect(10,10,50,50);
+
+    //存储时间数据
+    var data = [];
+    //存储运动的小球
+    var balls = [];
+    //设置粒子半径
+    var R = canvas.height/20-1;
+    (function(){
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        //存储时间数字，由十位小时、个位小时、冒号、十位分钟、个位分钟、冒号、十位秒钟、个位秒钟这7个数字组成
+        data.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+    })();
+
+    /*生成点阵数字*/
+    function renderDigit(index,num){
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    cxt.beginPath();
+                    cxt.arc(14*(R+2)*index + j*2*(R+1)+(R+1),i*2*(R+1)+(R+1),R,0,2*Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+    /*更新时钟*/
+    function updateDigitTime(){
+        var changeNumArray = [];
+        var temp = /(\d)(\d):(\d)(\d):(\d)(\d)/.exec(new Date());
+        var NewData = [];
+        NewData.push(temp[1],temp[2],10,temp[3],temp[4],10,temp[5],temp[6]);
+        for(var i = data.length-1; i >=0 ; i--){
+            //时间发生变化
+            if(NewData[i] !== data[i]){
+                //将变化的数字值和在data数组中的索引存储在changeNumArray数组中
+                changeNumArray.push(i+'_'+(Number(data[i])+1)%10);
+            }
+        }
+        //增加小球
+        for(var i = 0; i< changeNumArray.length; i++){
+            addBalls.apply(this,changeNumArray[i].split('_'));
+        }
+        data = NewData.concat();
+    }
+
+    /*更新小球状态*/
+    function updateBalls(){
+        for(var i = 0; i < balls.length; i++){
+            balls[i].stepY += balls[i].disY;
+            balls[i].x += balls[i].stepX;
+            balls[i].y += balls[i].stepY;
+            if(balls[i].x > W + R || balls[i].y > H + R){
+                balls.splice(i,1);
+                i--;
+            }
+        }
+    }
+
+    /*增加要运动的小球*/
+    function addBalls(index,num){
+        var numArray = [1,2,3];
+        var colorArray =  ["#3BE","#09C","#A6C","#93C","#9C0","#690","#FB3","#F80","#F44","#C00"];
+        for(var i = 0; i < digit[num].length; i++){
+            for(var j = 0; j < digit[num][i].length; j++){
+                if(digit[num][i][j] == 1){
+                    var ball = {
+                        x:14*(R+2)*index + j*2*(R+1)+(R+1),
+                        y:i*2*(R+1)+(R+1),
+                        stepX:Math.floor(Math.random() * 4 -2),
+                        stepY:-2*numArray[Math.floor(Math.random()*numArray.length)],
+                        color:colorArray[Math.floor(Math.random()*colorArray.length)],
+                        disY:1
+                    };
+                    balls.push(ball);
+                }
+            }
+        }
+    }
+
+    /*渲染*/
+    function render(){
+        //重置画布宽度，达到清空画布的效果
+        canvas.height = 100;
+        //渲染时钟
+        for(var i = 0; i < data.length; i++){
+            renderDigit(i,data[i]);
+        }
+        //渲染小球
+        for(var i = 0; i < balls.length; i++){
+            cxt.beginPath();
+            cxt.arc(balls[i].x,balls[i].y,R,0,2*Math.PI);
+            cxt.fillStyle = balls[i].color;
+            cxt.closePath();
+            cxt.fill();
+        }
+    }
+
+    clearInterval(oTimer);
+    var oTimer = setInterval(function(){
+        //更新时钟
+        updateDigitTime();
+        //更新小球状态
+        updateBalls();
+        //渲染
+        render();
+    },50);
+}
+
+})();
+</script>
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+<!--访问量访问人数-->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">
+	  <span class="post-count">71k</span>
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+
+&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+	<i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XUEYU</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="timeDate"></span><span id="times"></span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("3/10/2020 12:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = " Running "+dnum+" Days "; 
+    } 
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: true,
+        notify: false,
+        appId: 'zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz',
+        appKey: 'oNioHGf9lbC9krBNHyPsX05z',
+        placeholder: '欢迎交流讨论...',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("zSmUqaeGJut1H7flpYIH1eVP-gzGzoHsz", "oNioHGf9lbC9krBNHyPsX05z");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  <!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
