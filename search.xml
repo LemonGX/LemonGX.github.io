@@ -1936,4 +1936,16 @@ Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn �
         <tag>记录</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【踩坑】npm下载需要管理员权限问题</title>
+    <url>/2021/10/07/%E3%80%90%E8%B8%A9%E5%9D%91%E3%80%91npm%E4%B8%8B%E8%BD%BD%E9%9C%80%E8%A6%81%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>test</p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+      </tags>
+  </entry>
 </search>
