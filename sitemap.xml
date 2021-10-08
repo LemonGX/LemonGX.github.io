@@ -312,13 +312,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/PHP/</loc>
-    <lastmod>2021-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/tags/Web%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -326,21 +319,14 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/PHP/</loc>
+    <lastmod>2021-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/hexo/</loc>
-    <lastmod>2021-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/gdb/</loc>
-    <lastmod>2021-10-08</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/vim/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -361,6 +347,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/tags/gdb/</loc>
+    <lastmod>2021-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/vim/</loc>
+    <lastmod>2021-10-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
@@ -375,14 +375,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/Node/</loc>
+    <loc>http://yoursite.com/tags/%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/%E8%AE%B0%E5%BD%95/</loc>
+    <loc>http://yoursite.com/tags/Node/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -419,14 +419,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <loc>http://yoursite.com/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E4%B9%8B%E8%B7%AF/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E4%B9%8B%E8%B7%AF/</loc>
+    <loc>http://yoursite.com/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2021-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

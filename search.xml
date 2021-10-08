@@ -14,26 +14,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Crypto】EIGamal</title>
-    <url>/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/</url>
-    <content><![CDATA[<h1 id="eigamal公钥密码体制"><a href="#EIGamal公钥密码体制" class="headerlink" title="EIGamal公钥密码体制"></a>EIGamal公钥密码体制</h1><p>EIGamal 密码体制基于离散对数问题。</p>
-<a id="more"></a>
-<h2 id="同余定理"><a href="#同余定理" class="headerlink" title="同余定理"></a>同余定理</h2><p>给定一个正整数m，如果两个整数a和b满足（a-b）能够被m整除，即（a-b）/m得到一个整数，那么就称整数a与b对模m同余，记作<code>a ≡ b(mod m)</code>。</p>
-<p>两个整数a、b，若它们除以整数m所得的余数相等，则称a与b对模m同余或a同余于b模m，记作<code>a ≡ b(mod m)</code>。</p>
-<h3 id="同余性质"><a href="#同余性质" class="headerlink" title="同余性质"></a>同余性质</h3><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%90%8C%E4%BD%99%E6%80%A7%E8%B4%A8.JPG" class title="同余性质">
-<h2 id="离散对数"><a href="#离散对数" class="headerlink" title="离散对数"></a>离散对数</h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0.PNG" class title="离散对数">
-<h2 id="密码体制"><a href="#密码体制" class="headerlink" title="密码体制"></a>密码体制</h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6.PNG" class title="密码体制">
-<p>！！！开心O(∩_∩)O，了解 EIGamal 公钥密码体制后，《基于配对的密码学》P47 第一个公式迎刃而解</p>
-<h1 id="eigamal签名方案"><a href="#EIGamal签名方案" class="headerlink" title="EIGamal签名方案"></a>EIGamal签名方案</h1><h2 id="签名方案"><a href="#签名方案" class="headerlink" title="签名方案"></a>签名方案</h2><h2 id="签名方案的安全性"><a href="#签名方案的安全性" class="headerlink" title="签名方案的安全性"></a>签名方案的安全性</h2>]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>密码学原理与实践</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【CTF】代码审计-01</title>
     <url>/2020/03/14/%E3%80%90CTF%E3%80%91%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-01/</url>
     <content><![CDATA[<p><strong>md5加密相等绕过</strong></p>
@@ -63,24 +43,23 @@
       </tags>
   </entry>
   <entry>
-    <title>【Crypto】无证书加密体制</title>
-    <url>/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="形式化模型"><a href="#形式化模型" class="headerlink" title="形式化模型"></a>形式化模型</h1><p>在无证书加密体制中，用户的私钥 $S_U$ 实际上由两部分组成，一部分是 KGC 生成的 $D_U$，另一部分是用户自己生成的 $x_U$，这种方法使得 KGC 不知道用户的完全私钥 $S_U$，<u>解决了</u>基于身份的密码体制中<strong>密钥托管问题</strong>。此外，私钥包含了 KGC 生成的部分私钥 $D_U$，<u>消除了</u>基于 PKI 密码体制中的<strong>公钥证书</strong>。</p>
+    <title>【Crypto】EIGamal</title>
+    <url>/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/</url>
+    <content><![CDATA[<h1 id="eigamal公钥密码体制"><a href="#EIGamal公钥密码体制" class="headerlink" title="EIGamal公钥密码体制"></a>EIGamal公钥密码体制</h1><p>EIGamal 密码体制基于离散对数问题。</p>
 <a id="more"></a>
-<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B.JPG" class title="通信模型">
-<p>攻击者希望从密文 c 中恢复出明文信息 m 或者是获得接收者的私钥 $S_U$ 。</p>
-<h1 id="机密性游戏"><a href="#机密性游戏" class="headerlink" title="机密性游戏"></a>机密性游戏</h1><h2 id="类型-i-敌手"><a href="#类型-I-敌手" class="headerlink" title="类型 I 敌手"></a>类型 I 敌手</h2><p>（敌手不知道主密钥，但可以任意替换用户的公钥）</p>
-<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6%E7%9A%84%E7%B1%BB%E5%9E%8BI%E9%80%82%E5%BA%94%E6%80%A7%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F.JPG" class title="无证书加密体制的类型I适应性选择密文攻击游戏">
-<p>在<strong>解密询问阶段</strong>，如果敌手 A 已经替换了 $ID_U$ 的公钥，那么 C 不知道公钥对应的秘密值，这种情况下，如果要求敌手 A 提供公钥对应的秘密值 $x_U$，那么称这种解密询问为<strong>弱解密询问</strong>，否则称为<strong>强解密询问</strong>。</p>
-<h2 id="类型-ii-敌手"><a href="#类型-II-敌手" class="headerlink" title="类型 II 敌手"></a>类型 II 敌手</h2><p>（敌手知道主密钥 s ，但不能替换用户的公钥）</p>
-<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6%E7%9A%84%E7%B1%BB%E5%9E%8BII%E9%80%82%E5%BA%94%E6%80%A7%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F.JPG" class title="无证书加密体制的类型II适应性选择密文攻击游戏">
-<h1 id="ap体制"><a href="#AP体制" class="headerlink" title="AP体制"></a>AP体制</h1>]]></content>
+<h2 id="同余定理"><a href="#同余定理" class="headerlink" title="同余定理"></a>同余定理</h2><p>给定一个正整数m，如果两个整数a和b满足（a-b）能够被m整除，即（a-b）/m得到一个整数，那么就称整数a与b对模m同余，记作<code>a ≡ b(mod m)</code>。</p>
+<p>两个整数a、b，若它们除以整数m所得的余数相等，则称a与b对模m同余或a同余于b模m，记作<code>a ≡ b(mod m)</code>。</p>
+<h3 id="同余性质"><a href="#同余性质" class="headerlink" title="同余性质"></a>同余性质</h3><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%90%8C%E4%BD%99%E6%80%A7%E8%B4%A8.JPG" class title="同余性质">
+<h2 id="离散对数"><a href="#离散对数" class="headerlink" title="离散对数"></a>离散对数</h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0.PNG" class title="离散对数">
+<h2 id="密码体制"><a href="#密码体制" class="headerlink" title="密码体制"></a>密码体制</h2><img src="/2021/01/30/%E3%80%90Crypto%E3%80%91EIGamal/%E5%AF%86%E7%A0%81%E4%BD%93%E5%88%B6.PNG" class title="密码体制">
+<p>！！！开心O(∩_∩)O，了解 EIGamal 公钥密码体制后，《基于配对的密码学》P47 第一个公式迎刃而解</p>
+<h1 id="eigamal签名方案"><a href="#EIGamal签名方案" class="headerlink" title="EIGamal签名方案"></a>EIGamal签名方案</h1><h2 id="签名方案"><a href="#签名方案" class="headerlink" title="签名方案"></a>签名方案</h2><h2 id="签名方案的安全性"><a href="#签名方案的安全性" class="headerlink" title="签名方案的安全性"></a>签名方案的安全性</h2>]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
       <tags>
         <tag>密码学</tag>
-        <tag>基于配对的密码学</tag>
+        <tag>密码学原理与实践</tag>
       </tags>
   </entry>
   <entry>
@@ -120,122 +99,24 @@
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】Block Ciphers</title>
-    <url>/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/</url>
-    <content><![CDATA[<p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
-<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
-<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
+    <title>【Crypto】无证书加密体制</title>
+    <url>/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="形式化模型"><a href="#形式化模型" class="headerlink" title="形式化模型"></a>形式化模型</h1><p>在无证书加密体制中，用户的私钥 $S_U$ 实际上由两部分组成，一部分是 KGC 生成的 $D_U$，另一部分是用户自己生成的 $x_U$，这种方法使得 KGC 不知道用户的完全私钥 $S_U$，<u>解决了</u>基于身份的密码体制中<strong>密钥托管问题</strong>。此外，私钥包含了 KGC 生成的部分私钥 $D_U$，<u>消除了</u>基于 PKI 密码体制中的<strong>公钥证书</strong>。</p>
 <a id="more"></a>
-<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
-<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
-<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
-<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
-<p><strong>DES</strong>：核心思想是Feistel网络。</p>
-<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
-<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
-]]></content>
+<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B.JPG" class title="通信模型">
+<p>攻击者希望从密文 c 中恢复出明文信息 m 或者是获得接收者的私钥 $S_U$ 。</p>
+<h1 id="机密性游戏"><a href="#机密性游戏" class="headerlink" title="机密性游戏"></a>机密性游戏</h1><h2 id="类型-i-敌手"><a href="#类型-I-敌手" class="headerlink" title="类型 I 敌手"></a>类型 I 敌手</h2><p>（敌手不知道主密钥，但可以任意替换用户的公钥）</p>
+<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6%E7%9A%84%E7%B1%BB%E5%9E%8BI%E9%80%82%E5%BA%94%E6%80%A7%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F.JPG" class title="无证书加密体制的类型I适应性选择密文攻击游戏">
+<p>在<strong>解密询问阶段</strong>，如果敌手 A 已经替换了 $ID_U$ 的公钥，那么 C 不知道公钥对应的秘密值，这种情况下，如果要求敌手 A 提供公钥对应的秘密值 $x_U$，那么称这种解密询问为<strong>弱解密询问</strong>，否则称为<strong>强解密询问</strong>。</p>
+<h2 id="类型-ii-敌手"><a href="#类型-II-敌手" class="headerlink" title="类型 II 敌手"></a>类型 II 敌手</h2><p>（敌手知道主密钥 s ，但不能替换用户的公钥）</p>
+<img src="/2021/02/15/%E3%80%90Crypto%E3%80%91%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6/%E6%97%A0%E8%AF%81%E4%B9%A6%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6%E7%9A%84%E7%B1%BB%E5%9E%8BII%E9%80%82%E5%BA%94%E6%80%A7%E9%80%89%E6%8B%A9%E5%AF%86%E6%96%87%E6%94%BB%E5%87%BB%E6%B8%B8%E6%88%8F.JPG" class title="无证书加密体制的类型II适应性选择密文攻击游戏">
+<h1 id="ap体制"><a href="#AP体制" class="headerlink" title="AP体制"></a>AP体制</h1>]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
       <tags>
         <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【DanBoneh】Basic Key Exchange</title>
-    <url>/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</url>
-    <content><![CDATA[<h1 id="trusted-3rd-parties"><a href="#Trusted-3-rd-parties" class="headerlink" title="Trusted 3^rd parties"></a>Trusted 3^rd parties</h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>
-<a id="more"></a>
-<h2 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h2><p>试想，世界上有 n 位用户，那么这些用户如何管理这些密钥？</p>
-<p>假设 n=4 ，一种方案是，每一对用户共享一对密钥，这样用户需要管理的共享密钥太多。</p>
-<p>有一种方法叫<strong>在线可信任第三方</strong>，使用 TTP 表示可信任第三方，每个用户与可信任第三方共享一个单独的密钥，这个设计的好处是每个用户只需记住一个密钥。当 Alice 想和 Bob 通信时会发生什么？</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%9C%A8%E7%BA%BF%E5%8F%AF%E4%BF%A1%E4%BB%BB%E7%AC%AC%E4%B8%89%E6%96%B9.PNG" class title="在线可信任第三方">
-<p>双方必须参加某个特定协议，在协议的最后，他们会共享一个密钥 K_AB ，而攻击者不能知道 K_AB ，Alice 想和 Bob <strong>如何生成这一共享密钥 K_AB</strong> ？</p>
-<p>看一个玩具协议，<u>这个协议对窃听是安全的，对篡改或主动攻击不安全</u>，Alice 有她的密钥 $k_A$ ，Bob有他的密钥 $k_B$ ，$k_A$、$k_B$ 是与可信任第三方共享的。这个协议如下工作：</p>
-<p>Alice 开始时会发送一条信息，给可信任第三方，说她想要一个密钥用于和Bob通信，可信任第三方会选择一个随机密钥 k_AB ，那么可信任第三方生成了他们的共享密钥，他会回复一条信息给 Alice ，这条信息包含两部分，①使用 $k_A$ 加密的信息，这个密钥在 Alice 和 Bob 之间使用，k_AB 包含在这条信息里，即，这里被加密的信息是，k_AB 加上“这个密钥是Alice 和 Bob的共享密钥”这一事实。②票据，这个票据是为 Bob 加密的信息，是使用 $k_B$ 加密的，加密的信息依然是“这个密钥在 Alice 和 Bob 之间使用”，然后 TTP 把这个事实附在密钥 k_AB 后面。这里使用的加密系统 E 是一个 CPA 安全密码，当 Alice 想与 Bob 通信时，Alice 会解密给她的那部分信息得到密钥 k_AB ，然后把票据给 Bob ，Bob 收到这个票据，使用 $k_B$ 解密得到密钥 k_AB ，他们就有了共享密钥。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%88%A9%E7%94%A8%E7%8E%A9%E5%85%B7%E5%8D%8F%E8%AE%AE%E4%BA%A7%E7%94%9F%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5.PNG" class title="利用玩具协议产生共享密钥">
-<p><strong>为什么这个协议是窃听安全的？</strong></p>
-<p>当我们只考虑对窃听的安全时，窃听者在这个协议中看到两个密文，我们的目标是，<u>窃听者没有任何关于交换密钥 k_AB 的信息</u>，这点可由密码 E,D 的 CPA 安全性直接得到。</p>
-<p>对于每个密钥交换，TTP是必须使用的，这个协议的另一个性质是，TTP 知道所有的会话密钥，如果 TTP 被破解了，那么攻击者可以轻松获得所有系统中用户之间已经交换过的密钥。这个机制的优点是，它只使用对称密钥密码学，是快速有效的。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E7%8E%A9%E5%85%B7%E5%8D%8F%E8%AE%AE.PNG" class title="玩具协议">
-<p><strong>这个协议对主动攻击是完全不安全的，如，重放攻击：</strong></p>
-<p>设想 Alice 从 Bob 那里订购了一本书，Bob 接收了这本书的付款，然后发给 Alice 一份这本书的拷贝，交易完成。设想攻击者记下了 Alice 和在线商家 Bob 的会话，稍后向 Bob重放这段会话，Bob 就会认为，Alice刚刚重新订购了这本书的另一份拷贝，Bob 就会再收一次 Alice 的钱，然后发给 Alice 这份拷贝，所以，重放会话会对 Alice 造成巨大危害</p>
-<p>我们能否设计出密钥交换协议，对窃听和主动攻击都保持安全呢？<strong>我们能否设计出安全的密钥交换协议，但不需要一个在线的可信任第三方呢？</strong>答案是可能的。事实上，这是公钥密码学的起点，思路如下：</p>
-<p>①由 Ralph Merkle 于1974年提出。</p>
-<p>②由 Diffie 与 Hellman 于 1976年提出。</p>
-<p>③由 Rivest，Shamir，Adleman 于1977年提出。</p>
-<p>近年的新想法：①基于身份的加密（IBE）2001。②泛函加密，2011。</p>
-<h1 id="merkle-puzzles"><a href="#Merkle-Puzzles" class="headerlink" title="Merkle Puzzles"></a>Merkle Puzzles</h1><p>不借助可信第三方的密钥交换协议。</p>
-<p>这里我们通常的设定是，有 Alice 和 Bob ，他们想生成一个共享密钥，他们互相发送信息，在协议的最后，他们必须获得某个双方都知道的共享密钥 k ，窃听通信流量的攻击者绝对无法得知这个 k 是什么，目前，我们只关心监听会话的攻击者，我们将看到三个协议来达到这一目标。</p>
-<p>能借助对称密码学做到吗？可不可以只使用分组密码或哈希函数等？答案是肯定的，但是得到的协议<u>非常低效，在实际中从未被使用</u>，不过这些协议非常简单，<strong>Merkle 谜题协议工作流程</strong>如下：</p>
-<p>这个协议的主要工具叫做一个“谜题”，谜题是指难解的问题，但通过努力还是可以解出的。假设我们有一个对称密码，使用 128 位密钥，以 AES 为例，假设我选择的 AES 密钥的前 96 位都是 0 ，只有剩下的 32 位是非零的，并随机选取的。现在我加密一段固定的明文，比如“message”，使用 128 位密钥，大部分位都是 0 ，加密的结果叫做“谜题”，称之为谜题是因为不难找到密钥 P ，只需要尝试 2^32 种可能性，看是否得到明文“message”，如果是的话，就知道已经发现了正确的 P 。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE.PNG" class title="Merkle谜题协议">
-<p><strong>Merkle谜题协议工作方式</strong>如下：</p>
-<p>Alice 开始时生成大量的谜题，特别地，她将生成 2^32 个不同的谜题，对于每个谜题，她生成的方法如下：选择一个 32 位 随机谜题 $P_i$ ，i 从 1 遍历 到 2^32 ，然后她再选择两个值 $x_i$ 和 $k_i$ ，每个 128 位，现在她会使用谜题 $P_i$ 作为一个 AES 密钥，前 96 位都是 0 ，后 32 位非零，所以这个密钥的熵是 32 位，如果只有 2^32 个密钥，现在他要使用这个密钥加密的明文是下图中红色部分的信息，她对所有的谜题都这么做<u>得到了 2^32 个不同的谜题，然后把所有的谜题发送给 Bob</u> 。</p>
-<p>Bob 接收了 2^32 个不同的谜题，他只选择其中一个，不需要记住所有的谜题，比如说他选择了谜题 j ，他<u>花了 2^32 的时间来解决这个谜题</u>，他要检查明文的前面部分是否以“Puzzle”开头，如果是，Bob 就知道了他正确的解决了这个谜题，然后他就获得了嵌在谜题里的数据 $x_j$ 和 $k_j$ ，$x_j$ 是这个谜题的标记，$k_j$ 是他们要使用的秘密信息，<u>然后他把 $x_j$ 发送给 Alice</u> ，$k_j$ 自己保留，作为秘密。</p>
-<p>Alice 查找谜题数据库，她会<u>查到谜题 $x_j$ ，就知道了 Bob 选择的密钥 $k_j$</u> ，他们就有了这个共享密钥。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.PNG" class title="Merkle谜题协议工作方式">
-<p>窃听者看着 n 个谜题发送过去，看到 Bob 返回了一个 $x_j$ ，攻击者并不知道 Bob 解的是哪个谜题，他看到的只是谜题中的随机值，为了破解这个协议，窃听者会解决所有的谜题，直到他找到正确的谜题里面有 $x_j$ ，那么攻击者就会还原 $k_j$ ，那么，攻击者要做多少工作？$n^2$ 。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A1%A8%E5%BD%A2%E5%BC%8F.PNG" class title="Merkle谜题协议图表形式">
-<p><strong>我们能否只使用对称密码，做得比平方鸿沟更好呢？</strong>答案是未知的，我们不知道平方鸿沟是否是我们所能做到的最好的结果。</p>
-<p>事实上，如果我们把分组密码或哈希函数当作黑盒神谕来使用，换句话说，参与者只能询问分组密码或询问哈希函数在特定点的值并获得结果，如果这些是参与者所能做到的全部，换句话说，参与者不能实际使用分组密码或哈希函数的实现，那么事实上有一个结果告诉我们，<strong>如果参与者只能询问分组密码在 n 个点的值，那么总有一个攻击运行在 n 平方的时间里</strong>。这就是说，如果你只能使用分组密码作为一个黑盒进行询问，那么无论交换什么密钥，这个密钥交换总有一个平方时间的攻击。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/tip.PNG" class title="tip">
-<p>我们发现，我们需要比分组密码和哈希函数更多的技术，实际上，我们需要具备非常特殊性质的函数，为了构建这些函数，我们实际上必须依赖于某些代数。</p>
-<h1 id="the-diffie-hellman-protocol"><a href="#The-Diffie-Hellman-protocol" class="headerlink" title="The Diffie-Hellman protocol"></a>The Diffie-Hellman protocol</h1><h2 id="diffie-hellman-协议"><a href="#Diffie-Hellman-协议" class="headerlink" title="Diffie-Hellman 协议"></a>Diffie-Hellman 协议</h2><p>这是我们第一个实用的密钥交换机制。</p>
-<p>Alice 和 Bob 素未谋面，却想交换一个共享密钥，然后他们可以使用这个密钥来用于相互安全通信，我们只看对窃听攻击的安全性，攻击者不能篡改网络中的数据，在密钥交换协议的最后，Alice 和 Bob 应该有一个共享密钥，但窃听攻击者无法知道交换的密钥是什么。<strong>我们能否做与Merkle谜题协议同样的事情，但现在能获得一个指数级鸿沟，横亘在攻击者和参与者的工作之间？</strong>我们不能仅凭分组密码技术获得这个指数级鸿沟，我们必须使用拥有比对称原型更多结构的难解问题，那么我们使用一点代数。</p>
-<p><strong>Diffie-Hellman 协议是如何工作的呢？</strong></p>
-<p>首先，我们选某个固定的大质数，记为 p ，然后我们选一个固定的整数 g ，g 正好在从 1 到 p 的范围中，这里的 p 和 g 是 Diffie-Hellman 协议的参数，它们一经选择就不再改变。这个协议如下工作：</p>
-<p>开始时， Alice 选择某个随机数 a ，范围是 1 到 p-1 ，然后她将计算 $g^a$ (mod p) ，这是可以有效计算的，我们把这个计算的结果记为 A ，发送给 Bob 。现在，Bob 做同样的事情，他选择一个随机数 b ，范围是 1 到 p-1 ，计算 $g^b$ (mod p) ，结果记为 B ，发送给 Alice 。现在他们宣布已经共享了一个密钥，那么<strong>这个共享的密钥是什么呢？</strong>我们记为 k_AB = g^(ab) (mod p) 。事实上，双方都可以计算 k_AB ，Alice 可以取值 B ，计算 $B^a$ (mod p) ，获得 g^(ab) (mod p) ，Bob 也可以做类似的事情。这个协议顺利工作的本质原因是<strong>指数的代数性质</strong>。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Diffie-Hellman%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="Diffie-Hellman协议的工作过程">
-<p><strong>为什么这个协议是安全的？</strong></p>
-<p>窃听者能看到什么？他能看到质数 p 和生成元 g ，这些值是永远固定不变的，每个人都知道它们，攻击者还能看到 Alice 发送给 Bob 的 A 和 Bob 发送给 Alice 的 B ，那么，窃听者能计算出 g^(ab) (mod p) 吗？更一般地，我们定义 DH 函数，我们说 DH 函数定义在 g 上，给定 $g^a$ 和 $g^b$ ，能否计算 g^(ab) ？p 大约有 600 个十进制位，计算这个很大的质数模 p 乘法群上的函数，有多困难？</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/DH%E5%87%BD%E6%95%B0%E5%AE%89%E5%85%A8%E6%80%A7.PNG" class title="DH函数安全性">
-<p>目前已知的事实，这个质数正好有 n 位长，计算 DH 函数已知最好的算法是一个更为一般的算法，用来计算离散对数函数，这个算法叫做<strong>普通数域筛法</strong>。这个算法的运行时间是指数级的，运行时间大约是 e 的 n 的立方根次方，事实上这个算法的运行时间的严格表达式要比这个复杂的多，这个算法有时叫做<strong>亚指数算法</strong>，因为这里的指数项正比于 n 的立方根，而不是 n ，这说明即使这个问题很难，它也不是真正的指数级时间的问题，运行时间的指数是与 n 的立方根成正比的。</p>
-<p>看几个例子，如果你的密码有 80 位密钥，那大概需要 1000 位的模，这个算法是说我们可以以时间大约是 e 的 1024 的立方根次方解决 DH 问题，这不是很准确，事实上指数上有一些常数项。这个例子告诉大家，如果有一个亚指数级算法，即使看到这个问题规模很大，比如 1000 位，因为这个立方根的作用，其实总体并没有那么大。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E6%99%AE%E9%80%9A%E6%95%B0%E5%9F%9F%E7%AD%9B%E6%B3%95.PNG" class title="普通数域筛法">
-<p><strong>如果要使用 Diffie-Hellman 协议来交换会话密钥，用于分组密码的会话密钥要有合适的密钥大小，使得密钥交换协议的安全性和之后使用的分组密码的安全性相当。</strong></p>
-<p>计算在椭圆曲线域上的 Diffie-Hellman 函数要比计算质数模乘法上的 Diffie-Hellman 困难得多，因为问题更加困难，可以使用小得多的代数对象。这些模在椭圆曲线上增长的不快，通常从使用模算术到使用椭圆曲线域有一个缓慢的转换。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%9F%9F.PNG" class title="椭圆曲线域">
-<h2 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Diffie-Hellman 协议对抗主动攻击时，是完全不安全的，当存在<strong>中间人攻击</strong>时，我们需要对这个协议做些补充，让它对中间人攻击也是安全的。</p>
-<p><strong>这个协议为什么对主动攻击是不安全的？</strong></p>
-<p>假设我们有中间人 MiTM 试图窃听 Alice 和 Bob 之间的会话，协议开始时，Alice 发送 $g^a$ 给 Bob ，中间人截获了这个 $g^a$ ，他将取 Alice 发出的信息，换成他自己的信息，记为 A’ ，写成 $g^a$’ ，中间人选择了他自己的 a’ ，发送给 Bob 。</p>
-<p>Bob并不知道中间人对通信流量做了手脚，他只能获得 A’ ，Bob 会回复他的值 B ，$g^b$ 给 Alice ，中间人截获 B ，产生自己的 b’ ，然后发送 B’=$g^b$’ 给 Alice 。</p>
-<p>Alice 将计算她的密钥得到 g^(ab’) ，Bob 计算他的密钥 g^(ba’) ，而对于中间人，他既知道 A’ ，又知道 B’ ，他可以计算 g^(ab’) ，也可以计算 g^(ba’) ，因此现在它可以扮演中间人。</p>
-<p>当 Alice 发送一个加密的信息给 Bob ，中间人可以轻松解密这个信息，然后中间人重新使用 Bob 的密钥加密这个信息发送给 Bob ，这样 Alice 发送信息给 Bob ，Bob 接收信息认为这个信息是安全的。中间人可以完全读到信息内容，如果他愿意，可以修改它，所以这个协议是完全不安全的。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="中间人攻击">
-<h2 id="diffie-hellman-协议的非互动性"><a href="#Diffie-Hellman-协议的非互动性" class="headerlink" title="Diffie-Hellman 协议的非互动性"></a>Diffie-Hellman 协议的非互动性</h2><p>这个协议可以被视为一个非互动的协议，设想我们有一组几百万用户，他们中每个都将选取一个随机的私密值，然后在他们的 Facebook 页面上写下他们对 Diffie-Hellman 协议的贡献。</p>
-<p>现在，如果 Alice 和 Charlie 想建立一个共享密钥，他们无需相互通信，Alice 只要去 Charlie 的公共页面，Charlie 只要去 Alice 的公共页面，刹那间，他们就共享了一个密钥，Alice 知道了 g^ca ，Charlie 知道了 g^ac ，某种意义上，一旦他们在公共页面发布了他们对 Diffie-Hellman 协议的共享，他们根本不需要互相通信就能建立共享密钥。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Diffie-Hellman%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%80%A7%E8%B4%A8.PNG" class title="Diffie-Hellman协议的性质">
-<p><strong>开放问题</strong>：我们能否对多于两方的用户做这些呢？换句话说，比如我们有 4 方，所有人都在他们的 Facebook 公共页面上发布了他们的值，现在我们想只通过阅读 Facebook 页面，所有人都可以建立共享密钥。我们是否可以非互动的建立这些共享密钥？n=2 就是 Diffie-Hellman 协议；n=3 ，我们也知道怎么做，有一个已知的协议由 Joux 提出的使用了非常高级的数学；对于 n=4,5… 这个问题是完全开放的，即使只有 4 人，我们也不知道怎么做。</p>
-<h1 id="public-key-encryption"><a href="#Public-key-encryption" class="headerlink" title="Public-key encryption"></a>Public-key encryption</h1><p>一个基于公钥加密的不同的方法，依然只看对窃听的安全性，不允许攻击者修改数据或实施其他形式的主动攻击。</p>
-<h2 id="公钥加密"><a href="#公钥加密" class="headerlink" title="公钥加密"></a>公钥加密</h2><p>就像对称加密一样，有一个加密算法和解密算法，不过这里的加密算法有一个密钥，叫做<strong>公钥</strong> PK，这个公钥属于 Bob ，而解密算法有一个不同的密钥，叫做<strong>私钥</strong> SK，也属于 Bob 。这两个密钥优势叫做<strong>密钥对</strong>。通常，加密这个信息的算法是，加密算法产生一个使用公钥加密的密文，当密文交给解密算法时，解密算法会输出对应的明文</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="公钥加密">
-<p>公钥加密实际上由三个算法组成：密钥生成算法 G，E，D。当运行 G 时，会产生两个密钥，分别是公钥和私钥，通常，我们有<u>一致性</u>，即密钥生成算法输出的公钥和私钥，如果我们使用公钥加密明文，然后使用私钥解密，我们可以获得最初的明文。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%862.PNG" class title="公钥加密2">
-<h2 id="公钥加密系统的安全游戏"><a href="#公钥加密系统的安全游戏" class="headerlink" title="公钥加密系统的安全游戏"></a>公钥加密系统的安全游戏</h2><p>使用与之前用过的语义安全同样的概念，但游戏不同。这里，挑战者运行密钥生成算法来产生一对公钥和私钥，他会把公钥给攻击者，挑战者对私钥进行保密。攻击者会输出两个长度相等的明文 $m_0$ 和 $m_1$ ，挑战者会给攻击者 $m_0$ 或 $m_1$ 的加密结果，我们定义两个实验，在 实验0 中，攻击者得到 $m_0$ 加密的结果，在 实验1 中，攻击者得到 $m_1$ 加密的结果，攻击者的目标是<u>猜他得到的是哪个明文的加密结果</u>，我们把他的猜测作为 实验0 或 实验1 的输出。在公钥加密中，没必要赋予攻击者以实施选择明文攻击的能力，因为在对称密钥系统中，攻击者必须请求他选择的明文的加密，而在公钥系统中，攻击者拥有公钥，他可以自己加密任何他想加密的明文。</p>
-<p>我们说，如果攻击者无法区分 实验0 和 实验1 ，一个公钥系统 (G,E,D) 是语义安全的。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="公钥加密系统的安全游戏">
-<h2 id="共享密钥的建立"><a href="#共享密钥的建立" class="headerlink" title="共享密钥的建立"></a>共享密钥的建立</h2><p>①Alice 开始时会使用密钥生成算法为自己产生一个随机公钥、密钥对，然后把公钥 PK 发送给 Bob ，并告诉 Bob 这个信息来自 Alice 。</p>
-<p>②Bob 会产生一个随机的 128 位值 x ，回复 Alice 这个信息来自 Bob ，他还会返回用 Alice 的公钥加密的 x 。</p>
-<p>③Alice 收到这个密文使用私钥进行解密，解密结果会给她值 x 。</p>
-<p>现在，x 可以被用来作为双方共享的密钥。</p>
-<p>这与 Diffie-Hellman协议 很不相同，这里双方必须有先后的通信，Bob 不能发送他的信息，直到他收到了 Alice 的信息，换句话说，Bob 不能用 Alice 的公钥加密 x ，直到他收到了 Alice 的公钥。即使在 Facebook 发布了公钥，依然需要先发送信息 x 才能建立共享密钥。但在 Diffie-Hellman协议中，双方可以在任何时候发送他们的信息，没有对信息的发送顺序的强制要求。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%9A%84%E5%BB%BA%E7%AB%8B.PNG" class title="共享密钥的建立">
-<p><strong>为什么这个协议是安全的？（只考虑对窃听的安全）</strong></p>
-<p>在这个协议中，攻击者看到这个公钥和用公钥加密的 x ，他想得到 x ，现在我们知道这个公钥系统是语义安全的，这意味着攻击者不能区分 x 的加密和某个随机信息的加密，它仅仅是一个随机值，攻击者不能猜到。</p>
-<p>即使这个协议对窃听是安全的，对抗中间人攻击时，它也是完全不安全的。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%AF%B9%E7%AA%83%E5%90%AC%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="对窃听安全的公钥加密">
-<h2 id="中间人攻击"><a href="#中间人攻击-1" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Alice 产生她的公钥、密钥对，中间人也产生他自己的公钥、密钥对，当 Alice 发送她的公钥给 Bob 时，中间人会截获这个公钥，然后对 Bob 说这个信息来自 Alice，Alice 的公钥是 PK’ 。</p>
-<p>Bob 接收了这个信息，他认为自己获得了从 Alice 发来的信息，他会选择随机数 x 进行回复，它会返回用 PK’ 加密的 x ，中间人 截获这个信息，他会用其他信息来代替它，他的目标是确保这个密钥交换成功，中间人应该发送什么给 Alice 呢？我们把 Bob 发送的密文记为 c ，中间人使用自己的私钥解密 c 得知 x ，然后他继续用 Alice 的公钥加密 x ，把加密值发回给 Alice ，Alice 获得 x ，完成了与 Bob 的密钥交换。</p>
-<p>中间人也知道这个 x ，中间人可以修改 Alice 和 Bob 互发的信息，这个协议是完全不安全的。</p>
-<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="公钥加密的中间人攻击">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
+        <tag>基于配对的密码学</tag>
       </tags>
   </entry>
   <entry>
@@ -411,6 +292,125 @@ Adv_{CCA}[A,E]\leq2q\cdot Adv_{CI}[B_1,E]+Adv_{CPA}[B_2,E]</script><p>由于这�
 <p>方案③：可行，但效率极差，可能会让服务器遭受拒绝服务攻击。</p>
 <p>Lesson<img src="/2020/07/11/%E3%80%90DanBoneh%E3%80%91AuthenticatedEncryption/Lesson.PNG" class title="Lesson"></p>
 ]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Block Ciphers</title>
+    <url>/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/</url>
+    <content><![CDATA[<p><strong>分组密码</strong>：由两部分组成，<u>加密算法E</u> 和 <u>解密算法D</u>，它的输入和输出具有严格相同的位数。</p>
+<p><strong>3DES</strong>：分组大小为 64 位，使用 168 位长的密钥。n = 64 bits，k = 168 bits。</p>
+<p><strong>AES</strong>：n = 128 bits，k = 128，192，256 bits。密钥越长，密码工作速度越慢，越安全。</p>
+<a id="more"></a>
+<p><strong>伪随机函数</strong>（PRF）：定义在密钥空间、输入空间、输出空间上的三元组 (K,X,Y) ，F：K×X→Y。有一个有效的方法来计算这个函数，无需可逆。</p>
+<p><strong>伪随机置换</strong>（PRP）：定义在密钥空间和一个集合 X 上 (K,X) ，E：K×X→X，取密钥空间上的一个元素和 X 上的一个元素输出 X 上的一个元素。有一个有效的算法来计算这个函数，一旦固定密钥 K ，函数 E 是<u>一一对应</u>的，<u>需要一个逆向算法</u>。</p>
+<p>一个PRP是一个输入空间等于输出空间的PRF。</p>
+<p><strong>PRF安全的条件</strong>：在<u>伪随机函数集合上的均匀分布</u>与<u>全体函数上的均匀分布</u>不可区分。</p>
+<p><strong>DES</strong>：核心思想是Feistel网络。</p>
+<p>从<strong>伪随机数发生器</strong>可以构建<strong>伪随机函数</strong>，而不是伪随机置换，最终目标是构建一个分组密码，本质上是<strong>PRP</strong>，可被证明是安全的，但很慢、不实用。</p>
+<p><strong>PRF转换引理</strong>：一个安全的PRP，事实上也是安全的PRF，只要集合 X 足够大。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】Basic Key Exchange</title>
+    <url>/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/</url>
+    <content><![CDATA[<h1 id="trusted-3rd-parties"><a href="#Trusted-3-rd-parties" class="headerlink" title="Trusted 3^rd parties"></a>Trusted 3^rd parties</h1><p>两个用户可以通过共享一个密钥来保护通信数据，那么，这两个用户是如何产生这个共享密钥的？</p>
+<a id="more"></a>
+<h2 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h2><p>试想，世界上有 n 位用户，那么这些用户如何管理这些密钥？</p>
+<p>假设 n=4 ，一种方案是，每一对用户共享一对密钥，这样用户需要管理的共享密钥太多。</p>
+<p>有一种方法叫<strong>在线可信任第三方</strong>，使用 TTP 表示可信任第三方，每个用户与可信任第三方共享一个单独的密钥，这个设计的好处是每个用户只需记住一个密钥。当 Alice 想和 Bob 通信时会发生什么？</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%9C%A8%E7%BA%BF%E5%8F%AF%E4%BF%A1%E4%BB%BB%E7%AC%AC%E4%B8%89%E6%96%B9.PNG" class title="在线可信任第三方">
+<p>双方必须参加某个特定协议，在协议的最后，他们会共享一个密钥 K_AB ，而攻击者不能知道 K_AB ，Alice 想和 Bob <strong>如何生成这一共享密钥 K_AB</strong> ？</p>
+<p>看一个玩具协议，<u>这个协议对窃听是安全的，对篡改或主动攻击不安全</u>，Alice 有她的密钥 $k_A$ ，Bob有他的密钥 $k_B$ ，$k_A$、$k_B$ 是与可信任第三方共享的。这个协议如下工作：</p>
+<p>Alice 开始时会发送一条信息，给可信任第三方，说她想要一个密钥用于和Bob通信，可信任第三方会选择一个随机密钥 k_AB ，那么可信任第三方生成了他们的共享密钥，他会回复一条信息给 Alice ，这条信息包含两部分，①使用 $k_A$ 加密的信息，这个密钥在 Alice 和 Bob 之间使用，k_AB 包含在这条信息里，即，这里被加密的信息是，k_AB 加上“这个密钥是Alice 和 Bob的共享密钥”这一事实。②票据，这个票据是为 Bob 加密的信息，是使用 $k_B$ 加密的，加密的信息依然是“这个密钥在 Alice 和 Bob 之间使用”，然后 TTP 把这个事实附在密钥 k_AB 后面。这里使用的加密系统 E 是一个 CPA 安全密码，当 Alice 想与 Bob 通信时，Alice 会解密给她的那部分信息得到密钥 k_AB ，然后把票据给 Bob ，Bob 收到这个票据，使用 $k_B$ 解密得到密钥 k_AB ，他们就有了共享密钥。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%88%A9%E7%94%A8%E7%8E%A9%E5%85%B7%E5%8D%8F%E8%AE%AE%E4%BA%A7%E7%94%9F%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5.PNG" class title="利用玩具协议产生共享密钥">
+<p><strong>为什么这个协议是窃听安全的？</strong></p>
+<p>当我们只考虑对窃听的安全时，窃听者在这个协议中看到两个密文，我们的目标是，<u>窃听者没有任何关于交换密钥 k_AB 的信息</u>，这点可由密码 E,D 的 CPA 安全性直接得到。</p>
+<p>对于每个密钥交换，TTP是必须使用的，这个协议的另一个性质是，TTP 知道所有的会话密钥，如果 TTP 被破解了，那么攻击者可以轻松获得所有系统中用户之间已经交换过的密钥。这个机制的优点是，它只使用对称密钥密码学，是快速有效的。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E7%8E%A9%E5%85%B7%E5%8D%8F%E8%AE%AE.PNG" class title="玩具协议">
+<p><strong>这个协议对主动攻击是完全不安全的，如，重放攻击：</strong></p>
+<p>设想 Alice 从 Bob 那里订购了一本书，Bob 接收了这本书的付款，然后发给 Alice 一份这本书的拷贝，交易完成。设想攻击者记下了 Alice 和在线商家 Bob 的会话，稍后向 Bob重放这段会话，Bob 就会认为，Alice刚刚重新订购了这本书的另一份拷贝，Bob 就会再收一次 Alice 的钱，然后发给 Alice 这份拷贝，所以，重放会话会对 Alice 造成巨大危害</p>
+<p>我们能否设计出密钥交换协议，对窃听和主动攻击都保持安全呢？<strong>我们能否设计出安全的密钥交换协议，但不需要一个在线的可信任第三方呢？</strong>答案是可能的。事实上，这是公钥密码学的起点，思路如下：</p>
+<p>①由 Ralph Merkle 于1974年提出。</p>
+<p>②由 Diffie 与 Hellman 于 1976年提出。</p>
+<p>③由 Rivest，Shamir，Adleman 于1977年提出。</p>
+<p>近年的新想法：①基于身份的加密（IBE）2001。②泛函加密，2011。</p>
+<h1 id="merkle-puzzles"><a href="#Merkle-Puzzles" class="headerlink" title="Merkle Puzzles"></a>Merkle Puzzles</h1><p>不借助可信第三方的密钥交换协议。</p>
+<p>这里我们通常的设定是，有 Alice 和 Bob ，他们想生成一个共享密钥，他们互相发送信息，在协议的最后，他们必须获得某个双方都知道的共享密钥 k ，窃听通信流量的攻击者绝对无法得知这个 k 是什么，目前，我们只关心监听会话的攻击者，我们将看到三个协议来达到这一目标。</p>
+<p>能借助对称密码学做到吗？可不可以只使用分组密码或哈希函数等？答案是肯定的，但是得到的协议<u>非常低效，在实际中从未被使用</u>，不过这些协议非常简单，<strong>Merkle 谜题协议工作流程</strong>如下：</p>
+<p>这个协议的主要工具叫做一个“谜题”，谜题是指难解的问题，但通过努力还是可以解出的。假设我们有一个对称密码，使用 128 位密钥，以 AES 为例，假设我选择的 AES 密钥的前 96 位都是 0 ，只有剩下的 32 位是非零的，并随机选取的。现在我加密一段固定的明文，比如“message”，使用 128 位密钥，大部分位都是 0 ，加密的结果叫做“谜题”，称之为谜题是因为不难找到密钥 P ，只需要尝试 2^32 种可能性，看是否得到明文“message”，如果是的话，就知道已经发现了正确的 P 。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE.PNG" class title="Merkle谜题协议">
+<p><strong>Merkle谜题协议工作方式</strong>如下：</p>
+<p>Alice 开始时生成大量的谜题，特别地，她将生成 2^32 个不同的谜题，对于每个谜题，她生成的方法如下：选择一个 32 位 随机谜题 $P_i$ ，i 从 1 遍历 到 2^32 ，然后她再选择两个值 $x_i$ 和 $k_i$ ，每个 128 位，现在她会使用谜题 $P_i$ 作为一个 AES 密钥，前 96 位都是 0 ，后 32 位非零，所以这个密钥的熵是 32 位，如果只有 2^32 个密钥，现在他要使用这个密钥加密的明文是下图中红色部分的信息，她对所有的谜题都这么做<u>得到了 2^32 个不同的谜题，然后把所有的谜题发送给 Bob</u> 。</p>
+<p>Bob 接收了 2^32 个不同的谜题，他只选择其中一个，不需要记住所有的谜题，比如说他选择了谜题 j ，他<u>花了 2^32 的时间来解决这个谜题</u>，他要检查明文的前面部分是否以“Puzzle”开头，如果是，Bob 就知道了他正确的解决了这个谜题，然后他就获得了嵌在谜题里的数据 $x_j$ 和 $k_j$ ，$x_j$ 是这个谜题的标记，$k_j$ 是他们要使用的秘密信息，<u>然后他把 $x_j$ 发送给 Alice</u> ，$k_j$ 自己保留，作为秘密。</p>
+<p>Alice 查找谜题数据库，她会<u>查到谜题 $x_j$ ，就知道了 Bob 选择的密钥 $k_j$</u> ，他们就有了这个共享密钥。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.PNG" class title="Merkle谜题协议工作方式">
+<p>窃听者看着 n 个谜题发送过去，看到 Bob 返回了一个 $x_j$ ，攻击者并不知道 Bob 解的是哪个谜题，他看到的只是谜题中的随机值，为了破解这个协议，窃听者会解决所有的谜题，直到他找到正确的谜题里面有 $x_j$ ，那么攻击者就会还原 $k_j$ ，那么，攻击者要做多少工作？$n^2$ 。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Merkle%E8%B0%9C%E9%A2%98%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A1%A8%E5%BD%A2%E5%BC%8F.PNG" class title="Merkle谜题协议图表形式">
+<p><strong>我们能否只使用对称密码，做得比平方鸿沟更好呢？</strong>答案是未知的，我们不知道平方鸿沟是否是我们所能做到的最好的结果。</p>
+<p>事实上，如果我们把分组密码或哈希函数当作黑盒神谕来使用，换句话说，参与者只能询问分组密码或询问哈希函数在特定点的值并获得结果，如果这些是参与者所能做到的全部，换句话说，参与者不能实际使用分组密码或哈希函数的实现，那么事实上有一个结果告诉我们，<strong>如果参与者只能询问分组密码在 n 个点的值，那么总有一个攻击运行在 n 平方的时间里</strong>。这就是说，如果你只能使用分组密码作为一个黑盒进行询问，那么无论交换什么密钥，这个密钥交换总有一个平方时间的攻击。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/tip.PNG" class title="tip">
+<p>我们发现，我们需要比分组密码和哈希函数更多的技术，实际上，我们需要具备非常特殊性质的函数，为了构建这些函数，我们实际上必须依赖于某些代数。</p>
+<h1 id="the-diffie-hellman-protocol"><a href="#The-Diffie-Hellman-protocol" class="headerlink" title="The Diffie-Hellman protocol"></a>The Diffie-Hellman protocol</h1><h2 id="diffie-hellman-协议"><a href="#Diffie-Hellman-协议" class="headerlink" title="Diffie-Hellman 协议"></a>Diffie-Hellman 协议</h2><p>这是我们第一个实用的密钥交换机制。</p>
+<p>Alice 和 Bob 素未谋面，却想交换一个共享密钥，然后他们可以使用这个密钥来用于相互安全通信，我们只看对窃听攻击的安全性，攻击者不能篡改网络中的数据，在密钥交换协议的最后，Alice 和 Bob 应该有一个共享密钥，但窃听攻击者无法知道交换的密钥是什么。<strong>我们能否做与Merkle谜题协议同样的事情，但现在能获得一个指数级鸿沟，横亘在攻击者和参与者的工作之间？</strong>我们不能仅凭分组密码技术获得这个指数级鸿沟，我们必须使用拥有比对称原型更多结构的难解问题，那么我们使用一点代数。</p>
+<p><strong>Diffie-Hellman 协议是如何工作的呢？</strong></p>
+<p>首先，我们选某个固定的大质数，记为 p ，然后我们选一个固定的整数 g ，g 正好在从 1 到 p 的范围中，这里的 p 和 g 是 Diffie-Hellman 协议的参数，它们一经选择就不再改变。这个协议如下工作：</p>
+<p>开始时， Alice 选择某个随机数 a ，范围是 1 到 p-1 ，然后她将计算 $g^a$ (mod p) ，这是可以有效计算的，我们把这个计算的结果记为 A ，发送给 Bob 。现在，Bob 做同样的事情，他选择一个随机数 b ，范围是 1 到 p-1 ，计算 $g^b$ (mod p) ，结果记为 B ，发送给 Alice 。现在他们宣布已经共享了一个密钥，那么<strong>这个共享的密钥是什么呢？</strong>我们记为 k_AB = g^(ab) (mod p) 。事实上，双方都可以计算 k_AB ，Alice 可以取值 B ，计算 $B^a$ (mod p) ，获得 g^(ab) (mod p) ，Bob 也可以做类似的事情。这个协议顺利工作的本质原因是<strong>指数的代数性质</strong>。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Diffie-Hellman%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B.PNG" class title="Diffie-Hellman协议的工作过程">
+<p><strong>为什么这个协议是安全的？</strong></p>
+<p>窃听者能看到什么？他能看到质数 p 和生成元 g ，这些值是永远固定不变的，每个人都知道它们，攻击者还能看到 Alice 发送给 Bob 的 A 和 Bob 发送给 Alice 的 B ，那么，窃听者能计算出 g^(ab) (mod p) 吗？更一般地，我们定义 DH 函数，我们说 DH 函数定义在 g 上，给定 $g^a$ 和 $g^b$ ，能否计算 g^(ab) ？p 大约有 600 个十进制位，计算这个很大的质数模 p 乘法群上的函数，有多困难？</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/DH%E5%87%BD%E6%95%B0%E5%AE%89%E5%85%A8%E6%80%A7.PNG" class title="DH函数安全性">
+<p>目前已知的事实，这个质数正好有 n 位长，计算 DH 函数已知最好的算法是一个更为一般的算法，用来计算离散对数函数，这个算法叫做<strong>普通数域筛法</strong>。这个算法的运行时间是指数级的，运行时间大约是 e 的 n 的立方根次方，事实上这个算法的运行时间的严格表达式要比这个复杂的多，这个算法有时叫做<strong>亚指数算法</strong>，因为这里的指数项正比于 n 的立方根，而不是 n ，这说明即使这个问题很难，它也不是真正的指数级时间的问题，运行时间的指数是与 n 的立方根成正比的。</p>
+<p>看几个例子，如果你的密码有 80 位密钥，那大概需要 1000 位的模，这个算法是说我们可以以时间大约是 e 的 1024 的立方根次方解决 DH 问题，这不是很准确，事实上指数上有一些常数项。这个例子告诉大家，如果有一个亚指数级算法，即使看到这个问题规模很大，比如 1000 位，因为这个立方根的作用，其实总体并没有那么大。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E6%99%AE%E9%80%9A%E6%95%B0%E5%9F%9F%E7%AD%9B%E6%B3%95.PNG" class title="普通数域筛法">
+<p><strong>如果要使用 Diffie-Hellman 协议来交换会话密钥，用于分组密码的会话密钥要有合适的密钥大小，使得密钥交换协议的安全性和之后使用的分组密码的安全性相当。</strong></p>
+<p>计算在椭圆曲线域上的 Diffie-Hellman 函数要比计算质数模乘法上的 Diffie-Hellman 困难得多，因为问题更加困难，可以使用小得多的代数对象。这些模在椭圆曲线上增长的不快，通常从使用模算术到使用椭圆曲线域有一个缓慢的转换。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BF%E5%9F%9F.PNG" class title="椭圆曲线域">
+<h2 id="中间人攻击"><a href="#中间人攻击" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Diffie-Hellman 协议对抗主动攻击时，是完全不安全的，当存在<strong>中间人攻击</strong>时，我们需要对这个协议做些补充，让它对中间人攻击也是安全的。</p>
+<p><strong>这个协议为什么对主动攻击是不安全的？</strong></p>
+<p>假设我们有中间人 MiTM 试图窃听 Alice 和 Bob 之间的会话，协议开始时，Alice 发送 $g^a$ 给 Bob ，中间人截获了这个 $g^a$ ，他将取 Alice 发出的信息，换成他自己的信息，记为 A’ ，写成 $g^a$’ ，中间人选择了他自己的 a’ ，发送给 Bob 。</p>
+<p>Bob并不知道中间人对通信流量做了手脚，他只能获得 A’ ，Bob 会回复他的值 B ，$g^b$ 给 Alice ，中间人截获 B ，产生自己的 b’ ，然后发送 B’=$g^b$’ 给 Alice 。</p>
+<p>Alice 将计算她的密钥得到 g^(ab’) ，Bob 计算他的密钥 g^(ba’) ，而对于中间人，他既知道 A’ ，又知道 B’ ，他可以计算 g^(ab’) ，也可以计算 g^(ba’) ，因此现在它可以扮演中间人。</p>
+<p>当 Alice 发送一个加密的信息给 Bob ，中间人可以轻松解密这个信息，然后中间人重新使用 Bob 的密钥加密这个信息发送给 Bob ，这样 Alice 发送信息给 Bob ，Bob 接收信息认为这个信息是安全的。中间人可以完全读到信息内容，如果他愿意，可以修改它，所以这个协议是完全不安全的。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="中间人攻击">
+<h2 id="diffie-hellman-协议的非互动性"><a href="#Diffie-Hellman-协议的非互动性" class="headerlink" title="Diffie-Hellman 协议的非互动性"></a>Diffie-Hellman 协议的非互动性</h2><p>这个协议可以被视为一个非互动的协议，设想我们有一组几百万用户，他们中每个都将选取一个随机的私密值，然后在他们的 Facebook 页面上写下他们对 Diffie-Hellman 协议的贡献。</p>
+<p>现在，如果 Alice 和 Charlie 想建立一个共享密钥，他们无需相互通信，Alice 只要去 Charlie 的公共页面，Charlie 只要去 Alice 的公共页面，刹那间，他们就共享了一个密钥，Alice 知道了 g^ca ，Charlie 知道了 g^ac ，某种意义上，一旦他们在公共页面发布了他们对 Diffie-Hellman 协议的共享，他们根本不需要互相通信就能建立共享密钥。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/Diffie-Hellman%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%80%A7%E8%B4%A8.PNG" class title="Diffie-Hellman协议的性质">
+<p><strong>开放问题</strong>：我们能否对多于两方的用户做这些呢？换句话说，比如我们有 4 方，所有人都在他们的 Facebook 公共页面上发布了他们的值，现在我们想只通过阅读 Facebook 页面，所有人都可以建立共享密钥。我们是否可以非互动的建立这些共享密钥？n=2 就是 Diffie-Hellman 协议；n=3 ，我们也知道怎么做，有一个已知的协议由 Joux 提出的使用了非常高级的数学；对于 n=4,5… 这个问题是完全开放的，即使只有 4 人，我们也不知道怎么做。</p>
+<h1 id="public-key-encryption"><a href="#Public-key-encryption" class="headerlink" title="Public-key encryption"></a>Public-key encryption</h1><p>一个基于公钥加密的不同的方法，依然只看对窃听的安全性，不允许攻击者修改数据或实施其他形式的主动攻击。</p>
+<h2 id="公钥加密"><a href="#公钥加密" class="headerlink" title="公钥加密"></a>公钥加密</h2><p>就像对称加密一样，有一个加密算法和解密算法，不过这里的加密算法有一个密钥，叫做<strong>公钥</strong> PK，这个公钥属于 Bob ，而解密算法有一个不同的密钥，叫做<strong>私钥</strong> SK，也属于 Bob 。这两个密钥优势叫做<strong>密钥对</strong>。通常，加密这个信息的算法是，加密算法产生一个使用公钥加密的密文，当密文交给解密算法时，解密算法会输出对应的明文</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="公钥加密">
+<p>公钥加密实际上由三个算法组成：密钥生成算法 G，E，D。当运行 G 时，会产生两个密钥，分别是公钥和私钥，通常，我们有<u>一致性</u>，即密钥生成算法输出的公钥和私钥，如果我们使用公钥加密明文，然后使用私钥解密，我们可以获得最初的明文。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%862.PNG" class title="公钥加密2">
+<h2 id="公钥加密系统的安全游戏"><a href="#公钥加密系统的安全游戏" class="headerlink" title="公钥加密系统的安全游戏"></a>公钥加密系统的安全游戏</h2><p>使用与之前用过的语义安全同样的概念，但游戏不同。这里，挑战者运行密钥生成算法来产生一对公钥和私钥，他会把公钥给攻击者，挑战者对私钥进行保密。攻击者会输出两个长度相等的明文 $m_0$ 和 $m_1$ ，挑战者会给攻击者 $m_0$ 或 $m_1$ 的加密结果，我们定义两个实验，在 实验0 中，攻击者得到 $m_0$ 加密的结果，在 实验1 中，攻击者得到 $m_1$ 加密的结果，攻击者的目标是<u>猜他得到的是哪个明文的加密结果</u>，我们把他的猜测作为 实验0 或 实验1 的输出。在公钥加密中，没必要赋予攻击者以实施选择明文攻击的能力，因为在对称密钥系统中，攻击者必须请求他选择的明文的加密，而在公钥系统中，攻击者拥有公钥，他可以自己加密任何他想加密的明文。</p>
+<p>我们说，如果攻击者无法区分 实验0 和 实验1 ，一个公钥系统 (G,E,D) 是语义安全的。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E5%85%A8%E6%B8%B8%E6%88%8F.PNG" class title="公钥加密系统的安全游戏">
+<h2 id="共享密钥的建立"><a href="#共享密钥的建立" class="headerlink" title="共享密钥的建立"></a>共享密钥的建立</h2><p>①Alice 开始时会使用密钥生成算法为自己产生一个随机公钥、密钥对，然后把公钥 PK 发送给 Bob ，并告诉 Bob 这个信息来自 Alice 。</p>
+<p>②Bob 会产生一个随机的 128 位值 x ，回复 Alice 这个信息来自 Bob ，他还会返回用 Alice 的公钥加密的 x 。</p>
+<p>③Alice 收到这个密文使用私钥进行解密，解密结果会给她值 x 。</p>
+<p>现在，x 可以被用来作为双方共享的密钥。</p>
+<p>这与 Diffie-Hellman协议 很不相同，这里双方必须有先后的通信，Bob 不能发送他的信息，直到他收到了 Alice 的信息，换句话说，Bob 不能用 Alice 的公钥加密 x ，直到他收到了 Alice 的公钥。即使在 Facebook 发布了公钥，依然需要先发送信息 x 才能建立共享密钥。但在 Diffie-Hellman协议中，双方可以在任何时候发送他们的信息，没有对信息的发送顺序的强制要求。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%B1%E4%BA%AB%E5%AF%86%E9%92%A5%E7%9A%84%E5%BB%BA%E7%AB%8B.PNG" class title="共享密钥的建立">
+<p><strong>为什么这个协议是安全的？（只考虑对窃听的安全）</strong></p>
+<p>在这个协议中，攻击者看到这个公钥和用公钥加密的 x ，他想得到 x ，现在我们知道这个公钥系统是语义安全的，这意味着攻击者不能区分 x 的加密和某个随机信息的加密，它仅仅是一个随机值，攻击者不能猜到。</p>
+<p>即使这个协议对窃听是安全的，对抗中间人攻击时，它也是完全不安全的。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%AF%B9%E7%AA%83%E5%90%AC%E5%AE%89%E5%85%A8%E7%9A%84%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86.PNG" class title="对窃听安全的公钥加密">
+<h2 id="中间人攻击"><a href="#中间人攻击-1" class="headerlink" title="中间人攻击"></a>中间人攻击</h2><p>Alice 产生她的公钥、密钥对，中间人也产生他自己的公钥、密钥对，当 Alice 发送她的公钥给 Bob 时，中间人会截获这个公钥，然后对 Bob 说这个信息来自 Alice，Alice 的公钥是 PK’ 。</p>
+<p>Bob 接收了这个信息，他认为自己获得了从 Alice 发来的信息，他会选择随机数 x 进行回复，它会返回用 PK’ 加密的 x ，中间人 截获这个信息，他会用其他信息来代替它，他的目标是确保这个密钥交换成功，中间人应该发送什么给 Alice 呢？我们把 Bob 发送的密文记为 c ，中间人使用自己的私钥解密 c 得知 x ，然后他继续用 Alice 的公钥加密 x ，把加密值发回给 Alice ，Alice 获得 x ，完成了与 Bob 的密钥交换。</p>
+<p>中间人也知道这个 x ，中间人可以修改 Alice 和 Bob 互发的信息，这个协议是完全不安全的。</p>
+<img src="/2020/07/19/%E3%80%90DanBoneh%E3%80%91BasicKeyExchange/%E5%85%AC%E9%92%A5%E5%8A%A0%E5%AF%86%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.PNG" class title="公钥加密的中间人攻击">]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
@@ -754,6 +754,32 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
+    <title>【DanBoneh】One Time Pad</title>
+    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/</url>
+    <content><![CDATA[<p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
+<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
+<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
+<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
+<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
+<a id="more"></a>
+<p>给定明文 M 和密文 C 很容易求出密钥 K ，C = M⊕K，C⊕M = M⊕K⊕M，<code>K=M⊕C</code>，同时可以得出，<u>只有一个</u>密钥 K ，能够满足 E(K,M) = C。</p>
+<p>关于<strong>应用</strong>：Alice和Bob想要通信，必须传递一个和明文等长的密钥，这和直接安全传递明文没有区别，实际中很难应用。</p>
+<p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
+<p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
+<p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
+<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
+<p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
+<p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【DanBoneh】Odds And Ends</title>
     <url>/2020/07/15/%E3%80%90DanBoneh%E3%80%91OddsAndEnds/</url>
     <content><![CDATA[<h1 id="key-derivation"><a href="#Key-Derivation" class="headerlink" title="Key Derivation"></a>Key Derivation</h1><h2 id="从一个密钥推出多个密钥"><a href="#从一个密钥推出多个密钥" class="headerlink" title="从一个密钥推出多个密钥"></a>从一个密钥推出多个密钥</h2><p>设想我们有一个特定的源密钥，源密钥有很多种方法生成，设想源密钥是由一个<u>硬件随机数发生器</u>生成的，或者可能是由<u>密钥交换协议</u>生成的，攻击者不知道源密钥是什么。在很多情况下，我们需要很多密钥来保证会话的安全，不仅仅是单个源密钥。</p>
@@ -911,32 +937,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】One Time Pad</title>
-    <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/</url>
-    <content><![CDATA[<p><strong>密码</strong>由<u>加密算法 E</u>（经常是一个随机算法） 和<u>解密算法 D</u>（是确定算法） 组成。定义为一个三元组 <u>（K, M, E）</u>，全体可能的密钥（密钥空间）记为 K ，全体可能的明文空间记为 M ，全体可能的密文空间记为 E。<code>E：K×M→E</code> ；<code>D：K×E→M</code>。</p>
-<p><strong>一致性方程</strong>：∀m∈M，k∈K，D(k,E(k,m)) = m。</p>
-<p><strong>Vernam密码</strong>（一次性密码本OTP）：它的明文空间与其密文空间一样，是全体 n 位二进制字符串的集合，<code>M=E={0,1}ⁿ</code>，<code>K={0,1}ⁿ</code>，<code>密钥key=(与明文等长的随机字符串)</code>。</p>
-<p><code>c: = E(k,m) = k⊕m</code>；<code>m: = D(k,c) = k⊕c</code>。</p>
-<p><code>D(k,E(k,m)) = D(k,k⊕m) = k⊕k⊕m = m</code>。</p>
-<a id="more"></a>
-<p>给定明文 M 和密文 C 很容易求出密钥 K ，C = M⊕K，C⊕M = M⊕K⊕M，<code>K=M⊕C</code>，同时可以得出，<u>只有一个</u>密钥 K ，能够满足 E(K,M) = C。</p>
-<p>关于<strong>应用</strong>：Alice和Bob想要通信，必须传递一个和明文等长的密钥，这和直接安全传递明文没有区别，实际中很难应用。</p>
-<p><strong>关于安全</strong>：Shannon（香农）定义的安全想法是，如果得到了密文，从中无法得出一点关于明文的信息。</p>
-<p><strong>密码完美安全</strong>（perfect secrecy）：假设有加密算法 E 和解密算法 D ，定义在三元组 (K,M,C) 上，满足如下条件：</p>
-<p>对 M 中任意两个<u>长度相同</u>的明文 m0 和 m1 ，对 C 中的任意密文，满足 <code>Pr[E(k,m0) = c] = Pr[E(k,m1) = c]</code> 的概率关系，且密钥分布是均匀的。</p>
-<img src="/2020/03/24/%E3%80%90DanBoneh%E3%80%91OneTimePad/the_oretic_Security.PNG" class title="the_oretic_Security">
-<p>对于完美安全的密码，任何唯密攻击都无效，一次性密码本有完美安全，但完美安全并不意味着一次性密码本在实际应用中是安全的。</p>
-<p>Shannon证明了完美安全，还证明，如果一个密码是完美安全的，其全体密钥数 不少于其能处理的明文数，意味着 密钥长度必须不小于明文长度。</p>
-]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【DanBoneh】Stream Ciphers</title>
     <url>/2020/03/24/%E3%80%90DanBoneh%E3%80%91StreamCiphers/</url>
     <content><![CDATA[<p>在流密码中，密钥不是完全随机的，而是一种<u>伪随机密钥</u>。</p>
@@ -1017,6 +1017,40 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
 <li>基于新鲜值的模式下，新鲜值需要被扩展成 16 字节的分组才能加密，CBC 模式的密文比原来扩展了 16 倍；CTR 模式可以加密一字节的信息，通过与 CTR 模式产生的流的第一个字节进行异或，产生的每个密文都是一个字节的，无需扩张，和明文一样。</li>
 </ol>
 <img src="/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/CTRvsCBC.PNG" class title="CTRvsCBC">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【DanBoneh】绪论</title>
+    <url>/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<p><strong>TLS</strong>（安全传输层协议）：由两部分组成。第一部分为<strong>握手协议</strong>（Handshake），Alice与Bob互相交谈，在握手的最后，双方分享一个密钥，Alice与Bob都知道这个密钥，但攻击者不知道会话密钥K，运用了公钥密码技术。第二部分为<strong>记录协议</strong>（Record），双方共享密钥时，如何使用密钥加以保护通信数据。</p>
+<p><strong>对称加密</strong>：以分组的形式保护流量的技术。在对称加密系统中，只有通信双方知道密钥K，他们使用<strong>加密算法 E</strong> 和<strong>解密算法 D</strong> 进行通信加密。加密算法以<u>原信息</u>和<u>密钥</u>为输入，产生<u>密文</u>；解密算法以<u>密文</u>和<u>密钥</u>为输入，输出<u>原信息</u>。<strong>算法是公开的，密钥是保密的</strong>。很多私有的算法一旦被逆向工程很容易破解。</p>
+<p><strong>一次密钥</strong>（one time key）每个密钥只加密一个信息。</p>
+<a id="more"></a>
+<p><strong>WEP</strong>用来加密WiFi流量。</p>
+<p>密码学的核心是安全通信，含有两个部分：<strong>安全的密钥建立</strong>、<strong>安全的通信</strong>。</p>
+<p>现代密码学描述的每一个概念都依照非常严格的三步：</p>
+<ol>
+<li>当引入新的原型时，如数字签名，要准确描述模型的威胁是什么，如攻击者如何攻击数字签名、伪造签名的目的。</li>
+<li>提出架构，证明攻击者在这个威胁模型下可以攻击这个架构。</li>
+<li>攻击者可以用来解决根本性难题，如果问题很难，则证明攻击者无法在威胁模型下破解这个架构。</li>
+</ol>
+<p>eg：对于数字签名，我们定义数字签名不可伪造的意义，然后给出一个架构，假如有人能够破解这个架构，他也可以用他破解的方法来解决因子分解问题。</p>
+<p><strong>凯撒密码</strong>：并不是密码，因为没有密钥，是一个固定替换的替换式密码，利用字母移位，<em>可轻易破解</em>。</p>
+<p><strong>简单的替换式密码</strong>：密钥是一张字母映射替换表，替换表是随机选择的。假设有26个字母，密钥空间是 26！个，约为 2^88 ，意味着描述一个替换密钥需要88位，每个密钥以88位表示，但依然不安全，可以通过<strong>唯密文攻击</strong>仅凭密文就能还原密钥以及明文，首先可以使用<u>字母的频率</u> e&gt;t&gt;a 分析，其次，通过<u>字母配对的频率</u> he、an、in、th 等。所以，替换式密码<em>可轻易破解</em>。</p>
+<p><strong>Vigener加密</strong>：密钥是一个单词，将密钥字母不断重复以覆盖整个明文信息，将密钥字母和信息字母相加，模 26 得到密文。解密时，将密文信息（不够则 +26 ）减去密钥。通过<strong>唯密文攻击</strong>破解，破解时，首先假设<u>密钥长度已知</u>为 6 ，将密文按照密钥长度分组，然后看每组的第一个字母，它们都被同一个字母加密，eg：假设第一个密钥字母为 C ，则密文分组第一个字母是明文移动 3 位。收集所有字母，最常见的字母很可能是 E 的加密结果，设想每隔 5 个字母最常见的是 M ，我们知道 E 加上第一个密钥字母等于 M ，则 M-E=H，得出 H 为第一个密钥字母。同理，看每个密文分组的第二个字母，重复操作，找出最常见字母，它很可能是 E 的加密结果，减去 E 就是密钥的第二个字母，可以还原整个密钥。<u>密钥长度未知</u>的情况下，先假定密钥长度是 1 ，然后假定长度是 2 、是 3 等等，再运行解密过程，知道了密钥长度和密钥信息，直到得到一个说得通的明文信息。</p>
+<p><strong>单个轴轮机</strong>：密钥在碟片里，每按一次打字机，碟片转一个刻痕，实际上是一个<u>替换表的编码</u>，如图所示，连续按下 C 三次，三次输出均不同，依次为 T、S、K。通过<strong>唯密文攻击</strong>破解，分析<u>字母频率</u>、<u>配对频率</u>、<u>三合字母频率</u>。</p>
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E8%BD%B4%E8%BD%AE%E6%9C%BA.PNG" class title="轴轮机">
+<p><strong>Enigma机</strong>：是一种复杂的轴轮机，使用了3、4或5个轴轮。密钥是轴轮的初始设定，打字时，轴轮以不同速率旋转输出密文，4 个轴有 26^4 个不同的密钥，约 2^18，密钥空间较小。可通过<strong>唯密文攻击</strong>破解。</p>
+<p><strong>DES</strong>：一种将 64 比特的明文加密成 64 比特的密文的对称密码算法，密钥长度为 56 比特，每隔 7 比特会设置一个用于错误检查比特，密钥空间为 2^56 ，一次加密 64 位（8个字母），密钥空间很小，可以使用<strong>暴力破解</strong>，新项目中不能继续使用。</p>
+<p><strong>AES</strong>：分组长度固定，使用 128 位密钥，密钥长度 128、192、256 比特。</p>
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8701.JPG" class title="离散概率01">
+<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8702.JPG" class title="离散概率02">]]></content>
       <categories>
         <category>密码学之路</category>
       </categories>
@@ -1193,37 +1227,64 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【DanBoneh】绪论</title>
-    <url>/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/</url>
-    <content><![CDATA[<p><strong>TLS</strong>（安全传输层协议）：由两部分组成。第一部分为<strong>握手协议</strong>（Handshake），Alice与Bob互相交谈，在握手的最后，双方分享一个密钥，Alice与Bob都知道这个密钥，但攻击者不知道会话密钥K，运用了公钥密码技术。第二部分为<strong>记录协议</strong>（Record），双方共享密钥时，如何使用密钥加以保护通信数据。</p>
-<p><strong>对称加密</strong>：以分组的形式保护流量的技术。在对称加密系统中，只有通信双方知道密钥K，他们使用<strong>加密算法 E</strong> 和<strong>解密算法 D</strong> 进行通信加密。加密算法以<u>原信息</u>和<u>密钥</u>为输入，产生<u>密文</u>；解密算法以<u>密文</u>和<u>密钥</u>为输入，输出<u>原信息</u>。<strong>算法是公开的，密钥是保密的</strong>。很多私有的算法一旦被逆向工程很容易破解。</p>
-<p><strong>一次密钥</strong>（one time key）每个密钥只加密一个信息。</p>
+    <title>【Web安全】Web安全基础</title>
+    <url>/2021/09/28/%E3%80%90Web%E5%AE%89%E5%85%A8%E3%80%91Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="常见的web安全漏洞"><a href="#常见的Web安全漏洞" class="headerlink" title="常见的Web安全漏洞"></a>常见的Web安全漏洞</h1><p>2017年版OWASP Top 10</p>
 <a id="more"></a>
-<p><strong>WEP</strong>用来加密WiFi流量。</p>
-<p>密码学的核心是安全通信，含有两个部分：<strong>安全的密钥建立</strong>、<strong>安全的通信</strong>。</p>
-<p>现代密码学描述的每一个概念都依照非常严格的三步：</p>
 <ol>
-<li>当引入新的原型时，如数字签名，要准确描述模型的威胁是什么，如攻击者如何攻击数字签名、伪造签名的目的。</li>
-<li>提出架构，证明攻击者在这个威胁模型下可以攻击这个架构。</li>
-<li>攻击者可以用来解决根本性难题，如果问题很难，则证明攻击者无法在威胁模型下破解这个架构。</li>
+<li>注入。攻击者的恶意数据可以诱使解析器在没有适当授权的情况下执行非预期命令或访问数据</li>
+<li>失效的身份认证。</li>
+<li>敏感数据泄露。</li>
+<li>XML外部实体（XXE）。</li>
+<li>失效的访问控制。</li>
+<li>安全配置错误。</li>
+<li>跨站脚本（XSS）。</li>
+<li>不安全的反序列化。</li>
+<li>使用含有已知漏洞的组件。</li>
+<li>不足的日志记录和监控。</li>
 </ol>
-<p>eg：对于数字签名，我们定义数字签名不可伪造的意义，然后给出一个架构，假如有人能够破解这个架构，他也可以用他破解的方法来解决因子分解问题。</p>
-<p><strong>凯撒密码</strong>：并不是密码，因为没有密钥，是一个固定替换的替换式密码，利用字母移位，<em>可轻易破解</em>。</p>
-<p><strong>简单的替换式密码</strong>：密钥是一张字母映射替换表，替换表是随机选择的。假设有26个字母，密钥空间是 26！个，约为 2^88 ，意味着描述一个替换密钥需要88位，每个密钥以88位表示，但依然不安全，可以通过<strong>唯密文攻击</strong>仅凭密文就能还原密钥以及明文，首先可以使用<u>字母的频率</u> e&gt;t&gt;a 分析，其次，通过<u>字母配对的频率</u> he、an、in、th 等。所以，替换式密码<em>可轻易破解</em>。</p>
-<p><strong>Vigener加密</strong>：密钥是一个单词，将密钥字母不断重复以覆盖整个明文信息，将密钥字母和信息字母相加，模 26 得到密文。解密时，将密文信息（不够则 +26 ）减去密钥。通过<strong>唯密文攻击</strong>破解，破解时，首先假设<u>密钥长度已知</u>为 6 ，将密文按照密钥长度分组，然后看每组的第一个字母，它们都被同一个字母加密，eg：假设第一个密钥字母为 C ，则密文分组第一个字母是明文移动 3 位。收集所有字母，最常见的字母很可能是 E 的加密结果，设想每隔 5 个字母最常见的是 M ，我们知道 E 加上第一个密钥字母等于 M ，则 M-E=H，得出 H 为第一个密钥字母。同理，看每个密文分组的第二个字母，重复操作，找出最常见字母，它很可能是 E 的加密结果，减去 E 就是密钥的第二个字母，可以还原整个密钥。<u>密钥长度未知</u>的情况下，先假定密钥长度是 1 ，然后假定长度是 2 、是 3 等等，再运行解密过程，知道了密钥长度和密钥信息，直到得到一个说得通的明文信息。</p>
-<p><strong>单个轴轮机</strong>：密钥在碟片里，每按一次打字机，碟片转一个刻痕，实际上是一个<u>替换表的编码</u>，如图所示，连续按下 C 三次，三次输出均不同，依次为 T、S、K。通过<strong>唯密文攻击</strong>破解，分析<u>字母频率</u>、<u>配对频率</u>、<u>三合字母频率</u>。</p>
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E8%BD%B4%E8%BD%AE%E6%9C%BA.PNG" class title="轴轮机">
-<p><strong>Enigma机</strong>：是一种复杂的轴轮机，使用了3、4或5个轴轮。密钥是轴轮的初始设定，打字时，轴轮以不同速率旋转输出密文，4 个轴有 26^4 个不同的密钥，约 2^18，密钥空间较小。可通过<strong>唯密文攻击</strong>破解。</p>
-<p><strong>DES</strong>：一种将 64 比特的明文加密成 64 比特的密文的对称密码算法，密钥长度为 56 比特，每隔 7 比特会设置一个用于错误检查比特，密钥空间为 2^56 ，一次加密 64 位（8个字母），密钥空间很小，可以使用<strong>暴力破解</strong>，新项目中不能继续使用。</p>
-<p><strong>AES</strong>：分组长度固定，使用 128 位密钥，密钥长度 128、192、256 比特。</p>
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8701.JPG" class title="离散概率01">
-<img src="/2020/03/23/%E3%80%90DanBoneh%E3%80%91%E7%BB%AA%E8%AE%BA/%E7%A6%BB%E6%95%A3%E6%A6%82%E7%8E%8702.JPG" class title="离散概率02">]]></content>
+<h1 id="http基础"><a href="#HTTP基础" class="headerlink" title="HTTP基础"></a>HTTP基础</h1><h3 id="http之url"><a href="#HTTP之URL" class="headerlink" title="HTTP之URL"></a>HTTP之URL</h3><p>URL标准格式</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">协议:<span class="regexp">//</span>服务器域名[:端口<span class="regexp">/路径/</span>[?查询]</span><br></pre></td></tr></table></figure>
+<p>eg</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>www.ctfs-wiki.com<span class="regexp">/SQLi/</span>sqli.php?id=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>协议。<code>HTTP</code></li>
+<li>服务器域名。<code>www.ctfs-wiki.com</code>，也可使用ip地址表示</li>
+<li>端口。不是URL必须的部分，如果省略，将采用默认端口，HTTP默认端口是80</li>
+<li>路径。<code>SQLi/sqli.php</code></li>
+<li>查询。<code>id=1</code></li>
+</ol>
+<h3 id="http请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><p>HTTP请求包括3部分：请求行、请求头（消息报头）、请求正文。</p>
+<ol>
+<li>请求行：请求方法+请求路径+协议版本。</li>
+<li>请求头：有关客户端环境和请求正文的有用信息。</li>
+<li>请求正文：客户端请求提交的查询字符串信息。</li>
+</ol>
+<p>tips：请求头和请求正文之间是一个空行，表示请求头已经结束。</p>
+<h3 id="http响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h3><p>HTTP相应包括3部分：响应行、响应头（消息报头）、响应正文。</p>
+<ol>
+<li>响应行：协议版本+状态码+状态消息。</li>
+<li>响应头：用来传递不能放在响应行中的附加响应信息、关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。</li>
+<li>响应正文：服务器返回给客户端的文本信息。</li>
+</ol>
+<h3 id="http状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><img src="/2021/09/28/%E3%80%90Web%E5%AE%89%E5%85%A8%E3%80%91Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%88%86%E7%B1%BB.JPG" class title="HTTP状态码分类">
+<h3 id="http请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h3><ol>
+<li>GET</li>
+<li>HEAD</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+<li>CONNECT</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+</ol>
+<h1 id="cookie和session"><a href="#Cookie和Session" class="headerlink" title="Cookie和Session"></a>Cookie和Session</h1><p>懒得码了，决定斥巨资买书，祥见《Web安全原理分析与实践》。</p>
+]]></content>
       <categories>
-        <category>密码学之路</category>
+        <category>信安之路</category>
       </categories>
       <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
+        <tag>Web安全</tag>
       </tags>
   </entry>
   <entry>
@@ -1305,67 +1366,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【Web安全】Web安全基础</title>
-    <url>/2021/09/28/%E3%80%90Web%E5%AE%89%E5%85%A8%E3%80%91Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="常见的web安全漏洞"><a href="#常见的Web安全漏洞" class="headerlink" title="常见的Web安全漏洞"></a>常见的Web安全漏洞</h1><p>2017年版OWASP Top 10</p>
-<a id="more"></a>
-<ol>
-<li>注入。攻击者的恶意数据可以诱使解析器在没有适当授权的情况下执行非预期命令或访问数据</li>
-<li>失效的身份认证。</li>
-<li>敏感数据泄露。</li>
-<li>XML外部实体（XXE）。</li>
-<li>失效的访问控制。</li>
-<li>安全配置错误。</li>
-<li>跨站脚本（XSS）。</li>
-<li>不安全的反序列化。</li>
-<li>使用含有已知漏洞的组件。</li>
-<li>不足的日志记录和监控。</li>
-</ol>
-<h1 id="http基础"><a href="#HTTP基础" class="headerlink" title="HTTP基础"></a>HTTP基础</h1><h3 id="http之url"><a href="#HTTP之URL" class="headerlink" title="HTTP之URL"></a>HTTP之URL</h3><p>URL标准格式</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">协议:<span class="regexp">//</span>服务器域名[:端口<span class="regexp">/路径/</span>[?查询]</span><br></pre></td></tr></table></figure>
-<p>eg</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span>www.ctfs-wiki.com<span class="regexp">/SQLi/</span>sqli.php?id=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>协议。<code>HTTP</code></li>
-<li>服务器域名。<code>www.ctfs-wiki.com</code>，也可使用ip地址表示</li>
-<li>端口。不是URL必须的部分，如果省略，将采用默认端口，HTTP默认端口是80</li>
-<li>路径。<code>SQLi/sqli.php</code></li>
-<li>查询。<code>id=1</code></li>
-</ol>
-<h3 id="http请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h3><p>HTTP请求包括3部分：请求行、请求头（消息报头）、请求正文。</p>
-<ol>
-<li>请求行：请求方法+请求路径+协议版本。</li>
-<li>请求头：有关客户端环境和请求正文的有用信息。</li>
-<li>请求正文：客户端请求提交的查询字符串信息。</li>
-</ol>
-<p>tips：请求头和请求正文之间是一个空行，表示请求头已经结束。</p>
-<h3 id="http响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h3><p>HTTP相应包括3部分：响应行、响应头（消息报头）、响应正文。</p>
-<ol>
-<li>响应行：协议版本+状态码+状态消息。</li>
-<li>响应头：用来传递不能放在响应行中的附加响应信息、关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。</li>
-<li>响应正文：服务器返回给客户端的文本信息。</li>
-</ol>
-<h3 id="http状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><img src="/2021/09/28/%E3%80%90Web%E5%AE%89%E5%85%A8%E3%80%91Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%88%86%E7%B1%BB.JPG" class title="HTTP状态码分类">
-<h3 id="http请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h3><ol>
-<li>GET</li>
-<li>HEAD</li>
-<li>POST</li>
-<li>PUT</li>
-<li>DELETE</li>
-<li>CONNECT</li>
-<li>OPTIONS</li>
-<li>TRACE</li>
-</ol>
-<h1 id="cookie和session"><a href="#Cookie和Session" class="headerlink" title="Cookie和Session"></a>Cookie和Session</h1><p>懒得码了，决定斥巨资买书，祥见《Web安全原理分析与实践》。</p>
-]]></content>
-      <categories>
-        <category>信安之路</category>
-      </categories>
-      <tags>
-        <tag>Web安全</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【hexo】next踩坑TOC锚点undefined问题</title>
     <url>/2021/01/30/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91TOC%E9%94%9A%E7%82%B9undefined%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>hexo 搭建博客，文章的导航栏不能正常使用：文章左侧导航栏可以正常生成，但是在点击导航栏后并不能跳转到文章的对应位置，查看网页源代码，Console 报错如下：</p>
@@ -1381,28 +1381,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
 <p>即，仅保留28行，其他的内容注释掉。</p>
 <p>问题得以解决。</p>
 <p><a href="https://www.dazhuanlan.com/2019/12/05/5de8d9ba57a52/" target="_blank" rel="noopener">参考链接</a></p>
-]]></content>
-      <categories>
-        <category>hexo踩坑记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【hexo】next踩坑no such file or directory open ... \.swig </title>
-    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/</url>
-    <content><![CDATA[<p>更换 hexo 主题为 next 时，首先根据 hexo 官方文档进行主题设定。</p>
-<p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">官方文档链接</a></p>
-<a id="more"></a>
-<p>主题设定完成，发布过程<strong>报错</strong></p>
-<p>ERROR ENOENT: no such file or directory, open ‘D:\MyWork\hexo\themes\next\layout_scripts\schemes.swig’</p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/cmd%E6%8A%A5%E9%94%99.PNG" class title="cmd报错">
-<p><strong>解决方案</strong></p>
-<p>对主题配置文件代码（_config.yml）进行格式检查，推荐使用 YAML Lint 在线检测。</p>
-<p><a href="http://www.yamllint.com/" target="_blank" rel="noopener">检测地址链接</a></p>
-<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/yamllint%E6%A3%80%E6%B5%8B.PNG" class title="yamllint检测">
-<p>检测发现第100行代码冒号后缺少空格，错误得以解决。</p>
 ]]></content>
       <categories>
         <category>hexo踩坑记</category>
@@ -1435,6 +1413,104 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【hexo】next踩坑no such file or directory open ... \.swig </title>
+    <url>/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/</url>
+    <content><![CDATA[<p>更换 hexo 主题为 next 时，首先根据 hexo 官方文档进行主题设定。</p>
+<p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">官方文档链接</a></p>
+<a id="more"></a>
+<p>主题设定完成，发布过程<strong>报错</strong></p>
+<p>ERROR ENOENT: no such file or directory, open ‘D:\MyWork\hexo\themes\next\layout_scripts\schemes.swig’</p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/cmd%E6%8A%A5%E9%94%99.PNG" class title="cmd报错">
+<p><strong>解决方案</strong></p>
+<p>对主题配置文件代码（_config.yml）进行格式检查，推荐使用 YAML Lint 在线检测。</p>
+<p><a href="http://www.yamllint.com/" target="_blank" rel="noopener">检测地址链接</a></p>
+<img src="/2020/06/22/%E3%80%90hexo%E3%80%91next%E8%B8%A9%E5%9D%91no-such-file-or-directory-open-swig/yamllint%E6%A3%80%E6%B5%8B.PNG" class title="yamllint检测">
+<p>检测发现第100行代码冒号后缺少空格，错误得以解决。</p>
+]]></content>
+      <categories>
+        <category>hexo踩坑记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【pptx】对称密码2</title>
+    <url>/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/</url>
+    <content><![CDATA[<p><strong>分组密码</strong>：见《【DanBoneh】Block Ciphers》<a href="https://lemongx.github.io/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" target="_blank" rel="noopener">分组密码</a>。</p>
+<p>设计分组密码的两种基本技术：为了<u>抵抗攻击者对密码系统的统计分析</u>，香农提出<strong>混乱</strong>和<strong>扩散</strong>。</p>
+<a id="more"></a>
+<p><strong>混乱</strong></p>
+<ol>
+<li>目的：使明文和密文之间、密文和密文之间的相关统计特性极小化，从而使攻击者无法找到密钥。</li>
+<li>方法：代换。</li>
+</ol>
+<p><strong>扩散</strong></p>
+<ol>
+<li>目的：将明文及密钥的影响尽可能迅速地散布到较多个密文比特中。</li>
+<li>方法：置换。</li>
+</ol>
+<p>目前，绝大多数的分组密码都是通过<strong>迭代技术</strong>构造的。轮密钥（子密钥）：$k_1$~$k_d$，轮函数：R($k_i$,..)。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG" class title="分组密码迭代">
+<h5 id="des"><a href="#DES" class="headerlink" title="DES"></a>DES</h5><p>核心思想：<strong>Feistel网络</strong>，是使用<u>任意函数</u>构造<u>可逆函数</u>（分组密码）的一般方法。d 个函数无需可逆，构造出的Feistel网络仍然可逆。</p>
+<p>Feistel网络</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG" class title="Feistel网络">
+<p>Feistel网络求逆</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG" class title="Feistel网络求逆">
+<p>DES结构</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG" class title="DES结构">
+<p>Feistel网络一轮的结构中，乘积函数 F 有三个关键函数 E-box、S-box、P-box。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG" class title="DES一轮结构">
+<p>DES安全性：密钥空间只有 $2_56$ ≈ $10_17$，56 bits不足以抵抗<u>穷举攻击</u>。DES 依靠 S-box 实现非线性变换，但 NSA 被指责在 S-box 设计上隐藏了“陷门”。</p>
+<p><strong>PRF and PRP</strong>：见《【DanBoneh】Block Ciphers》<a href="https://lemongx.github.io/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" target="_blank" rel="noopener">PRF、PRP</a>。</p>
+<p><strong>PRF开关引理</strong></p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG" class title="PRF开关引理">
+<p><strong>分组密码工作模式</strong></p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG" class title="分组密码工作模式">
+<h5 id="ecb模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h5><p>对于包含两个或两个以上分组的明文，ECB 不是语义安全的。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="ECB语义安全证明">
+<p>优点</p>
+<ol>
+<li>简单、高速。</li>
+<li>无差错传播：单个密文分组在传输或存储时出现错误，只会影响该分组的解密，不会影响到其他分组。</li>
+</ol>
+<p>缺点：安全性差，暴露明文数据的格式和统计特征</p>
+<p><strong>确定的计数器模式</strong></p>
+<p>F 是安全的 PRF，与真随机函数不可区分，可以构造一个安全的 PRG。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG" class title="确定的计数器模式">
+<h5 id="cpa"><a href="#CPA" class="headerlink" title="CPA"></a>CPA</h5><p>CPA安全性：<u>选择明文攻击下</u>的<u>语义安全性</u>（密钥可以重复使用）。</p>
+<p>对称加密体制不是CPA安全的。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG" class title="对称加密体制">
+<p><strong>随机化加密</strong></p>
+<p>选取随机数和密钥 k 共同加密明文，使得加密相同的明文，输出不同的密文。</p>
+<p>密文比明文长，密文长度 =  明文长度 + “随机比特长度”，“随机比特长度” ≠ 随机比特长度，只是相关。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG" class title="随机化加密">
+<p><strong>nonce-based加密</strong></p>
+<p>nonce：只使用一次的数值，每加密一个明文，就换一个新的。(k，n)不重复使用。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG" class title="nonce-based加密">
+<p>如何选择nonce？</p>
+<ol>
+<li>计数器方式：设置nonce为计数器，使用每次数值加 1 ，如果发送者和接收者保持相同的状态，则nonce无需发送。</li>
+<li>随机数方式：设置nonce为随机数，随机数需与密文一起发送。</li>
+</ol>
+<p>文件加密：随机数方式（加密文件时无需保持状态）</p>
+<p>SSL（按顺序发送）: 计数器方式 （无需向对方发送nonce）</p>
+<p>IP sec（无序发送）: 计数器方式即可, 但发送每个报文时，需附带所用nonce一起发送</p>
+<h5 id="cbc模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h5><p>密钥可以重复使用，CPA安全的。加密串行，解密可以并行。使用 PRP。</p>
+<p>见《【DanBoneh】Using Block Ciphers》<a href="https://lemongx.github.io/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/" target="_blank" rel="noopener">CBC</a>。</p>
+<p>差错传播：单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。</p>
+<p>可自同步：只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG" class title="CBC差错传播">
+<h5 id="ctr模式"><a href="#CTR模式" class="headerlink" title="CTR模式"></a>CTR模式</h5><p>密钥可以重复使用，CPA安全的。加密、解密都可以并行。使用安全的 PRF。</p>
+<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG" class title="CTR的IV选择">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
       </tags>
   </entry>
   <entry>
@@ -1515,103 +1591,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【安全综合实践】逆向实验</title>
-    <url>/2020/08/28/%E3%80%90%E5%AE%89%E5%85%A8%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E3%80%91%E9%80%86%E5%90%91%E5%AE%9E%E9%AA%8C/</url>
-    <content><![CDATA[<h1 id="lab1思维导图"><a href="#lab1思维导图" class="headerlink" title="lab1思维导图"></a>lab1思维导图</h1><img src="/2020/08/28/%E3%80%90%E5%AE%89%E5%85%A8%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E3%80%91%E9%80%86%E5%90%91%E5%AE%9E%E9%AA%8C/lab1.png" class title="lab1">
-<h1 id="lab1实验手册"><a href="#lab1实验手册" class="headerlink" title="lab1实验手册"></a>lab1实验手册</h1>
-
-	<div class="row">
-    <embed src="lab1实验手册.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-]]></content>
-      <categories>
-        <category>信安之路</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-        <tag>gdb</tag>
-        <tag>vim</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【pptx】对称密码2</title>
-    <url>/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/</url>
-    <content><![CDATA[<p><strong>分组密码</strong>：见《【DanBoneh】Block Ciphers》<a href="https://lemongx.github.io/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" target="_blank" rel="noopener">分组密码</a>。</p>
-<p>设计分组密码的两种基本技术：为了<u>抵抗攻击者对密码系统的统计分析</u>，香农提出<strong>混乱</strong>和<strong>扩散</strong>。</p>
-<a id="more"></a>
-<p><strong>混乱</strong></p>
-<ol>
-<li>目的：使明文和密文之间、密文和密文之间的相关统计特性极小化，从而使攻击者无法找到密钥。</li>
-<li>方法：代换。</li>
-</ol>
-<p><strong>扩散</strong></p>
-<ol>
-<li>目的：将明文及密钥的影响尽可能迅速地散布到较多个密文比特中。</li>
-<li>方法：置换。</li>
-</ol>
-<p>目前，绝大多数的分组密码都是通过<strong>迭代技术</strong>构造的。轮密钥（子密钥）：$k_1$~$k_d$，轮函数：R($k_i$,..)。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E8%BF%AD%E4%BB%A3.PNG" class title="分组密码迭代">
-<h5 id="des"><a href="#DES" class="headerlink" title="DES"></a>DES</h5><p>核心思想：<strong>Feistel网络</strong>，是使用<u>任意函数</u>构造<u>可逆函数</u>（分组密码）的一般方法。d 个函数无需可逆，构造出的Feistel网络仍然可逆。</p>
-<p>Feistel网络</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C.PNG" class title="Feistel网络">
-<p>Feistel网络求逆</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/Feistel%E7%BD%91%E7%BB%9C%E6%B1%82%E9%80%86.PNG" class title="Feistel网络求逆">
-<p>DES结构</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E7%BB%93%E6%9E%84.PNG" class title="DES结构">
-<p>Feistel网络一轮的结构中，乘积函数 F 有三个关键函数 E-box、S-box、P-box。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/DES%E4%B8%80%E8%BD%AE%E7%BB%93%E6%9E%84.PNG" class title="DES一轮结构">
-<p>DES安全性：密钥空间只有 $2_56$ ≈ $10_17$，56 bits不足以抵抗<u>穷举攻击</u>。DES 依靠 S-box 实现非线性变换，但 NSA 被指责在 S-box 设计上隐藏了“陷门”。</p>
-<p><strong>PRF and PRP</strong>：见《【DanBoneh】Block Ciphers》<a href="https://lemongx.github.io/2020/03/27/%E3%80%90DanBoneh%E3%80%91BlockCiphers/" target="_blank" rel="noopener">PRF、PRP</a>。</p>
-<p><strong>PRF开关引理</strong></p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/PRF%E5%BC%80%E5%85%B3%E5%BC%95%E7%90%86.PNG" class title="PRF开关引理">
-<p><strong>分组密码工作模式</strong></p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F.PNG" class title="分组密码工作模式">
-<h5 id="ecb模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h5><p>对于包含两个或两个以上分组的明文，ECB 不是语义安全的。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/ECB%E8%AF%AD%E4%B9%89%E5%AE%89%E5%85%A8%E8%AF%81%E6%98%8E.PNG" class title="ECB语义安全证明">
-<p>优点</p>
-<ol>
-<li>简单、高速。</li>
-<li>无差错传播：单个密文分组在传输或存储时出现错误，只会影响该分组的解密，不会影响到其他分组。</li>
-</ol>
-<p>缺点：安全性差，暴露明文数据的格式和统计特征</p>
-<p><strong>确定的计数器模式</strong></p>
-<p>F 是安全的 PRF，与真随机函数不可区分，可以构造一个安全的 PRG。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E7%A1%AE%E5%AE%9A%E7%9A%84%E8%AE%A1%E6%95%B0%E5%99%A8%E6%A8%A1%E5%BC%8F.PNG" class title="确定的计数器模式">
-<h5 id="cpa"><a href="#CPA" class="headerlink" title="CPA"></a>CPA</h5><p>CPA安全性：<u>选择明文攻击下</u>的<u>语义安全性</u>（密钥可以重复使用）。</p>
-<p>对称加密体制不是CPA安全的。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E4%BD%93%E5%88%B6.PNG" class title="对称加密体制">
-<p><strong>随机化加密</strong></p>
-<p>选取随机数和密钥 k 共同加密明文，使得加密相同的明文，输出不同的密文。</p>
-<p>密文比明文长，密文长度 =  明文长度 + “随机比特长度”，“随机比特长度” ≠ 随机比特长度，只是相关。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/%E9%9A%8F%E6%9C%BA%E5%8C%96%E5%8A%A0%E5%AF%86.PNG" class title="随机化加密">
-<p><strong>nonce-based加密</strong></p>
-<p>nonce：只使用一次的数值，每加密一个明文，就换一个新的。(k，n)不重复使用。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/nonce-based%E5%8A%A0%E5%AF%86.PNG" class title="nonce-based加密">
-<p>如何选择nonce？</p>
-<ol>
-<li>计数器方式：设置nonce为计数器，使用每次数值加 1 ，如果发送者和接收者保持相同的状态，则nonce无需发送。</li>
-<li>随机数方式：设置nonce为随机数，随机数需与密文一起发送。</li>
-</ol>
-<p>文件加密：随机数方式（加密文件时无需保持状态）</p>
-<p>SSL（按顺序发送）: 计数器方式 （无需向对方发送nonce）</p>
-<p>IP sec（无序发送）: 计数器方式即可, 但发送每个报文时，需附带所用nonce一起发送</p>
-<h5 id="cbc模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h5><p>密钥可以重复使用，CPA安全的。加密串行，解密可以并行。使用 PRP。</p>
-<p>见《【DanBoneh】Using Block Ciphers》<a href="https://lemongx.github.io/2020/03/28/%E3%80%90DanBoneh%E3%80%91UsingBlockCiphers/" target="_blank" rel="noopener">CBC</a>。</p>
-<p>差错传播：单个密文分组在传输或存储过程中发生错误，会影响该分组和后面一个分组的解密。</p>
-<p>可自同步：只要后面的分组没发生错误，便不会影响后续分组的解密。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CBC%E5%B7%AE%E9%94%99%E4%BC%A0%E6%92%AD.PNG" class title="CBC差错传播">
-<h5 id="ctr模式"><a href="#CTR模式" class="headerlink" title="CTR模式"></a>CTR模式</h5><p>密钥可以重复使用，CPA安全的。加密、解密都可以并行。使用安全的 PRF。</p>
-<img src="/2020/03/30/%E3%80%90pptx%E3%80%91%E5%AF%B9%E7%A7%B0%E5%AF%86%E7%A0%812/CTR%E7%9A%84IV%E9%80%89%E6%8B%A9.PNG" class title="CTR的IV选择">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【vps】vps搭建</title>
     <url>/2020/03/12/%E3%80%90vps%E3%80%91vps%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<ul>
@@ -1646,6 +1625,47 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
 ]]></content>
       <tags>
         <tag>vps</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【总结归纳】哈希函数知识点串讲</title>
+    <url>/2020/07/10/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/</url>
+    <content><![CDATA[<h1 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h1>
+
+	<div class="row">
+    <embed src="哈希函数知识点串讲.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+        <tag>总结归纳</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【安全综合实践】逆向实验</title>
+    <url>/2020/08/28/%E3%80%90%E5%AE%89%E5%85%A8%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E3%80%91%E9%80%86%E5%90%91%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<h1 id="lab1思维导图"><a href="#lab1思维导图" class="headerlink" title="lab1思维导图"></a>lab1思维导图</h1><img src="/2020/08/28/%E3%80%90%E5%AE%89%E5%85%A8%E7%BB%BC%E5%90%88%E5%AE%9E%E8%B7%B5%E3%80%91%E9%80%86%E5%90%91%E5%AE%9E%E9%AA%8C/lab1.png" class title="lab1">
+<h1 id="lab1实验手册"><a href="#lab1实验手册" class="headerlink" title="lab1实验手册"></a>lab1实验手册</h1>
+
+	<div class="row">
+    <embed src="lab1实验手册.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+]]></content>
+      <categories>
+        <category>信安之路</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>gdb</tag>
+        <tag>vim</tag>
       </tags>
   </entry>
   <entry>
@@ -1731,26 +1751,6 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
-    <title>【总结归纳】哈希函数知识点串讲</title>
-    <url>/2020/07/10/%E3%80%90%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3%E3%80%91%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B8%B2%E8%AE%B2/</url>
-    <content><![CDATA[<h1 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h1>
-
-	<div class="row">
-    <embed src="哈希函数知识点串讲.pdf" width="100%" height="550" type="application/pdf">
-	</div>
-
-
-]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
-        <tag>总结归纳</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【机器学习】K近邻算法(KNN)</title>
     <url>/2021/09/29/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%91K%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>存在一个样本数据集合，也称作为训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一个数据与所属分类的对应关系。输入没有标签的新数据后，将新的数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本最相似数据(最近邻)的分类标签。</p>
@@ -1807,6 +1807,30 @@ Adv_{MAC}[A,I_F]=\frac{1}{2^{10}}=\frac{1}{1024}(不可忽略)</script><img src=
       </tags>
   </entry>
   <entry>
+    <title>【测试题】对称加密测试题</title>
+    <url>/2020/07/10/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="320bff3142a06501d6804be547f1d78c108a1598bf8e813092ffc4e4b82b1483">0c040d35b08962555cdd92e32e511a1860bcaa2de913303e7a607193e3c9d33bb1e12d55ec5b068dd87d8ad1f967dc59e95ef508cd80f6e0a7da28bf9b06b6eb356d4cb9b117b0c1f1f5de0edc6cc0b3d5b01b81ef4761dbd6ece4e986a742d9f8ec786641ffc43956de66c81bf019ecaac804ce60032059736dd153c64d7fb667b644ee4a0bf2988da3dfaa79e9f7e94950a1feb9195c1d55be0566f2a5d681eb9a9658fcb2640f6f4e36bc6142c30f0ea97c106430a214d3344fbf64f8a6c7a7d43611b5dc6b07d468cde32c36b1f291564903dbdd108e83026c0374c80898121b9f56df6235322ffdbe23ab05c652b6d37a48395f763cdb55595a328e805d0418ca5bbbec18bf9b30da402e5f9d8522e129b52e466aa6550156d0b8962261459f50182bcea75d243b095e4ca19c32c55ef1a8eeabab3a28559b069eae7271086dc04e9c06b32f87bf49cbd0039b12f2d908109c7ffcea694eccd662093d3662458c66dcdcc9c2db361d3fad424d7a9e05f5d6b7353863187d8fcf0ee5019602208a74806dec1b049efc6f87528c6116e436cf6220e4ae0a9cbb16bd1e488cfe06d0b43fa2407db33715f1d683f3206be2a4a80ca090229a68dc4cbe7135a639df9c5e28c4d9c1f9ffa52171a7a6e809aed3f7dd99aeda88e8ec1a1f118fd3fe7d744e70ee55a92e455e20ea2bd9c6aef1bdafcfcf15b2f61c6dfaf29b46520c22cc1cd538a80d8833d83383b4eba3c62c75dcdd732f25c9a3c629456e653c27df5e5d1cccd21dfdecb24f57a973bd31cdf12d407d811bdbfc89dda0bf2b31b8e8b7fccf8adba4192f7f30b03db4377e323dfbc844553dcfc89a5b3efeab0d332bdd981c87cfaedb9e999692036f26b7f8dbb4e7610122f58a6cdf1764e569383320324432cb9a0e140c5ece9249f405387e24e11834518b0cf0b4efedc36f20091c445d1dc486e2de170839b6b1d309a2f9ee4dd77720a359bbaa52c8b1c3313140437a97f401f93a644a6a521c9ba3d8698e4bd0325ce53c7d096cc00acc68f0a05eef2d4e1d4b0f1a2216d93252fd3482f933e34b1c9cfb76f65c3df335dda84fd0636fa3a07c8889a030473ad4d47475ced903db6534afe5118579ac4b4d71d20df5c675c41e7ec63881774a46066a9f36cf5be073b639b1f8f03f2b33da8ef6f6390f73a0e526058ef87fb2e1bc2eb6cda256e7d8d2f846e260ffa6577c058383c428fcba7448dd7c157edaa7fb64268bf976aec8470ca62c3349ce71b014bdf9f73546d3681424b2ce8321669280158b70dcbad1e4a7a55c241b6b8172d0bddd5b2c249b7e9cffadb16480d69614e4e6ccd26474a156b133984d1c484a1576e51cac0ce1b49255d0633f47db087e7d52c2de92332aff0d1a428f98ee541ccde71f44d20975b7183dfb164eb943ec5e874469f805b86a298b7a20db4f262ded84e8f4ea2aa5eb1b1eccdd5da62d8cbe4120c76d8e7d77c99b234d763d5a78143835aa0ecbb83585f681894229d62d85bb17d61686e5c31768116e46a4c239bd8b892241a21b3704eba77e1a1ab4a2b17b21d42e1791fac0558e4ac22f210b045a4adf94a29ccb822d5fa41944027837b58c2b713ada73d89b8417280fb061463d70fcc7757321c0fbdce73521c87f489ce16f5970bfceac16267e738aa94bab417ec0b402a3f5295c06bce4e2d915a423f8bafcff8d50eaba2ccc7aa7987c23500f627d08566c7e6e2d3130d7e7d900a5a12ef390f06cee309541c041e374468cb7e7eebc600789649baaa497adcb908907866ed970c498338d21c52510cad0962e4635f27b2893750688a5a0c99c625b7aedca3a62013d7b8d62d43c0c073663a1a0ddd68519c9475830bd593a2b78ba2c63e84c2de9392f3cb9202bf73f62f6cf9669f0a90a6d073f61f692c029051543716205075efd39696f7bdec0ef8609b3a09966b9a94021f644d9e1af941858ed7008921759c0c04477099920075e7d526de6f9b464a576f28efbfff15bcf9b20d2a521a7ca32c884176c8a27f9bf8a00815569e48c5e70af0fcb088e53b488a333b52759d15cfff82eb6c1e4f1efcaaccde16c76f3d4e7f4b3c03a50b5cdfd5d99ec3561642c05a94c7d5b9f48637b1f017f751c78be2673e51aa2749955c20a44a8866e2a1bc48ab0cdbd75a1bb5733079656bf3c5e310fc75171eedeb5e85a989b922f24625a0ee8edac827b7e4baf1600f3fac731ce3096b0e8af4629e2ccfe8f2d38495f1ecb34c8ebd738473cfdb6aa91a1fda28b2b5268bf8095d8e7115036d36bef8035686922d5f6a4ef0e27fcdf60f66f16424e7504e9edf21cdab69012c8abf5c9eea17cce34050dc801b1df2be24a4154a158d42512f468227bb0b727cba8d0538fa035d30b76db63386c7e24d3a158a0399b8767334b51d9d1f1b21134fbb0bc89f546abaef5e5bbab609d3571edf662df69975077a9da17f6cc3f79e4859016c339d19e84eb9efada3b748c9a98f690948b519b2188d3c293cc595c77907895fd41a3208d0506970a3b054e99615e2d79ea40021bd1ddeecdd9a83e1af010cb4ea321ef30b26773058de43852944072f9058f11ed4902b3240fb9d3533258565d66c15b9149dfef57577072e00e3d8d896b00c3662f2bf9ed201fdf8d55cbe3e6d27b07a33b31a2a302bf83866aa29f443b82b64d3911d6bcf150c8894e8da5bd37a2bd44d8b8f376ebb49422443887c65cce98981edcf3a0cdc9a8f50137d4ff838e46df359754eeb45d6f42d75ba1bcbb78f4c387eaa363529d2ce86f8e2aac4578404ed1749730e500903a4a24e920dd72367c58dcf5afbbac794dd38f4b93b4f20a425725fabc904185b31bbe4f31ea434797532435c2f524a1eb010e9b25e145615ee431493b858cf8ceeeb0c2af21590e49f7053fa0a39df944a02ae0f80503ebd7ae9d84f1baad56c654300ffa0d864b1eb1d2155a9e0c7c63a382e075968aa1b9fc942dee6e12358891d5d226ac225840dda64ca9f3634522658d97901dfb9f016ecce27c93610bc6d682aeb650542a6f7b2f99dee0620c63c35c08341d1cd588a42dcf114f611571e4a33375fdafd53c7457b40d104746f26ce64ebd3fc4bb3de09c920acfc040f5061ea6db7a9b8e8caf3663bc1511106f22dd60ccf5b193fb</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>密码学之路</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
+        <tag>DanBoneh密码学</tag>
+        <tag>测试题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【现代密码学理论与实践】概率论和信息论</title>
     <url>/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
     <content><![CDATA[<h4 id="标准符号"><a href="#标准符号" class="headerlink" title="标准符号"></a>标准符号</h4><img src="/2020/03/22/%E3%80%90%E7%8E%B0%E4%BB%A3%E5%AF%86%E7%A0%81%E5%AD%A6%E7%90%86%E8%AE%BA%E4%B8%8E%E5%AE%9E%E8%B7%B5%E3%80%91%E6%A6%82%E7%8E%87%E8%AE%BA%E5%92%8C%E4%BF%A1%E6%81%AF%E8%AE%BA/%E6%A0%87%E5%87%86%E7%AC%A6%E5%8F%B701.png" class title="标准符号01">
@@ -1846,30 +1870,6 @@ Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn �
       </categories>
       <tags>
         <tag>密码学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【测试题】对称加密测试题</title>
-    <url>/2020/07/10/%E3%80%90%E6%B5%8B%E8%AF%95%E9%A2%98%E3%80%91%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%B5%8B%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="320bff3142a06501d6804be547f1d78c108a1598bf8e813092ffc4e4b82b1483">0c040d35b08962555cdd92e32e511a1860bcaa2de913303e7a607193e3c9d33bb1e12d55ec5b068dd87d8ad1f967dc59e95ef508cd80f6e0a7da28bf9b06b6eb356d4cb9b117b0c1f1f5de0edc6cc0b3d5b01b81ef4761dbd6ece4e986a742d9f8ec786641ffc43956de66c81bf019ecaac804ce60032059736dd153c64d7fb667b644ee4a0bf2988da3dfaa79e9f7e94950a1feb9195c1d55be0566f2a5d681eb9a9658fcb2640f6f4e36bc6142c30f0ea97c106430a214d3344fbf64f8a6c7a7d43611b5dc6b07d468cde32c36b1f291564903dbdd108e83026c0374c80898121b9f56df6235322ffdbe23ab05c652b6d37a48395f763cdb55595a328e805d0418ca5bbbec18bf9b30da402e5f9d8522e129b52e466aa6550156d0b8962261459f50182bcea75d243b095e4ca19c32c55ef1a8eeabab3a28559b069eae7271086dc04e9c06b32f87bf49cbd0039b12f2d908109c7ffcea694eccd662093d3662458c66dcdcc9c2db361d3fad424d7a9e05f5d6b7353863187d8fcf0ee5019602208a74806dec1b049efc6f87528c6116e436cf6220e4ae0a9cbb16bd1e488cfe06d0b43fa2407db33715f1d683f3206be2a4a80ca090229a68dc4cbe7135a639df9c5e28c4d9c1f9ffa52171a7a6e809aed3f7dd99aeda88e8ec1a1f118fd3fe7d744e70ee55a92e455e20ea2bd9c6aef1bdafcfcf15b2f61c6dfaf29b46520c22cc1cd538a80d8833d83383b4eba3c62c75dcdd732f25c9a3c629456e653c27df5e5d1cccd21dfdecb24f57a973bd31cdf12d407d811bdbfc89dda0bf2b31b8e8b7fccf8adba4192f7f30b03db4377e323dfbc844553dcfc89a5b3efeab0d332bdd981c87cfaedb9e999692036f26b7f8dbb4e7610122f58a6cdf1764e569383320324432cb9a0e140c5ece9249f405387e24e11834518b0cf0b4efedc36f20091c445d1dc486e2de170839b6b1d309a2f9ee4dd77720a359bbaa52c8b1c3313140437a97f401f93a644a6a521c9ba3d8698e4bd0325ce53c7d096cc00acc68f0a05eef2d4e1d4b0f1a2216d93252fd3482f933e34b1c9cfb76f65c3df335dda84fd0636fa3a07c8889a030473ad4d47475ced903db6534afe5118579ac4b4d71d20df5c675c41e7ec63881774a46066a9f36cf5be073b639b1f8f03f2b33da8ef6f6390f73a0e526058ef87fb2e1bc2eb6cda256e7d8d2f846e260ffa6577c058383c428fcba7448dd7c157edaa7fb64268bf976aec8470ca62c3349ce71b014bdf9f73546d3681424b2ce8321669280158b70dcbad1e4a7a55c241b6b8172d0bddd5b2c249b7e9cffadb16480d69614e4e6ccd26474a156b133984d1c484a1576e51cac0ce1b49255d0633f47db087e7d52c2de92332aff0d1a428f98ee541ccde71f44d20975b7183dfb164eb943ec5e874469f805b86a298b7a20db4f262ded84e8f4ea2aa5eb1b1eccdd5da62d8cbe4120c76d8e7d77c99b234d763d5a78143835aa0ecbb83585f681894229d62d85bb17d61686e5c31768116e46a4c239bd8b892241a21b3704eba77e1a1ab4a2b17b21d42e1791fac0558e4ac22f210b045a4adf94a29ccb822d5fa41944027837b58c2b713ada73d89b8417280fb061463d70fcc7757321c0fbdce73521c87f489ce16f5970bfceac16267e738aa94bab417ec0b402a3f5295c06bce4e2d915a423f8bafcff8d50eaba2ccc7aa7987c23500f627d08566c7e6e2d3130d7e7d900a5a12ef390f06cee309541c041e374468cb7e7eebc600789649baaa497adcb908907866ed970c498338d21c52510cad0962e4635f27b2893750688a5a0c99c625b7aedca3a62013d7b8d62d43c0c073663a1a0ddd68519c9475830bd593a2b78ba2c63e84c2de9392f3cb9202bf73f62f6cf9669f0a90a6d073f61f692c029051543716205075efd39696f7bdec0ef8609b3a09966b9a94021f644d9e1af941858ed7008921759c0c04477099920075e7d526de6f9b464a576f28efbfff15bcf9b20d2a521a7ca32c884176c8a27f9bf8a00815569e48c5e70af0fcb088e53b488a333b52759d15cfff82eb6c1e4f1efcaaccde16c76f3d4e7f4b3c03a50b5cdfd5d99ec3561642c05a94c7d5b9f48637b1f017f751c78be2673e51aa2749955c20a44a8866e2a1bc48ab0cdbd75a1bb5733079656bf3c5e310fc75171eedeb5e85a989b922f24625a0ee8edac827b7e4baf1600f3fac731ce3096b0e8af4629e2ccfe8f2d38495f1ecb34c8ebd738473cfdb6aa91a1fda28b2b5268bf8095d8e7115036d36bef8035686922d5f6a4ef0e27fcdf60f66f16424e7504e9edf21cdab69012c8abf5c9eea17cce34050dc801b1df2be24a4154a158d42512f468227bb0b727cba8d0538fa035d30b76db63386c7e24d3a158a0399b8767334b51d9d1f1b21134fbb0bc89f546abaef5e5bbab609d3571edf662df69975077a9da17f6cc3f79e4859016c339d19e84eb9efada3b748c9a98f690948b519b2188d3c293cc595c77907895fd41a3208d0506970a3b054e99615e2d79ea40021bd1ddeecdd9a83e1af010cb4ea321ef30b26773058de43852944072f9058f11ed4902b3240fb9d3533258565d66c15b9149dfef57577072e00e3d8d896b00c3662f2bf9ed201fdf8d55cbe3e6d27b07a33b31a2a302bf83866aa29f443b82b64d3911d6bcf150c8894e8da5bd37a2bd44d8b8f376ebb49422443887c65cce98981edcf3a0cdc9a8f50137d4ff838e46df359754eeb45d6f42d75ba1bcbb78f4c387eaa363529d2ce86f8e2aac4578404ed1749730e500903a4a24e920dd72367c58dcf5afbbac794dd38f4b93b4f20a425725fabc904185b31bbe4f31ea434797532435c2f524a1eb010e9b25e145615ee431493b858cf8ceeeb0c2af21590e49f7053fa0a39df944a02ae0f80503ebd7ae9d84f1baad56c654300ffa0d864b1eb1d2155a9e0c7c63a382e075968aa1b9fc942dee6e12358891d5d226ac225840dda64ca9f3634522658d97901dfb9f016ecce27c93610bc6d682aeb650542a6f7b2f99dee0620c63c35c08341d1cd588a42dcf114f611571e4a33375fdafd53c7457b40d104746f26ce64ebd3fc4bb3de09c920acfc040f5061ea6db7a9b8e8caf3663bc1511106f22dd60ccf5b193fb</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>密码学之路</category>
-      </categories>
-      <tags>
-        <tag>密码学</tag>
-        <tag>DanBoneh密码学</tag>
-        <tag>测试题</tag>
       </tags>
   </entry>
   <entry>
@@ -1915,24 +1915,6 @@ Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn �
       </tags>
   </entry>
   <entry>
-    <title>【踩坑】npm下载需要管理员权限问题</title>
-    <url>/2021/10/07/%E3%80%90%E8%B8%A9%E5%9D%91%E3%80%91npm%E4%B8%8B%E8%BD%BD%E9%9C%80%E8%A6%81%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>安装配置Node后，利用npm下载包</p>
-<p>报错：<code>npm ERR! Please try running this command again as root/Administrator</code></p>
-<a id="more"></a>
-<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>这是由于我们在配置Node环境时修改了路径，在nodejs中创建了<code>node_global</code>和<code>node_cache</code>两个文件夹，而这两个文件夹的创建需要管理员权限，那么，以后执行npm命令自然也需要以管理员身份运行命令行。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>网上现有解决方法有很多是让删除<code>C:\Users\{账户}\下的.npmrc</code>文件，但是！！这个文件存放了修改路径的代码，删除后，虽然解决了npm报错问题，但是下载的路径依然是默认的<code>C:\Users\{账户}\AppData\Roaming\npm</code>，不方便管理且占用C盘空间。</p>
-<p>我们可以修改nodejs文件夹的授权，将其所有组和用户名的权限改为“完全控制”，问题得以解决。</p>
-<img src="/2021/10/07/%E3%80%90%E8%B8%A9%E5%9D%91%E3%80%91npm%E4%B8%8B%E8%BD%BD%E9%9C%80%E8%A6%81%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE.png" class title="权限设置">
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>Node</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【记录】实验室学习(研一寒假篇)</title>
     <url>/2021/01/30/%E3%80%90%E8%AE%B0%E5%BD%95%E3%80%91%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%AD%A6%E4%B9%A0-%E7%A0%94%E4%B8%80%E5%AF%92%E5%81%87%E7%AF%87/</url>
     <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -1952,6 +1934,24 @@ Prob[ξ_n=k]=(_k^n)p^k(1-p)^(n-k)（k=0,1,2,...,n）</script><p>那么称 ξn �
       </categories>
       <tags>
         <tag>记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【踩坑】npm下载需要管理员权限问题</title>
+    <url>/2021/10/07/%E3%80%90%E8%B8%A9%E5%9D%91%E3%80%91npm%E4%B8%8B%E8%BD%BD%E9%9C%80%E8%A6%81%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>安装配置Node后，利用npm下载包</p>
+<p>报错：<code>npm ERR! Please try running this command again as root/Administrator</code></p>
+<a id="more"></a>
+<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>这是由于我们在配置Node环境时修改了路径，在nodejs中创建了<code>node_global</code>和<code>node_cache</code>两个文件夹，而这两个文件夹的创建需要管理员权限，那么，以后执行npm命令自然也需要以管理员身份运行命令行。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>网上现有解决方法有很多是让删除<code>C:\Users\{账户}\下的.npmrc</code>文件，但是！！这个文件存放了修改路径的代码，删除后，虽然解决了npm报错问题，但是下载的路径依然是默认的<code>C:\Users\{账户}\AppData\Roaming\npm</code>，不方便管理且占用C盘空间。</p>
+<p>我们可以修改nodejs文件夹的授权，将其所有组和用户名的权限改为“完全控制”，问题得以解决。</p>
+<img src="/2021/10/07/%E3%80%90%E8%B8%A9%E5%9D%91%E3%80%91npm%E4%B8%8B%E8%BD%BD%E9%9C%80%E8%A6%81%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/%E6%9D%83%E9%99%90%E8%AE%BE%E7%BD%AE.png" class title="权限设置">
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
       </tags>
   </entry>
 </search>
